@@ -6,7 +6,7 @@
 </div>
 
 <div align="center">
-<img src="../img/imagen-descriptiva-si-existe.png" />
+<img src="../../src/img/Jhoola-logo3.png" />
 </div>
 
 
