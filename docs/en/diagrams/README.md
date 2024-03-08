@@ -1,4 +1,18 @@
-## UC specification:
+# Application Analysis and Design
+
+In this document we will analyze and design our application using the different diagrams and specifications we are familiar with.
+
+## Specification of the DB E/R Diagram
+
+In this section an image of the DB E/R diagram and a short explanation of it will be presented.
+
+## Specification of the MR diagram of the BBDD
+
+In this section we will show an image of the MR diagram of the DB and a short explanation of it.
+
+## UC specification
+
+In this section, an image of the diagram and the specification of the use cases will be shown.
 
 ### Specification of Stakeholders
 
@@ -388,3 +402,7 @@ This document specifies the use cases that are part of the proposed solution.
 | Notes |  |
 | Author | _Abián Castañeda Méndez_ |
 | Date | _06/03/2024_ |
+
+## Specification of the class diagram
+
+In this section an image of the class diagram and a short explanation of it will be presented.
