@@ -72,8 +72,8 @@ per month.
 
     | Service | Explication | Cost | Source |
     |----------|-------------|-------|--------|
-    | Aplicación con Soporte | La aplicación recibirá soporte por parte de nuestro equipo | 300€ mes | - |
-    | Aplicación sin Soporte | La aplicación no recibirá soporte y en el caso de que se requiera se realizaría un precio especial para dicho problema que haya surgido o se le daría la posibilidad al cliente de cambiar de suscripción | 250€ mes | - |
-    | Soporte no Incluido | En el caso de que haya que ofrecer soporte a alguien que no ha adquirido la suscripción con soporte | 25€ hora | - |
+    | Application with Support | The application will receive support from our team | 300€ per month | - |
+   | The application will not be supported and in case it is required, a special price will be charged for the problem that has arisen or the customer will be given the possibility to change the subscription | 250€ per month | - |
+   | Support not included | In the event that support needs to be provided to someone who has not purchased the subscription with support | €25 per hour | - |
     | VPS | A VPS with 4 GB RAM, 2 Cores and 200 GB SSD storage | 30 € per month | https://clouding.io/ | 
     | Domain name | A domain to host our web application | 6,95€ per year | https://www.dondominio.com/ |
