@@ -1,1 +1,4 @@
-django
+Django==4.2
+djangorestframework
+pillow
+WeasyPrint
