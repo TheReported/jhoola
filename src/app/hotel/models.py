@@ -9,12 +9,16 @@ class Hotel(models.Model):
     email = models.EmailField(max_length=50, null=False)
     phone = models.CharField(
         max_length=12, null=False
-    )  # issue: falta validator para comprobar teléfono
+    )
+    code = models.CharField(max_length=16, editable=False)
     # site_map
 
     @property
-    def code(self):  # issue: crear código a raíz del nombre del hotel
-        pass
+    def save(self, *args, **kwargs):
+        city_code = self.city[:2].upper()
+        hotel_code = ''.join(word[:2].upper() for word in self.name.split())
+        self.code = f"{city_code}-{hotel_code}"
+        super().save(*args, **kwargs)
 
 
 class User(models.Model):
