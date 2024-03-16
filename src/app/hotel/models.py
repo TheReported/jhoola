@@ -1,19 +1,15 @@
 from django.db import models
-import random
-import string
 
 
 class Hotel(models.Model):
     name = models.CharField(max_length=50, unique=True)
     slug = models.SlugField(max_length=30, blank=True)
-    city = models.CharField(max_length=50, null=False)
-    country = models.CharField(max_length=50, null=False)
-    email = models.EmailField(max_length=50, null=False)
-    phone = models.CharField(
-        max_length=12, null=False
-    )
-    code = models.CharField(max_length=16, editable=False)
-    # site_map
+    city = models.CharField(max_length=50)
+    country = models.CharField(max_length=50)
+    email = models.EmailField(max_length=50)
+    phone = models.CharField(max_length=12)
+    code = models.CharField(max_length=16, editable=False, blank=True, null=True)
+    site_map = models.CharField(max_length=100, blank=True)
 
     def save(self, *args, **kwargs):
         if not self.pk:
@@ -22,18 +18,5 @@ class Hotel(models.Model):
             self.code = f"{city_code}-{hotel_code}"
         super().save(*args, **kwargs)
 
-
-class User(models.Model):
-    username = models.CharField(max_length=20, unique=True, null=False)
-    password = models.charField(max_length=16, editable=False)
-    email = models.EmailField(max_length=50, null=False)
-    num_guest = models.SmallIntegerField(max_length=2, null=False)
-    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
-
-    def save(self, *args, **kwargs):
-        if not self.pk:
-            chars = string.ascii_letters + string.digits + string.punctuation
-            password_random = ''.join(random.choice(chars) for _ in range(16))
-            self.password = make_password(password_random)
-        super().save(*args, **kwargs)
-    
+    def __str__(self) -> str:
+        return self.name
