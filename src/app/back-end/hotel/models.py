@@ -19,4 +19,4 @@ class Hotel(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
-        return self.name
+        return self.name.capitalize()

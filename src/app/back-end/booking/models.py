@@ -13,3 +13,6 @@ class Booking(models.Model):
 
     class Meta:
         ordering = ['-timestamp']
+
+    def __str__(self) -> str:
+        return f'{self.user} -> {self.product} {self.duration}'

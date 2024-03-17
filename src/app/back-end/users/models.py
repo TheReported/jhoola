@@ -1,5 +1,7 @@
+from django.conf import settings
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
@@ -19,7 +21,11 @@ class NewUser(User):
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
-        # Send email to User with his password
         password = generate_password()
+        subject = 'Jhoola'
+        message = f'You have a new user in hotel {str(self.hotel)} and your password is {password}'
+        from_email = settings.EMAIL_HOST_USER
+        to_email = [self.email]
+        send_mail(subject, message, from_email, to_email, fail_silently=False)
         self.password = make_password(password)
         super().save(self, *args, **kwargs)
