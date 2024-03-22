@@ -1,0 +1,4 @@
+<select [(ngModel)]="selectedHotel">
+  <option *ngFor="let hotel of hotels" [value]="hotel">{{ hotel.name }}</option>
+</select>
+

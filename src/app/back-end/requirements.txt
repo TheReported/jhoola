@@ -1,5 +1,6 @@
 Django==4.2
-prettyconf
-djangorestframework
-pillow
-WeasyPrint
+prettyconf==2.2.1
+djangorestframework==3.14.0
+pillow==10.1.0
+WeasyPrint==61.2
+django-cors-headers==4.3.1
