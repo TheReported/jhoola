@@ -28,14 +28,13 @@ export class HotelSelectorComponent implements OnInit {
   }
 
   private _filterHotels(value: string): any[] {
-    const filterValue = value.toLowerCase();
     let filteredHotels = this.hotels.filter(hotel => {
-      let nameIncludes = hotel.name.toLowerCase().includes(filterValue);
-      let cityIncludes = hotel.city.toLowerCase().includes(filterValue);
-      return nameIncludes || cityIncludes;
+      let name = hotel.name.includes(value);
+      let city = hotel.city.includes(value);
+      return name || city;
     });
 
-    return filteredHotels.slice(0, this.maxResults); // Mover esta línea aquí
+    return filteredHotels.slice(0, this.maxResults);
   }
   
 }
