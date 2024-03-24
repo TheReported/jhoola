@@ -1,4 +1,16 @@
-<select [(ngModel)]="selectedHotel">
-  <option *ngFor="let hotel of hotels" [value]="hotel">{{ hotel.name }}</option>
-</select>
-
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <mat-label>Hotels</mat-label>
+    <input type="text"
+          placeholder="Find your hotel"
+          aria-label="Hotels"
+          matInput
+          [formControl]="hotelsControl"
+          [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let hotel of filteredHotels | async" [value]="hotel">
+        {{hotel.name}}, {{hotel.city}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>

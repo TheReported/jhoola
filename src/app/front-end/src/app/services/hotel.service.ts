@@ -11,7 +11,7 @@ export class HotelService {
 
   constructor(private http: HttpClient) {}
 
-  getHoteles(): Observable<any[]> {
+  getHotels(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
 }

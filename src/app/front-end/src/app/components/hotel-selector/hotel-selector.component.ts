@@ -1,5 +1,7 @@
-// hotel-selector.component.ts
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { HotelService } from 'src/app/services/hotel.service';
 
 @Component({
@@ -8,17 +10,32 @@ import { HotelService } from 'src/app/services/hotel.service';
   styleUrls: ['./hotel-selector.component.scss']
 })
 export class HotelSelectorComponent implements OnInit {
-  hotels: any[] = [];
-  selectedHotel: any;
+  hotelsControl = new FormControl();
+  filteredHotels!: Observable<any[]>;
+  hotels!: any[];
+  maxResults = 5;
 
   constructor(private hotelService: HotelService) { }
 
   ngOnInit(): void {
-    this.getHotels();
+    this.hotelService.getHotels().subscribe(hotels => {
+      this.hotels = hotels;
+      this.filteredHotels = this.hotelsControl.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filterHotels(value))
+      );
+    });
   }
 
-  getHotels(): void {
-    this.hotelService.getHoteles()
-      .subscribe(hotels => this.hotels = hotels);
+  private _filterHotels(value: string): any[] {
+    const filterValue = value.toLowerCase();
+    let filteredHotels = this.hotels.filter(hotel => {
+      let nameIncludes = hotel.name.toLowerCase().includes(filterValue);
+      let cityIncludes = hotel.city.toLowerCase().includes(filterValue);
+      return nameIncludes || cityIncludes;
+    });
+
+    return filteredHotels.slice(0, this.maxResults); // Mover esta línea aquí
   }
+  
 }
