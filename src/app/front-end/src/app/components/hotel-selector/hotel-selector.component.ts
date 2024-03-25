@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { HotelService } from 'src/app/services/hotel.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-hotel-selector',
@@ -10,17 +11,17 @@ import { HotelService } from 'src/app/services/hotel.service';
   styleUrls: ['./hotel-selector.component.scss']
 })
 export class HotelSelectorComponent implements OnInit {
-  hotelsControl = new FormControl();
+  hotelInput = new FormControl();
   filteredHotels!: Observable<any[]>;
   hotels!: any[];
   maxResults = 5;
 
-  constructor(private hotelService: HotelService) { }
+  constructor(private hotelService: HotelService, private router: Router) { }
 
   ngOnInit(): void {
     this.hotelService.getHotels().subscribe(hotels => {
       this.hotels = hotels;
-      this.filteredHotels = this.hotelsControl.valueChanges.pipe(
+      this.filteredHotels = this.hotelInput.valueChanges.pipe(
         startWith(''),
         map(value => this._filterHotels(value))
       );
@@ -28,13 +29,28 @@ export class HotelSelectorComponent implements OnInit {
   }
 
   private _filterHotels(value: string): any[] {
+    let formattedValue = value.toLowerCase();
+
     let filteredHotels = this.hotels.filter(hotel => {
-      let name = hotel.name.includes(value);
-      let city = hotel.city.includes(value);
+      let name = hotel.name.toLowerCase().includes(formattedValue);
+      let city = hotel.city.toLowerCase().includes(formattedValue);
       return name || city;
     });
 
     return filteredHotels.slice(0, this.maxResults);
   }
-  
+
+  formatSlug(hotelName: string): string{
+    const nonAcceptedValues = /[&\s]+/g
+    const normalizedAccents = hotelName.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    let slug = normalizedAccents.toLowerCase().replace(nonAcceptedValues, '-');
+    return slug;
+  }
+
+  redirectToLogin(): void {
+    let hotelName = this.hotelInput.value.split(',')[0].trim();
+    let slug = this.formatSlug(hotelName);
+    this.router.navigate(['/login', slug]);
+  }
+
 }

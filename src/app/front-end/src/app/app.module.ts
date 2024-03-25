@@ -9,15 +9,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatButtonModule } from '@angular/material/button';
 import { AsyncPipe } from '@angular/common';
+import { AppRoutingModule } from './app-routing.module';
+import { MatIconModule } from '@angular/material/icon';
+import { LoginComponent } from './components/login/login.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HotelSelectorComponent
+    HotelSelectorComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -25,7 +32,11 @@ import { AsyncPipe } from '@angular/common';
     MatAutocompleteModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    AsyncPipe
+    AsyncPipe,
+    MatButtonModule,
+    MatIconModule,
+    NgbModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

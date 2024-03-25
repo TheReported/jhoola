@@ -1,16 +1,19 @@
-<form class="example-form">
-  <mat-form-field class="example-full-width">
-    <mat-label>Hotels</mat-label>
-    <input type="text"
-          placeholder="Find your hotel"
-          aria-label="Hotels"
-          matInput
-          [formControl]="hotelsControl"
-          [matAutocomplete]="auto">
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let hotel of filteredHotels | async" [value]="hotel.name + ', ' + hotel.city">
-        {{hotel.name}}, {{hotel.city}}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-</form>
+<div class="container">
+  <form class="d-flex flex-column">
+    <h2>Where are you staying at?</h2>
+    <mat-form-field>
+      <input type="text"
+            placeholder="Find your hotel"
+            aria-label="Jhoola Hotels"
+            matInput
+            [formControl]="hotelInput"
+            [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let hotel of filteredHotels | async" [value]="hotel.name + ', ' + hotel.city">
+          {{hotel.name}}, {{hotel.city}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <button type="button" mat-raised-button color="primary" (click)="redirectToLogin()">This is my hotel</button>
+  </form>
+</div>
