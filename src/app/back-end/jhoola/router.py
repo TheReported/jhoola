@@ -11,6 +11,6 @@ app_name = 'router'
 
 router = routers.DefaultRouter()
 router.register('hotels', HotelViewSet, basename='hotels')
-router.register('users', ClientViewSet, basename='users')
+router.register('clients', ClientViewSet, basename='clients')
 router.register('products', ProductViewSet, basename='products')
 router.register('bookings', BookingViewSet, basename='bookings')

@@ -1,23 +1,21 @@
 <div class="container">
-  <form>
-  <section class="d-flex flex-column">
-    <h2>Log in</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="submitData()">
+    <section class="d-flex flex-column">
+      <h2>Log in</h2>
       <mat-form-field class="email-input">
         <mat-label>Username</mat-label>
-        <input type="text" matInput [formControl]="username">
-        <mat-error *ngIf="username.hasError('required')">Username is <strong>required</strong></mat-error>
+        <input type="text" matInput formControlName="username">
+        <mat-error *ngIf="loginForm.get('username')?.hasError('required')">Username is <strong>required</strong></mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Password</mat-label>
-        <input matInput [formControl]="password" [type]="hide ? 'password' : 'text'">
-        <mat-error *ngIf="username.hasError('required')">Password is <strong>required</strong></mat-error>
+        <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+        <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Password is <strong>required</strong></mat-error>
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
       </mat-form-field>
-      <button type="submit" mat-raised-button color="primary">Log in</button>   
-  </section>
+      <button type="submit" mat-raised-button color="primary">Log in</button>
+    </section>
   </form>
 </div>
-
-
