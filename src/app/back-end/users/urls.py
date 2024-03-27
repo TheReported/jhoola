@@ -3,5 +3,5 @@ from django.urls import include, path
 from . import views
 
 urlpatterns = [
-    path('activity/', views.dashboard, name='activity'),
+    path('login/<slug:hotel_slug>/', views.user_login, name='login')
 ]

@@ -18,8 +18,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.hotelSlug = params['hotelSlug'];
-      // Ahora puedes utilizar this.hotelSlug en tu lógica de autenticación
+    this.hotelSlug = params['hotelSlug'];
     });
   }
 }
