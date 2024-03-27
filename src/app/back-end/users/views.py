@@ -28,7 +28,7 @@ def user_login(request, hotel_slug):
     if user is None:
         return HttpResponse('Error: Invalid username or password.', status=401)
 
-    return HttpResponse(f'Login successful for user: {username} at {hotel.name}', status=200)
+    return HttpResponse(f'Login successful for {username} at {hotel.name}', status=200)
 
 
 # def dashboard(request):
