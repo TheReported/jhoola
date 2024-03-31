@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   submitData() {
     if (this.loginForm.valid) {
       let formData = this.loginForm.value;
-      this.loginService.postData(this.hotelSlug, formData).subscribe(
+      this.loginService.login(this.hotelSlug, formData).subscribe(
         (response) => {
           console.log(response);
         },

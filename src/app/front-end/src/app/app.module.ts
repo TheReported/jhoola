@@ -15,12 +15,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { MatIconModule } from '@angular/material/icon';
 import { LoginComponent } from './components/login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HotelSelectorComponent,
     LoginComponent,
+    AdminDashboardComponent,
   ],
   imports: [
     BrowserModule,

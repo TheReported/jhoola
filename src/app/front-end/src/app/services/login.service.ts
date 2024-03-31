@@ -10,7 +10,7 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  postData(hotelSlug: string, data: any) {
+  login(hotelSlug: string, data: any) {
     const loginUrl = `${this.baseUrl}${hotelSlug}/`;
     return this.http.post(loginUrl, data);
   }

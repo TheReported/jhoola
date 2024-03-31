@@ -378,7 +378,7 @@ p {
 }
 
 .champ, .header {
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../imgs/header2.jpg') no-repeat center center fixed;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('./assets/header2.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 
@@ -457,7 +457,7 @@ p {
 
 .section.has-img-bg {
   position: relative;
-  background: url(../imgs/section.jpg) no-repeat center top fixed;
+  background: url(./assets/section.jpg) no-repeat center top fixed;
   background-size: cover;
   color: #fff;
 }
