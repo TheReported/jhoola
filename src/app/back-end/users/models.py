@@ -5,7 +5,7 @@ from django.conf import settings
 
 # Minimum and maximun number of guests
 MIN_NUM_GUESTS = 1
-MAX_NUM_GUESTS = 6
+MAX_NUM_GUESTS = 10
 
 
 class Client(models.Model):
