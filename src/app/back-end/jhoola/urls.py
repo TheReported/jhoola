@@ -18,10 +18,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from users import views
+
 from .router import router
 
 urlpatterns = [
     path('', include('django.contrib.auth.urls')),
+    path('', views.main, name="main"),
     path("admin/", admin.site.urls),
     path('user/', include('users.urls')),
     path('api/', include(router.urls)),

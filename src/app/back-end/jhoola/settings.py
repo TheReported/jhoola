@@ -132,10 +132,11 @@ REST_FRAMEWORK = {
     ]
 }
 
+
 LOGIN_REDIRECT_URL = 'activity'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
-
+LOGOUT_REDIRECT_URL = 'main'
 
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')

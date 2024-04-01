@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class="testbox">
-        <h1>Login<a id="close" href="VistaPrincipal.html"><i class="icon-remove"></i></a></h1>
+        <h1>Login<a id="close" href={% url "main" %}><i class="icon-remove"></i></a></h1>
         <form method="post">
             <hr>
             {% block content %}
