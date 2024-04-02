@@ -5,3 +5,4 @@ media/
 __pycache__
 justfile
 *.pyc
+db.sqlite3
