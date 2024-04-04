@@ -37,11 +37,14 @@
     </nav>
     <header class="header">
         <div class="overlay">
-            <form method="post">
-                {% csrf_token %}
-                {{ form.as_p }}  <!-- Esto renderizará todos los campos del formulario como párrafos -->
-                <button type="submit">Enviar</button>
-            </form>
+            <div class="custom-dropdown">
+                <form id="hotel-form">
+                    <label for="hotel-input">Selecciona un hotel:</label><br>
+                    <input type="text" id="hotel-input" name="hotel"><br>
+                    <ul id="hotel-dropdown" class="dropdown-list p-0"></ul>
+                    <input type="submit" value="This is my hotel">
+                </form>
+            </div>
         </div>  
         <div class="shape">
             <svg viewBox="0 0 1500 200">
@@ -159,7 +162,41 @@
             </footer>
         </div>
     </section>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('hotel-input').addEventListener('focus', function() {
+                fetch('http://localhost:8000/api/hotels/')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        document.getElementById('hotel-dropdown').innerHTML = '';
+                        data.slice(0, 5).forEach(hotel => {
+                            const listItem = document.createElement('li');
+                            listItem.classList.add('dropdown-item', 'bg-white');
+                            listItem.setAttribute('data-value', hotel.id);
+                            listItem.textContent = hotel.name;
+                            document.getElementById('hotel-dropdown').appendChild(listItem);
+                        });
+                        document.querySelector('.custom-dropdown').classList.add('show');
+                    })
+                    .catch(error => {
+                        console.error('Error fetching hotels:', error);
+                    });
+            });
+
+            document.getElementById('hotel-dropdown').addEventListener('click', function(event) {
+                if (event.target.classList.contains('dropdown-item')) {
+                    document.getElementById('hotel-input').value = event.target.textContent;
+                    document.querySelector('.custom-dropdown').classList.remove('show');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
