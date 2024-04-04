@@ -1,8 +1,8 @@
-from django.urls import include, path
+from django.urls import path
 
 from . import views
 
-app_name = "users"
+app_name = 'users'
 urlpatterns = [
     path('bookings/', views.client_dashboard, name='client_dashboard'),
     path(

@@ -10,7 +10,6 @@
     <title>Jhoola</title>
 	<link rel="stylesheet" href="{% static "css/jhoola.css" %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-light champ">
@@ -32,28 +31,24 @@
                     <li class="nav-item">
                         <a class="link" href="#contact">Contact</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="link" href={% url "login" %}>Login</a>
-                    </li>
                 </ul>
             </div>
         </div>
     </nav>
-    
-    
-    
-    
-        <header class="header">
-            <div class="overlay">
-                <!--Aquí va el formulario de los hoteles-->
-            </div>  
-            <div class="shape">
-                <svg viewBox="0 0 1500 200">
-                    <path d="m 0,240 h 1500.4828 v -71.92164 c 0,0 -286.2763,-81.79324 -743.19024,-81.79324 C 300.37862,86.28512 0,168.07836 0,168.07836 Z"/>
-                </svg>
-            </div>  
-        </header>
-    </div>
+    <header class="header">
+        <div class="overlay">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}  <!-- Esto renderizará todos los campos del formulario como párrafos -->
+                <button type="submit">Enviar</button>
+            </form>
+        </div>  
+        <div class="shape">
+            <svg viewBox="0 0 1500 200">
+                <path d="m 0,240 h 1500.4828 v -71.92164 c 0,0 -286.2763,-81.79324 -743.19024,-81.79324 C 300.37862,86.28512 0,168.07836 0,168.07836 Z"/>
+            </svg>
+        </div>  
+    </header>
 
     <section  id="service" class="section pt-0">
         <div class="container">

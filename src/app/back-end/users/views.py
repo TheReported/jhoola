@@ -1,8 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
 
 
-def main(request):
-    return render(request, 'main.html')
+
 
 
 def client_dashboard(request):
