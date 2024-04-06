@@ -9,7 +9,6 @@ class ClientAdmin(admin.ModelAdmin):
     list_display = [
         'user',
         'num_guest',
-        'telephone',
         'hotel',
     ]
     raw_id_fields = ['user', 'hotel']

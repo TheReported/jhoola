@@ -1,24 +1,29 @@
 from django.contrib import messages
-from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import ClientCreationForm, ClientUpdateForm
+from django.http import HttpResponse, HttpResponseBadRequest
+from django.shortcuts import get_object_or_404, redirect, render
+
 from hotel.models import Hotel
+
+from .forms import ClientCreationForm, ClientUpdateForm
 from .models import Client
 
 
-def login(request):
+def login_view(request, hotel_slug):
     if request.method == 'POST':
-        form = AuthenticationForm(request.POST)
+        form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             user = form.get_user()
-            # hotel = get_object_or_404(Hotel, slug=hotel_slug)
-            # if user.client.hotel == hotel:
-            login(request, user)
-            return redirect('users:dashboard')
+            hotel = get_object_or_404(Hotel, slug=hotel_slug)
+            if user.client.hotel == hotel:
+                login(request, user)
+                return redirect("users:dashboard")
+            messages.error(request, f'You don\'t belong to the hotel {hotel}')
 
     else:
-        form = AuthenticationForm()
-        return render(request, 'registration/login.html', {'form':form})
+        form = AuthenticationForm(request)
+    return render(request, 'registration/login.html', {'form': form})
 
 
 def dashboard(request):
