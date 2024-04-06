@@ -3,19 +3,38 @@ from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import ClientCreationForm, ClientUpdateForm
 from .models import Client, Hotel
+from django.contrib.auth import authenticate, login
+
+from .forms import LoginForm
 
 
-
+def user_login(request):
+    selected_hotel = request.session.get('hotel_session_name')
+    print(selected_hotel)
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            user = authenticate(request, username=cd['username'], password=cd['password'])
+            if user is not None:
+                hotel = get_object_or_404(Hotel, name=selected_hotel)
+                client = get_object_or_404(Client, user=user)
+                if client.hotel == hotel:
+                    login(request, user)
+                    if user.groups.filter(name='admin-hotel').exists():
+                        return redirect(manager_dashboard)
+                    return redirect(client_dashboard)
+    else:
+        form = LoginForm()
+    return render(request, 'registration/login.html', {'form': form, 'selected_hotel': selected_hotel})
 
 
 def client_dashboard(request):
-    if not request.user.groups.filter(name="admin-hotel").exists():
-        return render(request, 'users/dashboard.html', {})
+    return render(request, 'users/dashboard.html', {})
 
 
 def manager_dashboard(request):
-    if request.user.groups.filter(name="admin-hotel").exists():
-        return render(request, 'managers/dashboard-manager.html', {})
+    return render(request, 'managers/dashboard-manager.html', {})
 
 
 def create_client(request):

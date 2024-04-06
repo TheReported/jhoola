@@ -38,7 +38,7 @@
     </nav>
     <header class="header">
         <div class="overlay">
-            <form action="{% url "login" %}" id="hotel-form" class="d-flex flex-column" method="post">
+            <form action="{% url "main" %}" id="hotel-form" class="d-flex flex-column" method="post">
                 {% csrf_token %}
                 {{ form.hotel_selector.label_tag }}
                 <hr class="dropdown-divider mb-3">
