@@ -38,7 +38,7 @@
     </nav>
     <header class="header">
         <div class="overlay">
-            <form action="{% url "login" hotel.slug %}" id="hotel-form" class="d-flex flex-column" method="post">
+            <form id="hotel-form" class="d-flex flex-column" method="post" action="{% url "login" hotel.slug %}">
                 {% csrf_token %}
                 {{ form.hotel_selector.label_tag }}
                 <hr class="dropdown-divider mb-3">
@@ -165,6 +165,6 @@
     </section>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src={% static "scripts/autocomplete.js" %}></script>
+    <script src={% static "js/autocomplete.js" %}></script>
 </body>
 </html>

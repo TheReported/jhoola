@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, redirect, render
 
 from hotel.models import Hotel
@@ -26,12 +26,14 @@ def login_view(request, hotel_slug):
     return render(request, 'registration/login.html', {'form': form})
 
 
+@login_required
 def dashboard(request):
     if request.user.groups.filter(name='admin-hotel').exists():
         return render(request, 'managers/dashboard-manager.html', {})
     return render(request, 'users/dashboard.html', {})
 
 
+@login_required
 def create_client(request):
     if request.method == 'POST':
         clientcreation_form = ClientCreationForm(request.POST)
@@ -45,6 +47,7 @@ def create_client(request):
     # return   render(request, '', {'clientcreation_form': clientcreation_form})
 
 
+@login_required
 def update_client(request, user):
     instance = get_object_or_404(Client, user=user)
     if request.method == 'POST':
@@ -59,6 +62,7 @@ def update_client(request, user):
     # return render(request, '', {'clientupdate_form': clientupdate_form})
 
 
+@login_required
 def delete_client(request, user):
     client = get_object_or_404(Client, user=user)
     if request.method == 'POST':
@@ -68,6 +72,7 @@ def delete_client(request, user):
     # return render(request, '', {'client': client})
 
 
+@login_required
 def client_list(request, hotel_code):
     hotel = Hotel.objects.get(code=hotel_code)
     clients = Client.objects.filter(hotel=hotel)

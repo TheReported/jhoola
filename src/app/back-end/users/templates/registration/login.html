@@ -11,15 +11,20 @@
         <form method="post">
             <hr>
             {% block content %}
-                {% if form.errors %}
-                    <p>
-                        Your username and password didn't match. Please try again.
-                    </p>
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li class="{{ message.tags }}">
+                                {{ message|safe }}
+                                
+                            </li>
+                        {% endfor %}
+                    </ul>
                 {% endif %}
                 <label id="icon" for="id_username"><i class="icon-print"></i></label>
-                {{ form.username }}
+                    {{ form.username }}
                 <label id="icon" for="id_password"><i class="icon-shield"></i></label>
-                {{ form.password }}
+                    {{ form.password }}
                 <br>
                 <br>
                 <input type="submit" class="logbutton" value="Enviar">

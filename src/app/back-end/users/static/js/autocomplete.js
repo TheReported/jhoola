@@ -1,4 +1,28 @@
-let hotels = [];
+function fetchHotelDetail(hotel) {
+    fetch('http://localhost:8000/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+
+        },
+        credentials: 'include',
+        body: JSON.stringify(hotel),
+    })
+    .then(response => {
+        console.log(response)
+        if (!response.ok) {
+            throw new Error('Network response was not ok')
+        }
+        return response.json()
+    })
+    .then(data => {
+        console.log(data)
+        return data
+    })
+    .catch(error => {
+        console.error('Error fetching hotel details:', error)
+    })
+}
 
 function fetchHotels() {
     fetch('http://localhost:8000/api/hotels/')
@@ -10,6 +34,8 @@ function fetchHotels() {
         })
         .then(data => {
             hotels = data;
+            console.log(data)
+            return data
         })
         .catch(error => {
             console.error('Error fetching hotels:', error);
@@ -30,6 +56,7 @@ function displayHotels() {
       listHotel.addEventListener('click', function() {
           document.getElementById('hotel-input').value = displayFormat;
           hotelDropdown.innerHTML = '';
+          fetchHotelDetail(hotel)
       });
       hotelDropdown.appendChild(listHotel);
   });
