@@ -1,4 +1,5 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
 from .models import Hotel
 from .forms import HotelForm
 
@@ -8,21 +9,14 @@ def main(request):
     return render(request, 'main.html', {'form': form})
 
 
-# class HotelAutoComplete(autocomplete.Select2QuerySetView):
-#     def get_queryset(self):
-#         qs = Hotel.objects.all()
-#         name_filter = qs.filter(name__icontains=self.q)
-#         city_filter = qs.filter(city__icontains=self.q)
-#         return name_filter | city_filter if self.q else qs
-
-
-def get_hotels(request):
+def get_hotel(request):
     if request.method == 'POST':
         form = HotelForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
+            print(cd['hotel_selector'])
             hotel = get_object_or_404(Hotel, name=cd['name'])
-            return hotel.slug
+            return redirect(reverse('login', kwargs={'hotel_slug': hotel.slug}))
     else:
         form = HotelForm()
     return render(request, 'main.html', {'form': form})

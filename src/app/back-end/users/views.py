@@ -1,21 +1,30 @@
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
-
+from django.contrib.auth.forms import AuthenticationForm
 from .forms import ClientCreationForm, ClientUpdateForm
-from .models import Client, Hotel
+from hotel.models import Hotel
+from .models import Client
 
 
+def login(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            # hotel = get_object_or_404(Hotel, slug=hotel_slug)
+            # if user.client.hotel == hotel:
+            login(request, user)
+            return redirect('users:dashboard')
+
+    else:
+        form = AuthenticationForm()
+        return render(request, 'registration/login.html', {'form':form})
 
 
-
-def client_dashboard(request):
-    if not request.user.groups.filter(name="admin-hotel").exists():
-        return render(request, 'users/dashboard.html', {})
-
-
-def manager_dashboard(request):
-    if request.user.groups.filter(name="admin-hotel").exists():
+def dashboard(request):
+    if request.user.groups.filter(name='admin-hotel').exists():
         return render(request, 'managers/dashboard-manager.html', {})
+    return render(request, 'users/dashboard.html', {})
 
 
 def create_client(request):

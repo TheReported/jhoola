@@ -9,7 +9,9 @@ MAX_NUM_GUESTS = 10
 
 
 class Client(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='client'
+    )
     num_guest = models.PositiveSmallIntegerField(
         validators=[
             MinValueValidator(MIN_NUM_GUESTS),
@@ -17,7 +19,7 @@ class Client(models.Model):
         ],
     )
     telephone = models.CharField(max_length=15)
-    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name="clients")
+    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name='clients')
 
     def save(self, *args, **kwargs):
         # password = generate_password()

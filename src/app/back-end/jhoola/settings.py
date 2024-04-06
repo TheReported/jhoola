@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'product.apps.ProductConfig',
     'booking.apps.BookingConfig',
-    'corsheaders'
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -139,6 +139,7 @@ REST_FRAMEWORK = {
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = 'main'
+LOGIN_REDIRECT_URL = 'dashboard'
 
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')

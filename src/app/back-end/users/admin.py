@@ -10,9 +10,6 @@ class ClientAdmin(admin.ModelAdmin):
         'user',
         'num_guest',
         'telephone',
-        'name_surname',
-        'email',
-        'last_login',
         'hotel',
     ]
     raw_id_fields = ['user', 'hotel']
