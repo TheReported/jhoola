@@ -1,12 +1,9 @@
 from django import forms
-from .models import Hotel
-from dal import autocomplete
 
 
-class HotelForm(forms.ModelForm):
-    class Meta:
-        model = Hotel
-        fields = ('name',)
-        widgets = {
-            'name': autocomplete.ModelSelect2(url='hotel-autocomplete'),
-        }
+class HotelForm(forms.Form):
+    hotel_selector = forms.CharField(
+        label='Where hotel are you staying at?',
+        max_length=100,
+        widget=forms.TextInput(attrs={'id': 'hotel-input', 'placeholder': 'Choose your hotel'}),
+    )

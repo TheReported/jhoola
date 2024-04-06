@@ -24,8 +24,7 @@ from .router import router
 
 urlpatterns = [
     path('', include('django.contrib.auth.urls')),
-    path('', views.main, name='main'),
-    path('data/', include('hotel.urls')),
+    path('', include('hotel.urls')),
     path('admin/', admin.site.urls),
     path('dashboard/', include('users.urls')),
     path('api/', include(router.urls)),
