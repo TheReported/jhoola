@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-
 from hotel.constants import MAX_NUM_GUESTS, MIN_NUM_GUESTS
 from hotel.models import Hotel
 
@@ -16,6 +15,7 @@ class Client(models.Model):
             MaxValueValidator(MAX_NUM_GUESTS),
         ],
     )
+    telephone = models.CharField(max_length=15)
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name="clients")
 
     def save(self, *args, **kwargs):
