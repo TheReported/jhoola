@@ -482,7 +482,10 @@ p {
 /* HOTEL SELECTOR */
 #hotel-form label {
   font-size: 32px;
-  
+}
+
+#hotel-form button {
+  max-width: max-content;
 }
 
 #hotel-input{
@@ -492,7 +495,7 @@ p {
 #hotel-dropdown li{
   list-style-type: none;
   background: 
-  linear-gradient(to bottom, transparent, #7c7f80) no-repeat
+  linear-gradient(to bottom, transparent, #787b7ce5) no-repeat
     calc(200% - var(--p,0%)) 100% / 200% var(--p,.08em);
   transition: .3s var(--t,0s), background-position .3s calc(.3s - var(--t,0s));
 }
@@ -500,4 +503,6 @@ p {
   --p: 100%;
   --t: .3s;
   color: #fff;
+  cursor: pointer;
+  
 }
