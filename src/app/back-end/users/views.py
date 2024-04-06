@@ -5,8 +5,7 @@ from .forms import ClientCreationForm, ClientUpdateForm
 from .models import Client, Hotel
 
 
-def main(request):
-    return render(request, 'main.html')
+
 
 
 def client_dashboard(request):

@@ -161,12 +161,13 @@ textarea.form-control {
   padding: 0.5rem 1rem;
   color: white;
   text-decoration: none;
-  text-decoration: none;
-  color: white;
+  transform: scale(1);
+  transition: color 0.2s, transform 0.2s; 
 }
 
 .link:hover {
-  color: orange;
+  color: #FE9854;
+  transform: scale(1.10);
 }
 
 
@@ -476,4 +477,32 @@ p {
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
   z-index: 1;
+}
+
+/* HOTEL SELECTOR */
+#hotel-form label {
+  font-size: 32px;
+}
+
+#hotel-form button {
+  max-width: max-content;
+}
+
+#hotel-input{
+  width: 500px;
+}
+
+#hotel-dropdown li{
+  list-style-type: none;
+  background: 
+  linear-gradient(to bottom, transparent, #787b7ce5) no-repeat
+    calc(200% - var(--p,0%)) 100% / 200% var(--p,.08em);
+  transition: .3s var(--t,0s), background-position .3s calc(.3s - var(--t,0s));
+}
+#hotel-dropdown li:hover {
+  --p: 100%;
+  --t: .3s;
+  color: #fff;
+  cursor: pointer;
+  
 }

@@ -15,8 +15,9 @@ class Hotel(models.Model):
         if not self.pk:
             city_code = self.city[:2].upper()
             hotel_code = ''.join(word[:2].upper() for word in self.name.split())
-            self.code = f"{city_code}-{hotel_code}"
+            self.code = f'{city_code}-{hotel_code}'
+            self.name = self.name.title()
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
-        return self.name.capitalize()
+        return self.name
