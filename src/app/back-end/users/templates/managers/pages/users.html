@@ -35,15 +35,30 @@
     </div>
 
     <div class="black-box mt-4 d-flex align-items-center justify-content-center flex-column">
-      <form action="{% url "users:manager_users" %}" method="post" id="createform" style="display: none;">
+      <form action="{% url "users:manager_users" %}" method="post" id="createform" style="display:none;">
         {% csrf_token %}
-        {{ user_form.as_p}}
+        <div class="form-group">
+          <label for="id_username">Username:</label>
+          {{ user_form.username }}
+        </div>
+        <div class="form-group">
+          <label for="id_firstandsecondname">Full Name:</label>
+          {{ user_form.first_name }} {{ user_form.last_name }}
+        </div>
+        <div class="form-group">
+          <label for="id_email">Email:</label>
+          {{ user_form.email }}
+        </div>
+        <div class="form-group">
+          <label for="id_guest">Num Guests:</label>
+          {{ user_form.num_guest }}
+        </div>
+        <br>
         <button class="btn btn-success btn-lg btn-block bg-gradient-primary mb-4" type="submit">Create User</button>
       </form>
       
       <form id="editform" style="display: none;">
         <input type="text" name="nombre_edit" placeholder="Nuevo Nombre">
-        <input type="text" name="telefono_edit" placeholder="Nuevo Teléfono">
         <input type="email" name="email_edit" placeholder="Nuevo Email">
         <button class="btn btn-success btn-lg btn-block bg-gradient-primary mb-4">Save User</button>
         <button class="btn btn-success btn-lg btn-block bg-gradient-primary mb-4">Delete User</button>
@@ -62,45 +77,3 @@
   </div>
 </main>
 {% endblock %}
-
-
-
-<script>
-  var userNameDiv = document.querySelector('.add-account')
-  var createForm = document.getElementById('createform')
-  var editForm = document.getElementById('editform')
-  
- 
-  userNameDiv.addEventListener('click', function() {
-    createForm.style.display = 'block'
-    editForm.style.display = 'none' 
-  })
-  
-
-  var editButton = document.querySelector('.user-name')
-  editButton.addEventListener('click', function() {
-    editForm.style.display = 'block'
-    createForm.style.display = 'none' 
-  })
-
-  var saveButtons = document.querySelectorAll('form button')
-  var confirmationModal = document.getElementById('confirmationModal')
-  var confirmYesButton = document.getElementById('confirmYes')
-  var confirmNoButton = document.getElementById('confirmNo')
-
-   saveButtons.forEach(function(button) {
-    button.addEventListener('click', function(event) {
-      event.preventDefault()
-      confirmationModal.style.display = 'block'
-    })
-  })
-
-  confirmYesButton.addEventListener('click', function() {
-    confirmationModal.style.display = 'none'
-  })
-
-  confirmNoButton.addEventListener('click', function() {
-    confirmationModal.style.display = 'none'
-  }) 
-</script>
-
