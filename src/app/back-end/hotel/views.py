@@ -1,7 +1,13 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
+
 from .forms import HotelForm
 
+
 def main(request):
+    if request.user.is_authenticated:
+        if request.user.groups.filter(name='HotelManagers').exists():
+            return redirect('users:manager_dashboard')
+        return redirect('users:client_dashboard', username=request.user.username)
     if request.method == 'POST':
         form = HotelForm(request.POST)
         if form.is_valid():

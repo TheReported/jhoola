@@ -11,6 +11,15 @@
         <form method="post">
             <hr>
             {% block content %}
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li class="{{ message.tags }}">
+                                {{ message|safe }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
                 {% if form.errors %}
                     <p>
                         Your username and password didn't match. Please try again.
