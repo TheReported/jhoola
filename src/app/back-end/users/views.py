@@ -1,7 +1,11 @@
+from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 
+from product.models import Product
+
+from .decorators import client_required, manager_required
 from .forms import ClientRegistrationForm, LoginForm
 from .models import Client, Hotel
 
@@ -21,21 +25,36 @@ def user_login(request):
                     if user.groups.filter(name='HotelManagers').exists():
                         return redirect('users:manager_dashboard')
                     return redirect('users:client_dashboard', username=user.username)
+                messages.error(
+                    request, 'You are accessing a hotel where you aren\'t authenticated.'
+                )
+            else:
+                messages.error(request, 'The credentials entered are incorrect. Please try again.')
     else:
         form = LoginForm()
     return render(request, 'registration/login.html', {'form': form})
 
 
 @login_required
+@client_required
 def client_dashboard(request, username):
     client = get_object_or_404(Client, user=request.user)
     return render(request, 'users/dashboard.html', {'client': client})
 
 
 @login_required
+@manager_required
 def manager_dashboard(request):
     client = get_object_or_404(Client, user=request.user)
-    return render(request, 'managers/dashboard-manager.html', {'client': client})
+    products = Product.objects.filter(hotel=client.hotel).count()
+    return render(
+        request,
+        'managers/dashboard-manager.html',
+        {
+            'client': client,
+            'num_products': products,
+        },
+    )
 
 
 def register(request):
