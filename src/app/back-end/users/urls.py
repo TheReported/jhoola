@@ -11,5 +11,7 @@ app_name = 'users'
 # ]
 
 urlpatterns = [
-    path('dashboard/', views.dashboard, name='dashboard'),
+    path('<username>/bookings/', views.client_dashboard, name='client_dashboard'),
+    path('manager/', views.manager_dashboard, name='manager_dashboard'),
+    path('manager/register/', views.register, name='register'),
 ]

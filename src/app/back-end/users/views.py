@@ -1,79 +1,57 @@
-from django.contrib import messages
-from django.contrib.auth import login
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import get_object_or_404, redirect, render
 
-from hotel.models import Hotel
-
-from .forms import ClientCreationForm, ClientUpdateForm
-from .models import Client
+from .forms import ClientRegistrationForm, LoginForm
+from .models import Client, Hotel
 
 
-def login_view(request, hotel_slug):
+def user_login(request):
+    selected_hotel = request.session.get('hotel_session_name')
     if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
+        form = LoginForm(request.POST)
         if form.is_valid():
-            user = form.get_user()
-            hotel = get_object_or_404(Hotel, slug=hotel_slug)
-            if user.client.hotel == hotel:
-                login(request, user)
-                return redirect("users:dashboard")
-            messages.error(request, f'You don\'t belong to the hotel {hotel}')
-
+            cd = form.cleaned_data
+            user = authenticate(request, username=cd['username'], password=cd['password'])
+            if user is not None:
+                hotel = get_object_or_404(Hotel, name=selected_hotel)
+                client = get_object_or_404(Client, user=user)
+                if client.hotel == hotel:
+                    login(request, user)
+                    if user.groups.filter(name='HotelManagers').exists():
+                        return redirect('users:manager_dashboard')
+                    return redirect('users:client_dashboard', username=user.username)
     else:
-        form = AuthenticationForm(request)
+        form = LoginForm()
     return render(request, 'registration/login.html', {'form': form})
 
 
 @login_required
-def dashboard(request):
-    if request.user.groups.filter(name='admin-hotel').exists():
-        return render(request, 'managers/dashboard-manager.html', {})
-    return render(request, 'users/dashboard.html', {})
+def client_dashboard(request, username):
+    client = get_object_or_404(Client, user=request.user)
+    return render(request, 'users/dashboard.html', {'client': client})
 
 
 @login_required
-def create_client(request):
+def manager_dashboard(request):
+    client = get_object_or_404(Client, user=request.user)
+    return render(request, 'managers/dashboard-manager.html', {'client': client})
+
+
+def register(request):
     if request.method == 'POST':
-        clientcreation_form = ClientCreationForm(request.POST)
-        if clientcreation_form.is_valid():
-            clientcreation_form.save()
-            messages.success(request, 'Your client has been created successfully.')
-            # return redirect('')
-        messages.error(request, 'Error! Your client could not be created')
+        user_form = ClientRegistrationForm(request.POST)
+        if user_form.is_valid():
+            new_user = user_form.save(commit=False)
+            new_user.set_password(
+                user_form.cleaned_data['password']
+            )  # TODO: Ajustar tema de contraseña automática
+            new_user.save()
+            client = Client.objects.create(user=new_user)
+            print(client)
+            return render(request, 'registration/register_done.html', {'new_user': new_user})
+        else:
+            return render(request, 'managers/pages/users.html', {'user_form': user_form})
     else:
-        clientcreation_form = ClientCreationForm()
-    # return   render(request, '', {'clientcreation_form': clientcreation_form})
-
-
-@login_required
-def update_client(request, user):
-    instance = get_object_or_404(Client, user=user)
-    if request.method == 'POST':
-        clientupdate_form = ClientUpdateForm(request.POST, instance=instance)
-        if clientupdate_form.is_valid():
-            clientupdate_form.save()
-            messages.success(request, 'Your client has been updated successfully.')
-            # return redirect('')
-        messages.error(request, 'Error! Your client could not be updated')
-    else:
-        clientupdate_form = ClientUpdateForm(instance=instance)
-    # return render(request, '', {'clientupdate_form': clientupdate_form})
-
-
-@login_required
-def delete_client(request, user):
-    client = get_object_or_404(Client, user=user)
-    if request.method == 'POST':
-        client.delete()
-        messages.success(request, 'Your client has been deleted successfully.')
-        # return redirect('')
-    # return render(request, '', {'client': client})
-
-
-@login_required
-def client_list(request, hotel_code):
-    hotel = Hotel.objects.get(code=hotel_code)
-    clients = Client.objects.filter(hotel=hotel)
-    # return render(request, '', {'clients': clients})
+        user_form = ClientRegistrationForm()
+    return render(request, 'managers/pages/users.html', {'user_form': user_form})

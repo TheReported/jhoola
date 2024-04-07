@@ -23,10 +23,10 @@ from users import views as user_views
 from .router import router
 
 urlpatterns = [
-    path('login/<slug:hotel_slug>/', user_views.login_view, name='login'),
+    path('login/', user_views.user_login, name='user_login'),
     path('', include('django.contrib.auth.urls')),
     path('', include('hotel.urls')),
+    path('', include('users.urls')),
     path('admin/', admin.site.urls),
-    path('users/', include('users.urls')),
     path('api/', include(router.urls)),
 ]

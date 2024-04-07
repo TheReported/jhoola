@@ -1,0 +1,8 @@
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+<div class="container pt-4">
+    <h1>Client {{ new_user.first_name }} succesfully created!</h1> 
+    <p> You can <a href="{% url 'register' %}">register</a> a new one</p>
+</div>
+{% endblock %}

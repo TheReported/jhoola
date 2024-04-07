@@ -127,11 +127,10 @@
     </div>
 
     <div class="black-box mt-4 d-flex align-items-center justify-content-center flex-column">
-      <form id="createform" style="display: none;">
-        <input type="text" name="nombre" placeholder="Nombre">
-        <input type="text" name="telefono" placeholder="Teléfono">
-        <input type="email" name="email" placeholder="Email">
-        <button class="btn btn-success btn-lg btn-block bg-gradient-primary mb-4">Create User</button>
+      <form action="{% url "users:register" %}" method="post" id="createform" style="display: none;">
+        {% csrf_token %}
+        {{ user_form.as_p}}
+        <button class="btn btn-success btn-lg btn-block bg-gradient-primary mb-4" type="submit">Create User</button>
       </form>
       
       <form id="editform" style="display: none;">
@@ -182,7 +181,7 @@
   var confirmYesButton = document.getElementById('confirmYes')
   var confirmNoButton = document.getElementById('confirmNo')
 
-  saveButtons.forEach(function(button) {
+  {% comment %} saveButtons.forEach(function(button) {
     button.addEventListener('click', function(event) {
       event.preventDefault()
       confirmationModal.style.display = 'block'
@@ -195,6 +194,6 @@
 
   confirmNoButton.addEventListener('click', function() {
     confirmationModal.style.display = 'none'
-  })
+  }) {% endcomment %}
 </script>
 
