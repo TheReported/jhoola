@@ -1,20 +1,32 @@
 {% load static %}
-<head>
-    <script src="https://kit.fontawesome.com/42d5adcbca.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-    <link id="pagestyle" href="{% static 'css/admin.css' %}" rel="stylesheet" />
-    <script src="{% static 'scripts/user.js' %}"></script>
-    <title>{% block title %}Admin-Dashboard{% endblock %}</title>
-</head>
-<body>
-
-    {% include "managers/nav.html" %}
-
-    {% include "managers/aside.html" %}
-
-    {% block content %}
-    {% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="https://kit.fontawesome.com/42d5adcbca.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+        <link id="pagestyle" href="{% static 'css/admin.css' %}" rel="stylesheet" />
+        <title>{% block title %}Admin-Dashboard{% endblock %}</title>
+    </head>
+    <body>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">
+                        {{ message|safe }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% include "managers/nav.html" %}
     
-    {% include "managers/footer.html" %}
+        {% include "managers/aside.html" %}
+    
+        {% block content %}
+        {% endblock %}
+        
+        {% include "managers/footer.html" %}
+    
+    </body>
+    <script src="{% static 'scripts/user.js' %}"></script>
+</html>
 
-</body>

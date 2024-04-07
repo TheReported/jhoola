@@ -98,7 +98,6 @@ img {
 
 .user-name-card {
   background-color: orange;
-  border: 1px solid blue;
   border-radius: 5px;
   padding: 10px; 
   margin-right: 10px;
@@ -132,6 +131,7 @@ img {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 4px 8px ;
+  color: white;
 }
 
 

@@ -3,10 +3,11 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 
+from booking.models import Booking
 from product.models import Product
 
 from .decorators import client_required, manager_required
-from .forms import ClientRegistrationForm, LoginForm
+from .forms import ClientEditForm, ClientRegistrationForm, LoginForm
 from .models import Client, Hotel
 
 
@@ -46,13 +47,22 @@ def client_dashboard(request, username):
 @manager_required
 def manager_dashboard(request):
     client = get_object_or_404(Client, user=request.user)
+    clients = Client.objects.filter(hotel=client.hotel).count()
     products = Product.objects.filter(hotel=client.hotel).count()
+    bookings = Booking.objects.filter(user__hotel=client.hotel)
+    total_money = 0
+    for booking in bookings:
+        total_money += booking.price
+
     return render(
         request,
         'managers/dashboard-manager.html',
         {
             'client': client,
             'num_products': products,
+            'num_clients': clients,
+            'num_bookings': bookings.count(),
+            'total_money': total_money,
         },
     )
 
@@ -61,25 +71,32 @@ def manager_dashboard(request):
 @manager_required
 def users_manager_view(request):
     selected_hotel = request.session.get('hotel_session_name')
-    hotel = Hotel.objects.get(name=selected_hotel)  
-    clients = Client.objects.filter(hotel=hotel)  
+    hotel = Hotel.objects.get(name=selected_hotel)
+    hotel_abbreviation = ''.join(letter[0] for letter in hotel.name.split()).upper()
+    city_abbreviation = ''.join(letter[0] for letter in hotel.city.split()).upper()
+    clients = Client.objects.filter(hotel=hotel)
     if request.method == 'POST':
         user_form = ClientRegistrationForm(request.POST)
         if user_form.is_valid():
             new_user = user_form.save(commit=False)
-            new_user.set_password(
-                user_form.cleaned_data['password']
-            )
+            new_user.set_password(user_form.cleaned_data['password'])
             new_user.save()
-            client = Client.objects.create(user=new_user, hotel=hotel)  
-            print(client)
-            return render(request, 'registration/register_done.html', {'new_user': new_user})
-        else:
-            return render(request, 'managers/pages/users.html', {'user_form': user_form, 'clients': clients})
+            Client.objects.create(
+                user=new_user, hotel=hotel, num_guest=user_form.cleaned_data['num_guest']
+            )
+            messages.success(request, 'A new client has been successfully created.')
+        messages.error(request, 'New client couldn\'t be created')
     else:
-        user_form = ClientRegistrationForm()
-    return render(request, 'managers/pages/users.html', {'user_form': user_form, 'clients': clients})
 
+        user_form = ClientRegistrationForm(
+            initial={'username': f'{hotel_abbreviation}{city_abbreviation}-{clients.count():04d}'}
+        )
+        user_edit_form = ClientEditForm()
+    return render(
+        request,
+        'managers/pages/users.html',
+        {'user_form': user_form, 'clients': clients, 'user_edit_form': user_edit_form},
+    )
 
 
 @login_required

@@ -1,8 +1,10 @@
 from django import forms
-from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.models import User
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.contrib.auth.password_validation import validate_password
+from django.core.validators import MaxValueValidator, MinValueValidator
+
 from .models import Client
+from .utils import generate_password
 
 
 class CleanUserData:
@@ -33,24 +35,37 @@ class LoginForm(forms.Form):
 class ClientRegistrationForm(forms.ModelForm, CleanUserData):
     password = forms.CharField(
         label='Password',
-        widget=forms.PasswordInput,
         validators=[validate_password],
+        widget=forms.widgets.HiddenInput(),
     )
-    password2 = forms.CharField(label='Repeat password', widget=forms.PasswordInput)
     num_guest = forms.IntegerField(
         label='Clients in room',
         validators=[
             MinValueValidator(Client._meta.get_field('num_guest').validators[0].limit_value),
             MaxValueValidator(Client._meta.get_field('num_guest').validators[1].limit_value),
         ],
+        initial=3,
     )
+
+    def __init__(self, *args, **kwargs):
+        super(ClientRegistrationForm, self).__init__(*args, **kwargs)
+        self.fields['password'].initial = generate_password()
 
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'email']
 
-    def clean_password2(self):
-        cd = self.cleaned_data
-        if cd.get('password') != cd.get('password2'):
-            raise forms.ValidationError("Passwords don't match.")
-        return cd.get('password2')
+
+class ClientEditForm(forms.ModelForm, CleanUserData):
+    num_guest = forms.IntegerField(
+        label='Clients in room',
+        validators=[
+            MinValueValidator(Client._meta.get_field('num_guest').validators[0].limit_value),
+            MaxValueValidator(Client._meta.get_field('num_guest').validators[1].limit_value),
+        ],
+        initial=3,
+    )
+
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'email']

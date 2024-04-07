@@ -32,7 +32,7 @@
                 <div class="text-end pt-1">
                   <p class="text-sm mb-0 text-capitalize">Bookings</p>
                 <!--Hay que poner los datos reales con django--> 
-                  <h4 class="mb-0">281</h4> 
+                  <h4 class="mb-0">{{ num_bookings }}</h4> 
                 </div>
               </div>
               <hr class="dark horizontal my-0">
@@ -50,7 +50,7 @@
                 <div class="text-end pt-1">
                   <p class="text-sm mb-0 text-capitalize">Users</p>
                 <!--Hay que poner los datos reales con django-->
-                  <h4 class="mb-0">2,300</h4>
+                  <h4 class="mb-0">{{ num_clients }}</h4>
                 </div>
               </div>
               <hr class="dark horizontal my-0">
@@ -68,7 +68,7 @@
             <div class="text-end pt-1">
               <p class="text-sm mb-0 text-capitalize">Revenue</p>
             <!--Hay que poner los datos reales con django-->
-              <h4 class="mb-0">34k</h4>
+              <h4 class="mb-0">{{ total_money }}</h4>
             </div>
           </div>
           <hr class="horizontal my-0 dark">
@@ -86,7 +86,7 @@
             <div class="text-end pt-1">
               <p class="text-sm mb-0 text-capitalize">Products</p>
             <!--Hay que poner los datos reales con django-->
-              <h4 class="mb-0">+91</h4>
+              <h4 class="mb-0">{{ num_products }}</h4>
             </div>
           </div>
           <hr class="horizontal my-0 dark">

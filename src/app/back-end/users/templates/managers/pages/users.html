@@ -9,27 +9,31 @@
       </div>
       {% for client in clients %}
 
-      <div class="user-card">
-        <div class="user-name-card">
-          <div class="user-name">Editar</div>
-        </div>
-        <div class="user-info">
+        <div class="user-card">
+          <div class="user-name-card">
+            <div class="user-name" name="editButton">Editar</div>
+          </div>
+          <div class="user-info">
 
-          <table>
-            <td>{{ client.user.username }}</td>
-            <td>{{ client.user.first_name }} {{ client.user.last_name }}</td>
-            <td>{{ client.user.email }}</td>
-            <td>{{ client.num_guest }}</td>
-            <td>{{ client.user.last_login }}</td>
-          </table>
+            <table>
+              <td>{{ client.user.username }}</td>
+              <td>{{ client.user.first_name }} {{ client.user.last_name }}</td>
+              <td>{{ client.user.email }}</td>
+              <td>{{ client.num_guest }}</td>
+              {% if  client.user.last_login is None %}
+                <td>{{ client.user.date_joined }}</td>
+              {% else %}
+                <td>{{ client.user.last_login }}</td>
+              {% endif %}
+            </table>
+          </div>
         </div>
-      </div>
       {% endfor %}
 
 
       <div class="user-card add-user-card">
         <div class="user-name-card">
-          <div class="user-name add-account">+</div>
+          <div class="add-account">+</div>
         </div>
       </div>
     </div>
@@ -37,22 +41,7 @@
     <div class="black-box mt-4 d-flex align-items-center justify-content-center flex-column">
       <form action="{% url "users:manager_users" %}" method="post" id="createform" style="display:none;">
         {% csrf_token %}
-        <div class="form-group">
-          <label for="id_username">Username:</label>
-          {{ user_form.username }}
-        </div>
-        <div class="form-group">
-          <label for="id_firstandsecondname">Full Name:</label>
-          {{ user_form.first_name }} {{ user_form.last_name }}
-        </div>
-        <div class="form-group">
-          <label for="id_email">Email:</label>
-          {{ user_form.email }}
-        </div>
-        <div class="form-group">
-          <label for="id_guest">Num Guests:</label>
-          {{ user_form.num_guest }}
-        </div>
+        {{ user_form.as_p }}
         <br>
         <button class="btn btn-success btn-lg btn-block bg-gradient-primary mb-4" type="submit">Create User</button>
       </form>
@@ -64,14 +53,6 @@
         <button class="btn btn-success btn-lg btn-block bg-gradient-primary mb-4">Delete User</button>
 
       </form>
-
-      <div id="confirmationModal" class="confirmation-modal">
-        <div class="confirmation-content">
-          <p>¿Are you sure about making these changes?</p>
-          <button id="confirmYes">Yes</button>
-          <button id="confirmNo">No</button>
-        </div>
-      </div>
     </div>
 
   </div>
