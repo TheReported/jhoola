@@ -4,12 +4,11 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 
 from product.models import Product
-from datetime import datetime, timedelta
-from booking.forms import BookingForm
 
 from .decorators import client_required, manager_required
 from .forms import ClientRegistrationForm, LoginForm
 from .models import Client, Hotel
+from product.models import Product
 
 
 def user_login(request):
@@ -94,6 +93,5 @@ def products_manager_view(request):
 @manager_required
 def bookings_manager_view(request):
     return render(request, 'managers/pages/bookings.html', {})
-
 
 
