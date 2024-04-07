@@ -4,9 +4,9 @@ from . import views
 
 app_name = 'users'
 urlpatterns = [
+    path('manager/bookings/', views.bookings_manager_view, name='manager_bookings'),
+    path('manager/products/', views.products_manager_view, name='manager_products'),
+    path('manager/', views.manager_dashboard, name='manager_dashboard'),
+    path('manager/users/', views.users_manager_view, name='manager_users'),
     path('<username>/bookings/', views.client_dashboard, name='client_dashboard'),
-    path(
-        'manager/', views.manager_dashboard, name='manager_dashboard'
-    ),
-    path('manager/register/', views.register, name='register'),
 ]

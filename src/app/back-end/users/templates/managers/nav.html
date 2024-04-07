@@ -1,0 +1,19 @@
+{% load static %}
+{% block nav %}
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 bg-gradient-dark border-radius-xl mt-4" id="navbarBlur">
+        <div class="container-fluid py-1 px-3">
+            <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+                <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                </div>
+                <li class="nav-item d-flex align-items-center">
+
+                    <a href="" class="nav-link text-body font-weight-bold">
+                        <i class="fa fa-user me-sm-1"></i>
+                        <a class="d-sm-inline d-none" href={% url "logout" %}>Sign Out</a>
+                    </a>
+                </li>
+            </div>
+        </div>
+    </nav>
+{% endblock nav %}
+

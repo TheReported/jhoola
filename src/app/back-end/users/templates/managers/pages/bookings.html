@@ -1,102 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <script src="https://kit.fontawesome.com/42d5adcbca.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-    <link href="../assets/css/styles.css" rel="stylesheet" />
-  </head>
-<body>
-  <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 bg-gradient-dark border-radius-xl mt-4" id="navbarBlur">
-    <div class="container-fluid py-1 px-3">
-        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-            </div>
-            <li class="nav-item d-flex align-items-center">
-                <a href="#" class="nav-link text-body font-weight-bold">
-                    <i class="fa fa-user me-sm-1"></i>
-                    <span class="d-sm-inline d-none">Sign Out</span>
-                </a>
-            </li>
-        </div>
-    </div>
-</nav>
-
-  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark">
-
-    <div class="sidenav-header text-center">
-      <i class="fas fa-times  cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"></i>
-      <a class="navbar-brand m-0" target="_blank">
-        <img src="../assets/imgs/logo.svg" class="logo">
-      </a>
-  </div>
-  
-
-
-  <hr class="horizontal light mt-0 mb-2">
-
-  <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
-    <ul class="navbar-nav">
-
-          
-<li class="nav-item">
-  <a class="nav-link text-white " href="../index.html">
-    
-      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-        <i class="material-icons opacity-10">dashboard</i>
-      </div>
-    
-    <span class="nav-link-text ms-1">Dashboard</span>
-  </a>
-</li>
-
-  
-<li class="nav-item">
-  <a class="nav-link text-white " href="./bookings.html">
-    
-      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-        <i class="material-icons opacity-10">beach_access</i>
-      </div>
-    
-    <span class="nav-link-text ms-1">Bookings</span>
-  </a>
-</li>
-
-  
-<li class="nav-item">
-  <a class="nav-link text-white " href="./products.html">
-    
-      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-        <i class="material-icons opacity-10">inventory_2</i>
-      </div>
-    
-    <span class="nav-link-text ms-1">Products</span>
-  </a>
-</li>
-
-  
-<li class="nav-item">
-  <a class="nav-link text-white " href="./users.html">
-    
-      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-        <i class="material-icons opacity-10">person_add</i>
-      </div>
-    
-    <span class="nav-link-text ms-1">Users</span>
-  </a>
-</li>
-            
-    </ul>
-  </div>
-  
-  <div class="sidenav-footer position-absolute w-100 bottom-0 ">
-    <div class="mx-3">
-      <a class="btn bg-gradient-primary w-100" href="#" type="button">Support</a>
-    </div>
-    
-  </div>
-  
-</aside>
-
+{% extends "managers/base.html" %}
+{% block content%}
 <main class="main-content border-radius-lg">
   <div class="container-fluid2">
     <div class="black-box2 mt-4">
@@ -154,12 +57,12 @@
   </div>
 </main>
 
-</body>
-<footer class="bg-gradient-dark text-white text-center py-4 border-radius-xl pt-5 fixed-bottom mx-3 end-0">
+{% endblock %}
 
-</footer>
+
+
 <script>
-  var userNameDiv = document.querySelector('.add-account')
+  {% comment %} var userNameDiv = document.querySelector('.add-account')
   var createForm = document.getElementById('createform')
   var editForm = document.getElementById('editform')
   
@@ -179,9 +82,9 @@
   var saveButtons = document.querySelectorAll('form button')
   var confirmationModal = document.getElementById('confirmationModal')
   var confirmYesButton = document.getElementById('confirmYes')
-  var confirmNoButton = document.getElementById('confirmNo')
+  var confirmNoButton = document.getElementById('confirmNo') {% endcomment %}
 
-  saveButtons.forEach(function(button) {
+  {% comment %} saveButtons.forEach(function(button) {
     button.addEventListener('click', function(event) {
       event.preventDefault()
       confirmationModal.style.display = 'block'
@@ -194,6 +97,6 @@
 
   confirmNoButton.addEventListener('click', function() {
     confirmationModal.style.display = 'none'
-  })
+  }) {% endcomment %}
 </script>
 

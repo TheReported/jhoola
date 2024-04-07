@@ -57,7 +57,9 @@ def manager_dashboard(request):
     )
 
 
-def register(request):
+@login_required
+@manager_required
+def users_manager_view(request):
     if request.method == 'POST':
         user_form = ClientRegistrationForm(request.POST)
         if user_form.is_valid():
@@ -74,3 +76,15 @@ def register(request):
     else:
         user_form = ClientRegistrationForm()
     return render(request, 'managers/pages/users.html', {'user_form': user_form})
+
+
+@login_required
+@manager_required
+def products_manager_view(request):
+    return render(request, 'managers/pages/products.html', {})
+
+
+@login_required
+@manager_required
+def bookings_manager_view(request):
+    return render(request, 'managers/pages/bookings.html', {})
