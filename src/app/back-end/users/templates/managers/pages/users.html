@@ -7,21 +7,26 @@
         <input type="text" class="search-bar" placeholder="Find something...">
         <button type="submit" class="search-button">Find</button>
       </div>
+      {% for client in clients %}
+
       <div class="user-card">
         <div class="user-name-card">
           <div class="user-name">Editar</div>
         </div>
         <div class="user-info">
+
           <table>
-            <td>Usuario 1</td>
-            <td>Abián Castañeda Méndez</td>
-            <td>697811966</td>
-            <td>abiancma12@gmail.com</td>
-            <td>4</td>
-            <td>12 de Abril</td>
+            <td>{{ client.user.username }}</td>
+            <td>{{ client.user.first_name }} {{ client.user.last_name }}</td>
+            <td>{{ client.user.email }}</td>
+            <td>{{ client.num_guest }}</td>
+            <td>{{ client.user.last_login }}</td>
           </table>
         </div>
       </div>
+      {% endfor %}
+
+
       <div class="user-card add-user-card">
         <div class="user-name-card">
           <div class="user-name add-account">+</div>

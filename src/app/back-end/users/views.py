@@ -60,22 +60,26 @@ def manager_dashboard(request):
 @login_required
 @manager_required
 def users_manager_view(request):
+    selected_hotel = request.session.get('hotel_session_name')
+    hotel = Hotel.objects.get(name=selected_hotel)  
+    clients = Client.objects.filter(hotel=hotel)  
     if request.method == 'POST':
         user_form = ClientRegistrationForm(request.POST)
         if user_form.is_valid():
             new_user = user_form.save(commit=False)
             new_user.set_password(
                 user_form.cleaned_data['password']
-            )  # TODO: Ajustar tema de contraseña automática
+            )
             new_user.save()
-            client = Client.objects.create(user=new_user)
+            client = Client.objects.create(user=new_user, hotel=hotel)  
             print(client)
             return render(request, 'registration/register_done.html', {'new_user': new_user})
         else:
-            return render(request, 'managers/pages/users.html', {'user_form': user_form})
+            return render(request, 'managers/pages/users.html', {'user_form': user_form, 'clients': clients})
     else:
         user_form = ClientRegistrationForm()
-    return render(request, 'managers/pages/users.html', {'user_form': user_form})
+    return render(request, 'managers/pages/users.html', {'user_form': user_form, 'clients': clients})
+
 
 
 @login_required

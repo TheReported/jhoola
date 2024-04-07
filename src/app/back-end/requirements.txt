@@ -3,3 +3,4 @@ prettyconf
 djangorestframework
 pillow
 WeasyPrint
+django-cors-headers
