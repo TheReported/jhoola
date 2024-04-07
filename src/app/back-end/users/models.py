@@ -16,7 +16,6 @@ class Client(models.Model):
             MaxValueValidator(MAX_NUM_GUESTS),
         ],
     )
-    telephone = models.CharField(max_length=15)
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name="clients")
 
     def save(self, *args, **kwargs):
