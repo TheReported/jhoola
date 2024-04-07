@@ -1,6 +1,9 @@
 from django import forms
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator, MaxValueValidator
+from .models import Client
+
 
 class CleanUserData:
     def clean_email(self):
@@ -26,6 +29,7 @@ class LoginForm(forms.Form):
     username = forms.CharField(label='username')
     password = forms.CharField(label='password', widget=forms.PasswordInput)
 
+
 class ClientRegistrationForm(forms.ModelForm, CleanUserData):
     password = forms.CharField(
         label='Password',
@@ -33,6 +37,13 @@ class ClientRegistrationForm(forms.ModelForm, CleanUserData):
         validators=[validate_password],
     )
     password2 = forms.CharField(label='Repeat password', widget=forms.PasswordInput)
+    num_guest = forms.IntegerField(
+        label='Clients in room',
+        validators=[
+            MinValueValidator(Client._meta.get_field('num_guest').validators[0].limit_value),
+            MaxValueValidator(Client._meta.get_field('num_guest').validators[1].limit_value),
+        ],
+    )
 
     class Meta:
         model = User
