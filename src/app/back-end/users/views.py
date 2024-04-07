@@ -4,8 +4,6 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 
 from product.models import Product
-from datetime import datetime, timedelta
-from booking.forms import BookingForm
 
 from .decorators import client_required, manager_required
 from .forms import ClientRegistrationForm, LoginForm
@@ -26,10 +24,8 @@ def user_login(request):
                     login(request, user)
                     if user.groups.filter(name='HotelManagers').exists():
                         return redirect('users:manager_dashboard')
-                    return redirect('users:client_dashboard', username=user.username)
-                messages.error(
-                    request, 'You are accessing a hotel where you aren\'t authenticated.'
-                )
+                    return redirect('booking:booking_list', username=user.username)
+                messages.error(request, "You are accessing a hotel where you aren't authenticated.")
             else:
                 messages.error(request, 'The credentials entered are incorrect. Please try again.')
     else:
@@ -63,25 +59,26 @@ def manager_dashboard(request):
 @manager_required
 def users_manager_view(request):
     selected_hotel = request.session.get('hotel_session_name')
-    hotel = Hotel.objects.get(name=selected_hotel)  
-    clients = Client.objects.filter(hotel=hotel)  
+    hotel = Hotel.objects.get(name=selected_hotel)
+    clients = Client.objects.filter(hotel=hotel)
     if request.method == 'POST':
         user_form = ClientRegistrationForm(request.POST)
         if user_form.is_valid():
             new_user = user_form.save(commit=False)
-            new_user.set_password(
-                user_form.cleaned_data['password']
-            )
+            new_user.set_password(user_form.cleaned_data['password'])
             new_user.save()
-            client = Client.objects.create(user=new_user, hotel=hotel)  
+            client = Client.objects.create(user=new_user, hotel=hotel)
             print(client)
             return render(request, 'registration/register_done.html', {'new_user': new_user})
         else:
-            return render(request, 'managers/pages/users.html', {'user_form': user_form, 'clients': clients})
+            return render(
+                request, 'managers/pages/users.html', {'user_form': user_form, 'clients': clients}
+            )
     else:
         user_form = ClientRegistrationForm()
-    return render(request, 'managers/pages/users.html', {'user_form': user_form, 'clients': clients})
-
+    return render(
+        request, 'managers/pages/users.html', {'user_form': user_form, 'clients': clients}
+    )
 
 
 @login_required
@@ -94,6 +91,3 @@ def products_manager_view(request):
 @manager_required
 def bookings_manager_view(request):
     return render(request, 'managers/pages/bookings.html', {})
-
-
-

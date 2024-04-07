@@ -1,0 +1,22 @@
+{% extends "users/dashboard.html" %}
+
+{% block title %}My bookings{% endblock %}
+{% block content %}
+
+<div class="container">
+  <h1>hola</h1>
+  <h1>{{user.username}}</h1>
+  {% if bookings %}
+  {% for booking in bookings %}
+    <p>{{ booking.product }}</p>
+  {% endfor %}       
+  {% else %}
+  <div class="row">
+      <div class="col-12 d-flex justify-content-center align-items-end p-5">
+          <h3>Looks like you haven't made any reservations yet, start your break <a href="#">here.</a></h3>
+      </div>
+  </div>
+{% endif %}
+
+</div>
+{% endblock content %}

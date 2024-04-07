@@ -8,7 +8,4 @@ urlpatterns = [
     path('manager/products/', views.products_manager_view, name='manager_products'),
     path('manager/', views.manager_dashboard, name='manager_dashboard'),
     path('manager/users/', views.users_manager_view, name='manager_users'),
-    path('<username>/bookings/', views.client_dashboard, name='client_dashboard'),
-    path('<username>/book/', views.client_book, name='client_book'),
-
 ]
