@@ -34,7 +34,6 @@ function fetchHotels() {
         })
         .then(data => {
             hotels = data;
-            console.log(data)
             return data
         })
         .catch(error => {

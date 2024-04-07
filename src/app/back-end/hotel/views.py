@@ -13,7 +13,6 @@ def main(request):
     print(request.method)
     if request.method == 'POST':
         form = HotelForm(request.POST)
-        print(form.is_valid())
         if form.is_valid():
             cd = form.cleaned_data
             hotel = get_object_or_404(Hotel, name=cd['name'])
