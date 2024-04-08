@@ -10,14 +10,11 @@
       {% for client in clients %}
 
         <div class="user-card">
-          <div class="user-name-card">
-            <div class="user-name" name="editButton">Editar</div>
-          </div>
           <div class="user-info">
 
             <table>
-              <td>{{ client.user.username }}</td>
-              <td>{{ client.user.first_name }} {{ client.user.last_name }}</td>
+              <td><a href="{% url "users:manager_users_edit" client %}">{{ client.user.username }}</a></td>
+              <td>{{ client.user.get_full_name }}</td>
               <td>{{ client.user.email }}</td>
               <td>{{ client.num_guest }}</td>
               {% if  client.user.last_login is None %}
@@ -33,26 +30,9 @@
 
       <div class="user-card add-user-card">
         <div class="user-name-card">
-          <div class="add-account">+</div>
+          <a href="{% url "users:manager_users_add" %}"><div class="add-account">+</div></a>
         </div>
       </div>
-    </div>
-
-    <div class="black-box mt-4 d-flex align-items-center justify-content-center flex-column">
-      <form action="{% url "users:manager_users" %}" method="post" id="createform" style="display:none;">
-        {% csrf_token %}
-        {{ user_form.as_p }}
-        <br>
-        <button class="btn btn-success btn-lg btn-block bg-gradient-primary mb-4" type="submit">Create User</button>
-      </form>
-      
-      <form id="editform" style="display: none;">
-        <input type="text" name="nombre_edit" placeholder="Nuevo Nombre">
-        <input type="email" name="email_edit" placeholder="Nuevo Email">
-        <button class="btn btn-success btn-lg btn-block bg-gradient-primary mb-4">Save User</button>
-        <button class="btn btn-success btn-lg btn-block bg-gradient-primary mb-4">Delete User</button>
-
-      </form>
     </div>
 
   </div>

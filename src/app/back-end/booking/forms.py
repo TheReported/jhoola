@@ -9,7 +9,7 @@ class BookingCreationForm(forms.ModelForm):
         fields = ['user', 'product', 'price', 'duration']
 
 
-class BookingUpdateForm(forms.ModelForm):
+class BookingEditForm(forms.ModelForm):
     class Meta:
         model = Booking
         fields = ['user', 'product', 'price', 'duration']

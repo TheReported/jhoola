@@ -7,47 +7,23 @@
         <input type="text" class="search-bar" placeholder="Find something...">
         <button type="submit" class="search-button">Find</button>
       </div>
-      <div class="user-card">
-        <div class="user-name-card">
-          <div class="user-name">Editar</div>
+      {% for product in products %}
+
+        <div class="user-card">
+          <div class="user-info">
+
+            <table>
+              <td><a href="{% url "users:manager_products_edit" product.id %}">{{ product.name }}</a></td>
+              <td>{{ product.price }}</td>
+              <td>{{ product.status }}</td>
+
+            </table>
+          </div>
         </div>
-        <div class="user-info">
-          <table>
-            <td>Producto 1</td>
-            <td>1 €</td>
-            <td>Free</td>
-          </table>
-        </div>
-      </div>
+      {% endfor %}
       <div class="user-card add-user-card">
         <div class="user-name-card">
-          <div class="user-name add-account">+</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="black-box mt-4 d-flex align-items-center justify-content-center flex-column">
-      <form id="createform" style="display: none;">
-        <input type="text" name="nombre" placeholder="Nombre">
-        <input type="text" name="telefono" placeholder="Teléfono">
-        <input type="email" name="email" placeholder="Email">
-        <button class="btn btn-success btn-lg btn-block bg-gradient-primary mb-4">Create Product</button>
-      </form>
-      
-      <form id="editform" style="display: none;">
-        <input type="text" name="nombre_edit" placeholder="Nuevo Nombre">
-        <input type="text" name="telefono_edit" placeholder="Nuevo Teléfono">
-        <input type="email" name="email_edit" placeholder="Nuevo Email">
-        <button class="btn btn-success btn-lg btn-block bg-gradient-primary mb-4">Save Product</button>
-        <button class="btn btn-success btn-lg btn-block bg-gradient-primary mb-4">Delete Product</button>
-
-      </form>
-
-      <div id="confirmationModal" class="confirmation-modal">
-        <div class="confirmation-content">
-          <p>¿Are you sure about making these changes?</p>
-          <button id="confirmYes">Yes</button>
-          <button id="confirmNo">No</button>
+          <a href="{% url "users:manager_products_add" %}"><div class="add-account">+</div></a>
         </div>
       </div>
     </div>
@@ -55,45 +31,3 @@
   </div>
 </main>
 {% endblock %}
-
-
-
-<script>
-  {% comment %} var userNameDiv = document.querySelector('.add-account')
-  var createForm = document.getElementById('createform')
-  var editForm = document.getElementById('editform')
-  
- 
-  userNameDiv.addEventListener('click', function() {
-    createForm.style.display = 'block'
-    editForm.style.display = 'none' 
-  })
-  
-
-  var editButton = document.querySelector('.user-name')
-  editButton.addEventListener('click', function() {
-    editForm.style.display = 'block'
-    createForm.style.display = 'none' 
-  })
-
-  var saveButtons = document.querySelectorAll('form button')
-  var confirmationModal = document.getElementById('confirmationModal')
-  var confirmYesButton = document.getElementById('confirmYes')
-  var confirmNoButton = document.getElementById('confirmNo') {% endcomment %}
-
-  {% comment %} saveButtons.forEach(function(button) {
-    button.addEventListener('click', function(event) {
-      event.preventDefault()
-      confirmationModal.style.display = 'block'
-    })
-  })
-
-  confirmYesButton.addEventListener('click', function() {
-    confirmationModal.style.display = 'none'
-  })
-
-  confirmNoButton.addEventListener('click', function() {
-    confirmationModal.style.display = 'none'
-  }) {% endcomment %}
-</script>
-

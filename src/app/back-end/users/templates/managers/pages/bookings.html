@@ -7,51 +7,23 @@
         <input type="text" class="search-bar" placeholder="Find something...">
         <button type="submit" class="search-button">Find</button>
       </div>
-      <div class="user-card">
-        <div class="user-name-card">
-          <div class="user-name">Editar</div>
-        </div>
-        <div class="user-info">
-          <table>
-            <td>Reserva 1</td>
-            <td>Producto 4</td>
-            <td>Usuario 3</td>
-            <td>4 de Abril a las 16:23</td>
-            <td>08:00-14:00</td>
-          </table>
-        </div>
-      </div>
-      <div class="user-card add-user-card">
-        <div class="user-name-card">
-          <div class="user-name add-account">+</div>
-        </div>
-      </div>
-    </div>
+      {% for booking in bookings %}
 
-    <div class="black-box mt-4 d-flex align-items-center justify-content-center flex-column">
-      <form id="createform" style="display: none;">
-        <input type="text" name="nombre" placeholder="Nombre">
-        <input type="text" name="telefono" placeholder="Teléfono">
-        <input type="email" name="email" placeholder="Email">
-        <button class="btn btn-success btn-lg btn-block bg-gradient-primary mb-4">Create Booking</button>
-      </form>
-      
-      <form id="editform" style="display: none;">
-        <input type="text" name="nombre_edit" placeholder="Nuevo Nombre">
-        <input type="text" name="telefono_edit" placeholder="Nuevo Teléfono">
-        <input type="email" name="email_edit" placeholder="Nuevo Email">
-        <button class="btn btn-success btn-lg btn-block bg-gradient-primary mb-4">Save Booking</button>
-        <button class="btn btn-success btn-lg btn-block bg-gradient-primary mb-4">Delete Booking</button>
+        <div class="user-card">
+          <div class="user-info">
 
-      </form>
-
-      <div id="confirmationModal" class="confirmation-modal">
-        <div class="confirmation-content">
-          <p>¿Are you sure about making these changes?</p>
-          <button id="confirmYes">Yes</button>
-          <button id="confirmNo">No</button>
+            <table>
+              <td><a href="{% url "users:manager_bookings_edit" booking.id %}">{{ booking.id }}</a></td>
+              <td>{{ booking.user }}</td>
+              <td>{{ booking.product }}</td>
+              <td>{{ booking.price }}</td>
+              <td>{{ booking.duration }}</td>
+              <td>{{ booking.timestamp }}</td>
+            </table>
+          </div>
         </div>
-      </div>
+      {% endfor %}
+
     </div>
 
   </div>
@@ -60,43 +32,4 @@
 {% endblock %}
 
 
-
-<script>
-  {% comment %} var userNameDiv = document.querySelector('.add-account')
-  var createForm = document.getElementById('createform')
-  var editForm = document.getElementById('editform')
-  
- 
-  userNameDiv.addEventListener('click', function() {
-    createForm.style.display = 'block'
-    editForm.style.display = 'none' 
-  })
-  
-
-  var editButton = document.querySelector('.user-name')
-  editButton.addEventListener('click', function() {
-    editForm.style.display = 'block'
-    createForm.style.display = 'none' 
-  })
-
-  var saveButtons = document.querySelectorAll('form button')
-  var confirmationModal = document.getElementById('confirmationModal')
-  var confirmYesButton = document.getElementById('confirmYes')
-  var confirmNoButton = document.getElementById('confirmNo') {% endcomment %}
-
-  {% comment %} saveButtons.forEach(function(button) {
-    button.addEventListener('click', function(event) {
-      event.preventDefault()
-      confirmationModal.style.display = 'block'
-    })
-  })
-
-  confirmYesButton.addEventListener('click', function() {
-    confirmationModal.style.display = 'none'
-  })
-
-  confirmNoButton.addEventListener('click', function() {
-    confirmationModal.style.display = 'none'
-  }) {% endcomment %}
-</script>
 

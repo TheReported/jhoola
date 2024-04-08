@@ -68,4 +68,10 @@ class ClientEditForm(forms.ModelForm, CleanUserData):
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email']
+        fields = ['username', 'password', 'first_name', 'last_name', 'email']
+        widgets = {
+            'password': forms.HiddenInput(),
+        }
+        required = {
+            'password': False,
+        }
