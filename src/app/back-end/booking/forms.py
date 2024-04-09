@@ -1,5 +1,5 @@
 from django import forms
-from .models import Booking, DURATION_CHOICES
+from .models import Booking
 from product.models import Product
 
 class BookingForm(forms.ModelForm):
@@ -9,7 +9,7 @@ class BookingForm(forms.ModelForm):
         model = Booking
         fields = ['product', 'duration', 'date']  
         widgets = {
-            'duration': forms.Select(choices=DURATION_CHOICES),
+            'duration': forms.Select(choices=Booking.TimeSlots.choices),
         }
 
     def __init__(self, user, *args, **kwargs):

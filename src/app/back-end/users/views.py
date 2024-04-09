@@ -33,11 +33,11 @@ def user_login(request):
     return render(request, 'registration/login.html', {'form': form})
 
 
-@login_required
-@client_required
-def client_dashboard(request, username):
-    client = get_object_or_404(Client, user=request.user)
-    return render(request, 'users/dashboard.html', {'client': client})
+# @login_required
+# @client_required
+# def client_dashboard(request, username):
+#     client = get_object_or_404(Client, user=request.user)
+#     return render(request, 'users/dashboard.html', {'client': client})
 
 
 @login_required
