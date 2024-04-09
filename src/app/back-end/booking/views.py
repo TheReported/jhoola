@@ -22,14 +22,16 @@ def booking_detail(request, username, booking_id):
 
 
 def booking_view(request, username):
-    client = Client.objects.get(user=request.user)
+    client = Client.objects.get(user=request.user) 
     if request.method == 'POST':
-        form = BookingForm(client, request.POST)
+        form = BookingForm(user=client, data=request.POST)  
         if form.is_valid():
-            form.instance.price = 0
-            form.save()
+            booking = form.save(commit=False)
+            booking.user = client  
+            booking.price = 0 
+            booking.save()
             return redirect('users:manager_users')
 
     else:
-        form = BookingForm(request.user)
+        form = BookingForm(user=client)  
     return render(request, 'users/pages/book.html', {'form': form})

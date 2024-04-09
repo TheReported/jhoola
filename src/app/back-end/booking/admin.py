@@ -5,5 +5,5 @@ from .models import Booking
 
 @admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ['user', 'product', 'duration', 'price', 'timestamp']
+    list_display = ['user', 'product', 'duration', 'price', 'date','timestamp']
     raw_id_fields = ['user', 'product']
