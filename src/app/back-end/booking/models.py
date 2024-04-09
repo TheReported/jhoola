@@ -15,6 +15,7 @@ class Booking(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True, editable=False)
     price = models.DecimalField(max_digits=8, decimal_places=2)
     duration = models.CharField(max_length=3, choices=DURATION_CHOICES)
+    date = models.DateField()
 
     class Meta:
         ordering = ['-timestamp']
