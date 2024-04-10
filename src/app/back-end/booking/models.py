@@ -11,7 +11,7 @@ DURATION_CHOICES = [
 
 class Booking(models.Model):
     user = models.ForeignKey(Client, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    products = models.ManyToManyField(Product)
     timestamp = models.DateTimeField(auto_now_add=True, editable=False)
     price = models.DecimalField(max_digits=8, decimal_places=2)
     duration = models.CharField(max_length=3, choices=DURATION_CHOICES)
@@ -20,5 +20,6 @@ class Booking(models.Model):
     class Meta:
         ordering = ['-timestamp']
 
-    def __str__(self) -> str:
-        return f'{self.user} -> {self.product} {self.duration}'
+    def __str__(self):
+        products_str = ", ".join([product.name for product in self.products.all()])
+        return f"Booking for {self.user} on {self.date} ({self.duration}) - Products: {products_str}"
