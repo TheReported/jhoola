@@ -22,7 +22,7 @@
             <a class="nav-link mx-2" href="{% url 'booking:booking_list' request.user.username %}"><i class="fas fa-plus-circle pe-2"></i>My Bookings</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link mx-2" href="{% url 'users:client_book' request.user.username %}"><i class="fas fa-bell pe-2"></i>Book</a>
+            <a class="nav-link mx-2" href="{% url 'booking:client_book' request.user.username %}"><i class="fas fa-bell pe-2"></i>Book</a>
         </li>
           <li class="nav-item ms-3">
             <a class="btn btn-black btn-rounded" href="{% url 'logout' %}">Log Out</a>

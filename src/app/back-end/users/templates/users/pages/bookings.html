@@ -7,7 +7,7 @@
   {% if bookings %}
   <div class="row">
     {% for booking in bookings %}
-    <div class="col-md-4 mt-5">
+    <div class="col-12 mt-5">
       <div class="card">
         <div class="card-header">
           Booking ID: {{ booking.id }}
@@ -16,12 +16,18 @@
           <div class="booking-info d-flex flex-row justify-content-between">
             <h5 class="card-title">{{ booking.product }} nº{{ booking.product.id }}</h5>
             <h5 class="card-title">{{ booking.price }}€</h5>
+            <p class="card-text">Reserved time: {{ booking.get_duration_display }}</p>
+            <p class="card-text">Date: {{ booking.date }}</p>
           </div>
-          <p class="card-text">Reserved time: {{ booking.get_duration_display }}</p>
-          <p class="card-text">Date: {{ booking.date }}</p>
+
           <div class="user-actions">
-            <a href="{% url "booking:booking_pdf" user.username booking.id %}" class="btn btn-primary">Download PDF</a>
-            <a href="#" class="btn btn-primary">Edit booking</a>
+            <div class="col-8">
+              <a href="{% url "booking:booking_pdf" user.username booking.id %}" class="btn btn-primary">Download PDF</a>
+              <a href="#" class="btn btn-primary">Edit booking</a>
+            </div>
+            <div class="col-4">
+              <a href="#" class="btn btn-danger d-flex justify-content-end">Delete booking</a>
+            </div>
           </div>
         </div>
       </div>
