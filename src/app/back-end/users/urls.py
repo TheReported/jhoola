@@ -2,6 +2,7 @@ from django.urls import path
 
 from . import views
 
+
 app_name = 'users'
 urlpatterns = [
     path('manager/bookings/', views.bookings_manager_view, name='manager_bookings'),
@@ -38,7 +39,6 @@ urlpatterns = [
         views.bookings_delete_manager_view,
         name='manager_booking_delete',
     ),
-    path('<username>/bookings/', views.client_dashboard, name='client_dashboard'),
     path(
         'manager/users/search/<str:search>/',
         views.search_clients_manager_view,

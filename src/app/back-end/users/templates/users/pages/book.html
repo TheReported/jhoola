@@ -1,0 +1,31 @@
+{% extends "users/dashboard.html" %}
+{% load static %}
+
+{% block title %}Book hammock{% endblock title %}
+
+{% block content %}
+<div class="container d-flex ">
+  <div class="box">
+    <form method="post">
+      {% csrf_token %}
+      <div class="products">
+        {% for product in form.products %}
+          <div class="product">
+            {{ product }}
+          </div>
+        {% endfor %}
+      </div>
+      <br>
+  </div>
+  <div class="box">
+    <center>
+        <label>Duration:</label><br>
+        {{ form.duration }}<br><br>
+        <label>Date:</label><br>
+        {{ form.date }}<br><br>
+        <button type="submit" class="send_book">Make reservation</button>
+      </form>
+  </div>
+</div>
+{% endblock content %}
+

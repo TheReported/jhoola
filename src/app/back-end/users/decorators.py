@@ -20,7 +20,7 @@ def manager_required(func):
         if client.user.groups.filter(name="HotelManagers").exists():
             return func(request, *args, **kwargs)
         return redirect(
-            reverse("users:client_dashboard", kwargs={'username': client.user.username})
+            reverse("booking:booking_list", kwargs={'username': client.user.username})
         )
 
     return wrapper

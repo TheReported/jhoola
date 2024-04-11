@@ -6,15 +6,14 @@ from django.core.mail import send_mail
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse
 from django.views.decorators.http import require_POST
 
-from booking.forms import BookingEditForm
+from booking.forms import BookingForm
 from booking.models import Booking
 from product.forms import ProductCreationForm, ProductEditForm
 from product.models import Product
 
-from .decorators import client_required, manager_required
+from .decorators import manager_required
 from .forms import ClientEditForm, ClientRegistrationForm, LoginForm
 from .models import Client, Hotel
 
@@ -33,22 +32,13 @@ def user_login(request):
                     login(request, user)
                     if user.groups.filter(name='HotelManagers').exists():
                         return redirect('users:manager_dashboard')
-                    return redirect('users:client_dashboard', username=user.username)
-                messages.error(
-                    request, 'You are accessing a hotel where you aren\'t authenticated.'
-                )
+                    return redirect('booking:booking_list', username=user.username)
+                messages.error(request, "You are accessing a hotel where you aren't authenticated.")
             else:
                 messages.error(request, 'The credentials entered are incorrect. Please try again.')
     else:
         form = LoginForm()
     return render(request, 'registration/login.html', {'form': form})
-
-
-@login_required
-@client_required
-def client_dashboard(request, username):
-    client = get_object_or_404(Client, user=request.user)
-    return render(request, 'users/dashboard.html', {'client': client})
 
 
 @login_required
@@ -91,21 +81,21 @@ def users_add_manager_view(request):
             new_user.save()
             Client.objects.create(user=new_user, hotel=hotel, num_guest=cd['num_guest'])
             subject = 'Welcome to Jhoola!'
-            message = f'''
-We are delighted to have you with us, {new_user.username}! We hope your stay at our hotel will
-be absolutely exceptional.
-Hotel name: {hotel}.
-Password : {cd['password']}
-We hope you enjoy all the amenities and services we offer during your visit!
-Please remember to keep your password secure at all times to ensure the safety of your account and personal information.
-'''
+            message = f"""
+                    We are delighted to have you with us, {new_user.username}! We hope your stay at our hotel will
+                    be absolutely exceptional.
+                    Hotel name: {hotel}.
+                    Password : {cd['password']}
+                    We hope you enjoy all the amenities and services we offer during your visit!
+                    Please remember to keep your password secure at all times to ensure the safety of your account and personal information.
+                    """
             from_email = settings.EMAIL_HOST_USER
             to_email = [cd['email']]
             send_mail(subject, message, from_email, to_email, fail_silently=False)
 
             messages.success(request, 'A new client has been successfully created.')
-            return redirect("users:manager_users")
-        messages.error(request, 'New client couldn\'t be created')
+            return redirect('users:manager_users')
+        messages.error(request, "New client couldn't be created")
     else:
         user_form = ClientRegistrationForm(
             initial={
@@ -132,10 +122,9 @@ def users_edit_manager_view(request, username):
             user.save()
             client.save()
             messages.success(request, 'A new client has been successfully edited.')
-            return redirect("users:manager_users")
-        messages.error(request, 'New client couldn\'t be edited')
+            return redirect('users:manager_users')
+        messages.error(request, "New client couldn't be edited")
     else:
-
         user_edit_form = ClientEditForm(instance=client.user)
     return render(
         request,
@@ -154,7 +143,7 @@ def users_delete_manager_view(request, username):
     client = get_object_or_404(Client, user__username=username)
     client.user.delete()
     client.delete()
-    return redirect("users:manager_users")
+    return redirect('users:manager_users')
 
 
 @login_required
@@ -164,7 +153,7 @@ def users_manager_view(request):
     hotel = Hotel.objects.get(name=selected_hotel)
     clients = hotel.clients.all()
     paginator = Paginator(clients, 10)
-    page = request.GET.get("page")
+    page = request.GET.get('page')
 
     try:
         clients = paginator.page(page)
@@ -185,7 +174,7 @@ def users_manager_view(request):
 def products_delete_manager_view(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     product.delete()
-    return redirect("users:manager_products")
+    return redirect('users:manager_products')
 
 
 @login_required
@@ -197,13 +186,11 @@ def products_edit_manager_view(request, product_id):
     if request.method == 'POST':
         product_edit_form = ProductEditForm(instance=product, data=request.POST)
         if product_edit_form.is_valid():
-
             product.save()
             messages.success(request, 'A new product has been successfully edited.')
-            return redirect("users:manager_products")
-        messages.error(request, 'New product couldn\'t be edited')
+            return redirect('users:manager_products')
+        messages.error(request, "New product couldn't be edited")
     else:
-
         product_edit_form = ProductEditForm(instance=product)
     return render(
         request,
@@ -227,10 +214,9 @@ def products_add_manager_view(request):
             product.hotel = hotel
             product.save()
             messages.success(request, 'A new product has been successfully created.')
-            return redirect("users:manager_products")
-        messages.error(request, 'New product couldn\'t be created')
+            return redirect('users:manager_products')
+        messages.error(request, "New product couldn't be created")
     else:
-
         product_add_form = ProductCreationForm()
     return render(
         request,
@@ -248,7 +234,7 @@ def products_manager_view(request):
     hotel = Hotel.objects.get(name=selected_hotel)
     products = hotel.products.all()
     paginator = Paginator(products, 10)
-    page = request.GET.get("page")
+    page = request.GET.get('page')
 
     try:
         products = paginator.page(page)
@@ -267,16 +253,14 @@ def bookings_edit_manager_view(request, booking_id):
     hotel = Hotel.objects.get(name=selected_hotel)
     booking = get_object_or_404(Booking, id=booking_id, user__hotel=hotel)
     if request.method == 'POST':
-        booking_edit_form = BookingEditForm(instance=booking, data=request.POST)
+        booking_edit_form = BookingForm(instance=booking, data=request.POST)
         if booking_edit_form.is_valid():
-
             booking.save()
             messages.success(request, 'A new booking has been successfully edited.')
-            return redirect("users:manager_bookings")
-        messages.error(request, 'New booking couldn\'t be edited')
+            return redirect('users:manager_bookings')
+        messages.error(request, "New booking couldn't be edited")
     else:
-
-        booking_edit_form = BookingEditForm(instance=booking)
+        booking_edit_form = BookingForm(instance=booking)
     return render(
         request,
         'managers/pages/bookings_edit.html',
@@ -294,7 +278,7 @@ def bookings_delete_manager_view(request, booking_id):
     hotel = Hotel.objects.get(name=selected_hotel)
     booking = get_object_or_404(Booking, id=booking_id, user__hotel=hotel)
     booking.delete()
-    return redirect("users:manager_bookings")
+    return redirect('users:manager_bookings')
 
 
 @login_required
@@ -304,7 +288,7 @@ def bookings_manager_view(request):
     hotel = Hotel.objects.get(name=selected_hotel)
     bookings = Booking.objects.filter(user__hotel=hotel)
     paginator = Paginator(bookings, 10)
-    page = request.GET.get("page")
+    page = request.GET.get('page')
 
     try:
         bookings = paginator.page(page)
