@@ -1,9 +1,10 @@
 from django.contrib import admin
-
 from .models import Booking
-
 
 @admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ['user', 'product', 'duration', 'price', 'date','timestamp']
-    raw_id_fields = ['user', 'product']
+    list_display = ['user', 'show_products', 'duration', 'price', 'date']
+    
+    def show_products(self, obj):
+        return ", ".join([str(product) for product in obj.products.all()])
+    show_products.short_description = "Products"

@@ -1,11 +1,25 @@
-{% extends "users/dashboard.html" %}
-
-{% block title %}Book{% endblock title %}
-
-{% block content %}
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Hacer reserva</button>
-  </form>
-  {% endblock content %}
+<div class="container">
+  <div class="box">
+    <form method="post">
+      {% csrf_token %}
+      <div class="products">
+        {% for product in form.products %}
+          <div class="product">
+            {{ product }}
+          </div>
+        {% endfor %}
+      </div>
+      <br>
+    </form>
+  </div>
+  <div class="box">
+    <center>
+      <form method="post">
+        <label>Duration:</label><br>
+        {{ form.duration }}<br><br>
+        <label>Date:</label><br>
+        {{ form.date }}<br><br>
+        <button type="submit" class="send_book">Make reservation</button>
+      </form>
+  </div>
+</div>
