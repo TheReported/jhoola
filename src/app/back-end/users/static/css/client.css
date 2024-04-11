@@ -1,8 +1,34 @@
-body {
-  margin: 0;
-  padding: 0;
+.box {
+  flex: 1;
+  background-color: black;
+  color: white;
+  padding: 20px;
 }
 
-.navbar-light .navbar-nav .nav-link {
-    color: #000;
-  }
+.box:first-child {
+  margin-right: 20px;
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+.product {
+  width: 20%; 
+  margin-bottom: 10px; 
+}
+.send_book {
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.send_book:hover {
+  background-color: #0056b3;
+}

@@ -15,7 +15,10 @@ from booking.forms import BookingForm
 def booking_list(request, username):
     client = get_object_or_404(Client, user=request.user)
     bookings = Booking.objects.filter(user=client)
-    return render(request, 'users/pages/bookings.html', {'bookings': bookings})
+    return render(
+        request, 'users/pages/bookings.html', {'bookings': bookings}
+    )
+
 
 @client_required
 @login_required
@@ -29,8 +32,10 @@ def booking_pdf(request, username, booking_id):
     return response
 
 
+@login_required
+@client_required
 def booking_view(request, username):
-    client = Client.objects.get(user=request.user) 
+    client = Client.objects.get(user=request.user)
     if request.method == 'POST':
         form = BookingForm(user=client, data=request.POST)
         if form.is_valid():
@@ -41,7 +46,7 @@ def booking_view(request, username):
             booking.user = client
             booking.price = total_price
             booking.save()
-            form.save_m2m()  
+            form.save_m2m()
             return redirect('users:manager_users')
     else:
         form = BookingForm(user=client)

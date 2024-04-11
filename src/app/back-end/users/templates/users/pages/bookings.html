@@ -14,10 +14,18 @@
         </div>
         <div class="card-body">
           <div class="booking-info d-flex flex-row justify-content-between">
-            <h5 class="card-title">{{ booking.product }} nº{{ booking.product.id }}</h5>
+            <h5 class="card-title">{{ booking.products.first }} X {{ booking.products.count }}</h5>
             <h5 class="card-title">{{ booking.price }}€</h5>
             <p class="card-text">Reserved time: {{ booking.get_duration_display }}</p>
             <p class="card-text">Date: {{ booking.date }}</p>
+          </div>
+          <div>
+            <p>
+              {% for product in booking.products.all %}
+              {{ booking.products.first }}  {{ product.id }}
+              {% endfor %}
+
+            </p>
           </div>
 
           <div class="user-actions">
@@ -37,7 +45,7 @@
   {% else %}
   <div class="row">
     <div class="col-12 d-flex justify-content-center align-items-end p-5">
-      <h3>Looks like you haven't made any reservations yet, start your break <a href="{% url 'users:client_book' request.user.username %}">here.</a></h3>
+      <h3>Looks like you haven't made any reservations yet, start your break <a href="{% url 'booking:client_book' request.user.username %}">here.</a></h3>
     </div>
   </div>
   {% endif %}

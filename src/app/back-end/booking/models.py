@@ -16,8 +16,7 @@ class Booking(models.Model):
     date = models.DateField()
 
     class Meta:
-        ordering = ['-timestamp']
+        ordering = ['timestamp']
 
     def __str__(self):
-        products_str = ", ".join([product.name for product in self.products.all()])
-        return f"Booking for {self.user} on {self.date} ({self.duration}) - Products: {products_str}"
+        return f'{self.id}'

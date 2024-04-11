@@ -1,4 +1,10 @@
-<div class="container">
+{% extends "users/dashboard.html" %}
+{% load static %}
+
+{% block title %}Book hammock{% endblock title %}
+
+{% block content %}
+<div class="container d-flex ">
   <div class="box">
     <form method="post">
       {% csrf_token %}
@@ -10,11 +16,9 @@
         {% endfor %}
       </div>
       <br>
-    </form>
   </div>
   <div class="box">
     <center>
-      <form method="post">
         <label>Duration:</label><br>
         {{ form.duration }}<br><br>
         <label>Date:</label><br>
@@ -23,3 +27,5 @@
       </form>
   </div>
 </div>
+{% endblock content %}
+
