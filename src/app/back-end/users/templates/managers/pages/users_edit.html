@@ -1,6 +1,5 @@
 {% extends "managers/base.html" %}
 {% block content %}
-<main class="main-content border-radius-lg">
     <div class="black-box mt-4 d-flex align-items-center justify-content-center flex-column">
         <form action="{% url "users:manager_users_edit" client %}" method="post" id="createform">
             {% csrf_token %}
@@ -13,5 +12,4 @@
             <button class="btn btn-success btn-lg btn-block bg-gradient-primary mb-4" type="submit">Delete User</button>
         </form>
     </div>
-</main>
 {% endblock %}

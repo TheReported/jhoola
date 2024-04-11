@@ -39,4 +39,14 @@ urlpatterns = [
         name='manager_booking_delete',
     ),
     path('<username>/bookings/', views.client_dashboard, name='client_dashboard'),
+    path(
+        'manager/users/search/<str:search>/',
+        views.search_clients_manager_view,
+        name='manager_clients_search',
+    ),
+    path(
+        'manager/bookings/search/<str:search>/',
+        views.search_bookings_manager_view,
+        name='manager_bookings_search',
+    ),
 ]

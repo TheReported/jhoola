@@ -1,0 +1,50 @@
+{% extends "managers/base.html" %}
+{% block content %}
+<div class="search-container mt-4">
+    <div class="container-fluid2">
+      <div class="black-box2 mt-4">
+        {% if clients %}
+            {% for client in clients %}
+        
+                <div class="user-card">
+                <div class="user-info">
+
+                    <table>
+                    <td><a href="{% url "users:manager_users_edit" client %}">{{ client.user.username }}</a></td>
+                    <td>{{ client.user.get_full_name }}</td>
+                    <td>{{ client.user.email }}</td>
+                    <td>{{ client.num_guest }}</td>
+                    {% if  client.user.last_login is None %}
+                        <td>{{ client.user.date_joined }}</td>
+                    {% else %}
+                        <td>{{ client.user.last_login }}</td>
+                    {% endif %}
+                    </table>
+                </div>
+                </div>
+            {% endfor %}
+
+            </div>
+        {% else %}
+            {% for booking in bookings %}
+    
+                <div class="user-card">
+                <div class="user-info">
+
+                    <table>
+                    <td><a href="{% url "users:manager_bookings_edit" booking.id %}">{{ booking.id }}</a></td>
+                    <td>{{ booking.user }}</td>
+                    <td>{{ booking.product }}</td>
+                    <td>{{ booking.price }}</td>
+                    <td>{{ booking.duration }}</td>
+                    <td>{{ booking.timestamp }}</td>
+                    </table>
+                </div>
+                </div>
+            {% endfor %}
+
+            </div>
+        {% endif %}
+  
+    </div>
+{% endblock %}

@@ -3,10 +3,13 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 from django.views.decorators.http import require_POST
 
-from booking.forms import BookingCreationForm, BookingEditForm
+from booking.forms import BookingEditForm
 from booking.models import Booking
 from product.forms import ProductCreationForm, ProductEditForm
 from product.models import Product
@@ -159,11 +162,21 @@ def users_delete_manager_view(request, username):
 def users_manager_view(request):
     selected_hotel = request.session.get('hotel_session_name')
     hotel = Hotel.objects.get(name=selected_hotel)
+    clients = hotel.clients.all()
+    paginator = Paginator(clients, 10)
+    page = request.GET.get("page")
+
+    try:
+        clients = paginator.page(page)
+    except PageNotAnInteger:
+        clients = paginator.page(1)
+    except EmptyPage:
+        clients = paginator.page(paginator.num_pages)
 
     return render(
         request,
         'managers/pages/users.html',
-        {'clients': hotel.clients.all()},
+        {'clients': clients},
     )
 
 
@@ -233,7 +246,18 @@ def products_add_manager_view(request):
 def products_manager_view(request):
     selected_hotel = request.session.get('hotel_session_name')
     hotel = Hotel.objects.get(name=selected_hotel)
-    return render(request, 'managers/pages/products.html', {'products': hotel.products.all()})
+    products = hotel.products.all()
+    paginator = Paginator(products, 10)
+    page = request.GET.get("page")
+
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger:
+        products = paginator.page(1)
+    except EmptyPage:
+        products = paginator.page(paginator.num_pages)
+
+    return render(request, 'managers/pages/products.html', {'products': products})
 
 
 @login_required
@@ -279,4 +303,32 @@ def bookings_manager_view(request):
     selected_hotel = request.session.get('hotel_session_name')
     hotel = Hotel.objects.get(name=selected_hotel)
     bookings = Booking.objects.filter(user__hotel=hotel)
+    paginator = Paginator(bookings, 10)
+    page = request.GET.get("page")
+
+    try:
+        bookings = paginator.page(page)
+    except PageNotAnInteger:
+        bookings = paginator.page(1)
+    except EmptyPage:
+        bookings = paginator.page(paginator.num_pages)
+
     return render(request, 'managers/pages/bookings.html', {'bookings': bookings})
+
+
+@login_required
+@manager_required
+def search_bookings_manager_view(request, search: str = None):
+    bookings = Booking.objects.filter(user__username__icontains=search)
+    return render(request, 'managers/pages/search_list.html', {'bookings': bookings})
+
+
+@login_required
+@manager_required
+def search_clients_manager_view(request, search: str = None):
+    clients = Client.objects.filter(
+        Q(user__username__icontains=search)
+        | Q(user__first_name__icontains=search)
+        | Q(user__last_name__icontains=search)
+    )
+    return render(request, 'managers/pages/search_list.html', {'clients': clients})

@@ -1,12 +1,7 @@
 {% extends "managers/base.html" %}
 {% block content%}
-<main class="main-content border-radius-lg">
   <div class="container-fluid2">
     <div class="black-box2 mt-4">
-      <div class="search-container mt-4">
-        <input type="text" class="search-bar" placeholder="Find something...">
-        <button type="submit" class="search-button">Find</button>
-      </div>
       {% for product in products %}
 
         <div class="user-card">
@@ -29,5 +24,5 @@
     </div>
 
   </div>
-</main>
+  {% include "managers/pagination-products.html" with products=products %}
 {% endblock %}
