@@ -19,5 +19,9 @@ class Client(models.Model):
     )
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name="clients")
 
+    @property
+    def fullname(self):
+        return f'{self.user.first_name} {self.user.last_name}'
+
     def __str__(self):
         return self.user.username

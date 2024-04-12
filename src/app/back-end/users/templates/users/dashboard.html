@@ -10,7 +10,7 @@
 
 <nav class="navbar navbar-expand-lg bg-light navbar-light">
     <div class="container">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="{% url "booking:booking_list" user.username %}">
         <img src="{% static 'imgs/logo.svg' %}" class="logo" height="50">
       </a>
       <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,6 +34,9 @@
 
   <!-- bloque de contenidos -->
 {% block content %}{% endblock %}
+
+<!-- bloque para js -->
+{% block domready %}{% endblock %}
 </body>
 
 

@@ -17,23 +17,23 @@ function fetchHotels() {
 }
 
 function displayHotels() {
-  let hotelDropdown = document.getElementById('hotel-dropdown');
-  let inputValue = document.getElementById('hotel-input').value.toLowerCase();
-  let filteredHotels = hotels.filter(hotel => `${hotel.name}, ${hotel.city}`.toLowerCase().includes(inputValue)).slice(0, 5);
+    let hotelDropdown = document.getElementById('hotel-dropdown');
+    let inputValue = document.getElementById('hotel-input').value.toLowerCase();
+    let filteredHotels = hotels.filter(hotel => `${hotel.name}, ${hotel.city}`.toLowerCase().includes(inputValue)).slice(0, 5);
 
-  hotelDropdown.innerHTML = '';
-  filteredHotels.forEach(hotel => {
-      let listHotel = document.createElement('li');
-      let displayFormat = `${hotel.name}, ${hotel.city}`;
-      listHotel.textContent = displayFormat;
-      listHotel.classList.add('pt-2', 'mt-1');
-      listHotel.addEventListener('click', function() {
-          document.getElementById('hotel-input').value = displayFormat;
-          hotelDropdown.innerHTML = '';
-      });
-      hotelDropdown.appendChild(listHotel);
-  });
-  hotelDropdown.classList.add('remove-bullets');
+    hotelDropdown.innerHTML = '';
+    filteredHotels.forEach(hotel => {
+        let listHotel = document.createElement('li');
+        let displayFormat = `${hotel.name}, ${hotel.city}`;
+        listHotel.textContent = displayFormat;
+        listHotel.classList.add('pt-2', 'mt-1');
+        listHotel.addEventListener('click', function() {
+            document.getElementById('hotel-input').value = displayFormat;
+            hotelDropdown.innerHTML = '';
+        });
+        hotelDropdown.appendChild(listHotel);
+    });
+    hotelDropdown.classList.add('remove-bullets');
 }
 
 
