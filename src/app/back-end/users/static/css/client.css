@@ -59,3 +59,33 @@
   opacity: 0;
   transition: opacity 1s ease-out;
 }
+
+/*****NAV*****/
+.nav-link {
+  color: black;
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+}
+.nav-link:after {
+  bottom: -8;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  background: black;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+.nav-link:hover:after {
+  width: 100%;
+  left: 0;
+}
+
+.nav-link.is-active {
+  text-decoration: underline;
+  text-decoration-color: black;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 12px;
+}

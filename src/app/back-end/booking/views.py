@@ -16,7 +16,9 @@ from booking.forms import BookingForm
 def booking_list(request, username):
     client = get_object_or_404(Client, user=request.user)
     bookings = Booking.objects.filter(user=client)
-    return render(request, 'users/pages/bookings.html', {'bookings': bookings})
+    return render(
+        request, 'users/pages/bookings.html', {'bookings': bookings, 'section': 'My Bookings'}
+    )
 
 
 @client_required
@@ -49,7 +51,7 @@ def booking_view(request, username):
             return redirect('users:manager_users')
     else:
         form = BookingForm(user=client)
-    return render(request, 'users/pages/book.html', {'form': form})
+    return render(request, 'users/pages/book.html', {'form': form, 'section': 'Book'})
 
 
 @login_required

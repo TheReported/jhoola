@@ -6,7 +6,7 @@
 <div class="container">
 
   {% block messages %}
-    {% include "users/messages.html" %}
+    {% include "users/messages/success.html" %}
   {% endblock messages %}
 
   {% if bookings %}
@@ -22,15 +22,15 @@
         </div>
         <div class="card-body">
           <div class="booking-info d-flex flex-row justify-content-between">
-            <h5 class="card-title">{{ booking.products.first }} X {{ booking.products.count }}</h5>
-            <h5 class="card-title">{{ booking.price }}€</h5>
+            <h5 class="card-title">{{ booking.products.first }} x {{ booking.products.count }}</h5>
             <p class="card-text">Reserved time: {{ booking.get_duration_display }}</p>
             <p class="card-text">Date: {{ booking.date }}</p>
+            <h5 class="card-title">{{ booking.price }}€</h5>
           </div>
           <div>
-            <p>
+            <p> Your hammocks:
               {% for product in booking.products.all %}
-                {{ booking.products.first }}  {{ product.id }}
+              {{ product.id }}{% if not forloop.last %},{% endif %}
               {% endfor %}
             </p>
           </div>
