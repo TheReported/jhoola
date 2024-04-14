@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'product.apps.ProductConfig',
     'booking.apps.BookingConfig',
+    'payment.apps.PaymentConfig',
     'corsheaders',
 ]
 
@@ -155,3 +156,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = 'media/'
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+STRIPE_PUBLISHABLE_KEY = config('STRIPE_PUBLISHABLE_KEY')
+STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
+STRIPE_API_VERSION = '2024-04-10'

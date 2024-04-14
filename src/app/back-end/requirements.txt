@@ -4,3 +4,4 @@ djangorestframework
 pillow
 WeasyPrint
 django-cors-headers
+stripe==9.1.0

@@ -28,6 +28,7 @@ urlpatterns = [
     path('', include('hotel.urls')),
     path('', include('users.urls')),
     path('', include('booking.urls')),
+    path('payment/', include('payment.urls')),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
 ]
