@@ -36,19 +36,21 @@ def booking_pdf(request, username, booking_id):
 @login_required
 @client_required
 def booking_view(request, username):
-    client = Client.objects.get(user=request.user)
+    client = get_object_or_404(Client, user=request.user)
     if request.method == 'POST':
         form = BookingForm(user=client, data=request.POST)
         if form.is_valid():
+            cd = form.cleaned_data
             booking = form.save(commit=False)
-            products = form.cleaned_data['products']
+            products = cd['products']
             total_price = sum(product.price for product in products)
 
             booking.user = client
             booking.price = total_price
             booking.save()
             form.save_m2m()
-            return redirect('users:manager_users')
+            messages.success(request, 'Your hammocks have been properly booked')
+            return redirect('booking:booking_list', username=username)
     else:
         form = BookingForm(user=client)
     return render(request, 'users/pages/book.html', {'form': form, 'section': 'Book'})

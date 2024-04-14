@@ -14,9 +14,7 @@ class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
         fields = ['products', 'duration', 'date']
-        widgets = {
-            'duration': forms.Select(choices=Booking.TimeSlots.choices),
-        }
+
 
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)

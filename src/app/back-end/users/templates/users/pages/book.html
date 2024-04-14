@@ -1,31 +1,64 @@
 {% extends "users/dashboard.html" %}
 {% load static %}
 
-{% block title %}Book hammock{% endblock title %}
+{% block title %}Book your hammocks{% endblock title %}
 
 {% block content %}
-<div class="container d-flex ">
-  <div class="box">
-    <form method="post">
-      {% csrf_token %}
-      <div class="products">
-        {% for product in form.products %}
-          <div class="product">
+
+<div class="container">
+
+{% block messages %}
+  {% include "users/messages/success.html" %}
+{% endblock messages %}
+
+  <div class="row mt-4">
+    <h2>Select your hammoks:</h2>
+  </div>
+  <form method="post">
+    {% csrf_token %}
+    <div class="row mt-4 p-2">
+      <div class="site-map col-9 border border-1 rounded d-flex flex-row">
+        <div class="col-4 products d-flex flex-wrap justify-content-center">
+          {% for product in form.products|slice:"::2" %}
+          <div class="product p-1 m-2 d-flex justify-content-center align-items-center">
             {{ product }}
           </div>
-        {% endfor %}
+          {% endfor %}
+        </div>
+
+        <div class="col-4 pool">
+          <svg width="300" height="600" xmlns="http://www.w3.org/2000/svg">
+            <!-- Swimming pool -->
+            <rect x="60" y="50" width="200" height="500" fill="lightblue" stroke="grey" stroke-width="5"/>
+            <!-- Stairs -->
+            <rect x="140" y="525" width="40" height="50" fill="grey"/>
+          </svg> 
+        </div>
+
+        <div class="col-4 products d-flex flex-wrap justify-content-center">
+          {% for product in form.products|slice:"1::2" %}
+          <div class="product p-1 m-2 d-flex justify-content-center align-items-center">
+            {{ product }}
+          </div>
+          {% endfor %}
+        </div>
       </div>
-      <br>
-  </div>
-  <div class="box">
-    <center>
-        <label>Duration:</label><br>
-        {{ form.duration }}<br><br>
-        <label>Date:</label><br>
-        {{ form.date }}<br><br>
-        <button type="submit" class="send_book">Make reservation</button>
-      </form>
-  </div>
-</div>
+
+      <div class="col-2 p-2 ms-5">
+        <div class="reservation-form">
+          <p class="d-flex flex-column">
+            <label>Time slot:</label>
+              {{form.duration}}
+          <p class="d-flex flex-column">
+            <label>Date:</label>
+            {{ form.date }}
+          </p>
+          <button type="submit" class="btn btn-primary">Make reservation</button>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </form>
+
 {% endblock content %}
 
