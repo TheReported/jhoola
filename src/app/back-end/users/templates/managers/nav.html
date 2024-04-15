@@ -5,6 +5,12 @@
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                 </div>
+                <div class="col-md-4 col-6 d-flex justify-content-end align-items-center">
+                    <form class="d-flex flex-row align-items-center" action="{% url 'users:manager_search' %}">
+                        <input class="form-control me-2 bg-white" type="search" placeholder="..." aria-label="Search" id="search" name="query">
+                        <button id="search-btn" class="btn btn-light" type="submit">Buscar</button>
+                    </form>
+                  </div>
                 <li class="nav-item d-flex align-items-center">
                     <a href="" class="nav-link text-body font-weight-bold">
                         <i class="fa fa-user me-sm-1"></i>

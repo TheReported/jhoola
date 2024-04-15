@@ -1,5 +1,10 @@
 {% extends "managers/base.html" %}
 {% block content%}
+<div class="user-card add-user-card">
+  <div class="user-name-card">
+    <a href="{% url "users:manager_products_add" %}"><div class="add-account">+</div></a>
+  </div>
+</div>
   <div class="container-fluid2">
     <div class="black-box2 mt-4">
       {% for product in products %}
@@ -8,7 +13,8 @@
           <div class="user-info">
 
             <table>
-              <td><a href="{% url "users:manager_products_edit" product.id %}">{{ product.name }}</a></td>
+              <td><a href="{% url "users:manager_products_edit" product.id %}">{{ product.id }}</a></td>
+              <td>{{ product.name }}</td>
               <td>{{ product.price }}</td>
               <td>{{ product.status }}</td>
 
@@ -16,11 +22,7 @@
           </div>
         </div>
       {% endfor %}
-      <div class="user-card add-user-card">
-        <div class="user-name-card">
-          <a href="{% url "users:manager_products_add" %}"><div class="add-account">+</div></a>
-        </div>
-      </div>
+      
     </div>
 
   </div>

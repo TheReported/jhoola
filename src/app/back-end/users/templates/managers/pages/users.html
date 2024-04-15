@@ -1,13 +1,13 @@
 {% extends "managers/base.html" %}
 {% block content %}
-<div class="search-container mt-4">
-  <form class="d-flex" role="search">
-      <input type="text" id="search-users-field" class="search-bar" placeholder="Find something...">
-      <button type="submit" id="search-users-btn" class="search-button">Find</button>
-      {% csrf_token %}
-  </form>
+
+<div class="user-card add-user-card">
+  <div class="user-name-card">
+    <a href="{% url "users:manager_users_add" %}"><div class="add-account">+</div></a>
+  </div>
 </div>
 <div class="container-fluid2">
+
     <div class="black-box2 mt-4">
       {% for client in clients %}
 
@@ -30,11 +30,6 @@
       {% endfor %}
 
 
-      <div class="user-card add-user-card">
-        <div class="user-name-card">
-          <a href="{% url "users:manager_users_add" %}"><div class="add-account">+</div></a>
-        </div>
-      </div>
     </div>
 
   </div>

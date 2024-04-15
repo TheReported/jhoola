@@ -1,6 +1,7 @@
 from django import forms
 from django.db.models import Count
 from django.utils import timezone
+
 from product.models import Product
 
 from .models import Booking
@@ -15,7 +16,6 @@ class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
         fields = ['products', 'duration', 'date']
-
 
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)

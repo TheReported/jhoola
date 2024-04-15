@@ -1,12 +1,5 @@
 {% extends "managers/base.html" %}
 {% block content%}
-<div class="search-container mt-4">
-  <form class="d-flex" role="search">
-      <input type="text" id="search-bookings-field" class="search-bar" placeholder="Find something...">
-      <button type="submit" id="search-bookings-btn" class="search-button">Find</button>
-      {% csrf_token %}
-  </form>
-</div>
   <div class="container-fluid2">
     <div class="black-box2 mt-4">
       {% for booking in bookings %}
@@ -17,10 +10,9 @@
             <table>
               <td><a href="{% url "users:manager_bookings_edit" booking.id %}">{{ booking.id }}</a></td>
               <td>{{ booking.user }}</td>
-              <td>{{ booking.product }}</td>
               <td>{{ booking.price }}</td>
               <td>{{ booking.duration }}</td>
-              <td>{{ booking.timestamp }}</td>
+              <td>{{ booking.date }}</td>
             </table>
           </div>
         </div>
