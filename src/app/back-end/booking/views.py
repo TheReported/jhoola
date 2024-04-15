@@ -78,7 +78,6 @@ def booking_view(request, username):
                     reverse('booking:payment_cancelled', kwargs={'booking_id': booking.id})
                 ),
             )
-        messages.success(request, 'Your hammocks have been properly booked')
         return redirect(session.url)
 
     else:
@@ -92,6 +91,7 @@ def payment_success(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id)
     booking.paid = True
     booking.save()
+    messages.success(request, 'Your hammocks have been properly booked')
     return redirect('booking:booking_list', booking.user)
 
 
