@@ -10,13 +10,13 @@ pre, form, fieldset, input, textarea, p, blockquote, th, td {
 
 
 
-html{
-
-  background-size: cover;
-
-  background-image: url(https://mediaim.expedia.com/destination/1/d420416b9bc1bbba8e116331a1340536.jpg);
-
-}
+  html {
+    background-image: url(https://mediaim.expedia.com/destination/1/d420416b9bc1bbba8e116331a1340536.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh; /* Establece el tamaño mínimo del fondo como el 100% del viewport height */
+  }
 
 fieldset, img {border:0}
 
