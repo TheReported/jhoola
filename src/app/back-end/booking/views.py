@@ -1,5 +1,6 @@
 import stripe
 import weasyprint
+from booking.forms import BookingForm
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -7,8 +8,6 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.urls import reverse
-
-from booking.forms import BookingForm
 from users.decorators import client_required
 from users.models import Client
 
@@ -78,8 +77,7 @@ def booking_view(request, username):
                     reverse('payment:payment_cancelled', kwargs={'booking_id': booking.id})
                 ),
             )
-        return redirect(session.url)
-
+            return redirect(session.url)  
     else:
         form = BookingForm(user=client)
     return render(request, 'users/pages/book.html', {'form': form, 'section': 'Book'})
@@ -89,6 +87,7 @@ def booking_view(request, username):
 @login_required
 def payment_success(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id)
+    booking.paid = True
     booking.save()
     messages.success(request, 'Your booking has been done successfully')
     return redirect('booking:booking_list', booking.user)

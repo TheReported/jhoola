@@ -1,8 +1,9 @@
 from django import forms
-from .models import Booking
-from product.models import Product
-from django.utils import timezone
 from django.db.models import Count
+from django.utils import timezone
+from product.models import Product
+
+from .models import Booking
 
 
 class BookingForm(forms.ModelForm):
@@ -37,7 +38,7 @@ class BookingForm(forms.ModelForm):
         date = cleaned_data.get('date')
         user = self.user
 
-        total_products_booked = Booking.objects.filter(user=user, date=date).aggregate(
+        total_products_booked = Booking.objects.filter(user=user, date=date, paid=True).aggregate(
             total=Count('products')
         )['total']
 
@@ -57,14 +58,16 @@ class BookingForm(forms.ModelForm):
             raise forms.ValidationError('You can only book up to one week from today.')
 
         if products and duration and date:
-            if Booking.objects.filter(products__in=products, duration=duration, date=date).exists():
+            if Booking.objects.filter(
+                products__in=products, duration=duration, date=date, paid=True
+            ).exists():
                 raise forms.ValidationError(
                     f"There is already a booking for these products with duration '{duration}' on {date}."
                 )
             elif (
                 duration == 'ALL'
                 and Booking.objects.filter(
-                    products__in=products, duration__in=['MOR', 'AFT'], date=date
+                    products__in=products, duration__in=['MOR', 'AFT'], date=date, paid=True
                 ).exists()
             ):
                 raise forms.ValidationError(
@@ -73,7 +76,7 @@ class BookingForm(forms.ModelForm):
             elif (
                 duration in ['MOR', 'AFT']
                 and Booking.objects.filter(
-                    products__in=products, duration='ALL', date=date
+                    products__in=products, duration='ALL', date=date, paid=True
                 ).exists()
             ):
                 raise forms.ValidationError(

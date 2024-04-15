@@ -4,7 +4,7 @@
 {% block title %}Book hammock{% endblock title %}
 
 {% block content %}
-<div class="container d-flex ">
+<div class="container d-flex pt-4">
   <div class="box">
     <form method="post">
       {% csrf_token %}
@@ -19,9 +19,9 @@
   </div>
   <div class="box">
     <center>
-        <label>Duration:</label><br>
+        <label id="duration_id">Duration:</label>
         {{ form.duration }}<br><br>
-        <label>Date:</label><br>
+        <label id="duration_id">Date:</label>
         {{ form.date }}<br><br>
         <button type="submit" class="send_book">Make reservation</button>
       </form>
