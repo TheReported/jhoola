@@ -1,14 +1,21 @@
-from django.contrib import messages
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import Booking
-from users.models import Client
-from django.contrib.auth.decorators import login_required
-from users.decorators import client_required
-from django.template.loader import render_to_string
+import stripe
 import weasyprint
+from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
+from django.template.loader import render_to_string
+from django.urls import reverse
 
 from booking.forms import BookingForm
+from users.decorators import client_required
+from users.models import Client
+
+from .models import Booking
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
+stripe.api_version = settings.STRIPE_API_VERSION
 
 
 @login_required
@@ -49,11 +56,53 @@ def booking_view(request, username):
             booking.price = total_price
             booking.save()
             form.save_m2m()
-            messages.success(request, 'Your hammocks have been properly booked')
-            return redirect('booking:booking_list', username=username)
+            session = stripe.checkout.Session.create(
+                payment_method_types=['card'],
+                line_items=[
+                    {
+                        'price_data': {
+                            'currency': 'eur',
+                            'product_data': {
+                                'name': 'Booking',
+                            },
+                            'unit_amount': int(total_price * 100),
+                        },
+                        'quantity': 1,
+                    }
+                ],
+                mode='payment',
+                metadata={'booking_id': booking.id},
+                success_url=request.build_absolute_uri(
+                    reverse('payment:payment_completed', kwargs={'booking_id': booking.id})
+                ),
+                cancel_url=request.build_absolute_uri(
+                    reverse('payment:payment_cancelled', kwargs={'booking_id': booking.id})
+                ),
+            )
+        messages.success(request, 'Your hammocks have been properly booked')
+        return redirect(session.url)
+
     else:
         form = BookingForm(user=client)
     return render(request, 'users/pages/book.html', {'form': form, 'section': 'Book'})
+
+
+@client_required
+@login_required
+def payment_success(request, booking_id):
+    booking = get_object_or_404(Booking, id=booking_id)
+    booking.save()
+    messages.success(request, 'Your booking has been done successfully')
+    return redirect('booking:booking_list', booking.user)
+
+
+@client_required
+@login_required
+def payment_cancel(request, booking_id):
+    booking = get_object_or_404(Booking, id=booking_id)
+    booking.delete()
+    messages.error(request, 'There has been an error with your booking')
+    return redirect('booking:booking_list', booking.user)
 
 
 @login_required
