@@ -10,6 +10,7 @@ from django.template.loader import render_to_string
 from django.urls import reverse
 from users.decorators import client_required
 from users.models import Client
+from django.core.paginator import Paginator
 
 from .models import Booking
 
@@ -22,8 +23,11 @@ stripe.api_version = settings.STRIPE_API_VERSION
 def booking_list(request, username):
     client = get_object_or_404(Client, user=request.user)
     bookings = Booking.objects.filter(user=client)
+    paginator = Paginator(bookings, 3)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
     return render(
-        request, 'users/pages/bookings.html', {'bookings': bookings, 'section': 'My Bookings'}
+        request, 'users/pages/bookings.html', {'page_obj': page_obj, 'section': 'My Bookings'}
     )
 
 

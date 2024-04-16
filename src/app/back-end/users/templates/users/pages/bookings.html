@@ -9,12 +9,12 @@
     {% include "users/messages/message.html" %}
   {% endblock messages %}
 
-  {% if bookings %}
+  {% if page_obj %}
   <div class="row mt-4">
     <h2>Happy Holidays, {{ user.first_name }}!! </h2>
   </div>
   <div class="row">
-    {% for booking in bookings %}
+    {% for booking in page_obj %}
     {% if booking.paid %}
     <div class="col-12 mt-4">
       <div class="card">
@@ -49,6 +49,11 @@
     </div>
     {% endif %}
     {% endfor %}
+
+    {% block paginator %}
+      {% include "users/pages/paginator.html" %}
+    {% endblock paginator %}
+
   </div>
   {% else %}
   <div class="row">
