@@ -4,33 +4,26 @@
 <div class="search-container mt-4">
     <div class="container-fluid2">
     <div class="black-box2 mt-4">
-        {% for result in results %}
-            {% if result|check_model_name:"Booking" %}
-                {% with booking=result %}
-                    <table>
-                        <td><a href="{% url "users:manager_bookings_edit" booking.id %}">{{ booking.id }}</a></td>
-                        <td>{{ booking.user }}</td>
-                        <td>{{ booking.product }}</td>
-                        <td>{{ booking.price }}</td>
-                        <td>{{ booking.duration }}</td>
-                        <td>{{ booking.date }}</td>
-                    </table>
-                {% endwith %}
-            {% else %}
-                {% with client=result %}
-                    <table>
-                        <td><a href="{% url "users:manager_users_edit" client %}">{{ client.user.username }}</a></td>
-                        <td>{{ client.user.get_full_name }}</td>
-                        <td>{{ client.user.email }}</td>
-                        <td>{{ client.num_guest }}</td>
-                        {% if  client.user.last_login is None %}
-                        <td>{{ client.user.date_joined }}</td>
-                        {% else %}
-                        <td>{{ client.user.last_login }}</td>
-                        {% endif %}
-                    </table>
-                {% endwith %}
-            {% endif %}
+        {% for client in clients %}
+            <table>
+                <td><a href="{% url "users:manager_users_edit" client %}">{{ client.user.username }}</a></td>
+                <td>{{ client.user.get_full_name }}</td>
+                <td>{{ client.user.email }}</td>
+                <td>{{ client.num_guest }}</td>
+                {% if  client.user.last_login is None %}
+                    <td>{{ client.user.date_joined }}</td>
+                {% else %}
+                    <td>{{ client.user.last_login }}</td>
+                {% endif %}
+                <td>
+                    Bookings:
+                    {% if client.bookings %}
+                        {% for booking in client.bookings.all %}
+                            <a href="{% url "users:manager_bookings_edit" booking.id %}">{{ booking.id }}{% if not forloop.last %},{% endif %}</a>
+                        {% endfor %}
+                    {% endif %}
+                </td>
+            </table>   
         {% endfor %}
 
     </div>

@@ -82,13 +82,16 @@ def users_add_manager_view(request):
             Client.objects.create(user=new_user, hotel=hotel, num_guest=cd['num_guest'])
             subject = 'Welcome to Jhoola!'
             message = f"""
-                    We are delighted to have you with us, {new_user.username}! We hope your stay at our hotel will
-                    be absolutely exceptional.
-                    Hotel name: {hotel}.
-                    Password : {cd['password']}
-                    We hope you enjoy all the amenities and services we offer during your visit!
-                    Please remember to keep your password secure at all times to ensure the safety of your account and personal information.
-                    """
+We are delighted to have you with us, {new_user.get_full_name()}! We hope your stay at our hotel will
+be absolutely exceptional.
+
+Username: {new_user.username}.
+Hotel name: {hotel}.
+Password : {cd['password']}.
+
+We hope you enjoy all the amenities and services we offer during your visit!
+Please remember to keep your password secure at all times to ensure the safety of your account and personal information.
+"""
             from_email = settings.EMAIL_HOST_USER
             to_email = [cd['email']]
             send_mail(subject, message, from_email, to_email, fail_silently=False)
@@ -304,18 +307,13 @@ def bookings_manager_view(request):
 @manager_required
 def search_manager_view(request):
     form = SearchForm(request.GET)
-    bookings_results = []
-    clients_results = []
+    clients = []
     selected_hotel = request.session.get('hotel_session_name')
     hotel = Hotel.objects.get(name=selected_hotel)
 
     if form.is_valid():
         query = form.cleaned_data['query']
-        bookings_results = Booking.paid_bookings.filter(
-            Q(user__user__username__icontains=query)
-        ).distinct()
-
-        clients_results = (
+        clients = (
             hotel.clients.filter(
                 Q(user__first_name__icontains=query)
                 | Q(user__last_name__icontains=query)
@@ -326,12 +324,12 @@ def search_manager_view(request):
             .exclude(user__groups__name='HotelManagers')
         )
 
-    results = list(bookings_results) + list(clients_results)
     return render(
         request,
         'managers/pages/search_list.html',
         {
             'form': form,
-            'results': results,
+            'clients': clients,
+            'bookings': bookings,
         },
     )

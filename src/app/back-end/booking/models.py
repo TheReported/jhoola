@@ -15,7 +15,7 @@ class Booking(models.Model):
         AFTERNOON = 'AFT', 'Afternoon'
         ALL_DAY = 'ALL', 'All Day'
 
-    user = models.ForeignKey(Client, on_delete=models.CASCADE)
+    user = models.ForeignKey(Client, on_delete=models.CASCADE, related_name="bookings")
     products = models.ManyToManyField(Product)
     timestamp = models.DateTimeField(auto_now_add=True, editable=False)
     price = models.DecimalField(max_digits=8, decimal_places=2)
