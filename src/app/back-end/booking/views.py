@@ -42,7 +42,7 @@ def booking_pdf(request, username, booking_id):
 @login_required
 @client_required
 def booking_view(request, username):
-    client = Client.objects.get(user=request.user)
+    client = get_object_or_404(Client, user=request.user)
     if request.method == 'POST':
         form = BookingForm(user=client, data=request.POST)
         if form.is_valid():
@@ -71,10 +71,10 @@ def booking_view(request, username):
                 mode='payment',
                 metadata={'booking_id': booking.id},
                 success_url=request.build_absolute_uri(
-                    reverse('payment:payment_completed', kwargs={'booking_id': booking.id})
+                    reverse('booking:payment_completed', kwargs={'booking_id': booking.id})
                 ),
                 cancel_url=request.build_absolute_uri(
-                    reverse('payment:payment_cancelled', kwargs={'booking_id': booking.id})
+                    reverse('booking:payment_cancelled', kwargs={'booking_id': booking.id})
                 ),
             )
             return redirect(session.url)
@@ -89,7 +89,7 @@ def payment_success(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id)
     booking.paid = True
     booking.save()
-    messages.success(request, 'Your booking has been done successfully')
+    messages.success(request, 'Your hammocks have been properly booked')
     return redirect('booking:booking_list', booking.user)
 
 
