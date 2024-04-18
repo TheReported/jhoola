@@ -1,38 +1,50 @@
 {% extends "managers/base.html" %}
 {% block content %}
 
-<div class="user-card add-user-card">
-  <div class="user-name-card">
-    <a href="{% url "users:manager_users_add" %}"><div class="add-account">+</div></a>
-  </div>
-</div>
-<div class="container-fluid2">
-
-    <div class="black-box2 mt-4">
-      {% for client in clients %}
-
-        <div class="user-card">
-          <div class="user-info">
-
-            <table>
-              <td><a href="{% url "users:manager_users_edit" client %}">{{ client.user.username }}</a></td>
-              <td>{{ client.user.get_full_name }}</td>
-              <td>{{ client.user.email }}</td>
-              <td>{{ client.num_guest }}</td>
-              {% if  client.user.last_login is None %}
-                <td>{{ client.user.date_joined }}</td>
-              {% else %}
-                <td>{{ client.user.last_login }}</td>
-              {% endif %}
-            </table>
+<div class="container-fluid py-4">
+  <div class="row">
+    <div class="col-2"></div> 
+    <div class="col-8">
+      <div class="card user-card add-user-card colorful-card mt-4">
+        <div class="card-body">
+          <div class="user-name-card">
+            <a href="{% url 'users:manager_users_add' %}">
+              <div class="add-account">+</div>
+            </a>
           </div>
         </div>
-      {% endfor %}
-
-
+      </div>
     </div>
+    <div class="col-2"></div>
 
+    {% for client in clients %}
+    {% if forloop.counter|divisibleby:2 == False %}
+        <div class="col-2"></div>
+    {% endif %}
+    <div class="col-4">
+        <div class="card colorful-card">
+            <div class="card-body">
+                <h5 class="card-title"><a href="{% url 'users:manager_users_edit' client %}">{{ client.user.username }}</a></h5>
+                <p class="card-text">{{ client.user.get_full_name }}</p>
+                <p class="card-text">{{ client.user.email }}</p>
+                <p class="card-text">Number of Guests: {{ client.num_guest }}</p>
+                {% if client.user.last_login is None %}
+                    <p class="card-text">Joined: {{ client.user.date_joined }}</p>
+                {% else %}
+                    <p class="card-text">Last Login: {{ client.user.last_login }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% if forloop.counter|divisibleby:2%}
+        <div class="col-2"></div>
+    {% endif %}
+    
+{% endfor %}
+    
   </div>
+</div>
+
   {% include "managers/pagination-clients.html" with clients=clients %}
   <script>
     document.addEventListener("DOMContentLoaded", (event) => {

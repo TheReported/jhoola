@@ -1,3 +1,5 @@
+from booking.forms import BookingForm
+from booking.models import Booking
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
@@ -7,9 +9,6 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
-
-from booking.forms import BookingForm
-from booking.models import Booking
 from product.forms import ProductCreationForm, ProductEditForm
 from product.models import Product
 
@@ -155,7 +154,7 @@ def users_manager_view(request):
     selected_hotel = request.session.get('hotel_session_name')
     hotel = Hotel.objects.get(name=selected_hotel)
     clients = hotel.clients.exclude(user__groups__name='HotelManagers')
-    paginator = Paginator(clients, 10)
+    paginator = Paginator(clients, 4)
     page = request.GET.get('page')
 
     try:
@@ -236,7 +235,7 @@ def products_manager_view(request):
     selected_hotel = request.session.get('hotel_session_name')
     hotel = Hotel.objects.get(name=selected_hotel)
     products = hotel.products.all()
-    paginator = Paginator(products, 10)
+    paginator = Paginator(products, 4)
     page = request.GET.get('page')
 
     try:
@@ -290,7 +289,7 @@ def bookings_manager_view(request):
     selected_hotel = request.session.get('hotel_session_name')
     hotel = Hotel.objects.get(name=selected_hotel)
     bookings = Booking.paid_bookings.filter(user__hotel=hotel, paid=True)
-    paginator = Paginator(bookings, 10)
+    paginator = Paginator(bookings, 4)
     page = request.GET.get('page')
 
     try:

@@ -1,26 +1,29 @@
 {% extends "managers/base.html" %}
 {% block content%}
-  <div class="container-fluid2">
-    <div class="black-box2 mt-4">
-      {% for booking in bookings %}
+<div class="container-fluid py-4">
+  <div class="row">
 
-        <div class="user-card">
-          <div class="user-info">
-
-            <table>
-              <td><a href="{% url "users:manager_bookings_edit" booking.id %}">{{ booking.id }}</a></td>
-              <td>{{ booking.user }}</td>
-              <td>{{ booking.price }}</td>
-              <td>{{ booking.duration }}</td>
-              <td>{{ booking.date }}</td>
-            </table>
-          </div>
+    {% for booking in bookings %}
+    {% if forloop.counter|divisibleby:2 == False %}
+        <div class="col-2"></div>
+    {% endif %}
+    <div class="col-md-4">
+      <div class="card user-card">
+        <div class="card-body">
+          <h5 class="card-title"><a href="{% url 'users:manager_bookings_edit' booking.id %}">{{ booking.id }}</a></h5>
+          <p class="card-text">User: {{ booking.user }}</p>
+          <p class="card-text">Price: {{ booking.price }}</p>
+          <p class="card-text">Duration: {{ booking.duration }}</p>
+          <p class="card-text">Date: {{ booking.date }}</p>
         </div>
-      {% endfor %}
-
+      </div>
     </div>
-
+    {% if forloop.counter|divisibleby:2%}
+        <div class="col-2"></div>
+    {% endif %}
+    {% endfor %}
   </div>
+</div>
   {% include "managers/pagination-bookings.html" with bookings=bookings %}
   <script>
     document.addEventListener("DOMContentLoaded", (event) => {

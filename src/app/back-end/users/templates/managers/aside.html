@@ -1,86 +1,40 @@
 {% load static %}
 {% block aside %}
-    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark">
-    
-        <div class="sidenav-header text-center">
-        <i class="fas fa-times  cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"></i>
-        <a class="navbar-brand m-0" target="_blank">
+    <nav class="navbar-vertical navbar-expand-xs navbar-light bg-gradient-dark mt-4">
+        <div class="navbar-brand d-flex justify-content-center align-items-center mt-4">
             <img src="{% static 'imgs/logo.svg' %}" class="logo">
-        </a>
-    </div>
-    
-
-
-    <hr class="horizontal light mt-0 mb-2">
-
-    <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
-        <ul class="navbar-nav">
-
-            
-    <li class="nav-item">
-    <!--Hay que poner la url con django para ir al Dashboard-Admin-->
-    <a class="nav-link text-white " href="{% url "users:manager_dashboard" %}">
-        
-        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="material-icons opacity-10">dashboard</i>
         </div>
-        
-        <span class="nav-link-text ms-1">Dashboard</span>
-    </a>
-    </li>
-
-    
-    <li class="nav-item">
-    <!--Hay que poner la url con django para ir a Reservas-->
-
-    <a class="nav-link text-white " href="{% url "users:manager_bookings" %}">
-        
-        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="material-icons opacity-10">beach_access</i>
-        </div>
-        
-        <span class="nav-link-text ms-1">Bookings</span>
-    </a>
-    </li>
-
-    
-    <li class="nav-item">
-    <!--Hay que poner la url con django para ir a Productos-->
-
-    <a class="nav-link text-white " href="{% url "users:manager_products" %}">
-        
-        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="material-icons opacity-10">inventory_2</i>
-        </div>
-        
-        <span class="nav-link-text ms-1">Products</span>
-    </a>
-    </li>
-
-    
-    <li class="nav-item">
-    <!--Hay que poner la url con django para ir a Usuarios-->
-
-    <a class="nav-link text-white " href="{% url "users:manager_users" %}">
-        
-        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="material-icons opacity-10">person_add</i>
-        </div>
-        
-        <span class="nav-link-text ms-1">Users</span>
-    </a>
-    </li>
-                
+    <div class="navbar-nav-scroll">
+        <ul class="navbar-nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{% url "users:manager_dashboard" %}">
+                    <i class="material-icons opacity-10 me-2">dashboard</i>
+                    Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{% url "users:manager_bookings" %}">
+                    <i class="material-icons opacity-10 me-2">beach_access</i>
+                    Bookings
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{% url "users:manager_products" %}">
+                    <i class="material-icons opacity-10 me-2">inventory_2</i>
+                    Products
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{% url "users:manager_users" %}">
+                    <i class="material-icons opacity-10 me-2">person_add</i>
+                    Users
+                </a>
+            </li>
         </ul>
     </div>
-    
-    <div class="sidenav-footer position-absolute w-100 bottom-0 ">
-        <div class="mx-3">
-        <!--Hay que poner la url con django para ir a un futuro lugar de soporte-->
+    <br>
+    <div class="navbar-footer">
         <a class="btn bg-gradient-primary w-100" href="#" type="button">Support</a>
-        </div>
-        
     </div>
-    
-    </aside>
+</nav>
 {% endblock aside %}

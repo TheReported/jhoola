@@ -1,30 +1,46 @@
 {% extends "managers/base.html" %}
-{% block content%}
-<div class="user-card add-user-card">
-  <div class="user-name-card">
-    <a href="{% url "users:manager_products_add" %}"><div class="add-account">+</div></a>
-  </div>
-</div>
-  <div class="container-fluid2">
-    <div class="black-box2 mt-4">
-      {% for product in products %}
+{% block content %}
 
-        <div class="user-card">
-          <div class="user-info">
+<div class="container-fluid py-4">
+  <div class="row">
+    <div class="col-2"></div>
 
-            <table>
-              <td><a href="{% url "users:manager_products_edit" product.id %}">{{ product.id }}</a></td>
-              <td>{{ product.name }}</td>
-              <td>{{ product.price }}</td>
-              <td>{{ product.status }}</td>
-
-            </table>
+    <div class="col-md-8">
+      <div class="card user-card add-user-card">
+        <div class="card-body">
+          <div class="user-name-card">
+            <a href="{% url 'users:manager_products_add' %}">
+              <div class="add-account">+</div>
+            </a>
           </div>
         </div>
-      {% endfor %}
-      
+      </div>
     </div>
+    <div class="col-2"></div>
 
+          {% for product in products %}
+            {% if forloop.counter|divisibleby:2 == False %}
+              <div class="col-2"></div>
+            {% endif %}
+          <div class="col-4">
+            <div class="card user-card">
+              <div class="card-body">
+                <h5 class="card-title"><a href="{% url 'users:manager_products_edit' product.id %}">{{ product.name }}</a></h5>
+                <p class="card-text">ID: {{ product.id }}</p>
+                <p class="card-text">Price: {{ product.price }}</p>
+                <p class="card-text">Status: {{ product.status }}</p>
+              </div>
+            </div>
+          </div>
+          {% if forloop.counter|divisibleby:2%}
+        <div class="col-2"></div>
+        {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
   </div>
-  {% include "managers/pagination-products.html" with products=products %}
+</div>
+{% include "managers/pagination-products.html" with products=products %}
+
 {% endblock %}
