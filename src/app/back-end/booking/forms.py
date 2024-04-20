@@ -9,13 +9,12 @@ from .models import Booking
 class BookingForm(forms.ModelForm):
     date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
     products = forms.ModelMultipleChoiceField(
-        queryset=Product.objects.all(), widget=forms.CheckboxSelectMultiple
+        queryset=Product.objects.all(), widget=forms.CheckboxSelectMultiple, required=False
     )
 
     class Meta:
         model = Booking
         fields = ['products', 'duration', 'date']
-
 
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -35,6 +34,9 @@ class BookingForm(forms.ModelForm):
         duration = cleaned_data.get('duration')
         date = cleaned_data.get('date')
         user = self.user
+
+        if not products:
+            raise forms.ValidationError('You have to choose at least one product')
 
         total_products_booked = Booking.objects.filter(user=user, date=date, paid=True).aggregate(
             total=Count('products')

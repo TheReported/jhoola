@@ -36,7 +36,6 @@ def booking_list(request, username):
 def booking_pdf(request, username, booking_id):
     booking = get_object_or_404(Booking, id=booking_id)
     html = render_to_string('users/pages/pdf.html', {'booking': booking})
-
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = f'filename=transaction_{booking_id}.pdf'
     weasyprint.HTML(string=html, base_url=request.build_absolute_uri()).write_pdf(response)
@@ -82,6 +81,11 @@ def booking_view(request, username):
                 ),
             )
             return redirect(session.url)
+        else:
+            for errors in form.errors.values():
+                for error in errors:
+                    messages.error(request, error)
+
     else:
         form = BookingForm(user=client)
     return render(request, 'users/pages/book.html', {'form': form, 'section': 'Book'})
