@@ -1,5 +1,3 @@
-from booking.forms import BookingForm
-from booking.models import Booking
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
@@ -9,6 +7,9 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
+
+from booking.forms import BookingForm
+from booking.models import Booking
 from product.forms import ProductCreationForm, ProductEditForm
 from product.models import Product
 
@@ -329,6 +330,5 @@ def search_manager_view(request):
         {
             'form': form,
             'clients': clients,
-            'bookings': bookings,
         },
     )

@@ -16,8 +16,8 @@
                     <td>{{ client.user.last_login }}</td>
                 {% endif %}
                 <td>
-                    Bookings:
                     {% if client.bookings %}
+                        Bookings:
                         {% for booking in client.bookings.all %}
                             <a href="{% url "users:manager_bookings_edit" booking.id %}">{{ booking.id }}{% if not forloop.last %},{% endif %}</a>
                         {% endfor %}
