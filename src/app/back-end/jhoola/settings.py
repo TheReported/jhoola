@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'product.apps.ProductConfig',
     'booking.apps.BookingConfig',
     'corsheaders',
+    'django.contrib.postgres',
 ]
 
 MIDDLEWARE = [
@@ -83,8 +84,11 @@ WSGI_APPLICATION = 'jhoola.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DATABASE_NAME', default='jhoola'),
+        'USER': config('DATABASE_USER', default='jhoola'),
+        'PASSWORD': config('DATABASE_PASSWORD', default='jhoola'),
+        'HOST': config('DATABASE_HOST', default='localhost'),
     }
 }
 
