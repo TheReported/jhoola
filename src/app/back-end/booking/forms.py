@@ -44,6 +44,7 @@ class BookingForm(forms.ModelForm):
 
         max_products = user.num_guest
 
+
         if total_products_booked + len(products) > max_products:
             raise forms.ValidationError(
                 f'You can only reserve a maximum of {max_products} products per day.'

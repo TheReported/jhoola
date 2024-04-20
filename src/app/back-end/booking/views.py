@@ -11,7 +11,7 @@ from django.urls import reverse
 from users.decorators import client_required
 from users.models import Client
 from django.core.paginator import Paginator
-
+from django.utils import timezone
 from .models import Booking
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -22,10 +22,15 @@ stripe.api_version = settings.STRIPE_API_VERSION
 @client_required
 def booking_list(request, username):
     client = get_object_or_404(Client, user=request.user)
+    actual_datetime = timezone.now().date()
     bookings = Booking.objects.filter(user=client)
+    for booking in bookings:
+        if booking.date < actual_datetime:
+            booking.delete()
     paginator = Paginator(bookings, 3)
-    page_number = request.GET.get("page")
+    page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+
     return render(
         request, 'users/pages/bookings.html', {'page_obj': page_obj, 'section': 'My Bookings'}
     )
