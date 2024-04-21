@@ -15,7 +15,6 @@
   </div>
   <div class="row">
     {% for booking in page_obj %}
-    {% if booking.paid %}
     <div class="col-12 mt-4">
       <div class="card">
         <div class="card-header">
@@ -47,7 +46,6 @@
         </div>
       </div>
     </div>
-    {% endif %}
     {% endfor %}
 
     {% block paginator %}

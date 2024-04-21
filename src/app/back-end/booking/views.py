@@ -23,7 +23,7 @@ stripe.api_version = settings.STRIPE_API_VERSION
 def booking_list(request, username):
     client = get_object_or_404(Client, user=request.user)
     actual_datetime = timezone.now().date()
-    bookings = Booking.objects.filter(user=client, date__gte=actual_datetime)
+    bookings = Booking.objects.filter(user=client, date__gte=actual_datetime, paid=True)
     paginator = Paginator(bookings, 3)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
