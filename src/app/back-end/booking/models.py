@@ -18,7 +18,7 @@ class Booking(models.Model):
     paid = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ['timestamp']
+        ordering = ['date']
 
     def __str__(self):
         return f'{self.id}'
