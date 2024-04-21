@@ -95,3 +95,8 @@ select {
 /* footer {
   background-color: #37ABC8;
 } */
+
+/*****Paginator*****/
+a.page-link {
+  color: black;
+}
