@@ -1,5 +1,4 @@
 from django import forms
-from django.db.models import Count
 from django.utils import timezone
 from product.models import Product
 
@@ -34,26 +33,20 @@ class BookingForm(forms.ModelForm):
         duration = cleaned_data.get('duration')
         date = cleaned_data.get('date')
         user = self.user
+        max_products = user.num_guest
+        actual_date = timezone.now().date()
+        max_date = actual_date + timezone.timedelta(days=7)
 
         if not products:
             raise forms.ValidationError('You have to choose at least one product')
 
-        total_products_booked = Booking.objects.filter(user=user, date=date, paid=True).aggregate(
-            total=Count('products')
-        )['total']
-
-        max_products = user.num_guest
-
-
-        if total_products_booked + len(products) > max_products:
+        if len(products) > max_products and (duration == 'ALL' or duration in ['MOR', 'AFT']):
             raise forms.ValidationError(
-                f'You can only reserve a maximum of {max_products} products per day.'
+                f'You can only reserve a maximum of {max_products} products per time slot.'
             )
 
-        if date < timezone.now().date():
+        if date < actual_date:
             raise forms.ValidationError('You cannot book for past dates.')
-
-        max_date = timezone.now().date() + timezone.timedelta(days=7)
 
         if date > max_date:
             raise forms.ValidationError('You can only book up to one week from today.')
