@@ -19,8 +19,8 @@ ssh "$REMOTE_USER@$REMOTE_HOST" "
   fi
   python3 -m venv .venv --prompt jhoola
   source .venv/bin/activate
-  cd src/back-end/
+  cd src/app/back-end/
   pip install -r requirements.txt
   supervisorctl restart jhoola
 "
-cd ~/$TARGET_DIR/src/back-end/ && scp .env "$REMOTE_USER@$REMOTE_HOST":/home/diego/$TARGET_DIR/
+cd ~/$TARGET_DIR/src/app/back-end/ && scp .env "$REMOTE_USER@$REMOTE_HOST":/home/diego/$TARGET_DIR/
