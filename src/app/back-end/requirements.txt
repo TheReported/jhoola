@@ -6,3 +6,4 @@ WeasyPrint
 django-cors-headers
 stripe==9.1.0
 gunicorn
+psycopg2-binary
