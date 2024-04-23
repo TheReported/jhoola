@@ -2,19 +2,13 @@
 
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: #212529;
 }
 
-hr {
-  margin: 1rem 0;
-  color: inherit;
-  border: 0;
-  border-top: 1px solid;
-  opacity: 0.25;
-}
 
 a {
   text-decoration: none;
-  color: blue;
+  color: white;
 }
 
 img {
@@ -24,15 +18,14 @@ img {
 .user-card {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
 }
 
 .user-name-card {
-  background-color: orange;
+  background-color: black;
+  width: 40px;
+  height: 35px;
   border-radius: 5px;
-  padding: 10px; 
   margin-right: 10px;
-  margin-top: 20px;
   margin-left: 20px;
   transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s; 
 }
@@ -130,6 +123,7 @@ img {
 
 .text-center {
   text-align: center !important;
+  color:white;
 }
 
 
@@ -138,11 +132,21 @@ img {
 }
 
 .text-body {
-  color: #7b809a !important;
+  color: white !important;
 }
 
 .bg-transparent {
   background-color: transparent !important;
+}
+
+.card-logo{
+  width: 100px;
+  float: right;
+  margin-right: 30px;
+}
+
+.card-text{
+  color:white;
 }
 
 .btn {
@@ -168,14 +172,18 @@ img {
   color: #fff;
 }
 
-.card {
-  padding-top: 3rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+.colorful-card{
+  height: 265px;
 }
 
-.card .card-header {
-  padding: 1.5rem;
+.card {
+  background-color: rgba(255, 255, 255, 0);
+  color:White;
+  border: white 1px solid;
 }
+
+
 
 .card .card-body {
   font-family: "Roboto", Helvetica, Arial, sans-serif;
@@ -244,16 +252,6 @@ img {
   top: 31%;
   font-size: 1.5rem;
 }
-
-hr {
-  border-top: none;
-  height: 1px;
-}
-
-hr.horizontal.light {
-  background-image: linear-gradient(90deg, rgba(255, 255, 255, 0), #fff, rgba(255, 255, 255, 0));
-}
-
 
 .border-radius-lg {
   border-radius: 0.5rem;
@@ -333,6 +331,8 @@ h2 {
   border-color: #8e8e8e; 
 }
 
+
+
 .search-btn {
   position: absolute;
   right: 10px;
@@ -347,27 +347,15 @@ h2 {
   color: #555; 
 }
 
-.colorful-card {
-  background-color: #f7f7f7;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-.colorful-card:hover {
-  background-color: #e0e0e0;
-}
-
 .user-card.add-user-card {
-  background-color: #5cb85c;
+  border-radius: 2rem;
+
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.1) , rgba(0, 0, 0, 1));
   color: #fff; 
 }
 
-.user-card.add-user-card:hover {
-  background-color: #4cae4c; 
-}
-
 .add-account {
-  font-size: 48px;
+  font-size: 20px;
   text-align: center;
 }
 
@@ -382,27 +370,87 @@ h2 {
   list-style: none;
   padding: 0;
   display: flex;
+  
 }
 
 .page-number {
   margin: 0 5px; 
+  
 }
 
 .page-link {
   text-decoration: none;
-  color: #333;
+  color: white;
   padding: 5px 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  background-color: black;
+
 }
 
 .page-link:hover {
   background-color: #f0f0f0;
 }
 
-/* Footer */
+/* Form */
 
-footer {
-  background-image: linear-gradient(195deg, #191919 0%, #191919 100%);
+.custom-input input[type="text"], input[type="email"] {
+  width: 85%;
+  padding: 10px;
+  margin-left: 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
+.custom-input input,
+    .custom-input select {
+        padding: 10px; 
+        border-radius: 5px; 
+        border: 1px solid #ccc;
+        width: 80%; 
+
+    }
+
+.custom-input input[type="number"] {
+  width: 75%;
+  padding: 10px;
+  margin-left: 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+
+}
+
+.custom-input label {
+  font-weight: bold;
+}
+
+.deletear {
+  float:left;
+}
+
+.salvar {
+  float:right;
+}
+
+.form-group {
+  color:white;
+}
+
+.edit {
+  border-radius: 1rem;
+
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.1) , rgba(0, 0, 0, 1));;
+
+}
+
+main {
+  background-color: #212529;
+}
+
+.general {
+  margin-left: 300px;
+}

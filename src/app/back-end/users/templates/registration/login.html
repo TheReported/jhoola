@@ -6,6 +6,9 @@
     <title>{% block title %}Log-in{% endblock %}</title>
 </head>
 <body>
+    <a class="navbar-brand" href={% url "main" %}>
+        <img src="{% static "imgs/logo.svg" %}" alt="">
+    </a>
     <div class="testbox">
         <h1>Login<a id="close" href={% url "main" %}><i class="icon-remove"></i></a></h1>
         <form method="post">

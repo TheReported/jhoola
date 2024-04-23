@@ -1,30 +1,40 @@
 {% extends "managers/base.html" %}
 {% block content %}
+{% load static %}
+
 {% load model_name %}
 <div class="search-container mt-4">
-    <div class="container-fluid2">
-    <div class="black-box2 mt-4">
-        {% for client in clients %}
-            <table>
-                <td><a href="{% url "users:manager_users_edit" client %}">{{ client.user.username }}</a></td>
-                <td>{{ client.user.get_full_name }}</td>
-                <td>{{ client.user.email }}</td>
-                <td>{{ client.num_guest }}</td>
-                {% if  client.user.last_login is None %}
-                    <td>{{ client.user.date_joined }}</td>
-                {% else %}
-                    <td>{{ client.user.last_login }}</td>
-                {% endif %}
-                <td>
-                    Bookings:
+    <div class="container-fluid py-4">
+        <div class="row justify-content-center">
+            {% for client in clients %}
+                <div class="col-md-4"> 
+                    <div class="card colorful-card" style="background: linear-gradient(to right, rgba(255, 255, 255, 0.1) , rgba(0, 0, 0, 1));;">
+                        <div class="card-logo-wrapper">
+                            <img src="{% static 'imgs/logo.svg' %}" class="card-logo">
+                        </div>
+
+                        <div class="card-body">
+                            <h2 class="card-title text-center"><b>{{ client.user.username.upper }}</b></h2>
+                            <p class="card-text"><b>Full Name:</b> {{ client.user.get_full_name }}</p>
+                            <p class="card-text"><b>Email:</b> {{ client.user.email }}</p>
+                            <p class="card-text"><b>Number of Guests:</b> {{ client.num_guest }}</p>
+                            {% if client.user.last_login is None %}
+                                <p class="card-text"><b>Joined:</b> {{ client.user.date_joined }}</p>
+                            {% else %}
+                                <p class="card-text"><b>Last Login:</b> {{ client.user.last_login }}</p>
+                            {% endif %}
+                        </div>
+                        <a href="{% url 'users:manager_users_edit' client %}" class="btn btn-warning ml-auto">Edit</a>
+                    </div>
                     {% if client.bookings %}
+                        <p>{{ client.user.username.upper }}'S Bookings:</p>
                         {% for booking in client.bookings.all %}
                             <a href="{% url "users:manager_bookings_edit" booking.id %}">{{ booking.id }}{% if not forloop.last %},{% endif %}</a>
                         {% endfor %}
                     {% endif %}
-                </td>
-            </table>   
-        {% endfor %}
-
+                </div>
+            {% endfor %}
+        </div> 
     </div>
+</div>
 {% endblock %}

@@ -1,13 +1,49 @@
 {% extends "managers/base.html" %}
 {% block content %}
-    <div class="black-box mt-4 d-flex align-items-center justify-content-center flex-column">
-
-        <form action="{% url "users:manager_users_add" %}" method="post" id="createform">
-        {% csrf_token %}
-        {{ user_form.as_p }}
-        <br>
-        <button class="btn btn-success btn-lg btn-block bg-gradient-primary mb-4" type="submit">Create User</button>
-        </form>
-    
-  </div>
+<div class="container pt-4">
+    <div class="row justify-content-center">
+        <div class="col-xs-8 col-sm-2"></div>
+        <div class="col-md-8 col-xs-4 col-sm-4">
+            <div class="card edit mt-4">
+                <div class="card-body edit">
+                    <form action="{% url 'users:manager_users_add' %}" method="post" id="createform">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div class="custom-input">
+                                <i class="fas fa-user"></i> {{ user_form.username.label_tag }} {{ user_form.username }}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <div class="custom-input">
+                                <i class="fas fa-user"></i> {{ user_form.first_name.label_tag }} {{ user_form.first_name }}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <div class="custom-input">
+                                <i class="fas fa-user"></i> {{ user_form.last_name.label_tag }} {{ user_form.last_name }}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <div class="custom-input">
+                                <i class="fas fa-envelope"></i> <b>Email:</b> {{ user_form.email }}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <div class="custom-input">
+                                <i class="fas fa-sort-numeric-up"></i> {{ user_form.num_guest.label_tag }} {{ user_form.num_guest }}
+                                {{ user_form.password }}
+                            </div>
+                        </div>
+                        <br>
+                        <button class="btn-lg btn-block bg-warning justify-content-center" type="submit">Create User</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

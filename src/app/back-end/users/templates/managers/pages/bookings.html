@@ -1,20 +1,24 @@
 {% extends "managers/base.html" %}
+{% load static %}
+
 {% block content%}
 <div class="container-fluid py-4">
   <div class="row">
 
     {% for booking in bookings %}
     {% if forloop.counter|divisibleby:2 == False %}
-        <div class="col-2"></div>
+        <div class="col-3"></div>
     {% endif %}
-    <div class="col-md-4">
-      <div class="card user-card">
+    <div class="col-md-3">
+      <div class="card colorful-card mt-2 mb-4" style="background: linear-gradient(to right, rgba(255, 255, 255, 0.1) , rgba(0, 0, 0, 1));;">
         <div class="card-body">
-          <h5 class="card-title"><a href="{% url 'users:manager_bookings_edit' booking.id %}">{{ booking.id }}</a></h5>
-          <p class="card-text">User: {{ booking.user }}</p>
-          <p class="card-text">Price: {{ booking.price }}</p>
-          <p class="card-text">Duration: {{ booking.duration }}</p>
-          <p class="card-text">Date: {{ booking.date }}</p>
+          <h5 class="card-title text-center">{{ booking.id }}</h2>
+          <p class="card-text"><b>User:</b> {{ booking.user }}</p>
+          <p class="card-text"><b>Price:</b> {{ booking.price }}</p>
+          <p class="card-text"><b>Duration:</b> {{ booking.duration }}</p>
+          <p class="card-text"><b>Date:</b> {{ booking.date }}</p>
+          <a href="{% url 'users:manager_bookings_edit' booking.id %}" class="btn btn-warning ml-auto">Edit</a>
+
         </div>
       </div>
     </div>

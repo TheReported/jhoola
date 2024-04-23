@@ -1,11 +1,13 @@
 {% extends "managers/base.html" %}
+{% load static %}
+
 {% block content %}
 
-<div class="container-fluid py-4">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-2"></div> 
-    <div class="col-8">
-      <div class="card user-card add-user-card colorful-card mt-4">
+    <div class="col-3"></div> 
+    <div class="col-6">
+      <div class="card user-card add-user-card mt-4">
         <div class="card-body">
           <div class="user-name-card">
             <a href="{% url 'users:manager_users_add' %}">
@@ -15,27 +17,29 @@
         </div>
       </div>
     </div>
-    <div class="col-2"></div>
+    <div class="col-1"></div>
 
     {% for client in clients %}
     {% if forloop.counter|divisibleby:2 == False %}
-        <div class="col-2"></div>
+        <div class="col-3"></div>
     {% endif %}
-    <div class="col-4">
-        <div class="card colorful-card">
-            <div class="card-body">
-                <h5 class="card-title"><a href="{% url 'users:manager_users_edit' client %}">{{ client.user.username }}</a></h5>
-                <p class="card-text">{{ client.user.get_full_name }}</p>
-                <p class="card-text">{{ client.user.email }}</p>
-                <p class="card-text">Number of Guests: {{ client.num_guest }}</p>
-                {% if client.user.last_login is None %}
-                    <p class="card-text">Joined: {{ client.user.date_joined }}</p>
-                {% else %}
-                    <p class="card-text">Last Login: {{ client.user.last_login }}</p>
-                {% endif %}
-            </div>
+    <div class="col-3">
+      <div class="card colorful-card mt-2 mb-4" style="background: linear-gradient(to right, rgba(255, 255, 255, 0.1) , rgba(0, 0, 0, 1));;">
+        <div class="card-body">
+            <h5 class="card-title text-center"> <b>{{ client.user.username.upper }}</b> </h2>
+            <p class="card-text "><b>Full Name:</b> {{ client.user.get_full_name }}</p>
+            <p class="card-text"><b>Email:</b> {{ client.user.email }}</p>
+            <p class="card-text"><b>Number of Guests:</b> {{ client.num_guest }}</p>
+            {% if client.user.last_login is None %}
+                <p class="card-text"><b>Joined:</b> {{ client.user.date_joined }}</p>
+            {% else %}
+                <p class="card-text"><b>Last Login:</b> {{ client.user.last_login }}</p>
+            {% endif %}
+            <a href="{% url 'users:manager_users_edit' client %}" class="btn btn-warning ml-auto">Edit</a>
+
         </div>
     </div>
+</div>
     {% if forloop.counter|divisibleby:2%}
         <div class="col-2"></div>
     {% endif %}

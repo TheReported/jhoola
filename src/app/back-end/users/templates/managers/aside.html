@@ -1,40 +1,40 @@
 {% load static %}
 {% block aside %}
-    <nav class="navbar-vertical navbar-expand-xs navbar-light bg-gradient-dark mt-4">
-        <div class="navbar-brand d-flex justify-content-center align-items-center mt-4">
+    <nav class="navbar-vertical navbar-expand-xs navbar-light bg-gradient-dark" >
+        <div class="navbar-brand d-flex justify-content-center align-items-center mt-4 ">
             <img src="{% static 'imgs/logo.svg' %}" class="logo">
         </div>
-    <div class="navbar-nav-scroll">
-        <ul class="navbar-nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link text-white" href="{% url "users:manager_dashboard" %}">
-                    <i class="material-icons opacity-10 me-2">dashboard</i>
-                    Dashboard
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="{% url "users:manager_bookings" %}">
-                    <i class="material-icons opacity-10 me-2">beach_access</i>
-                    Bookings
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="{% url "users:manager_products" %}">
-                    <i class="material-icons opacity-10 me-2">inventory_2</i>
-                    Products
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white" href="{% url "users:manager_users" %}">
-                    <i class="material-icons opacity-10 me-2">person_add</i>
-                    Users
-                </a>
-            </li>
-        </ul>
-    </div>
-    <br>
-    <div class="navbar-footer">
-        <a class="btn bg-gradient-primary w-100" href="#" type="button">Support</a>
-    </div>
+        <div class="navbar-nav-scroll">
+            <ul class="navbar-nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url "users:manager_dashboard" %}">
+                        <i class="material-icons opacity-10 me-2">dashboard</i>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url "users:manager_bookings" %}">
+                        <i class="material-icons opacity-10 me-2">beach_access</i>
+                        Bookings
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url "users:manager_products" %}">
+                        <i class="material-icons opacity-10 me-2">inventory_2</i>
+                        Products
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url "users:manager_users" %}">
+                        <i class="material-icons opacity-10 me-2">person_add</i>
+                        Users
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <br>
+        <div class="navbar-footer">
+            <a class="btn bg-warning w-100" href="#" type="button">Support</a>
+        </div>
 </nav>
 {% endblock aside %}
