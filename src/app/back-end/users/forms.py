@@ -75,3 +75,7 @@ class ClientEditForm(forms.ModelForm, CleanUserData):
         required = {
             'password': False,
         }
+
+
+class SearchForm(forms.Form):
+    query = forms.CharField()

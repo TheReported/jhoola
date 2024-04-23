@@ -2,7 +2,6 @@ from django.urls import path
 
 from . import views
 
-
 app_name = 'users'
 urlpatterns = [
     path('manager/bookings/', views.bookings_manager_view, name='manager_bookings'),
@@ -37,16 +36,11 @@ urlpatterns = [
     path(
         'manager/bookings/<booking_id>/delete/',
         views.bookings_delete_manager_view,
-        name='manager_booking_delete',
+        name='manager_bookings_delete',
     ),
     path(
-        'manager/users/search/<str:search>/',
-        views.search_clients_manager_view,
-        name='manager_clients_search',
-    ),
-    path(
-        'manager/bookings/search/<str:search>/',
-        views.search_bookings_manager_view,
-        name='manager_bookings_search',
+        'manager/search/',
+        views.search_manager_view,
+        name='manager_search',
     ),
 ]

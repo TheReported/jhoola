@@ -14,7 +14,7 @@ from product.forms import ProductCreationForm, ProductEditForm
 from product.models import Product
 
 from .decorators import manager_required
-from .forms import ClientEditForm, ClientRegistrationForm, LoginForm
+from .forms import ClientEditForm, ClientRegistrationForm, LoginForm, SearchForm
 from .models import Client, Hotel
 
 
@@ -48,7 +48,7 @@ def manager_dashboard(request):
     hotel = Hotel.objects.get(name=selected_hotel)
     clients = hotel.clients.count()
     products = hotel.products.count()
-    bookings = Booking.objects.filter(user__hotel=hotel)
+    bookings = Booking.paid_bookings.filter(user__hotel=hotel)
     total_money = 0
     for booking in bookings:
         total_money += booking.price
@@ -82,13 +82,16 @@ def users_add_manager_view(request):
             Client.objects.create(user=new_user, hotel=hotel, num_guest=cd['num_guest'])
             subject = 'Welcome to Jhoola!'
             message = f"""
-                    We are delighted to have you with us, {new_user.username}! We hope your stay at our hotel will
-                    be absolutely exceptional.
-                    Hotel name: {hotel}.
-                    Password : {cd['password']}
-                    We hope you enjoy all the amenities and services we offer during your visit!
-                    Please remember to keep your password secure at all times to ensure the safety of your account and personal information.
-                    """
+We are delighted to have you with us, {new_user.get_full_name()}! We hope your stay at our hotel will
+be absolutely exceptional.
+
+Username: {new_user.username}.
+Hotel name: {hotel}.
+Password : {cd['password']}.
+
+We hope you enjoy all the amenities and services we offer during your visit!
+Please remember to keep your password secure at all times to ensure the safety of your account and personal information.
+"""
             from_email = settings.EMAIL_HOST_USER
             to_email = [cd['email']]
             send_mail(subject, message, from_email, to_email, fail_silently=False)
@@ -151,8 +154,8 @@ def users_delete_manager_view(request, username):
 def users_manager_view(request):
     selected_hotel = request.session.get('hotel_session_name')
     hotel = Hotel.objects.get(name=selected_hotel)
-    clients = hotel.clients.all()
-    paginator = Paginator(clients, 10)
+    clients = hotel.clients.exclude(user__groups__name='HotelManagers')
+    paginator = Paginator(clients, 4)
     page = request.GET.get('page')
 
     try:
@@ -233,7 +236,7 @@ def products_manager_view(request):
     selected_hotel = request.session.get('hotel_session_name')
     hotel = Hotel.objects.get(name=selected_hotel)
     products = hotel.products.all()
-    paginator = Paginator(products, 10)
+    paginator = Paginator(products, 4)
     page = request.GET.get('page')
 
     try:
@@ -251,16 +254,16 @@ def products_manager_view(request):
 def bookings_edit_manager_view(request, booking_id):
     selected_hotel = request.session.get('hotel_session_name')
     hotel = Hotel.objects.get(name=selected_hotel)
-    booking = get_object_or_404(Booking, id=booking_id, user__hotel=hotel)
+    booking = get_object_or_404(Booking, id=booking_id, user__hotel=hotel, paid=True)
     if request.method == 'POST':
-        booking_edit_form = BookingForm(instance=booking, data=request.POST)
+        booking_edit_form = BookingForm(user=booking.user, instance=booking, data=request.POST)
         if booking_edit_form.is_valid():
             booking.save()
             messages.success(request, 'A new booking has been successfully edited.')
             return redirect('users:manager_bookings')
         messages.error(request, "New booking couldn't be edited")
     else:
-        booking_edit_form = BookingForm(instance=booking)
+        booking_edit_form = BookingForm(user=booking.user, instance=booking)
     return render(
         request,
         'managers/pages/bookings_edit.html',
@@ -276,7 +279,7 @@ def bookings_edit_manager_view(request, booking_id):
 def bookings_delete_manager_view(request, booking_id):
     selected_hotel = request.session.get('hotel_session_name')
     hotel = Hotel.objects.get(name=selected_hotel)
-    booking = get_object_or_404(Booking, id=booking_id, user__hotel=hotel)
+    booking = get_object_or_404(Booking, id=booking_id, user__hotel=hotel, paid=True)
     booking.delete()
     return redirect('users:manager_bookings')
 
@@ -286,8 +289,8 @@ def bookings_delete_manager_view(request, booking_id):
 def bookings_manager_view(request):
     selected_hotel = request.session.get('hotel_session_name')
     hotel = Hotel.objects.get(name=selected_hotel)
-    bookings = Booking.objects.filter(user__hotel=hotel)
-    paginator = Paginator(bookings, 10)
+    bookings = Booking.paid_bookings.filter(user__hotel=hotel, paid=True)
+    paginator = Paginator(bookings, 4)
     page = request.GET.get('page')
 
     try:
@@ -302,17 +305,30 @@ def bookings_manager_view(request):
 
 @login_required
 @manager_required
-def search_bookings_manager_view(request, search: str = None):
-    bookings = Booking.objects.filter(user__username__icontains=search)
-    return render(request, 'managers/pages/search_list.html', {'bookings': bookings})
+def search_manager_view(request):
+    form = SearchForm(request.GET)
+    clients = []
+    selected_hotel = request.session.get('hotel_session_name')
+    hotel = Hotel.objects.get(name=selected_hotel)
 
+    if form.is_valid():
+        query = form.cleaned_data['query']
+        clients = (
+            hotel.clients.filter(
+                Q(user__first_name__icontains=query)
+                | Q(user__last_name__icontains=query)
+                | Q(user__username__icontains=query)
+                | Q(user__email__icontains=query)
+            )
+            .distinct()
+            .exclude(user__groups__name='HotelManagers')
+        )
 
-@login_required
-@manager_required
-def search_clients_manager_view(request, search: str = None):
-    clients = Client.objects.filter(
-        Q(user__username__icontains=search)
-        | Q(user__first_name__icontains=search)
-        | Q(user__last_name__icontains=search)
+    return render(
+        request,
+        'managers/pages/search_list.html',
+        {
+            'form': form,
+            'clients': clients,
+        },
     )
-    return render(request, 'managers/pages/search_list.html', {'clients': clients})
