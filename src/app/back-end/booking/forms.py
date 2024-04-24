@@ -1,5 +1,6 @@
 from django import forms
 from django.utils import timezone
+
 from product.models import Product
 
 from .models import Booking
@@ -19,6 +20,7 @@ class BookingForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.user = user
         self.fields['products'].queryset = Product.objects.filter(hotel=self.user.hotel)
+        self.fields['duration'].initial = Booking.TimeSlots.ALL_DAY
 
     def save(self, commit=True):
         instance = super().save(commit=False)

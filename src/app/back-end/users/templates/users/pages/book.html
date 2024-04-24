@@ -1,6 +1,6 @@
 {% extends "users/dashboard.html" %}
 {% load static %}
-
+{% load custom_tags %}
 {% block title %}Book your hammocks{% endblock title %}
 
 {% block content %}
@@ -20,9 +20,14 @@
       <div class="site-map col-9 border border-1 rounded d-flex flex-row">
         <div class="col-4 products d-flex flex-wrap justify-content-center">
           {% for product in form.products|slice:"::2" %}
-          <div class="product p-1 m-2 d-flex justify-content-center align-items-center">
-            {{ product }}
-          </div>
+            {% with product_id=product.data.value.value %}
+              <div class="product p-1 m-2 d-flex justify-content-center align-items-center">
+                
+                <label for="{{ product.id_for_label }}">{{ product.choice_label }}</label>
+                <input type="checkbox" id="{{ product.id_for_label }}" name="{{ product.data.name }}" value="{{ product.data.value }}" 
+                matraca="{% is_product_occupied product_id duration occupied_products date %}">
+              </div>
+            {% endwith %}
           {% endfor %}
         </div>
 
@@ -37,15 +42,21 @@
 
         <div class="col-4 products d-flex flex-wrap justify-content-center">
           {% for product in form.products|slice:"1::2" %}
-          <div class="product p-1 m-2 d-flex justify-content-center align-items-center">
-            {{ product }}
-          </div>
+            {% with product_id=product.data.value.value %}
+              <div class="product p-1 m-2 d-flex justify-content-center align-items-center">
+                
+                <label for="{{ product.id_for_label }}">{{ product.choice_label }}</label>
+                <input type="checkbox" id="{{ product.id_for_label }}" name="{{ product.data.name }}" value="{{ product.data.value }}" 
+                disabled="{% is_product_occupied product_id duration occupied_products date %}">
+
+              </div>
+            {% endwith %}
           {% endfor %}
         </div>
       </div>
 
       <div class="col-2 p-2 ms-5">
-        <div class="reservation-form">
+        <div class="reservation-form filter">
           <p class="d-flex flex-column">
             <label>Time slot:</label>
               {{form.duration}}
@@ -62,3 +73,25 @@
 
 {% endblock content %}
 
+{% block domready %}
+<script>
+  window.onload = () => {
+    duration = document.querySelector("select")
+    date = document.querySelector("input[type=date]")
+    filter = document.querySelector(".filter")
+    products = document.querySelectorAll("input[name=products]")
+    const username = "{{ user.username }}"
+    const url = `/${username}/book/`
+
+    filter.addEventListener('change', () => {
+      fetch(`${url}?duration=${duration.value}&date=${date.value}`, {
+          method: 'GET'
+      })
+      .then(data => console.log(data))
+      .catch(err => console.log(err))
+    })
+    
+  }
+
+</script>
+{% endblock %}

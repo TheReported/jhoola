@@ -1,17 +1,19 @@
 import stripe
 import weasyprint
-from booking.forms import BookingForm
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.urls import reverse
+from django.utils import timezone
+
+from booking.forms import BookingForm
 from users.decorators import client_required
 from users.models import Client
-from django.core.paginator import Paginator
-from django.utils import timezone
+
 from .models import Booking
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -47,7 +49,18 @@ def booking_pdf(request, username, booking_id):
 @login_required
 @client_required
 def booking_view(request, username):
+    duration = request.GET.get("duration")
+    date = request.GET.get("date")
     client = get_object_or_404(Client, user=request.user)
+    actual_datetime = timezone.now().date()
+    bookings = Booking.objects.filter(date__gte=actual_datetime, paid=True)
+    occupied_products = {
+        booking.date.strftime("%Y-%m-%d"): [
+            (product.id, booking.duration) for product in booking.products.all()
+        ]
+        for booking in bookings
+    }
+
     if request.method == 'POST':
         form = BookingForm(user=client, data=request.POST)
         if form.is_valid():
@@ -90,7 +103,17 @@ def booking_view(request, username):
 
     else:
         form = BookingForm(user=client)
-    return render(request, 'users/pages/book.html', {'form': form, 'section': 'Book'})
+    return render(
+        request,
+        'users/pages/book.html',
+        {
+            'form': form,
+            'section': 'Book',
+            'occupied_products': occupied_products,
+            'duration': duration,
+            'date': date,
+        },
+    )
 
 
 @client_required
