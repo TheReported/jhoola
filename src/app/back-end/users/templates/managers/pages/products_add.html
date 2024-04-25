@@ -1,13 +1,29 @@
 {% extends "managers/base.html" %}
 {% block content %}
-    <div class="black-box mt-4 d-flex align-items-center justify-content-center flex-column">
-
-        <form action="{% url "users:manager_products_add" %}" method="post" id="createform">
-        {% csrf_token %}
-        {{ product_add_form.as_p }}
-        <br>
-        <button class="btn btn-success btn-lg btn-block bg-gradient-primary mb-4" type="submit">Create Product</button>
-        </form>
-    
-  </div>
+<div class="container pt-4">
+  <div class="row justify-content-center">
+      <div class="col-xs-8 col-sm-2"></div>
+      <div class="col-md-8 col-xs-4 col-sm-4">
+          <div class="card edit mt-4">
+              <div class="card-body edit">
+              <form action="{% url "users:manager_products_add" %}" method="post" id="createform">
+                {% csrf_token %}
+                <div class="form-group">
+                  <div class="custom-input">
+                    <i class="fas fa-box"></i> {{ product_add_form.name.label_tag }} {{ product_add_form.name }}
+                  </div>
+                </div>
+                <br>
+                <div class="form-group">
+                  <div class="custom-input">
+                    <i class="fas fa-money-bill"></i> {{ product_add_form.price.label_tag }} {{ product_add_form.price }}
+                  </div>
+                </div>
+                <br>
+                <button class="btn-lg btn-block bg-warning justify-content-center" type="submit">Create Product</button>
+              </form>
+          </div>
+        </div>
+      </div>
+</div>
 {% endblock %}

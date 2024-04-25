@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-7kmew4(o5u)14b)!-pj-uugg$2(^i1i)fzb$t1_1j9w(k(vnak
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=[], cast=config.list)
 
 # Application definition
 
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'booking.apps.BookingConfig',
     'corsheaders',
     'debug_toolbar',
+    'django.contrib.postgres',
 ]
 
 MIDDLEWARE = [
@@ -85,8 +86,11 @@ WSGI_APPLICATION = 'jhoola.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DATABASE_NAME', default='jhoola'),
+        'USER': config('DATABASE_USER', default='jhoola'),
+        'PASSWORD': config('DATABASE_PASSWORD', default='jhoola'),
+        'HOST': config('DATABASE_HOST', default='localhost'),
     }
 }
 

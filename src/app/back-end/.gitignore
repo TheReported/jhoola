@@ -7,3 +7,4 @@ justfile
 *.pyc
 db.sqlite3
 .vscode
+*.json
