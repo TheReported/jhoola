@@ -5,3 +5,4 @@ pillow
 WeasyPrint
 django-cors-headers
 stripe==9.1.0
+django-debug-toolbar==4.3.0
