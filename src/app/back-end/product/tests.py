@@ -19,7 +19,7 @@ class ProductModelTestCase(TestCase):
 class ProductFormTestCase(TestCase):
     def test_product_form_valid_data(self):
         self.hotel = Hotel.objects.create(name='Test Hotel', city='Test Location')
-        form = ProductCreationForm(data={'name': 'Producto 1', 'price': 10.99, 'hotel': self.hotel})
+        form = ProductCreationForm(data={'name': 'Product 1', 'price': 10.99, 'hotel': self.hotel})
 
         self.assertTrue(form.is_valid())
 
@@ -34,17 +34,17 @@ class ProductEditFormTestCase(TestCase):
 
     def test_product_edit_form_valid_data(self):
         self.hotel = Hotel.objects.create(name='Test Hotel', city='Test Location')
-        product = Product.objects.create(name='Producto 1', price=10.99, hotel=self.hotel)
+        product = Product.objects.create(name='Product 1', price=10.99, hotel=self.hotel)
         form = ProductEditForm(
             instance=product,
-            data={'name': 'Producto Editado', 'price': 15.99, 'hotel': self.hotel.id},
+            data={'name': 'Edited Product', 'price': 15.99, 'hotel': self.hotel.id},
         )
 
         self.assertTrue(form.is_valid())
 
     def test_product_edit_form_no_data(self):
         hotel = Hotel.objects.create(name='Test Hotel', city='Test Location')
-        product = Product.objects.create(name='Producto 1', price=10.99, hotel=hotel)
+        product = Product.objects.create(name='Produc', price=10.99, hotel=hotel)
         form = ProductEditForm(instance=product, data={})
 
         self.assertFalse(form.is_valid())
