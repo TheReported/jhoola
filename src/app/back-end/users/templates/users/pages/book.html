@@ -19,9 +19,17 @@
     <div class="row mt-4 p-2">
       <div class="site-map col-9 border border-1 rounded d-flex flex-row">
         <div class="col-4 products d-flex flex-wrap justify-content-center">
-          {% for product in form.products|slice:"::2" %}
+          {% for product in form.products.field.queryset|slice:"::2" %}
           <div class="product p-1 m-2 d-flex justify-content-center align-items-center">
-            {{ product }}
+            <label for="product_{{ product.id }}">
+                {% if product.status == 'FR' %}
+                  <img src="{{ product.avatar.url }}" alt="Avatar" style="background-color: lightgreen; width:50px;">
+                {% else %}
+                  <img src="{{ product.avatar.url }}" alt="Avatar" style="background-color: red; width:50px;">
+                {% endif %}
+            </label>
+            <input type="checkbox" name="products" value="{{ product.id }}" id="product_{{ product.id }}" style="display: none;">
+            {{product.id}}
           </div>
           {% endfor %}
         </div>
@@ -36,13 +44,21 @@
         </div>
 
         <div class="col-4 products d-flex flex-wrap justify-content-center">
-          {% for product in form.products|slice:"1::2" %}
-          <div class="product p-1 m-2 d-flex justify-content-center align-items-center">
-            {{ product }}
-          </div>
+          {% for product in form.products.field.queryset|slice:"1::2"  %}
+            <div class="product p-1 m-2 d-flex justify-content-center align-items-center">
+              <label for="product_{{ product.id }}">
+                  {% if product.status == 'FR' %}
+                    <img src="{{ product.avatar.url }}" alt="Avatar" style="background-color: lightgreen; width:50px;">
+                  {% else %}
+                    <img src="{{ product.avatar.url }}" alt="Avatar" style="background-color: red; width:50px;">
+                  {% endif %}
+              </label>
+              <input type="checkbox" name="products" value="{{ product.id }}" id="product_{{ product.id }}" style="display: none;">
+              {{product.id}}
+            </div>
           {% endfor %}
         </div>
-      </div>
+        
 
       <div class="col-2 p-2 ms-5">
         <div class="reservation-form">
@@ -61,4 +77,8 @@
   </form>
 
 {% endblock content %}
+
+{% block domready %}
+
+{% endblock domready %}
 

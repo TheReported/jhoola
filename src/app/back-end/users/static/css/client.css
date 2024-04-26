@@ -100,3 +100,13 @@ select {
 a.page-link {
   color: black;
 }
+
+/*****AVATARS*****/
+.product-avatar {
+  width: 30px;
+}
+
+
+  .free { background-color: lightgreen; }
+  .in_process { background-color: orange; }
+
