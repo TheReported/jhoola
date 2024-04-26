@@ -32,15 +32,14 @@ TÍTULO DEL PROYECTO
 2. [***ORIGEN, CONTEXTUALIZACIÓN Y JUSTIFICACIÓN DEL PROYECTO.***](#id2)
 3. [***OBJETIVO GENERAL DEL PROYECTO.***](#id3)
 4. [***DESCRIPCIÓN GENERAL DEL PROYECTO (ALCANCE).***](#id4)
-5. [***TAREAS.***](#id5)
-6. [***CRONOGRAMA.***](#id6)
-7. [***RESUMEN DE RECURSOS HUMANOS Y MATERIALES.***](#id7)
-8. [***CONTROL DE RIESGOS.***](#id8)
-9. [***POLÍTICA DE SEGUIMIENTO, EVALUACIÓN Y CONTROL DE CALIDAD.***](#id9)
-10. [***CLAUSULAS.***](#id10)
-11. [***BIBLIOGRAFÍA.***](#id11)
-12. [***GLOSARIO.***](#id12)
-13. [***ANEXOS.***](#id13)
+5. [***CRONOGRAMA.***](#id5)
+6. [***RESUMEN DE TAREAS, RECURSOS HUMANOS Y MATERIALES.***](#id6)
+7. [***CONTROL DE RIESGOS.***](#id7)
+8. [***POLÍTICA DE SEGUIMIENTO, EVALUACIÓN Y CONTROL DE CALIDAD.***](#id8)
+9. [***CLAUSULAS.***](#id9)
+10. [***BIBLIOGRAFÍA.***](#id10)
+11. [***GLOSARIO.***](#id11)
+12. [***ANEXOS.***](#id12)
 
 ### 1. INTRODUCCIÓN. <a name="id1"></a>
 
@@ -119,55 +118,34 @@ La aplicación estará dividida en dos partes principales: el frontend y el back
 
 En resumen, el proyecto se estructurará utilizando tecnologías modernas y robustas para ofrecer una aplicación web eficiente y segura para la gestión de reservas de hospedaje.
 
-### 5. TAREAS. <a name="id5"></a>
-
-Para cada tarea:
-+ **Título**
-+ **Descripción y metodología.** 
->En este apartado se define tanto el objetivo que persigue la ejecución de esta tarea así como una definición de la misma, es decir, en qué consiste la tarea, qué se va a hacer durante el desarrollo de la misma, etc.
-+ **Duración (en horas).** 
-+ **Fecha de inicio y fecha de fin**
-+ **Recursos humanos**
-+ **Recursos materiales**
-+ **Coste**
-+ **Responsable**
-
->Consejo: NO programen tareas hasta el último minuto, ¡establezcan contingencias!! 	La mayoría de tareas se dividirán en subtareas, que deberán indicarse (pero en este caso no detallar). Bastará con algo como lo siguiente :
-
-<center>
-
-| Tarea     | Título                  | Depend  | Duración | Fecha Ini | Fecha Fin |
-|-----------|-------------------------|---------|----------|-----------|-----------|
-| Tarea 5   | Front-end               |         | 20h      | 25/3/19   | 27/3/19   |
-| Tarea 5.1 | Conectar a la API       | 2, 3, 4 | 3 h      | 25/3/19   | 25/3/19   |
-| Tarea 5.2 | Listar un elemento      | 5.1     | 1 h      | 25/3/19   | 25/3/19   |
-| Tarea 5.3 | Crear un nuevo elemento | 5.1     | 4 h      | 26/3/19   | 26/3/19   |
-| ...       | ...                     | ...     | ...      | ...       | ...       |
-
-</center>
-
-A partir de esta información, RELLENAR LAS TAREAS EN EL TEAM-GANTT (o similar)
-
-### 6. CRONOGRAMA. <a name="id6"></a>
+### 5. CRONOGRAMA. <a name="id5"></a>
 
 Este apartado nos servirá como resumen de alcance, temporalización y coste. Utilizar la información anterior de las tareas, para establecer un resumen de los principales aspectos del proyecto (debería bastar con las tareas principales, y evitar un excesivo detalle de las subtareas). Se puede reflejar con un diagrama de Gantt que podemos sacar de los **PROJECTS** de **GitHub** ( adjuntamos capturas de pantalla )
 
-### 7. RESUMEN DE RECURSOS HUMANOS Y MATERIALES. <a name="id7"></a>
+### 6. TAREAS, RESUMEN DE RECURSOS HUMANOS Y MATERIALES. <a name="id6"></a>
 
 Como en el caso anterior, hacer una tabla para cada tarea principal
 
 <center>
 
-| TAREA                | Recursos Humanos                                   | Recursos materiales                           |
-|----------------------|----------------------------------------------------|-----------------------------------------------|
-| 1. Instalar software | Técnico de sistemas: 2 Técnico de base de datos: 3 | Servidor de pruebas Licencia de base de datos |
-| ...                  | ...                                                | ...                                           |
+| Tarea | Título | Descripción y Metodología  | Duración | Fecha Ini | Fecha Fin | Recursos Humanos | Recursos Materiales | Coste | Responsable |
+|-------|--------|----------------------------|----------|-----------|-----------|------------------|---------------------|-------|-------------|
+| Tarea 1 | Desarrollo de la Landing Page |
+| Tarea 2 | Desarrollo del Login de Hoteles |
+| Tarea 3 | Desarrollo del Login | 
+| Tarea 4 | Desarrollo de la Zona Admin |
+| Tarea 5 | Desarrollo de la Zona Client |
+| Tarea 6 | Desarrollo de la API |
+| Tarea 7 | Despliegue de la Aplicación | 
+| Tarea 8 | Migración del a Base de Datos a PostgreSQL |
+| Tarea 9 | Desarrollo del Testing de la Aplicación |
+
 
 </center>
 
-### 8. CONTROL DE RIESGOS. <a name="id8"></a>
+### 7. CONTROL DE RIESGOS. <a name="id7"></a>
 
-#### 8.1 Riesgo de cambios menores en los requisitos del cliente
+#### 7.1 Riesgo de cambios menores en los requisitos del cliente
 
 **Probabilidad:** Baja (0.10)
 
@@ -178,7 +156,7 @@ Como en el caso anterior, hacer una tabla para cada tarea principal
 **Acción a llevar a cabo:** Dividir dichos cambios con calma entre los distintos trabajadores involucrados en el proyecto. El equipo puede manejar estos cambios fácilmente sin necesidad de intervención adicional. Se pueden implementar prácticas ágiles para adaptarse a los cambios de manera eficiente y garantizar la satisfacción del cliente.
 
 
-#### 8.2 Riesgo de fallos en la infraestructura de despliegue
+#### 7.2 Riesgo de fallos en la infraestructura de despliegue
 
 **Probabilidad:** Muy Bajo (0.10)
 
@@ -188,7 +166,7 @@ Como en el caso anterior, hacer una tabla para cada tarea principal
 
 **Acción a llevar a cabo:** Plan de mitigación → Realizar distintas pruebas exhaustivas de la infraestructura de despliegue y configurar sistemas para detectar posibles problemas. A su vez hay que establecer un protocolo de respuesta rápida para abordar cualquier fallo y minimizar el tiempo de inactividad.
 
-#### 8.3 Riesgo de falta de experiencia con tecnologías seleccionadas
+#### 7.3 Riesgo de falta de experiencia con tecnologías seleccionadas
 
 **Probabilidad:** Alto (0.60)
 
@@ -198,35 +176,35 @@ Como en el caso anterior, hacer una tabla para cada tarea principal
 
 Acción a llevar a cabo: Plan de mitigación → Cambiar el modelo de trabajo aplicado en el proyecto para lanzarlo con las tecnologías que se controlan en el equipo o directamente pasar a un proceso de aprendizaje agil con el que poder lograr sacar hacia adelante el proyecto.
   
-### 9. POLÍTICA DE SEGUIMIENTO, EVALUACIÓN Y CONTROL DE CALIDAD. <a name="id9"></a>
+### 8. POLÍTICA DE SEGUIMIENTO, EVALUACIÓN Y CONTROL DE CALIDAD. <a name="id8"></a>
 
 
 Para asegurar que el proyecto se mantenga en curso y cumpla con los objetivos planteados, se implementarán diversas acciones de seguimiento, evaluación y control de calidad. Aquí algunas de las acciones a llevar a cabo:
 
-#### 9.1 Reuniones regulares de seguimiento
+#### 8.1 Reuniones regulares de seguimiento
 
 Se realizarán reuniones periódicas con el equipo del proyecto para revisar el progreso, discutir cualquier cambio o problema y tomar medidas si es necesario.
 
-#### 9.2 Seguimiento de hitos
+#### 8.2 Seguimiento de hitos
 
 Se establecerán hitos en el cronograma del proyecto. Se realizará un seguimiento constante para asegurar que se cumplan en los plazos establecidos.
 
-#### 9.3 Revisiones de código y Testing
+#### 8.3 Revisiones de código y Testing
 
 Se llevarán a cabo revisiones regulares del código para garantizar su calidad y coherencia. Además, se realizarán pruebas para asegurar que los diferentes componentes del sistema funcionen correctamente juntos.
 
-#### 9.4 Encuestas de satisfacción del cliente y Beta-Testing
+#### 8.4 Encuestas de satisfacción del cliente y Beta-Testing
 
 Se enviarán encuestas a los clientes para evaluar su satisfacción con el proyecto y recopilar comentarios que ayuden a identificar áreas de mejora y a su vez se les dejará probar la aplicación con el fin de que aquellos menos enterados en dicho ambito nos ayuden a encontrar errores.
 
-#### 9.5 Retroalimentación del equipo
+#### 8.5 Retroalimentación del equipo
 
 Se fomentará un ambiente sano dentro del equipo, donde los miembros puedan compartir sus ideas, preocupaciones y sugerencias para mejorar el proceso y el producto final.
 Implementando estas acciones de seguimiento, evaluación y control de calidad, el equipo podrá estar en sintonía con el progreso del proyecto, identificar y abordar casos inesperados de manera oportuna y asegurar la entrega de un producto de alta calidad que cumpla con los requisitos y expectativas del cliente.
 
-### 10.  CLAUSULAS. <a name="id10"></a>
+### 9.  CLAUSULAS. <a name="id9"></a>
 
-#### 10.1 Entrega y plazos
+#### 9.1 Entrega y plazos
 
 - La entrega de la aplicación web a la empresa se realizará en la fecha acordada entre las partes, especificada en el contrato inicial.
 
@@ -234,7 +212,7 @@ Implementando estas acciones de seguimiento, evaluación y control de calidad, e
 
 - Los plazos para cada funcionalidad del proyecto se detallarán en el cronograma y podrán ser modificados post-contrato solo con el consentimiento mutuo de equipo y cliente.
 
-#### 10.2 Pagos
+#### 9.2 Pagos
 
 - El pago se realizará de acuerdo con el cronograma establecido en el contrato, detallando la cantidad mensual y la fecha de cuando se debe realizar.
 
@@ -242,40 +220,40 @@ Implementando estas acciones de seguimiento, evaluación y control de calidad, e
 
 - En caso de incumplimiento en los pagos por parte del cliente, el equipo se reserva el derecho de suspender sus labores hasta que se solucione la situación.
 
-#### 10.3 Propiedad intelectual
+#### 9.3 Propiedad intelectual
 
 - Todos los derechos de propiedad intelectual del software desarrollado, incluidos el código fuente, la documentación y cualquier material asociado, serán propiedad exclusiva de Jhoola.
 
-#### 10.4 Soporte
+#### 9.4 Soporte
 
 - Se ofrecerá soporte al cliente si este adquiere la suscripción en la que se incluye dicho servicio
 
-#### 10.5 Confidencialidad
+#### 9.5 Confidencialidad
 
 - Ambas partes se comprometen a mantener la confidencialidad de toda la información que se proporcione durante el proyecto, incluidos los datos del cliente, los detalles del proyecto y cualquier otra información que sea sensible.
 
 - El punto anteriormente mencionado eguirá en vigor incluso después de la aplicación del proyecto o la terminación del contrato.
 
-#### 10.6 Calidad y control de cambios
+#### 9.6 Calidad y control de cambios
 
 - El equipo de desarrollo se compromete a cumplir con los estándares de calidad acordados y a realizar pruebas exhaustivas para garantizar el funcionamiento adecuado de la aplicación web.
 
 - Los cambios o mejoras que se quieran implementar requerirán la aprobación por escrito del cliente, y podrán implicar ajustes en el cronograma y el aumento del coste de la aplicación.
 
-#### 10.7 Resolución de conflictos
+#### 9.7 Resolución de conflictos
 
 - Si surge un problema entre equipo y cliente ambas partes intentarán resolverlos de manera amistosa y mediante negociaciones directas.
 
-#### 10.8 Cancelación del servicio
+#### 9.8 Cancelación del servicio
 
 - En caso de que el cliente desee cancelar su servicio, solo tendrá que hacerlo previo al pago del siguiente mes. Si el pago ya ha sido realizado no nos comprometemos a devolver el dinero.
 
 
-### 11.  BIBLIOGRAFÍA. <a name="id11"></a>
+### 10.  BIBLIOGRAFÍA. <a name="id11"></a>
     
-### 12.  GLOSARIO. <a name="id12"></a>
+### 11.  GLOSARIO. <a name="id12"></a>
 
-### 13.  ANEXOS. <a name="id13"></a>
+### 12.  ANEXOS. <a name="id13"></a>
 
 Aquí se puede indicar: 
 + Documentación externa de utilidad
