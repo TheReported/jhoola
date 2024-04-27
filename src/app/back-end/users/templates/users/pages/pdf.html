@@ -1,13 +1,80 @@
 <html>
   <head>
     {% load static %}
-    <link href="{% static 'css/pdf.css' %}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <link href="{% static 'css/pdf.css' %}" rel="stylesheet">
   </head>
   <body>
-    <div class="d-flex justify-content-center align-items-center">
-      <img src="{% static "imgs/logo.svg" %}" alt="logo_jhoola" class="">
+    <div class="row">
+      <div class="col-12 logo-pdf d-flex justify-content-center align-items-center">
+        <img src="{% static "imgs/logo.svg" %}" alt="logo_jhoola" class="">
+      </div>
     </div>
     <hr>
+    <div class="row mb-4">
+      <h3 class="mb-3">Booking details</h3>
+      <div class="col-3">
+        <p>Booking ID</p>
+        <p>Reserved time</p>
+        <p>Date</p>
+      </div>
+      <div class="col-4">
+        <p>{{booking.id}}</p>
+        <p>{{booking.get_duration_display}}</p>
+        <p>{{ booking.date|date:"l, d/m/Y" }}</p>
+      </div>
+      <span class="col-5 paid-container d-flex justify-content-center">
+        <span class="paid-content">
+          Paid
+        </span>
+      </span>
+    </div>
+
+    <div class="row mb-4">
+      <h3 class="mb-3">Booked by</h3>
+      <div class="col-6">
+        <p>{{booking.user.fullname}}</p>
+        <p>{{booking.user.user.email}}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Product</th>
+            <th scope="col" class="text-end">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>{{ booking.products.first }} x {{ booking.products.count }}
+            <br> Nº
+            ({% for product in booking.products.all %}{{ product.id }}{% if not forloop.last %},{% else %}){% endif %}
+            {% endfor %}
+          </td>
+          <td class="text-end">{{ booking.products.first.price }}€</td>
+        </tr>
+        <tr>
+          <th class="text-end col-11">Total price </th>
+          <th class="text-end col-1">{{ booking.price }}€</th>
+        </tr>
+      </tbody>
+      </table>     
+    </div>
+    
+    <div class="jhoola-info d-flex justify-content-between align-items-center">
+      <div class="me-3">
+        <i class="fa-solid fa-phone"></i> +34 697 81 19 66
+      </div>
+      <div class="me-3">
+        <i class="fa fa-envelope"></i> jhoolasl@gmail.com
+      </div>
+      <div class="me-3">
+        <i class="fa-solid fa-globe"></i> www.jhoola.com
+      </div>
+    </div>
+
   </body>
 </html>

@@ -1,15 +1,33 @@
 {% extends "managers/base.html" %}
 {% block content %}
-    <div class="black-box mt-4 d-flex align-items-center justify-content-center flex-column">
-        <form action="{% url "users:manager_products_edit" product.id %}" method="post" id="createform">
-            {% csrf_token %}
-            {{ product_edit_form.as_p }}
-            <br>
-            <button class="btn btn-success btn-lg btn-block bg-gradient-primary mb-4" type="submit">Edit Product</button>
-        </form>
-        <form action="{% url "users:manager_products_delete" product.id %}" method="post" id="createform">
-            {% csrf_token %}
-            <button class="btn btn-success btn-lg btn-block bg-gradient-primary mb-4" type="submit">Delete Product</button>
-        </form>
+<div class="container pt-4">
+    <div class="row justify-content-center">
+        <div class="col-xs-8 col-sm-2"></div>
+        <div class="col-md-8 col-xs-4 col-sm-4">
+            <div class="card edit mt-4">
+                <div class="card-body edit">
+                <form action="{% url 'users:manager_products_edit' product.id %}" method="post" id="editForm">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="custom-input">
+                            <i class="fas fa-box"></i> Name: {{ product_edit_form.name }}
+                        </div>
+                    </div>
+                    <br></br>
+                    <div class="form-group">
+                        <div class="custom-input">
+                            <i class="fas fa-money-bill"></i> Price: {{ product_edit_form.price }}
+                        </div>
+                    </div>
+                    <br></br>
+                    <button class="btn-lg btn-block bg-warning salvar" type="submit">Save Changes</button>
+                </form>
+                <form action="{% url 'users:manager_products_delete' product.id %}" method="post" id="deleteForm">
+                    {% csrf_token %}
+                    <button class="btn btn-danger btn-lg btn-block bg-gradient-danger deletear" type="submit">Delete User</button>
+                </form>
+            </div>
+        </div>
     </div>
+</div>
 {% endblock %}
