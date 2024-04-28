@@ -129,6 +129,7 @@
           <p>Duration: {{ duration }}</p>
           <p>Date: {{ date }}</p>
           <p>Hammocks: <span id="hammocks"></span></p>
+          <p>Price: <span id="totalPrice">0</span> €</p>
         </div>
       </div>
       <button type="submit" class="btn btn-primary">Make reservation</button>
@@ -141,16 +142,20 @@
   <script>
     let products = document.querySelectorAll("input[name=products]")
     let hammocks = document.querySelector("#hammocks")
+    let totalPrice = document.querySelector("#totalPrice")
     const checked_hammocks = []
     products.forEach((product) => { 
         product.addEventListener('click', () => {
           let fill = document.querySelector(`svg[name=${product.id}]`).firstElementChild.style.fill
           if (fill !== "red"){
             document.querySelector(`svg[name=${product.id}]`).firstElementChild.style.fill = fill == "green" ? "grey": "green"
+            const productPrice = parseFloat("{{ form.products.field.queryset.first.price }}")
             if (product.checked){
               checked_hammocks.push(product.value)
+              totalPrice.innerHTML = parseFloat(totalPrice.innerHTML) + productPrice
             } else {
               let indx = checked_hammocks.indexOf(product.value)
+              totalPrice.innerHTML = parseFloat(totalPrice.innerHTML) - productPrice
               checked_hammocks.splice(indx, 1)
             }
             hammocks.innerHTML = checked_hammocks.join(", ")
