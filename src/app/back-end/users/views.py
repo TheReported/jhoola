@@ -8,7 +8,7 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 
-from booking.forms import BookingForm
+from booking.forms import BookingFilterForm, BookingForm
 from booking.models import Booking
 from product.forms import ProductCreationForm, ProductEditForm
 from product.models import Product
@@ -48,7 +48,7 @@ def manager_dashboard(request):
     hotel = Hotel.objects.get(name=selected_hotel)
     clients = hotel.clients.count()
     products = hotel.products.count()
-    bookings = Booking.paid_bookings.filter(user__hotel=hotel)
+    bookings = Booking.objects.filter(user__hotel=hotel, paid=True)
     total_money = 0
     for booking in bookings:
         total_money += booking.price
@@ -256,7 +256,10 @@ def bookings_edit_manager_view(request, booking_id):
     hotel = Hotel.objects.get(name=selected_hotel)
     booking = get_object_or_404(Booking, id=booking_id, user__hotel=hotel, paid=True)
     if request.method == 'POST':
-        booking_edit_form = BookingForm(user=booking.user, instance=booking, data=request.POST)
+        booking_edit_form = BookingForm(user=booking.user, data=request.POST)
+        booking_edit_filter_form = BookingFilterForm(
+            user=booking.user, instance=booking, data=request.POST
+        )
         if booking_edit_form.is_valid():
             booking.save()
             messages.success(request, 'A new booking has been successfully edited.')
@@ -264,11 +267,15 @@ def bookings_edit_manager_view(request, booking_id):
         messages.error(request, "New booking couldn't be edited")
     else:
         booking_edit_form = BookingForm(user=booking.user, instance=booking)
+        booking_edit_filter_form = BookingFilterForm(
+            user=booking.user, data={"date": booking.date, "duration": booking.duration}
+        )
     return render(
         request,
         'managers/pages/bookings_edit.html',
         {
             'booking_edit_form': booking_edit_form,
+            'booking_edit_filter_form': booking_edit_filter_form,
             'booking': booking,
         },
     )
@@ -289,7 +296,7 @@ def bookings_delete_manager_view(request, booking_id):
 def bookings_manager_view(request):
     selected_hotel = request.session.get('hotel_session_name')
     hotel = Hotel.objects.get(name=selected_hotel)
-    bookings = Booking.paid_bookings.filter(user__hotel=hotel, paid=True)
+    bookings = Booking.objects.filter(user__hotel=hotel, paid=True)
     paginator = Paginator(bookings, 4)
     page = request.GET.get('page')
 
