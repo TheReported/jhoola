@@ -147,7 +147,8 @@ def payment_cancel(request, booking_id):
 @login_required
 @client_required
 def delete_booking(request, username, booking_id):
-    booking = get_object_or_404(Booking, id=booking_id, user=request.user)
+    client = get_object_or_404(Client, user=request.user)
+    booking = get_object_or_404(Booking, id=booking_id, user=client)
     booking.delete()
     messages.success(request, f'Booking {booking_id} has been succesfully deleted')
     return redirect('booking:booking_list', username=username)
