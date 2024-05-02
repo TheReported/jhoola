@@ -1,3 +1,6 @@
+/* Azul logo: #37ABC8 */
+/* Naranja logo: #FE9854 */
+
 
 .site-map {
   max-height: 600px;
@@ -7,8 +10,9 @@
   width: fit-content; 
 }
 
-.reservation-form {
+.reservation-form-filter {
   max-height: fit-content;
+  width: 300px;
 }
 /*****MESSAGES.HTML*****/
 
@@ -41,7 +45,6 @@
 
 .navbar {
   box-shadow: 0 4px 6px 0 lightgray, 0 6px 20px 0 lightgray;
-
 }
 
 .nav-link {

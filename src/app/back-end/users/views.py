@@ -85,9 +85,9 @@ def users_add_manager_view(request):
 We are delighted to have you with us, {new_user.get_full_name()}! We hope your stay at our hotel will
 be absolutely exceptional.
 
-Username: {new_user.username}.
-Hotel name: {hotel}.
-Password : {cd['password']}.
+Username: {new_user.username}
+Hotel name: {hotel}
+Password : {cd['password']}
 
 We hope you enjoy all the amenities and services we offer during your visit!
 Please remember to keep your password secure at all times to ensure the safety of your account and personal information.
