@@ -22,10 +22,14 @@
         </div>
         <div class="card-body">
           <div class="booking-info d-flex flex-row justify-content-between">
-            <h5 class="card-title">{{ booking.products.first }} x {{ booking.products.count }}</h5>
-            <p class="card-text">Reserved time: {{ booking.get_duration_display }}</p>
-            <p class="card-text">Date: {{ booking.date|date:"l, d/m/Y" }}</p>
-            <h5 class="card-title">{{ booking.price }}€</h5>
+            <h5 class="card-title col-md-3 col-6 order-0 mb-3">{{ booking.products.first }} x {{ booking.products.count }}</h5>
+            <p class="card-text col-md-3 col-6 order-lg-2 order-3 d-md-block d-none">Date: {{ booking.date|date:"l, d/m/Y" }}</p>
+            <p class="card-text col-md-3 col-6 order-lg-1 order-2 d-md-block d-none">Reserved time: {{ booking.get_duration_display }}</p>
+            <h5 class="card-title col-md-1 col-6 order-md-3 order-1 text-end">{{ booking.price }}€</h5>
+          </div>
+          <div class="card-sm-body d-md-none d-block mb-3">
+            <p class="card-text ">Date: {{ booking.date|date:"l, d/m/Y" }}</p>
+            <p class="card-text ">Reserved time: {{ booking.get_duration_display }}</p>            
           </div>
           <div>
             <p> Your hammocks:
