@@ -11,12 +11,12 @@
 {% endblock messages %}
 
   <div class="row mt-4">
-    <h2>Select your hammoks:</h2>
+    <h2>Select your hammocks:</h2>
   </div>
   <form method="post">
     {% csrf_token %}
     <div class="row mt-4 p-2">
-      <div class="site-map col-12 border border-1 rounded d-flex flex-row">
+      <div class="site-map col-10 border border-1 rounded d-flex flex-row">
         <div class="col-2 products d-flex flex-wrap justify-content-center">
           {% for product in form.products|slice:"::2" %}
             {% with product_id=product.data.value.value %}
@@ -125,14 +125,14 @@
             {% endwith %}
           {% endfor %}
         </div>
-        <div class="col-2">
-          <p>Duration: {{ duration }}</p>
-          <p>Date: {{ date }}</p>
-          <p>Hammocks: <span id="hammocks"></span></p>
-          <p>Price: <span id="totalPrice">0</span> €</p>
-        </div>
       </div>
-      <button type="submit" class="btn btn-primary">Make reservation</button>
+      <div class="col-2">
+        <p>Duration: {{ duration }}</p>
+        <p>Date: {{ date }}</p>
+        <p>Hammocks: <span id="hammocks"></span></p>
+        <p>Price: <span id="totalPrice">0</span> €</p>
+        <button type="submit" class="btn btn-primary">Make reservation</button>
+      </div>
     </div>
   </form>
 

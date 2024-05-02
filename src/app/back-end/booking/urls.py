@@ -4,8 +4,8 @@ from . import views
 
 app_name = 'booking'
 urlpatterns = [
-    path('<str:username>/book/', views.booking_view, name='client_book'),
-    path('<str:username>/filter/', views.filter_view, name='client_book_filter'),
+    path('<str:username>/new-booking/poolmap/', views.booking_view, name='client_book'),
+    path('<str:username>/new-booking/', views.filter_view, name='client_book_filter'),
     path('<str:username>/bookings/', views.booking_list, name='booking_list'),
     path('<str:username>/bookings/<booking_id>/pdf/', views.booking_pdf, name='booking_pdf'),
     path(

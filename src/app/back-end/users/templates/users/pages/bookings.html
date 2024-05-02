@@ -1,6 +1,6 @@
 {% extends "users/dashboard.html" %}
 
-{% block title %}My bookings{% endblock %}
+{% block title %}My reservations{% endblock %}
 {% block content %}
 
 <div class="container">
@@ -18,7 +18,7 @@
     <div class="col-12 mt-4">
       <div class="card">
         <div class="card-header">
-          Booking ID: {{ booking.id }}
+          Reservation ID: {{ booking.id }}
         </div>
         <div class="card-body">
           <div class="booking-info d-flex flex-row justify-content-between">
@@ -43,7 +43,7 @@
               <a href="{% url "booking:booking_pdf" user.username booking.id %}" class="btn btn-primary">Download PDF</a>
             </div>
             <div class="col-6 d-flex justify-content-end">
-              <a href="{% url "booking:delete_booking" user.username booking.id %}" class="delete-btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete booking</a>
+              <a href="{% url "booking:delete_booking" user.username booking.id %}" class="delete-btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete reservation</a>
             </div>
           </div>
         </div>
@@ -55,11 +55,11 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Delete booking ID: {{booking.id}}</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Delete reservation ID: {{booking.id}}</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            Are you sure you want to delete this booking?
+            Are you sure you want to delete this reservation?
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

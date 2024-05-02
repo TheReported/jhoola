@@ -1,5 +1,6 @@
 import stripe
 import weasyprint
+from datetime import datetime
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -49,8 +50,10 @@ def booking_pdf(request, username, booking_id):
 @login_required
 @client_required
 def booking_view(request, username):
-    date = request.session.get("date")
-    duration = request.session.get("duration")
+    date = request.session.get('date')
+    duration = request.session.get('duration')
+    formatted_date = datetime.strptime(date, '%Y-%m-%d').strftime('%d/%m/%Y')
+    formatted_duration = dict(Booking.TimeSlots.choices)[duration]
     client = get_object_or_404(Client, user=request.user)
     bookings = Booking.objects.filter(date=date, paid=True, duration=duration)
     occupied_products = [product.id for booking in bookings for product in booking.products.all()]
@@ -119,8 +122,8 @@ def booking_view(request, username):
             'form': form,
             'section': 'Book',
             'occupied_products': occupied_products,
-            'duration': duration,
-            'date': date,
+            'duration': formatted_duration,
+            'date': formatted_date,
         },
     )
 
@@ -161,13 +164,13 @@ def filter_view(request, username):
     if request.method == 'POST':
         form = BookingFilterForm(user=client, data=request.POST)
         if form.is_valid():
-            request.session["date"] = form.cleaned_data["date"].strftime("%Y-%m-%d")
-            request.session["duration"] = form.cleaned_data["duration"]
-            return redirect("booking:client_book", username=username)
+            request.session['date'] = form.cleaned_data['date'].strftime('%Y-%m-%d')
+            request.session['duration'] = form.cleaned_data['duration']
+            return redirect('booking:client_book', username=username)
         else:
             for errors in form.errors.values():
                 for error in errors:
                     messages.error(request, error)
     else:
         form = BookingFilterForm(user=client)
-    return render(request, "users/pages/filter.html", {"section": "Book", "form": form})
+    return render(request, 'users/pages/filter.html', {'section': 'Book', 'form': form})
