@@ -93,12 +93,12 @@ select {
     border-radius: 5px; 
     border: 1px solid #ccc; 
 }
-/*****Footer*****/
 
-/* footer {
-  background-color: #37ABC8;
-} */
-
+.vertical-line {
+  border-left: 1px solid #ccc;
+  height: 90%;
+  margin: 0 20px; 
+}
 /*****Paginator*****/
 a.page-link {
   color: black;
