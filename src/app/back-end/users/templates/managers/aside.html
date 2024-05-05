@@ -1,9 +1,58 @@
-{% load static %}
+
 {% block aside %}
-    <nav class="navbar-vertical navbar-expand-xs navbar-light bg-gradient-dark" >
-        <div class="navbar-brand d-flex justify-content-center align-items-center mt-4 ">
-            <img src="{% static 'imgs/logo.svg' %}" class="logo">
+<nav class="navbar-vertical navbar-expand-xs navbar-light bg-gradient-dark">
+    <div class="separator d-lg-flex d-none justify-content-center">
+        <hr class="m-0">
+    </div>
+    <div class="navbar d-flex justify-content-center">
+        <ul class="navbar-nav flex-column mt-4">
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white d-flex flex-row" href="{% url "users:manager_dashboard" %}">
+                    <i class="material-icons opacity-10 me-lg-2">dashboard</i>
+                    <div class="text d-lg-flex d-none">
+                        Dashboard
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white d-flex flex-row" href="{% url "users:manager_bookings" %}">
+                    <i class="material-icons opacity-10 me-lg-2">beach_access</i>
+                    <div class="text d-lg-flex d-none">
+                        Bookings
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white d-flex flex-row" href="{% url "users:manager_products" %}">
+                    <i class="material-icons opacity-10 me-lg-2">inventory_2</i>
+                    <div class="text d-lg-flex d-none">
+                        Products
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item d-flex mb-2">
+                <a class="nav-link text-white d-flex flex-row" href="{% url "users:manager_users" %}">
+                    <i class="material-icons opacity-10 me-lg-2">person_add</i>
+                    <div class="text d-lg-flex d-none">
+                        Users
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <br>
+    <div class="navbar-footer d-flex justify-content-center align-items-center">
+        <div class="support d-flex justify-content-center align-items-center">
+            <a class="btn bg-warning d-flex flex-row justify-content-center" href="#" type="button">
+                <i class="material-icons opacity-10 d-lg-none d-flex">phone</i>
+                <div class="text d-lg-flex d-none">
+                    Support
+                </div>
+            </a>
         </div>
+    </div>
+</nav>
+{% comment %} <nav class="navbar-vertical navbar-expand-xs navbar-light bg-gradient-dark" >
         <div class="navbar-nav-scroll">
             <ul class="navbar-nav flex-column">
                 <li class="nav-item">
@@ -36,5 +85,5 @@
         <div class="navbar-footer">
             <a class="btn bg-warning w-100" href="#" type="button">Support</a>
         </div>
-</nav>
+</nav> {% endcomment %}
 {% endblock aside %}
