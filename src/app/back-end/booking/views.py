@@ -94,15 +94,13 @@ def booking_view(request, username):
             if any(
                 [
                     product.status
-                    for product in booking.products.all()
+                    for product in products
                     if product.status == Product.Status.OCCUPIED
                 ]
             ):
                 messages.error(request, 'The selected hammocks is not available.')
                 return redirect('booking:client_book', client)
-            for product in booking.products.all():
-                product.status = Product.Status.OCCUPIED
-                product.save()
+
             total_price = sum(product.price for product in products)
             booking.user = client
             booking.price = total_price
@@ -110,6 +108,9 @@ def booking_view(request, username):
             booking.duration = duration
             booking.save()
             form.save_m2m()
+            for product in booking.products.all():
+                product.status = Product.Status.OCCUPIED
+                product.save()
             line_items = [
                 {
                     'price_data': {
@@ -124,9 +125,11 @@ def booking_view(request, username):
             ]
             metadata = {'booking_id': booking.id}
             success_url = request.build_absolute_uri(
-                reverse('booking:payment_completed', kwargs=metadata)
+                reverse('booking:payment_completed', kwargs={'booking_id': booking.id})
             )
-            cancel_url = request.build_absolute_uri(reverse('booking:payment_cancelled', metadata))
+            cancel_url = request.build_absolute_uri(
+                reverse('booking:payment_cancelled', kwargs={'booking_id': booking.id})
+            )
 
             task = booking_created.delay(
                 success_url,
