@@ -2,6 +2,7 @@ import weasyprint
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.db.models import Count
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
@@ -49,6 +50,11 @@ def booking_view(request, username):
     duration = request.session.get("duration")
     client = get_object_or_404(Client, user=request.user)
     bookings = Booking.objects.filter(date=date, paid=True, duration=duration)
+    user_bookings = Booking.objects.filter(date=date, paid=True, user=client)
+    total_products = (
+        user_bookings.aggregate(total_products=Count('products'))['total_products'] or 0
+    )
+    max_products = client.num_guest - total_products
     occupied_products = [product.id for booking in bookings for product in booking.products.all()]
     # Obtener los productos reservados para todo el día
     if duration != Booking.TimeSlots.ALL_DAY:
@@ -66,11 +72,15 @@ def booking_view(request, username):
 
     if request.method == 'POST':
         form = BookingForm(user=client, data=request.POST)
+
         if form.is_valid():
             booking = form.save(commit=False)
             products = form.cleaned_data['products']
-            total_price = sum(product.price for product in products)
+            if len(products) > max_products:
+                messages.error(request, "You have already reserved all possible hammocks.")
+                return redirect('booking:client_book', client)
 
+            total_price = sum(product.price for product in products)
             booking.user = client
             booking.price = total_price
             booking.date = date
