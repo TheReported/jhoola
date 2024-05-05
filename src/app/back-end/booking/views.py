@@ -55,7 +55,7 @@ def booking_view(request, username):
     formatted_date = datetime.strptime(date, '%Y-%m-%d').strftime('%d/%m/%Y')
     formatted_duration = dict(Booking.TimeSlots.choices)[duration]
     client = get_object_or_404(Client, user=request.user)
-    user_bookings = Booking.objects.filter(date=date, user=client)
+    user_bookings = Booking.objects.filter(date=date, paid=True, user=client)
     total_products = (
         user_bookings.aggregate(total_products=Count('products'))['total_products'] or 0
     )
