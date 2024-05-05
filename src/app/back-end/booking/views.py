@@ -122,7 +122,7 @@ def booking_view(request, username):
                     'quantity': 1,
                 }
             ]
-            metadata = {'booking_id': booking.id, 'products': products}
+            metadata = {'booking_id': booking.id}
             success_url = request.build_absolute_uri(
                 reverse('booking:payment_completed', kwargs=metadata)
             )
