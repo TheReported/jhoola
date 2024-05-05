@@ -1,0 +1,43 @@
+html, hr {
+  background-color: #ffffff;
+}
+
+body { 
+  padding:0;
+  margin:0;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  color: #4c4c4c;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../imgs/beach.webp);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh; 
+}
+
+#logo {
+  width: 100px;
+}
+
+h1 {
+  font-size: 30px;
+  font-weight: 300;
+  color: #ffffff;
+}
+
+.login {
+  height: 60vh;
+}
+
+.loginbox {
+  max-width: 400px;
+}
+
+#icon {
+  color: white;
+  width: 20px;
+}
+
+input[type=text],input[type=password] {
+  width: 375px;
+}
