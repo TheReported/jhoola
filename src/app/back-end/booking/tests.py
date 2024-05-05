@@ -36,9 +36,7 @@ class BookingTestCase(TestCase):
     def test_booking_duration(self):
         hotel = Hotel.objects.create(name='Test Hotel', city='Test Location')
 
-        user = User.objects.create(
-            username="ejemplo_usuario", first_name="Ejemplo", last_name="Usuario"
-        )
+        user = User.objects.create(username="user", first_name="user1", last_name="user2")
         client = Client.objects.create(user=user, num_guest=2, hotel=hotel)
 
         morning_booking = Booking.objects.create(

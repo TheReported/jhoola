@@ -1,5 +1,3 @@
-from typing import Any
-from django.db.models import Count
 from django import forms
 from django.utils import timezone
 
@@ -36,7 +34,6 @@ class BookingFilterForm(forms.Form):
     #         raise forms.ValidationError('You can only book one time for duration')
     #     return duration
 
-
     # IDEA A DESARROLLAR: Controlar en la vista la actualización de los productos máximos tal que así
     # def clean(self):
     #     date = request.session.get("date")
@@ -44,8 +41,6 @@ class BookingFilterForm(forms.Form):
     #     bookings = Booking.objects.filter(user=self.user, date=date, duration=duration)
     #     total_products = bookings.aggregate(total_products=Count('products'))['total_products'] or 0
     #     max_products = self.user.num_guest - total_products
-
-
 
 
 class BookingForm(forms.ModelForm):
