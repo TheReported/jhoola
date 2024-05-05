@@ -6,7 +6,6 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 
-from booking.forms import BookingFilterForm, BookingForm
 from booking.models import Booking
 from product.forms import ProductCreationForm, ProductEditForm
 from product.models import Product
@@ -232,38 +231,6 @@ def products_manager_view(request):
         products = paginator.page(paginator.num_pages)
 
     return render(request, 'managers/pages/products.html', {'products': products})
-
-
-@login_required
-@manager_required
-def bookings_edit_manager_view(request, booking_id):
-    selected_hotel = request.session.get('hotel_session_name')
-    hotel = Hotel.objects.get(name=selected_hotel)
-    booking = get_object_or_404(Booking, id=booking_id, user__hotel=hotel, paid=True)
-    if request.method == 'POST':
-        booking_edit_form = BookingForm(user=booking.user, data=request.POST)
-        booking_edit_filter_form = BookingFilterForm(
-            user=booking.user, instance=booking, data=request.POST
-        )
-        if booking_edit_form.is_valid():
-            booking.save()
-            messages.success(request, 'A new booking has been successfully edited.')
-            return redirect('users:manager_bookings')
-        messages.error(request, "New booking couldn't be edited")
-    else:
-        booking_edit_form = BookingForm(user=booking.user, instance=booking)
-        booking_edit_filter_form = BookingFilterForm(
-            user=booking.user, data={'date': booking.date, 'duration': booking.duration}
-        )
-    return render(
-        request,
-        'managers/pages/bookings_edit.html',
-        {
-            'booking_edit_form': booking_edit_form,
-            'booking_edit_filter_form': booking_edit_filter_form,
-            'booking': booking,
-        },
-    )
 
 
 @login_required

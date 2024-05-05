@@ -19,11 +19,6 @@ urlpatterns = [
         name='manager_products_edit',
     ),
     path(
-        'manager/bookings/<booking_id>/edit/',
-        views.bookings_edit_manager_view,
-        name='manager_bookings_edit',
-    ),
-    path(
         'manager/users/<username>/delete/',
         views.users_delete_manager_view,
         name='manager_users_delete',

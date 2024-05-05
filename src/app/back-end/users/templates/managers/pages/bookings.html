@@ -17,7 +17,7 @@
           <p class="card-text"><b>Price:</b> {{ booking.price }}</p>
           <p class="card-text"><b>Duration:</b> {{ booking.duration }}</p>
           <p class="card-text"><b>Date:</b> {{ booking.date }}</p>
-          <a href="{% url 'users:manager_bookings_edit' booking.id %}" class="btn btn-warning ml-auto">Edit</a>
+          <a href="{% url 'users:manager_bookings_delete' booking.id %}" class="btn btn-danger btn-lg btn-block bg-gradient-danger ml-auto">Delete</a>
 
         </div>
       </div>

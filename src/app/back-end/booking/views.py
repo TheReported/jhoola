@@ -13,6 +13,7 @@ from django.urls import reverse
 from django.utils import timezone
 
 from booking.forms import BookingFilterForm, BookingForm
+from product.models import Product
 from users.decorators import client_required
 from users.models import Client
 
@@ -48,7 +49,6 @@ def booking_pdf(request, username, booking_id):
 
 @login_required
 @client_required
-@shared_task
 def booking_view(request, username):
     date = request.session.get('date')
     duration = request.session.get('duration')
@@ -60,7 +60,7 @@ def booking_view(request, username):
         user_bookings.aggregate(total_products=Count('products'))['total_products'] or 0
     )
     max_products = client.num_guest - total_products
-    all_date_bookings = Booking.objects.filter(date=date)
+    all_date_bookings = Booking.objects.filter(paid=True, date=date)
 
     # Inicializar la lista de productos ocupados
     occupied_products = []
@@ -91,6 +91,18 @@ def booking_view(request, username):
                 messages.error(request, 'You have already reserved all possible hammocks.')
                 return redirect('booking:client_book', client)
 
+            if any(
+                [
+                    product.status
+                    for product in products
+                    if product.status == Product.Status.OCCUPIED
+                ]
+            ):
+                messages.error(request, 'The selected hammocks is not available.')
+                return redirect('booking:client_book', client)
+            for product in products:
+                product.status = Product.Status.OCCUPIED
+                product.save()
             total_price = sum(product.price for product in products)
             booking.user = client
             booking.price = total_price
