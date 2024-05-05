@@ -165,3 +165,5 @@ STRIPE_API_VERSION = '2024-04-10'
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'

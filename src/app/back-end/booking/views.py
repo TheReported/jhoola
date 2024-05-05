@@ -1,6 +1,4 @@
-import stripe
 import weasyprint
-from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
@@ -15,9 +13,7 @@ from users.decorators import client_required
 from users.models import Client
 
 from .models import Booking
-
-stripe.api_key = settings.STRIPE_SECRET_KEY
-stripe.api_version = settings.STRIPE_API_VERSION
+from .tasks import booking_created
 
 
 @login_required
@@ -81,30 +77,34 @@ def booking_view(request, username):
             booking.duration = duration
             booking.save()
             form.save_m2m()
-            session = stripe.checkout.Session.create(
-                payment_method_types=['card'],
-                line_items=[
-                    {
-                        'price_data': {
-                            'currency': 'eur',
-                            'product_data': {
-                                'name': 'Booking',
-                            },
-                            'unit_amount': int(total_price * 100),
+            line_items = [
+                {
+                    'price_data': {
+                        'currency': 'eur',
+                        'product_data': {
+                            'name': 'Booking',
                         },
-                        'quantity': 1,
-                    }
-                ],
-                mode='payment',
-                metadata={'booking_id': booking.id},
-                success_url=request.build_absolute_uri(
-                    reverse('booking:payment_completed', kwargs={'booking_id': booking.id})
-                ),
-                cancel_url=request.build_absolute_uri(
-                    reverse('booking:payment_cancelled', kwargs={'booking_id': booking.id})
-                ),
+                        'unit_amount': int(total_price * 100),
+                    },
+                    'quantity': 1,
+                }
+            ]
+            metadata = {'booking_id': booking.id}
+            success_url = request.build_absolute_uri(
+                reverse('booking:payment_completed', kwargs={'booking_id': booking.id})
             )
-            return redirect(session.url)
+            cancel_url = request.build_absolute_uri(
+                reverse('booking:payment_cancelled', kwargs={'booking_id': booking.id})
+            )
+
+            task = booking_created.delay(
+                success_url,
+                cancel_url,
+                metadata,
+                line_items,
+            )
+            session = task.get()
+            return redirect(session['url'])
         else:
             for errors in form.errors.values():
                 for error in errors:

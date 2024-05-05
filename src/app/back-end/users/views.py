@@ -16,6 +16,7 @@ from product.models import Product
 from .decorators import manager_required
 from .forms import ClientEditForm, ClientRegistrationForm, LoginForm, SearchForm
 from .models import Client, Hotel
+from .tasks import user_created
 
 
 def user_login(request):
@@ -80,22 +81,7 @@ def users_add_manager_view(request):
             new_user.set_password(cd['password'])
             new_user.save()
             Client.objects.create(user=new_user, hotel=hotel, num_guest=cd['num_guest'])
-            subject = 'Welcome to Jhoola!'
-            message = f"""
-We are delighted to have you with us, {new_user.get_full_name()}! We hope your stay at our hotel will
-be absolutely exceptional.
-
-Username: {new_user.username}.
-Hotel name: {hotel}.
-Password : {cd['password']}.
-
-We hope you enjoy all the amenities and services we offer during your visit!
-Please remember to keep your password secure at all times to ensure the safety of your account and personal information.
-"""
-            from_email = settings.EMAIL_HOST_USER
-            to_email = [cd['email']]
-            send_mail(subject, message, from_email, to_email, fail_silently=False)
-
+            user_created.delay(cd, hotel.name)
             messages.success(request, 'A new client has been successfully created.')
             return redirect('users:manager_users')
         messages.error(request, "New client couldn't be created")
