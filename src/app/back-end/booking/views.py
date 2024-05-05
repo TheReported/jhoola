@@ -122,13 +122,11 @@ def booking_view(request, username):
                     'quantity': 1,
                 }
             ]
-            metadata = {'booking_id': booking.id}
+            metadata = {'booking_id': booking.id, 'products': products}
             success_url = request.build_absolute_uri(
-                reverse('booking:payment_completed', kwargs={'booking_id': booking.id})
+                reverse('booking:payment_completed', kwargs=metadata)
             )
-            cancel_url = request.build_absolute_uri(
-                reverse('booking:payment_cancelled', kwargs={'booking_id': booking.id})
-            )
+            cancel_url = request.build_absolute_uri(reverse('booking:payment_cancelled', metadata))
 
             task = booking_created.delay(
                 success_url,
@@ -160,19 +158,25 @@ def booking_view(request, username):
 
 @client_required
 @login_required
-def payment_success(request, booking_id):
+def payment_success(request, booking_id, products):
     booking = get_object_or_404(Booking, id=booking_id)
     booking.paid = True
     booking.save()
+    for product in products:
+        product.status = Product.Status.FREE
+        product.save()
     messages.success(request, 'Your hammocks have been properly booked')
     return redirect('booking:booking_list', booking.user)
 
 
 @client_required
 @login_required
-def payment_cancel(request, booking_id):
+def payment_cancel(request, booking_id, products):
     booking = get_object_or_404(Booking, id=booking_id)
     booking.delete()
+    for product in products:
+        product.status = Product.Status.FREE
+        product.save()
     messages.error(request, 'There has been an error with your booking')
     return redirect('booking:booking_list', booking.user)
 
