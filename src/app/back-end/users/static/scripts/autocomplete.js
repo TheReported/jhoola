@@ -1,7 +1,7 @@
 let hotels = [];
 
 function fetchHotels() {
-    fetch(`${window.location.href}/api/hotels/`)
+    fetch(`${window.location.href}api/hotels/`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
