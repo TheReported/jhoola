@@ -1,230 +1,43 @@
-body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, 
+html, hr {
+  background-color: #ffffff;
+}
 
-pre, form, fieldset, input, textarea, p, blockquote, th, td { 
-
+body { 
   padding:0;
-
-  margin:0;}
-
-
-
-
-
-  html {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(https://mediaim.expedia.com/destination/1/d420416b9bc1bbba8e116331a1340536.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: 100vh; 
-  }
-
-fieldset, img {border:0}
-
-
-
-.navbar-brand img{
-  width: 200px;
-  margin-left: 20px;
-  margin-top: 20px;
-}
-
-
-
-body,
-
-input,
-
-textarea,
-
-select {
-
+  margin:0;
   font-family: 'Open Sans', sans-serif;
-
   font-size: 16px;
-
   color: #4c4c4c;
-
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../imgs/beach.webp);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh; 
 }
 
+#logo {
+  width: 100px;
+}
 
 h1 {
-
   font-size: 30px;
-
   font-weight: 300;
-
-  color: #4c4c4c;
-
-  padding-top: 10px;
-
-  margin-bottom: 10px;
-
-  margin-left: 170px;
-
+  color: #ffffff;
 }
 
-
-
-html{
-
-  background-color: #ffffff;
-
+.login {
+  height: 60vh;
 }
 
-
-
-#close{
-
-  margin-left: 165px;
-
-  text-decoration: none;
-
-  color:#02E0C6;
-
+.loginbox {
+  max-width: 400px;
 }
-
-
-
-.testbox {
-
-  margin-top: 10%;
-
-  margin-left: 40%;
-
-  width: 443px; 
-
-  height: 300px; 
-
-  -webkit-border-radius: 8px/7px; 
-
-  -moz-border-radius: 8px/7px; 
-
-  border-radius: 8px/7px; 
-
-  background-color: #ebebeb; 
-
-  -webkit-box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
-
-  -moz-box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
-
-  box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
-
-  border: solid 1px #cbc9c9;
-
-}
-
-
-
-input[type=radio] {
-
-  visibility: hidden;
-
-}
-
-
-
-form{
-
-  margin: 0 30px;
-
-}
-
-
-
-hr{
-
-  color: #a9a9a9;
-
-  opacity: 0.3;
-
-}
-
-
-
-input[type=text],input[type=password]{
-
-  width: 300px; 
-
-  height: 39px; 
-
-  -webkit-border-radius: 0px 4px 4px 0px/5px 5px 4px 4px; 
-
-  -moz-border-radius: 0px 4px 4px 0px/0px 0px 4px 4px; 
-
-  border-radius: 0px 4px 4px 0px/5px 5px 4px 4px; 
-
-  background-color: #fff; 
-
-  -webkit-box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
-
-  -moz-box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
-
-  box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
-
-  border: solid 1px #cbc9c9;
-
-  margin-left: -5px;
-
-  margin-top: 13px; 
-
-  padding-left: 10px;
-
-}
-
-
-
-input[type=password]{
-
-  margin-bottom: 25px;
-
-}
-
-
 
 #icon {
-
-  display: inline-block;
-
-  width: 30px;
-
-  background-color: #02E0C6;
-
-  padding: 8px 0px 8px 15px;
-
-  margin-left: 15px;
-
-  -webkit-border-radius: 4px 0px 0px 4px; 
-
-  -moz-border-radius: 4px 0px 0px 4px; 
-
-  border-radius: 4px 0px 0px 4px;
-
   color: white;
-
-  -webkit-box-shadow: 1px 2px 5px rgba(0,0,0,.09);
-
-  -moz-box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
-
-  box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
-
-  border: solid 0px #cbc9c9;
-
+  width: 20px;
 }
 
-
-.logbutton {
-    font-size: 15px;
-    font-weight: bold;
-    margin-left: 115px;
-    color: white;
-    width: 150px; /* ajusta el ancho según sea necesario */
-    height: 27px;
-    border-radius: 5px;
-    background-color: #02E0C6;
-  }
-  
-  .logbutton:hover {
-    top: 3px;
-    background-color: #2e458b;
-    box-shadow: none;
-  }
+input[type=text],input[type=password] {
+  width: 375px;
+}

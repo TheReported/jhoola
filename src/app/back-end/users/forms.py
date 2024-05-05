@@ -28,8 +28,8 @@ class CleanUserData:
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(label='username')
-    password = forms.CharField(label='password', widget=forms.PasswordInput)
+    username = forms.CharField(label='username',widget=forms.TextInput(attrs={'placeholder': 'Username'}))
+    password = forms.CharField(label='password', widget=forms.PasswordInput(attrs={'placeholder':'Password'}))
 
 
 class ClientRegistrationForm(forms.ModelForm, CleanUserData):
