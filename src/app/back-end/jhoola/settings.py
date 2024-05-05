@@ -44,10 +44,11 @@ INSTALLED_APPS = [
     'product.apps.ProductConfig',
     'booking.apps.BookingConfig',
     'corsheaders',
-    'django.contrib.postgres',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -84,11 +85,8 @@ WSGI_APPLICATION = 'jhoola.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DATABASE_NAME', default='jhoola'),
-        'USER': config('DATABASE_USER', default='jhoola'),
-        'PASSWORD': config('DATABASE_PASSWORD', default='jhoola'),
-        'HOST': config('DATABASE_HOST', default='localhost'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -163,3 +161,9 @@ CORS_ALLOW_ALL_ORIGINS = True
 STRIPE_PUBLISHABLE_KEY = config('STRIPE_PUBLISHABLE_KEY')
 STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
 STRIPE_API_VERSION = '2024-04-10'
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
+
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'

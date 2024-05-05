@@ -1,6 +1,5 @@
 {% extends "users/dashboard.html" %}
 {% load static %}
-
 {% block title %}Book your hammocks{% endblock title %}
 
 {% block content %}
@@ -17,15 +16,56 @@
   <form method="post">
     {% csrf_token %}
     <div class="row mt-4 p-2">
-      <div class="site-map col-9 border border-1 rounded d-flex flex-row">
-        <div class="col-4 products d-flex flex-wrap justify-content-center">
+      <div class="site-map col-12 border border-1 rounded d-flex flex-row">
+        <div class="col-2 products d-flex flex-wrap justify-content-center">
           {% for product in form.products|slice:"::2" %}
-          <div class="product p-1 m-2 d-flex justify-content-center align-items-center">
-            {{ product }}
-          </div>
+            {% with product_id=product.data.value.value %}
+              <div class="product p-1 m-2 d-flex justify-content-center align-items-center"> 
+                <label for="{{product.id_for_label }}">
+                  <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+                  width="20.000000pt" height="20.000000pt" viewBox="0 0 512.000000 512.000000"
+                  preserveAspectRatio="xMidYMid meet" name="{{ product.id_for_label }}">
+
+                  <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+                  style="fill:{% if product_id in occupied_products %}red{% else %}grey{% endif %}" stroke="none">
+                  <path d="M1150 5015 c-60 -19 -109 -62 -145 -126 l-30 -54 -3 -2255 c-2 -2500
+                  -7 -2315 65 -2399 20 -24 59 -54 87 -67 l51 -24 1385 0 1385 0 51 24 c28 13
+                  67 43 87 67 72 84 67 -101 65 2399 l-3 2255 -30 54 c-36 66 -85 107 -149 126
+                  -72 22 -2747 21 -2816 0z m2671 -188 c47 -23 103 -79 126 -126 16 -33 18 -74
+                  21 -451 2 -369 1 -420 -14 -459 -23 -60 -79 -119 -139 -147 l-50 -24 -1205 0
+                  -1205 0 -50 24 c-60 29 -107 76 -134 136 -20 43 -21 64 -21 451 0 281 4 416
+                  12 440 24 73 88 138 162 166 23 9 333 11 1246 10 1152 -2 1217 -3 1251 -20z
+                  m-85 -1679 c94 -50 143 -131 144 -239 0 -111 -66 -209 -168 -245 -54 -19
+                  -2250 -19 -2304 0 -165 59 -222 269 -112 413 29 39 103 84 153 94 20 4 531 6
+                  1136 5 l1100 -1 51 -27z m0 -705 c54 -29 117 -101 132 -151 39 -128 -16 -262
+                  -133 -325 l-40 -22 -1135 0 -1135 0 -41 22 c-54 29 -117 101 -132 151 -15 50
+                  -15 124 0 174 21 70 100 145 178 169 14 4 529 7 1145 6 l1120 -2 41 -22z m2
+                  -709 c98 -49 146 -134 140 -249 -3 -59 -9 -81 -33 -121 -37 -59 -107 -108
+                  -175 -123 -71 -15 -2149 -15 -2220 0 -68 15 -138 64 -175 123 -24 40 -30 62
+                  -33 121 -6 115 42 200 140 249 l52 26 1126 0 1126 0 52 -26z m-17 -696 c57
+                  -25 115 -83 139 -140 18 -43 22 -65 18 -123 -3 -38 -12 -85 -22 -102 -23 -45
+                  -75 -95 -122 -119 -38 -18 -74 -19 -1163 -22 l-1124 -2 -51 23 c-103 47 -155
+                  127 -156 237 0 97 35 163 123 230 51 38 75 39 1217 37 1004 -2 1108 -4 1141
+                  -19z"/>
+                  <path d="M1373 4665 c-52 -22 -55 -47 -51 -452 l3 -363 28 -27 27 -28 1180 0
+                  1180 0 27 28 28 27 3 370 c3 413 1 428 -60 449 -21 8 -390 11 -1182 11 -959
+                  -1 -1156 -3 -1183 -15z"/>
+                  <path d="M29 3941 l-29 -29 0 -1001 0 -1000 24 -28 c24 -27 27 -28 143 -31
+                  117 -4 120 -3 151 23 l32 27 0 1009 0 1010 -26 24 c-25 24 -33 25 -146 25
+                  -119 0 -120 0 -149 -29z"/>
+                  <path d="M4796 3945 l-26 -24 0 -1010 0 -1009 32 -27 c31 -26 34 -27 151 -23
+                  116 3 119 4 143 31 l24 28 0 1000 0 1001 -29 29 c-29 29 -30 29 -149 29 -113
+                  0 -121 -1 -146 -25z"/>
+                  <path d="M530 3265 l0 -265 130 0 130 0 0 265 0 265 -130 0 -130 0 0 -265z"/>
+                  <path d="M4330 3265 l0 -265 130 0 130 0 0 265 0 265 -130 0 -130 0 0 -265z"/>
+                  </g>
+                  </svg>
+                </label>
+                <input type="checkbox" name="products" value="{{ product_id }}" id="{{ product.id_for_label }}" style="display: none;">
+              </div>
+            {% endwith %}
           {% endfor %}
         </div>
-
         <div class="col-4 pool">
           <svg width="300" height="600" xmlns="http://www.w3.org/2000/svg">
             <!-- Swimming pool -->
@@ -35,30 +75,93 @@
           </svg> 
         </div>
 
-        <div class="col-4 products d-flex flex-wrap justify-content-center">
+        <div class="col-2 products d-flex flex-wrap justify-content-center">
           {% for product in form.products|slice:"1::2" %}
-          <div class="product p-1 m-2 d-flex justify-content-center align-items-center">
-            {{ product }}
-          </div>
+            {% with product_id=product.data.value.value %}
+              <div class="product p-1 m-2 d-flex justify-content-center align-items-center">
+                
+                <label for="{{product.id_for_label }}">
+                  <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+                  width="20.000000pt" height="20.000000pt" viewBox="0 0 512.000000 512.000000"
+                  preserveAspectRatio="xMidYMid meet" name="{{ product.id_for_label }}">
+
+                  <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+                  style="fill:{% if product_id in occupied_products %}red{% else %}grey{% endif %}" stroke="none">
+                  <path d="M1150 5015 c-60 -19 -109 -62 -145 -126 l-30 -54 -3 -2255 c-2 -2500
+                  -7 -2315 65 -2399 20 -24 59 -54 87 -67 l51 -24 1385 0 1385 0 51 24 c28 13
+                  67 43 87 67 72 84 67 -101 65 2399 l-3 2255 -30 54 c-36 66 -85 107 -149 126
+                  -72 22 -2747 21 -2816 0z m2671 -188 c47 -23 103 -79 126 -126 16 -33 18 -74
+                  21 -451 2 -369 1 -420 -14 -459 -23 -60 -79 -119 -139 -147 l-50 -24 -1205 0
+                  -1205 0 -50 24 c-60 29 -107 76 -134 136 -20 43 -21 64 -21 451 0 281 4 416
+                  12 440 24 73 88 138 162 166 23 9 333 11 1246 10 1152 -2 1217 -3 1251 -20z
+                  m-85 -1679 c94 -50 143 -131 144 -239 0 -111 -66 -209 -168 -245 -54 -19
+                  -2250 -19 -2304 0 -165 59 -222 269 -112 413 29 39 103 84 153 94 20 4 531 6
+                  1136 5 l1100 -1 51 -27z m0 -705 c54 -29 117 -101 132 -151 39 -128 -16 -262
+                  -133 -325 l-40 -22 -1135 0 -1135 0 -41 22 c-54 29 -117 101 -132 151 -15 50
+                  -15 124 0 174 21 70 100 145 178 169 14 4 529 7 1145 6 l1120 -2 41 -22z m2
+                  -709 c98 -49 146 -134 140 -249 -3 -59 -9 -81 -33 -121 -37 -59 -107 -108
+                  -175 -123 -71 -15 -2149 -15 -2220 0 -68 15 -138 64 -175 123 -24 40 -30 62
+                  -33 121 -6 115 42 200 140 249 l52 26 1126 0 1126 0 52 -26z m-17 -696 c57
+                  -25 115 -83 139 -140 18 -43 22 -65 18 -123 -3 -38 -12 -85 -22 -102 -23 -45
+                  -75 -95 -122 -119 -38 -18 -74 -19 -1163 -22 l-1124 -2 -51 23 c-103 47 -155
+                  127 -156 237 0 97 35 163 123 230 51 38 75 39 1217 37 1004 -2 1108 -4 1141
+                  -19z"/>
+                  <path d="M1373 4665 c-52 -22 -55 -47 -51 -452 l3 -363 28 -27 27 -28 1180 0
+                  1180 0 27 28 28 27 3 370 c3 413 1 428 -60 449 -21 8 -390 11 -1182 11 -959
+                  -1 -1156 -3 -1183 -15z"/>
+                  <path d="M29 3941 l-29 -29 0 -1001 0 -1000 24 -28 c24 -27 27 -28 143 -31
+                  117 -4 120 -3 151 23 l32 27 0 1009 0 1010 -26 24 c-25 24 -33 25 -146 25
+                  -119 0 -120 0 -149 -29z"/>
+                  <path d="M4796 3945 l-26 -24 0 -1010 0 -1009 32 -27 c31 -26 34 -27 151 -23
+                  116 3 119 4 143 31 l24 28 0 1000 0 1001 -29 29 c-29 29 -30 29 -149 29 -113
+                  0 -121 -1 -146 -25z"/>
+                  <path d="M530 3265 l0 -265 130 0 130 0 0 265 0 265 -130 0 -130 0 0 -265z"/>
+                  <path d="M4330 3265 l0 -265 130 0 130 0 0 265 0 265 -130 0 -130 0 0 -265z"/>
+                  </g>
+                  </svg>
+                </label>
+                <input type="checkbox" name="products" value="{{ product_id }}" id="{{ product.id_for_label }}" style="display: none;">
+              </div>
+            {% endwith %}
           {% endfor %}
         </div>
-      </div>
-
-      <div class="col-2 p-2 ms-5">
-        <div class="reservation-form">
-          <p class="d-flex flex-column">
-            <label>Time slot:</label>
-              {{form.duration}}
-          <p class="d-flex flex-column">
-            <label>Date:</label>
-            {{ form.date }}
-          </p>
-          <button type="submit" class="btn btn-primary">Make reservation</button>
-          <hr>
+        <div class="col-2">
+          <p>Duration: {{ duration }}</p>
+          <p>Date: {{ date }}</p>
+          <p>Hammocks: <span id="hammocks"></span></p>
+          <p>Price: <span id="totalPrice">0</span> €</p>
         </div>
       </div>
+      <button type="submit" class="btn btn-primary">Make reservation</button>
     </div>
   </form>
 
 {% endblock content %}
 
+{% block domready %}
+  <script>
+    let products = document.querySelectorAll("input[name=products]")
+    let hammocks = document.querySelector("#hammocks")
+    let totalPrice = document.querySelector("#totalPrice")
+    const checked_hammocks = []
+    products.forEach((product) => { 
+        product.addEventListener('click', () => {
+          let fill = document.querySelector(`svg[name=${product.id}]`).firstElementChild.style.fill
+          if (fill !== "red"){
+            document.querySelector(`svg[name=${product.id}]`).firstElementChild.style.fill = fill == "green" ? "grey": "green"
+            const productPrice = parseFloat("{{ form.products.field.queryset.first.price }}")
+            if (product.checked){
+              checked_hammocks.push(product.value)
+              totalPrice.innerHTML = parseFloat(totalPrice.innerHTML) + productPrice
+            } else {
+              let indx = checked_hammocks.indexOf(product.value)
+              totalPrice.innerHTML = parseFloat(totalPrice.innerHTML) - productPrice
+              checked_hammocks.splice(indx, 1)
+            }
+            hammocks.innerHTML = checked_hammocks.join(", ")
+          }
+        })
+      }
+    )
+  </script>
+{% endblock %}
