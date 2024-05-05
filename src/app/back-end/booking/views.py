@@ -1,5 +1,7 @@
-import weasyprint
 from datetime import datetime
+
+import weasyprint
+from celery import shared_task
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
@@ -46,6 +48,7 @@ def booking_pdf(request, username, booking_id):
 
 @login_required
 @client_required
+@shared_task
 def booking_view(request, username):
     date = request.session.get('date')
     duration = request.session.get('duration')
