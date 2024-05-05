@@ -57,6 +57,7 @@ def manager_dashboard(request):
         request,
         'managers/dashboard-manager.html',
         {
+            'hotel': selected_hotel,
             'num_products': products,
             'num_clients': clients,
             'num_bookings': bookings.count(),
@@ -268,7 +269,7 @@ def bookings_edit_manager_view(request, booking_id):
     else:
         booking_edit_form = BookingForm(user=booking.user, instance=booking)
         booking_edit_filter_form = BookingFilterForm(
-            user=booking.user, data={"date": booking.date, "duration": booking.duration}
+            user=booking.user, data={'date': booking.date, 'duration': booking.duration}
         )
     return render(
         request,
