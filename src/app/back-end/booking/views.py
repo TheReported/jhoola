@@ -121,8 +121,8 @@ def booking_view(request, username):
                 metadata,
                 line_items,
             )
-            session = task.get()
-            return redirect(session['url'])
+            url = task.get()
+            return redirect(url)
         else:
             for errors in form.errors.values():
                 for error in errors:
