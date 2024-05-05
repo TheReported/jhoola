@@ -1,0 +1,36 @@
+{% extends "users/dashboard.html" %}
+{% load static %}
+{% block title %}Book your hammocks{% endblock title %}
+{% block content %}
+
+    <div class="container">
+
+        {% block messages %}
+            {% include "users/messages/message.html" %}
+        {% endblock messages %}
+
+        <div class="row mt-4">
+            <h2>Select the date and duration:</h2>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <div class="row mt-4 p-2">
+                <div class="col-8 p-2 ms-5">
+                    <div class="reservation-form filter">
+                    <p class="d-flex flex-column">
+                        <label>Time slot:</label>
+                        {{form.duration}}
+                    <p class="d-flex flex-column">
+                        <label>Date:</label>
+                        {{ form.date }}
+                    </p>
+                    <button type="submit" class="btn btn-primary">Apply filters</button>
+                    <hr>
+                    </div>
+                </div>
+            </div>
+            
+        </form>
+    </div>
+
+{% endblock content %}

@@ -23,9 +23,6 @@ class Booking(models.Model):
     date = models.DateField()
     paid = models.BooleanField(default=False)
 
-    paid_bookings = PaidManager()
-    objects = models.Manager()
-
     class Meta:
         ordering = ['date']
 
