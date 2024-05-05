@@ -94,13 +94,13 @@ def booking_view(request, username):
             if any(
                 [
                     product.status
-                    for product in products
+                    for product in booking.products.all()
                     if product.status == Product.Status.OCCUPIED
                 ]
             ):
                 messages.error(request, 'The selected hammocks is not available.')
                 return redirect('booking:client_book', client)
-            for product in products:
+            for product in booking.products.all():
                 product.status = Product.Status.OCCUPIED
                 product.save()
             total_price = sum(product.price for product in products)
