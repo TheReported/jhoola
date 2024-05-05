@@ -4,31 +4,26 @@
 {% block content%}
 <div class="container-fluid py-4">
   <div class="row">
-
     {% for booking in bookings %}
-    {% if forloop.counter|divisibleby:2 == False %}
-        <div class="col-3"></div>
-    {% endif %}
-    <div class="col-md-3">
-      <div class="card colorful-card mt-2 mb-4" style="background: linear-gradient(to right, rgba(255, 255, 255, 0.1) , rgba(0, 0, 0, 1));;">
-        <div class="card-body">
-          <h5 class="card-title text-center">{{ booking.id }}</h2>
+    <div class="col-xl-3 col-sm-6 col-12">
+        <div class="card-body text-white mb-4">
+          <h5 class="card-title text-center">Reservation {{ booking.id }}</h2>
           <p class="card-text"><b>User:</b> {{ booking.user }}</p>
+          <p class="card-text"><b>Hammocks:</b>
+            {% for product in booking.products.all %}
+              {{ product.id }}{% if not forloop.last %},{% endif %}
+            {% endfor %}</p>
           <p class="card-text"><b>Price:</b> {{ booking.price }}</p>
-          <p class="card-text"><b>Duration:</b> {{ booking.duration }}</p>
-          <p class="card-text"><b>Date:</b> {{ booking.date }}</p>
-          <a href="{% url 'users:manager_bookings_edit' booking.id %}" class="btn btn-warning ml-auto">Edit</a>
-
+          <p class="card-text"><b>Duration:</b> {{ booking.get_duration_display }}</p>
+          <p class="card-text"><b>Date:</b> {{ booking.date|date:"d/m/Y" }}</p>
+          <a href="{% url 'users:manager_bookings_delete' booking.id %}" class="btn btn-danger m-0">Delete</a>
         </div>
-      </div>
     </div>
-    {% if forloop.counter|divisibleby:2%}
-        <div class="col-2"></div>
-    {% endif %}
     {% endfor %}
   </div>
 </div>
   {% include "managers/pagination-bookings.html" with bookings=bookings %}
+  {% block domready %}
   <script>
     document.addEventListener("DOMContentLoaded", (event) => {
       document
@@ -40,7 +35,5 @@
       });
     });
   </script>
+  {% endblock domready %}
 {% endblock %}
-
-
-

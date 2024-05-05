@@ -273,6 +273,7 @@ def bookings_delete_manager_view(request, booking_id):
     hotel = Hotel.objects.get(name=selected_hotel)
     booking = get_object_or_404(Booking, id=booking_id, user__hotel=hotel, paid=True)
     booking.delete()
+    messages.success(request, f'Booking {booking_id} has been succesfully deleted')
     return redirect('users:manager_bookings')
 
 
@@ -282,7 +283,7 @@ def bookings_manager_view(request):
     selected_hotel = request.session.get('hotel_session_name')
     hotel = Hotel.objects.get(name=selected_hotel)
     bookings = Booking.objects.filter(user__hotel=hotel, paid=True)
-    paginator = Paginator(bookings, 4)
+    paginator = Paginator(bookings, 8)
     page = request.GET.get('page')
 
     try:
