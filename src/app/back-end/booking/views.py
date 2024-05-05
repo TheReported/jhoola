@@ -164,10 +164,11 @@ def booking_view(request, username):
 def payment_success(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id)
     booking.paid = True
-    booking.save()
     for product in booking.products.all():
         product.status = Product.Status.FREE
         product.save()
+    booking.save()
+
     messages.success(request, 'Your hammocks have been properly booked')
     return redirect('booking:booking_list', booking.user)
 
@@ -176,10 +177,11 @@ def payment_success(request, booking_id):
 @login_required
 def payment_cancel(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id)
-    booking.delete()
     for product in booking.products.all():
         product.status = Product.Status.FREE
         product.save()
+    booking.delete()
+
     messages.error(request, 'There has been an error with your booking')
     return redirect('booking:booking_list', booking.user)
 
