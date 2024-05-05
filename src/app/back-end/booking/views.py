@@ -55,12 +55,12 @@ def booking_view(request, username):
     formatted_date = datetime.strptime(date, '%Y-%m-%d').strftime('%d/%m/%Y')
     formatted_duration = dict(Booking.TimeSlots.choices)[duration]
     client = get_object_or_404(Client, user=request.user)
-    user_bookings = Booking.objects.filter(date=date, paid=True, user=client)
+    user_bookings = Booking.objects.filter(date=date, user=client)
     total_products = (
         user_bookings.aggregate(total_products=Count('products'))['total_products'] or 0
     )
     max_products = client.num_guest - total_products
-    all_date_bookings = Booking.objects.filter(paid=True, date=date)
+    all_date_bookings = Booking.objects.filter(date=date)
 
     # Inicializar la lista de productos ocupados
     occupied_products = []
