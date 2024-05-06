@@ -131,6 +131,7 @@ def users_delete_manager_view(request, username):
     client = get_object_or_404(Client, user__username=username)
     client.user.delete()
     client.delete()
+    messages.success(request, f'Client {username} has been succesfully deleted')
     return redirect('users:manager_users')
 
 
@@ -140,20 +141,14 @@ def users_manager_view(request):
     selected_hotel = request.session.get('hotel_session_name')
     hotel = Hotel.objects.get(name=selected_hotel)
     clients = hotel.clients.exclude(user__groups__name='HotelManagers')
-    paginator = Paginator(clients, 4)
-    page = request.GET.get('page')
-
-    try:
-        clients = paginator.page(page)
-    except PageNotAnInteger:
-        clients = paginator.page(1)
-    except EmptyPage:
-        clients = paginator.page(paginator.num_pages)
+    paginator = Paginator(clients, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
     return render(
         request,
         'managers/pages/users.html',
-        {'clients': clients},
+        {'page_obj': page_obj},
     )
 
 
@@ -162,6 +157,7 @@ def users_manager_view(request):
 def products_delete_manager_view(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     product.delete()
+    messages.success(request, f'Product {product_id} has been succesfully deleted')
     return redirect('users:manager_products')
 
 
@@ -175,7 +171,7 @@ def products_edit_manager_view(request, product_id):
         product_edit_form = ProductEditForm(instance=product, data=request.POST)
         if product_edit_form.is_valid():
             product.save()
-            messages.success(request, 'A new product has been successfully edited.')
+            messages.success(request, 'Product has been successfully edited.')
             return redirect('users:manager_products')
         messages.error(request, "New product couldn't be edited")
     else:
@@ -221,50 +217,11 @@ def products_manager_view(request):
     selected_hotel = request.session.get('hotel_session_name')
     hotel = Hotel.objects.get(name=selected_hotel)
     products = hotel.products.all()
-    paginator = Paginator(products, 4)
-    page = request.GET.get('page')
+    paginator = Paginator(products, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
-    try:
-        products = paginator.page(page)
-    except PageNotAnInteger:
-        products = paginator.page(1)
-    except EmptyPage:
-        products = paginator.page(paginator.num_pages)
-
-    return render(request, 'managers/pages/products.html', {'products': products})
-
-
-@login_required
-@manager_required
-def bookings_edit_manager_view(request, booking_id):
-    selected_hotel = request.session.get('hotel_session_name')
-    hotel = Hotel.objects.get(name=selected_hotel)
-    booking = get_object_or_404(Booking, id=booking_id, user__hotel=hotel, paid=True)
-    if request.method == 'POST':
-        booking_edit_form = BookingForm(user=booking.user, data=request.POST)
-        booking_edit_filter_form = BookingFilterForm(
-            user=booking.user, instance=booking, data=request.POST
-        )
-        if booking_edit_form.is_valid():
-            booking.save()
-            messages.success(request, 'A new booking has been successfully edited.')
-            return redirect('users:manager_bookings')
-        messages.error(request, "New booking couldn't be edited")
-    else:
-        booking_edit_form = BookingForm(user=booking.user, instance=booking)
-        booking_edit_filter_form = BookingFilterForm(
-            user=booking.user, data={'date': booking.date, 'duration': booking.duration}
-        )
-    return render(
-        request,
-        'managers/pages/bookings_edit.html',
-        {
-            'booking_edit_form': booking_edit_form,
-            'booking_edit_filter_form': booking_edit_filter_form,
-            'booking': booking,
-        },
-    )
-
+    return render(request, 'managers/pages/products.html', {'page_obj': page_obj})
 
 @login_required
 @manager_required
@@ -273,7 +230,7 @@ def bookings_delete_manager_view(request, booking_id):
     hotel = Hotel.objects.get(name=selected_hotel)
     booking = get_object_or_404(Booking, id=booking_id, user__hotel=hotel, paid=True)
     booking.delete()
-    messages.success(request, f'Booking {booking_id} has been succesfully deleted')
+    messages.success(request, f'Reservation {booking_id} has been succesfully deleted')
     return redirect('users:manager_bookings')
 
 
@@ -284,16 +241,9 @@ def bookings_manager_view(request):
     hotel = Hotel.objects.get(name=selected_hotel)
     bookings = Booking.objects.filter(user__hotel=hotel, paid=True)
     paginator = Paginator(bookings, 8)
-    page = request.GET.get('page')
-
-    try:
-        bookings = paginator.page(page)
-    except PageNotAnInteger:
-        bookings = paginator.page(1)
-    except EmptyPage:
-        bookings = paginator.page(paginator.num_pages)
-
-    return render(request, 'managers/pages/bookings.html', {'bookings': bookings})
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'managers/pages/bookings.html', {'page_obj': page_obj})
 
 
 @login_required
@@ -317,11 +267,15 @@ def search_manager_view(request):
             .exclude(user__groups__name='HotelManagers')
         )
 
+    paginator = Paginator(clients, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     return render(
         request,
         'managers/pages/search_list.html',
         {
             'form': form,
-            'clients': clients,
+            'page_obj': page_obj
         },
     )

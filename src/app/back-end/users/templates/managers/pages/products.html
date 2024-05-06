@@ -19,7 +19,7 @@
     </div>
     <div class="col-1"></div>
 
-          {% for product in products %}
+          {% for product in page_obj %}
             {% if forloop.counter|divisibleby:2 == False %}
               <div class="col-3"></div>
             {% endif %}
@@ -45,6 +45,6 @@
     </div>
   </div>
 </div>
-{% include "managers/pagination-products.html" with products=products %}
+{% include "managers/paginator.html" %}
 
 {% endblock %}

@@ -4,7 +4,7 @@
 {% block content%}
 <div class="container-fluid py-4">
   <div class="row">
-    {% for booking in bookings %}
+    {% for booking in page_obj %}
     <div class="col-xl-3 col-sm-6 col-12">
         <div class="card-body text-white mb-4">
           <h5 class="card-title text-center">Reservation {{ booking.id }}</h2>
@@ -22,7 +22,7 @@
     {% endfor %}
   </div>
 </div>
-  {% include "managers/pagination-bookings.html" with bookings=bookings %}
+  {% include "managers/paginator.html" %}
   {% block domready %}
   <script>
     document.addEventListener("DOMContentLoaded", (event) => {

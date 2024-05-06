@@ -19,7 +19,7 @@
     </div>
     <div class="col-1"></div>
 
-    {% for client in clients %}
+    {% for client in page_obj %}
     {% if forloop.counter|divisibleby:2 == False %}
         <div class="col-3"></div>
     {% endif %}
@@ -49,7 +49,7 @@
   </div>
 </div>
 
-  {% include "managers/pagination-clients.html" with clients=clients %}
+{% include "managers/paginator.html" %}
   <script>
     document.addEventListener("DOMContentLoaded", (event) => {
       document
