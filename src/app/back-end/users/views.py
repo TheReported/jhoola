@@ -1,12 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 
-from booking.forms import BookingFilterForm, BookingForm
 from booking.models import Booking
 from product.forms import ProductCreationForm, ProductEditForm
 from product.models import Product
@@ -15,6 +14,7 @@ from .decorators import manager_required
 from .forms import ClientEditForm, ClientRegistrationForm, LoginForm, SearchForm
 from .models import Client, Hotel
 from .tasks import user_created
+from django.contrib.auth.models import Group
 
 
 def user_login(request):
@@ -45,7 +45,8 @@ def user_login(request):
 def manager_dashboard(request):
     selected_hotel = request.session.get('hotel_session_name')
     hotel = Hotel.objects.get(name=selected_hotel)
-    clients = hotel.clients.count()
+    hotel_manager_group = Group.objects.get(name='HotelManagers')
+    clients = hotel.clients.exclude(user__groups=hotel_manager_group).count()
     products = hotel.products.count()
     bookings = Booking.objects.filter(user__hotel=hotel, paid=True)
     total_money = 0
@@ -223,6 +224,7 @@ def products_manager_view(request):
 
     return render(request, 'managers/pages/products.html', {'page_obj': page_obj})
 
+
 @login_required
 @manager_required
 def bookings_delete_manager_view(request, booking_id):
@@ -274,8 +276,5 @@ def search_manager_view(request):
     return render(
         request,
         'managers/pages/search_list.html',
-        {
-            'form': form,
-            'page_obj': page_obj
-        },
+        {'form': form, 'page_obj': page_obj},
     )

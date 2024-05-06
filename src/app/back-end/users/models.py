@@ -17,7 +17,7 @@ class Client(models.Model):
             MaxValueValidator(MAX_NUM_GUESTS),
         ],
     )
-    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name="clients")
+    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name='clients')
 
     @property
     def fullname(self):
