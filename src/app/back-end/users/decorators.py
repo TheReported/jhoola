@@ -20,8 +20,6 @@ def manager_required(func):
     def wrapper(request, *args, **kwargs):
         selected_hotel = request.session.get('hotel_session_name')
         hotel = Hotel.objects.get(name=selected_hotel)
-        if not request.user.is_authenticated:
-            return redirect("users_login")
         client = get_object_or_404(Client, user=request.user, hotel=hotel)
         if client.user.groups.filter(name="HotelManagers").exists():
             return func(request, *args, **kwargs)

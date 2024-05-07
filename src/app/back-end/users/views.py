@@ -294,20 +294,25 @@ def search_manager_view(request):
     )
 
 
-@manager_required
 def check_booking_manager_view(request):
     if request.user.is_authenticated:
-        booking_id = request.GET.get("booking_id")
-        client_id = request.GET.get("client_id")
-        selected_hotel = request.GET.get("hotel")
-        hotel = Hotel.objects.get(name=selected_hotel)
-        actual_datetime = timezone.now().date()
-
         try:
-            Booking.objects.get(
-                id=booking_id, user__user=client_id, date=actual_datetime, user__hotel=hotel
-            )
-        except Booking.DoesNotExist:
-            return render(request, 'managers/pages/invalid_booking.html')
-        return render(request, 'managers/pages/valid_booking.html')
+            client = Client.objects.get(user=request.user)
+        except Client.DoesNotExist:
+            return redirect("main")
+        if client.user.groups.filter(name="HotelManagers").exists():
+            booking_id = request.GET.get("booking_id")
+            client_id = request.GET.get("client_id")
+            selected_hotel = request.GET.get("hotel")
+            hotel = Hotel.objects.get(name=selected_hotel)
+            actual_datetime = timezone.now().date()
+
+            try:
+                Booking.objects.get(
+                    id=booking_id, user__user=client_id, date=actual_datetime, user__hotel=hotel
+                )
+            except Booking.DoesNotExist:
+                return render(request, 'managers/pages/invalid_booking.html')
+            return render(request, 'managers/pages/valid_booking.html')
+        return redirect("booking:booking_list")
     return redirect("main")
