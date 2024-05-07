@@ -16,11 +16,15 @@ header, nav, .searchbar, .logo {
 #aside {
   height: calc(100vh - 75px - 1px);
   overflow: auto;
-
 }
 
 .aside-bar {
   background-color: #191919;
+}
+
+.modal-content {
+background-color: #212529;
+color: white;
 }
 
 a {
@@ -177,7 +181,7 @@ hr {
 
 .btn.bg-gradient-primary:hover {
   color: #fff;
-} */
+}
 
 
 /* .colorful-card{

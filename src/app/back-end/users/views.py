@@ -142,7 +142,7 @@ def users_manager_view(request):
     selected_hotel = request.session.get('hotel_session_name')
     hotel = Hotel.objects.get(name=selected_hotel)
     clients = hotel.clients.exclude(user__groups__name='HotelManagers')
-    paginator = Paginator(clients, 8)
+    paginator = Paginator(clients, 14)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -242,7 +242,7 @@ def bookings_manager_view(request):
     selected_hotel = request.session.get('hotel_session_name')
     hotel = Hotel.objects.get(name=selected_hotel)
     bookings = Booking.objects.filter(user__hotel=hotel, paid=True)
-    paginator = Paginator(bookings, 8)
+    paginator = Paginator(bookings, 14)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request, 'managers/pages/bookings.html', {'page_obj': page_obj})
