@@ -306,7 +306,6 @@ def check_booking_manager_view(request):
             selected_hotel = request.GET.get("hotel")
             hotel = Hotel.objects.get(name=selected_hotel)
             actual_datetime = timezone.now().date()
-
             try:
                 Booking.objects.get(
                     id=booking_id,
