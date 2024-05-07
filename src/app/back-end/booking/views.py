@@ -42,7 +42,8 @@ def booking_list(request, username):
 @login_required
 def booking_pdf(request, username, booking_id):
     booking = get_object_or_404(Booking, id=booking_id, user__user=request.user)
-    get_params = f'?booking_id={booking.id}&client_id={request.user.id}'
+    selected_hotel = request.session.get('hotel_session_name')
+    get_params = f'?booking_id={booking.id}&client_id={request.user.id}&hotel={selected_hotel}'
     path_qr = request.build_absolute_uri(f"{reverse('users:manager_check_booking')}{get_params}")
     qr_rend = BytesIO()
     img = make(path_qr)
