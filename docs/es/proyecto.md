@@ -120,25 +120,26 @@ En resumen, el proyecto se estructurará utilizando tecnologías modernas y robu
 
 ### 5. CRONOGRAMA. <a name="id5"></a>
 
-Este apartado nos servirá como resumen de alcance, temporalización y coste. Utilizar la información anterior de las tareas, para establecer un resumen de los principales aspectos del proyecto (debería bastar con las tareas principales, y evitar un excesivo detalle de las subtareas). Se puede reflejar con un diagrama de Gantt que podemos sacar de los **PROJECTS** de **GitHub** ( adjuntamos capturas de pantalla )
+Puesto que el diagrama es muy amplio para mostrarlo en capturas de pantalla, se adjuntará un enlance mediante el cual se podrá acceder al mismo.
+
+https://github.com/users/TheReported/projects/1/views/4
 
 ### 6. TAREAS, RESUMEN DE RECURSOS HUMANOS Y MATERIALES. <a name="id6"></a>
 
-Como en el caso anterior, hacer una tabla para cada tarea principal
-
+En la siguiente tabla se va a intentar hacer una estimación (imposible hacerla exacta) de las fechas en las que se trabajó en las distintas areas del proyecto y a su vez el tiempo que se tardó.
 <center>
 
 | Tarea | Título | Descripción y Metodología  | Duración | Fecha Ini | Fecha Fin | Recursos Humanos | Recursos Materiales | Coste | Responsable |
 |-------|--------|----------------------------|----------|-----------|-----------|------------------|---------------------|-------|-------------|
-| Tarea 1 | Desarrollo de la Landing Page |
-| Tarea 2 | Desarrollo del Login de Hoteles |
-| Tarea 3 | Desarrollo del Login | 
-| Tarea 4 | Desarrollo de la Zona Admin |
-| Tarea 5 | Desarrollo de la Zona Client |
-| Tarea 6 | Desarrollo de la API |
-| Tarea 7 | Despliegue de la Aplicación | 
-| Tarea 8 | Migración del a Base de Datos a PostgreSQL |
-| Tarea 9 | Desarrollo del Testing de la Aplicación |
+| Tarea 1 | Desarrollo de la Landing Page | Se desarrolló una página de inicio para la aplicación en la que los clientes pueden encontrar información de nuestro proyecto, como contactarnos, etc. | X horas | Marzo | Marzo | 1 | 0 | 0 € (Va a ser un servicio) | Abián |
+| Tarea 2 | Desarrollo del Login de Hoteles | Se desarrolló un buscador de hoteles con autocompletado para que los clientes y administradores busquen su hotel antes de pasar al login | X horas | Marzo | Abril | 1 | 0 | 0 € (Va a ser un servicio) | Samuel |
+| Tarea 3 | Desarrollo del Login | Se desarrolló un login para el hotel mediante el cual clientes y administradores se verificarían para después poder hacer uso de la aplicación | X horas | Marzo | Abril | 3 | 0 | 0 € (Va a ser un servicio) | Abián, Diego y Samuel |
+| Tarea 4 | Desarrollo de la Zona Admin | Se desarrolló una zona de administradores desde la cual los mismos pueden gestionar los usuarios, productos y reservas de los clientes | X horas | Marzo | Mayo | 3 | 0 | 0 € (Va a ser un servicio) | Abián, Diego y Samuel |
+| Tarea 5 | Desarrollo de la Zona Cliente | Se desarrolló una zona de clientes desde la cual los mismos pueden hacer reservas, consultarlas y borrarlas | X horas | Abril | Mayo | 3 | 0 | 0 € (Va a ser un servicio) | Abián, Diego y Samuel |
+| Tarea 6 | Desarrollo de la API | Se desarrolló una API para tener conectadas las distintas areas de la aplicación de manera eficiente y segura | X horas | Marzo | Marzo | 1 | 0 | 0 € (Va a ser un servicio) | Diego |
+| Tarea 7 | Despliegue de la Aplicación | Se preparó la aplicación para su despliegue automatizada mediante un script en una máquina Azure | X horas | Mayo | Mayo | 1 | 0 | 0 € (Va a ser un servicio) | Diego |
+| Tarea 8 | Migración de la Base de Datos a PostgreSQL | Se pasó la aplicación a PostgreSQL con el fin de disponer de una mayor eficiencia y seguridad | X horas | Mayo | Mayo | 1 | 0 | 0 € (Va a ser un servicio) | Diego
+| Tarea 9 | Desarrollo del Testing de la Aplicación | Se realizaron una serie de tests con el fin de asegurar el buen funcionamiento de la aplicación | X Horas | Abril | Mayo | 1 | 0 | 0 € (Va a ser un servicio) | Abián
 
 
 </center>
@@ -249,16 +250,23 @@ Implementando estas acciones de seguimiento, evaluación y control de calidad, e
 - En caso de que el cliente desee cancelar su servicio, solo tendrá que hacerlo previo al pago del siguiente mes. Si el pago ya ha sido realizado no nos comprometemos a devolver el dinero.
 
 
-### 10.  BIBLIOGRAFÍA. <a name="id11"></a>
+### 10.  BIBLIOGRAFÍA. <a name="id10"></a>
+
+- [Django](https://docs.djangoproject.com/en/5.0/)
+- [ChatGPT](https://chatgpt.com/)
+- [Bootstrap](https://getbootstrap.com/)
     
-### 11.  GLOSARIO. <a name="id12"></a>
+### 11.  GLOSARIO. <a name="id11"></a>
 
-### 12.  ANEXOS. <a name="id13"></a>
+**API (Interfaz de Programación de Aplicaciones):** Un conjunto de reglas y definiciones que permite a las aplicaciones de software comunicarse entre sí.
+**Backend:** La parte de una aplicación web que se encarga de procesar las solicitudes del cliente, interactuar con la base de datos y realizar la lógica de negocio.
+**Base de datos PostgreSQL:** Un sistema de gestión de bases de datos relacional de código abierto y altamente escalable.
+**Bootstrap 5:** Un framework de código abierto para el desarrollo de sitios y aplicaciones web. Proporciona plantillas de diseño, componentes y estilos predefinidos para facilitar el desarrollo web responsivo y móvil.
+**Framework Django:** Un framework web de alto nivel escrito en Python que fomenta el desarrollo rápido y limpio. Es conocido por su capacidad para manejar aplicaciones web complejas y su énfasis en la reutilización de código.
+**Frontend:** La parte de una aplicación web que interactúa directamente con el usuario, proporcionando la interfaz gráfica con la que interactúa.
+**Testing:** Proceso de evaluación de un sistema o aplicación para verificar que cumple con los requisitos especificados y para identificar defectos o errores.
 
-Aquí se puede indicar: 
-+ Documentación externa de utilidad
-+ Modelos de datos
-+ Diagramas y esquemas
-+ Diagrama de Entidad-Relación o similar.
-+ Tabla de roles de los usuarios
-+ etc.
+### 12.  ANEXOS. <a name="id12"></a>
+
+- [Diagramas](https://github.com/TheReported/jhoola/tree/development/docs/es/diagramas#readme)
+- [Memoria Final](https://github.com/TheReported/jhoola/blob/development/docs/es/memoriafinal.md)
