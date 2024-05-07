@@ -2,10 +2,46 @@
 {% load static %}
 
 {% block content%}
-<div class="container-fluid py-4">
-  <div class="row">
-    {% for booking in page_obj %}
-    <div class="col-xl-3 col-sm-6 col-12">
+<div class="bookings-container mt-3">
+  <table class="table table-striped table-dark">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Username</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Hammocks</th>
+        <th scope="col">Price</th>
+        <th scope="col">Duration</th>
+        <th scope="col">Date</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for booking in page_obj %}
+      <tr>
+        <th scope="row">{{ booking.id }}</th>
+        <td>{{ booking.user }}</td>
+        <td>{{ booking.user.fullname }}</td>
+        <td>{{ booking.user.user.email }}</td>
+        <td>{% for product in booking.products.all %}
+              {{ product.id }}{% if not forloop.last %},{% endif %}
+            {% endfor %}
+        </td>
+        <td>{{ booking.price }} €</td>
+        <td>{{ booking.get_duration_display }}</td>
+        <td>{{ booking.date|date:"d/m/Y" }}</td>
+        <td>
+          <a href="{% url 'users:manager_bookings_delete' booking.id %}" class="btn btn-danger m-0" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
+        </td>
+      </tr>
+      {% include "users/messages/delete_booking_modal.html" %}
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+    {% comment %} <div class="col-xl-3 col-sm-6 col-12">
         <div class="card-body text-white mb-4">
           <h5 class="card-title text-center">Reservation {{ booking.id }}</h2>
           <p class="card-text"><b>User:</b> {{ booking.user }}</p>
@@ -18,10 +54,9 @@
           <p class="card-text"><b>Date:</b> {{ booking.date|date:"d/m/Y" }}</p>
           <a href="{% url 'users:manager_bookings_delete' booking.id %}" class="btn btn-danger m-0">Delete</a>
         </div>
-    </div>
-    {% endfor %}
-  </div>
-</div>
+    </div> 
+    {% endfor %} {% endcomment %}
+
   {% include "managers/paginator.html" %}
   {% block domready %}
   <script>
