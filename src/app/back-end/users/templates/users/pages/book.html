@@ -175,6 +175,8 @@
 
 {% block domready %}
   <script>
+    {% comment %} Evento para controlar cuando se va para atras sin terminar la reserva {% endcomment %}
+    window.addEventListener("beforeunload", () => {window.location.reload()})
     let products = document.querySelectorAll("input[name=products]")
     let hammocks = document.querySelector("#hammocks")
     let totalPrice = document.querySelector("#totalPrice")
@@ -198,5 +200,7 @@
         })
       }
     )
+
+
   </script>
 {% endblock %}
