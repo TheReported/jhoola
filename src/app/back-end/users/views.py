@@ -309,7 +309,11 @@ def check_booking_manager_view(request):
 
             try:
                 Booking.objects.get(
-                    id=booking_id, user__user=client_id, date=actual_datetime, user__hotel=hotel
+                    id=booking_id,
+                    user__user=client_id,
+                    date=actual_datetime,
+                    user__hotel=hotel,
+                    paid=True,
                 )
             except Booking.DoesNotExist:
                 return render(request, 'managers/pages/invalid_booking.html')
