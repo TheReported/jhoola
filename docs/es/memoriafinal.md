@@ -43,10 +43,31 @@ El presente documento constituye la memoria final del proyecto de desarrollo de 
 
 ### 2. TECNOLOGÍAS UTILIZADAS. <a name="id2"></a>
 
+Las tecnologías usadas en el proyecto han sido las siguientes:
 
+**Django==4.2:** Django es un framework web de alto nivel escrito en Python que permite el desarrollo rápido de aplicaciones web seguras y mantenibles. Proporciona un conjunto de componentes y patrones de diseño que facilitan la creación de aplicaciones web complejas.
 
+**prettyconf==2.2.1:** PrettyConf es una biblioteca de Python que facilita la gestión de la configuración de una aplicación mediante el uso de archivos de configuración simples y legibles. Permite definir variables de entorno y valores predeterminados de manera clara y ordenada.
 
+**djangorestframework==3.15.1:** Django REST Framework es una biblioteca de Django que facilita la creación de APIs web utilizando el estilo de arquitectura REST. Proporciona herramientas para la serialización de datos, la autenticación de usuarios, la gestión de permisos y la creación de vistas basadas en clases.
 
+**pillow==10.3.0:** Pillow es una biblioteca de procesamiento de imágenes en Python que se utiliza comúnmente para manipular imágenes en aplicaciones web. Proporciona herramientas para abrir, manipular y guardar imágenes en una variedad de formatos.
+
+**WeasyPrint==61.2:** WeasyPrint es una biblioteca de Python que permite generar documentos PDF a partir de contenido HTML y CSS. Es útil para generar informes o facturas en aplicaciones web.
+
+**django-cors-headers==4.3.1:** Django CORS Headers es una biblioteca de Django que facilita la configuración de encabezados CORS (Cross-Origin Resource Sharing) en una aplicación web. Permite que el servidor indique a los navegadores web si se permite o no que una página web acceda a recursos de otro origen.
+
+**stripe==9.1.0:** Stripe es una plataforma de pagos en línea que facilita la aceptación de pagos en aplicaciones web y móviles. La biblioteca Stripe proporciona herramientas para integrar la funcionalidad de pago de Stripe en una aplicación Django.
+
+**django-debug-toolbar==4.3.0:** Django Debug Toolbar es una herramienta de depuración para aplicaciones Django que muestra información útil para desarrolladores mientras están depurando una aplicación. Proporciona paneles interactivos que muestran información sobre consultas de base de datos, solicitudes HTTP y rendimiento.
+
+**gunicorn==22.0.0:** Gunicorn es un servidor HTTP de Python que se utiliza comúnmente para implementar aplicaciones web Django en producción. Proporciona un entorno de ejecución eficiente y escalable para aplicaciones web Python.
+
+**psycopg2-binary==2.9.9:** Psycopg2 es un adaptador de base de datos PostgreSQL para Python que permite a las aplicaciones Python interactuar con bases de datos PostgreSQL.
+
+**celery==5.4.0:** Celery es una biblioteca de Python para la ejecución de tareas en segundo plano o en paralelo, de manera asíncrona. Es comúnmente utilizado para realizar tareas que son intensivas en CPU o que pueden tardar mucho tiempo en completarse, como el envío de correos electrónicos o la generación de informes.
+
+**redis==5.0.4:** Redis es una base de datos en memoria de código abierto que se utiliza comúnmente como almacén de datos en caché o como cola de mensajes en aplicaciones web. La biblioteca Redis proporciona herramientas para interactuar con un servidor Redis desde una aplicación Python.
 
 ### 3. GUIA DE ESTILO DE LA WEB. <a name="id3"></a>
 
@@ -81,8 +102,7 @@ Cuando empezamos tuvimos grandes ideas que podíamos aplicar pero el tiempo se n
 
 ### 5. DERECHOS DE AUTOR. <a name="id5"></a>
 
-
-
+En todo momento se ha hecho uso de contenido público y el cual se ha sido referenciado para no tener problemas con nadie dado que al igual que nosotros valoramos que respeten lo que hemos desarrollado, también valoramos el trabajo de otras personas los cuales se ganan el pan con mucho esfuerzo.
 
 ### 6. RIESGOS Y MEDIDAS. <a name="id6"></a>
 
@@ -139,7 +159,26 @@ Se analizará los resultados y lecciones aprendidas para mejorar continuamente l
 
 ### 10.  PRODUCTO FINAL. <a name="id10"></a>
 
-Describir el producto final obtenido, qué funcionalidades se han implementado, que hay que tener en cuenta para usarla, etc. Describirlo como si fuera un pequeño MANUAL DE USO de la aplicación, ya que se usará este punto para corregir el proyecto.
+#### 10.1 Landing Page
+
+En este apartado se tendrá a disposición de cualquier persona una web en la que podrán encontrar información sobre nosotros, el producto que se ha creado, contacto y lo más importante, un apartado en el que escogerán el hotel donde estén hospedándose o en el caso del administrador donde esté trabajando.
+
+#### 10.2 Login 
+
+En esta zona tanto usuario como administrador tendrán que introducir sus datos para pasar a sus respectivas areas. Si eres administrador pasa directamente al paso **10.4**.
+
+#### 10.3 Zona Cliente
+
+En esta zona el cliente tendrá la posibilidad de hacer una reserva mediante la cual encontrará una serie de apartados en los que seleccionar la fecha y posteriormente la parte de la piscina en la que se quiere quedar. Acto seguido pasará al pago en el cual introducirá sus datos para poder completar la reserva. Por último tendrá la posibilidad de consultar su reserva descargándose un PDF o borrarla en el caso de que se haya equivocado o quiera dar marcha atrás.
+
+#### 10.4 Zona Administrador
+
+En esta zona el administrador llegará a un menú en el que podrá decidir a que área ir (productos, reservas o usuarios) y en cada de uno de ellos hacer modificaciones, borrados, consultas o adiciones ( a excepción de las reservas en las cuales solo se pueden hacer consultas y borrados para ofrecer al consumidor una mejor eficiencia y usabilidad).
     
 ### 11.  EXPERIENCIAS APRENDIDAS A TENER EN CUENTA EN PRÓXIMOS PROYECTOS. <a name="id11"></a>
+
+**Abián:** Por mi parte creo que el proyecto ha servido bastante puesto que nos ha puesto a mis compañeros y a mi en situaciones difíciles de toma de decisiones y a su vez en conflictos que nos han servido para mejorar el proyecto y también para mejorar como personas y en nuestros ámbitos laborales.
+
 ### 12.  CONCLUSIONES, COMENTARIOS Y VALORACIÓN FINAL. <a name="id12"></a>
+
+**Abián:** Creo que para un proyecto como este a sabiendas del poco tiempo que hay puesto que también tenemos que ir a trabajar, no es justo el poco tiempo que se ha proporcionado para el mismo y por ende se debería enfocar que el  trabajo en este proyecto empiece mucho antes de Navidades con el fin de lograr los objetivos en un entorno más realista y tranquilo. Igualmente, dentro de lo que cabe lo hemos logrado sacar hacia adelante y nos hemos llevado una muy buena de experiencia que quedará ahí siempre.
