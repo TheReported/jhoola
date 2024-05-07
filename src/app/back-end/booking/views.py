@@ -1,7 +1,8 @@
+from base64 import b64encode
 from datetime import datetime
+from io import BytesIO
 
 import weasyprint
-from celery import shared_task
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
@@ -11,6 +12,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils import timezone
+from qrcode import make
 
 from booking.forms import BookingFilterForm, BookingForm
 from product.models import Product
@@ -39,8 +41,14 @@ def booking_list(request, username):
 @client_required
 @login_required
 def booking_pdf(request, username, booking_id):
-    booking = get_object_or_404(Booking, id=booking_id)
-    html = render_to_string('users/pages/pdf.html', {'booking': booking})
+    booking = get_object_or_404(Booking, id=booking_id, user__user=request.user)
+    get_params = f'?booking_id={booking.id}&client_id={request.user.id}'
+    path_qr = request.build_absolute_uri(f"{reverse('users:manager_check_booking')}{get_params}")
+    qr_rend = BytesIO()
+    img = make(path_qr)
+    img.save(qr_rend, 'PNG')
+    qr_url = f'data:image/png/;base64,{b64encode(qr_rend.getvalue()).decode("ascii")}'
+    html = render_to_string('users/pages/pdf.html', {'booking': booking, 'qr': qr_url})
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = f'filename=transaction_{booking_id}.pdf'
     weasyprint.HTML(string=html, base_url=request.build_absolute_uri()).write_pdf(response)

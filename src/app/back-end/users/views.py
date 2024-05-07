@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils import timezone
 from django.views.decorators.http import require_POST
 
 from booking.models import Booking
@@ -291,3 +292,16 @@ def search_manager_view(request):
             'clients': clients,
         },
     )
+
+
+@login_required
+@manager_required
+def check_booking_manager_view(request):
+    booking_id = request.GET.get("booking_id")
+    client_id = request.GET.get("client_id")
+    actual_datetime = timezone.now().date()
+    try:
+        Booking.objects.get(id=booking_id, user__user=client_id, date=actual_datetime)
+    except Booking.DoesNotExist:
+        return render(request, 'managers/pages/invalid_booking.html')
+    return render(request, 'managers/pages/valid_booking.html')
