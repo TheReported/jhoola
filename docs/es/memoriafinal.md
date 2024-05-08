@@ -8,7 +8,9 @@
 <right>
 
 ***Autor/es:*** Abián Gustavo Castañeda Méndez, Diego Peraza Cabo, Samuel Eloy González Díaz
+<br>
 ***Fecha:*** 10 de Mayo de 2024
+<br>
 ***Tutor:*** Alejandro Martín Zarza
 
 </right>
