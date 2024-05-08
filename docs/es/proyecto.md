@@ -1,5 +1,4 @@
 <center>
-
 # Dpto. INFORMÁTICA - I.E.S. PUERTO DE LA CRUZ – TELESFORO BRAVO 
 ***
 ### MÓDULO PROYECTO (PRW)
@@ -131,20 +130,20 @@ En la siguiente tabla se va a intentar hacer una estimación (imposible hacerla 
 
 | Tarea | Título | Descripción y Metodología  | Duración | Fecha Ini | Fecha Fin | Recursos Humanos | Recursos Materiales | Coste | Responsable |
 |-------|--------|----------------------------|----------|-----------|-----------|------------------|---------------------|-------|-------------|
-| Tarea 1 | Desarrollo de la Landing Page | Se desarrolló una página de inicio para la aplicación en la que los clientes pueden encontrar información de nuestro proyecto, como contactarnos, etc. | X horas | Marzo | Marzo | 1 | 0 | 0 € (Va a ser un servicio) | Abián |
+| Tarea 1 | Desarrollo de la Landing Page | Se desarrolló una página de inicio para la aplicación en la que los clientes pueden encontrar información de nuestro proyecto, como contactarnos, etc. | 4-5 horas | Marzo | Marzo | 1 | 0 | 0 € (Va a ser un servicio) | Abián |
 | Tarea 2 | Desarrollo del Login de Hoteles | Se desarrolló un buscador de hoteles con autocompletado para que los clientes y administradores busquen su hotel antes de pasar al login | X horas | Marzo | Abril | 1 | 0 | 0 € (Va a ser un servicio) | Samuel |
-| Tarea 3 | Desarrollo del Login | Se desarrolló un login para el hotel mediante el cual clientes y administradores se verificarían para después poder hacer uso de la aplicación | X horas | Marzo | Abril | 3 | 0 | 0 € (Va a ser un servicio) | Abián, Diego y Samuel |
+| Tarea 3 | Desarrollo del Login Principal | Se desarrolló un login para el hotel mediante el cual clientes y administradores se verificarían para después poder hacer uso de la aplicación | 4 horas | Marzo | Abril | 3 | 0 | 0 € (Va a ser un servicio) | Abián, Diego y Samuel |
 | Tarea 4 | Desarrollo de la Zona Admin | Se desarrolló una zona de administradores desde la cual los mismos pueden gestionar los usuarios, productos y reservas de los clientes | X horas | Marzo | Mayo | 3 | 0 | 0 € (Va a ser un servicio) | Abián, Diego y Samuel |
-| Tarea 4.1 | Desarrollo del Backend de la Zona Admin | Se desarrolló la lógica de programación que hay detras zona de administradores desde la cual los mismos pueden gestionar los usuarios, productos y reservas de los clientes | X horas | Marzo | Mayo | 3 | 0 | 0 € (Va a ser un servicio) | Abián, Diego y Samuel |
+| Tarea 4.1 | Desarrollo del Backend de la Zona Admin | Se desarrolló la lógica de programación que hay detras zona de administradores desde la cual los mismos pueden gestionar los usuarios, productos y reservas de los clientes | 5-6 horas | Marzo | Mayo | 3 | 0 | 0 € (Va a ser un servicio) | Abián, Diego y Samuel |
 | Tarea 4.2 | Desarrollo del Frontend de la Zona Admin | Se desarrolló el como debe visualizarse la zona de administradores desde la cual los mismos pueden gestionar los usuarios, productos y reservas de los clientes | X horas | Marzo | Mayo | 2 | 0 | 0 € (Va a ser un servicio) | Abián y Samuel |
 | Tarea 5 | Desarrollo de la Zona Cliente | Se desarrolló una zona de clientes desde la cual los mismos pueden hacer reservas, consultarlas y borrarlas | X horas | Abril | Mayo | 3 | 0 | 0 € (Va a ser un servicio) | Abián, Diego y Samuel |
 | Tarea 5.1 | Desarrollo del Sistema de Pagos y el backend de la zona | Se hizo uso de Stripe con el fin de desarrollar un sistema de pagos | X horas | Abril | Mayo | 1 | 0 | 0 € (Va a ser un servicio) | Abián |
 | Tarea 5.2 | Desarrollo del frontend de la zona | Se hizo uso de HTML, CSS, JS y Bootstrap para realizar el diseño de la zona de clientes | X horas | Abril | Mayo | 1 | 0 | 0 € (Va a ser un servicio) | Samuel |
-| Tarea 5.3 | Desarrollo del selector de hamacas y la lógica tras ello | Se hizo uso de JS, backend y SVGs con el fin de desarrollar la lógica tras el selector de Hamacas | X horas | Abril | Mayo | 1 | 0 | 0 € (Va a ser un servicio) | Diego |
-| Tarea 6 | Desarrollo de la API | Se desarrolló una API para tener conectadas las distintas areas de la aplicación de manera eficiente y segura | X horas | Marzo | Marzo | 1 | 0 | 0 € (Va a ser un servicio) | Diego |
-| Tarea 7 | Despliegue de la Aplicación | Se preparó la aplicación para su despliegue automatizada mediante un script en una máquina Azure | X horas | Mayo | Mayo | 1 | 0 | 0 € (Va a ser un servicio) | Diego |
-| Tarea 8 | Migración de la Base de Datos a PostgreSQL | Se pasó la aplicación a PostgreSQL con el fin de disponer de una mayor eficiencia y seguridad | X horas | Mayo | Mayo | 1 | 0 | 0 € (Va a ser un servicio) | Diego
-| Tarea 9 | Desarrollo del Testing de la Aplicación | Se realizaron una serie de tests con el fin de asegurar el buen funcionamiento de la aplicación | X Horas | Abril | Mayo | 1 | 0 | 0 € (Va a ser un servicio) | Abián
+| Tarea 5.3 | Desarrollo del selector de hamacas y la lógica tras ello | Se hizo uso de JS, backend y SVGs con el fin de desarrollar la lógica tras el selector de Hamacas | 4 horas | Abril | Mayo | 1 | 0 | 0 € (Va a ser un servicio) | Diego |
+| Tarea 6 | Desarrollo de la API | Se desarrolló una API para tener conectadas las distintas areas de la aplicación de manera eficiente y segura | 2 horas | Marzo | Marzo | 1 | 0 | 0 € (Va a ser un servicio) | Diego |
+| Tarea 7 | Despliegue de la Aplicación | Se preparó la aplicación para su despliegue automatizada mediante un script en una máquina Azure | 1 hora | Mayo | Mayo | 1 | 0 | 0 € (Va a ser un servicio) | Diego |
+| Tarea 8 | Migración de la Base de Datos a PostgreSQL | Se pasó la aplicación a PostgreSQL con el fin de disponer de una mayor eficiencia y seguridad | 1 hora | Mayo | Mayo | 1 | 0 | 0 € (Va a ser un servicio) | Diego
+| Tarea 9 | Desarrollo del Testing de la Aplicación | Se realizaron una serie de tests con el fin de asegurar el buen funcionamiento de la aplicación | 2 Horas | Abril | Mayo | 1 | 0 | 0 € (Va a ser un servicio) | Abián
 
 </center>
 
@@ -253,22 +252,25 @@ Implementando estas acciones de seguimiento, evaluación y control de calidad, e
 
 - En caso de que el cliente desee cancelar su servicio, solo tendrá que hacerlo previo al pago del siguiente mes. Si el pago ya ha sido realizado no nos comprometemos a devolver el dinero.
 
-
 ### 10.  BIBLIOGRAFÍA. <a name="id10"></a>
 
 - [Django](https://docs.djangoproject.com/en/5.0/)
 - [ChatGPT](https://chatgpt.com/)
 - [Bootstrap](https://getbootstrap.com/)
+- [Stack Overflow](https://stackoverflow.com/)
+- [Docs Python](https://docs.python.org/3/)
+- Django 4 By Example
+- [Developer Mozilla](https://developer.mozilla.org)
     
 ### 11.  GLOSARIO. <a name="id11"></a>
 
-**API (Interfaz de Programación de Aplicaciones):** Un conjunto de reglas y definiciones que permite a las aplicaciones de software comunicarse entre sí.
-**Backend:** La parte de una aplicación web que se encarga de procesar las solicitudes del cliente, interactuar con la base de datos y realizar la lógica de negocio.
-**Base de datos PostgreSQL:** Un sistema de gestión de bases de datos relacional de código abierto y altamente escalable.
-**Bootstrap 5:** Un framework de código abierto para el desarrollo de sitios y aplicaciones web. Proporciona plantillas de diseño, componentes y estilos predefinidos para facilitar el desarrollo web responsivo y móvil.
-**Framework Django:** Un framework web de alto nivel escrito en Python que fomenta el desarrollo rápido y limpio. Es conocido por su capacidad para manejar aplicaciones web complejas y su énfasis en la reutilización de código.
-**Frontend:** La parte de una aplicación web que interactúa directamente con el usuario, proporcionando la interfaz gráfica con la que interactúa.
-**Testing:** Proceso de evaluación de un sistema o aplicación para verificar que cumple con los requisitos especificados y para identificar defectos o errores.
+**- API (Interfaz de Programación de Aplicaciones):** Un conjunto de reglas y definiciones que permite a las aplicaciones de software comunicarse entre sí.
+**- Backend:** La parte de una aplicación web que se encarga de procesar las solicitudes del cliente, interactuar con la base de datos y realizar la lógica de negocio.
+**- Frontend:** La parte de una aplicación web que interactúa directamente con el usuario, proporcionando la interfaz gráfica con la que interactúa.
+**- Testing:** Proceso de evaluación de un sistema o aplicación para verificar que cumple con los requisitos especificados y para identificar defectos o errores.
+**- Beta-Testing:** Es una etapa en el desarrollo de un producto, ya sea software, hardware o cualquier otro tipo de producto, en la que se pone a disposición una versión preliminar del mismo a un grupo limitado de usuarios externos.
+**- Token:** Es un código único y temporal que se genera y se envía al usuario como parte de un proceso de autenticación.
+**- Landing Page:** Es una página web diseñada específicamente para recibir y convertir a los visitantes en leads o clientes potenciales.
 
 ### 12.  ANEXOS. <a name="id12"></a>
 
