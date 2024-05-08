@@ -31,7 +31,7 @@
         <td>{{ booking.get_duration_display }}</td>
         <td>{{ booking.date|date:"d/m/Y" }}</td>
         <td>
-          <a href="{% url 'users:manager_bookings_delete' booking.id %}" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">
+          <a href="{% url 'users:manager_bookings_delete' booking.id %}" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal{{ booking.id }}">
             <span class="material-icons">
             delete
             </span>

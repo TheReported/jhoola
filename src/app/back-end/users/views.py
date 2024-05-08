@@ -4,7 +4,6 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
-from django.views.decorators.http import require_POST
 
 from booking.models import Booking
 from product.forms import ProductCreationForm, ProductEditForm
@@ -62,6 +61,7 @@ def manager_dashboard(request):
             'num_clients': clients,
             'num_bookings': bookings.count(),
             'total_money': total_money,
+            'section': 'dashboard',
         },
     )
 
@@ -84,7 +84,9 @@ def users_add_manager_view(request):
             user_created.delay(cd, hotel.name)
             messages.success(request, 'A new client has been successfully created.')
             return redirect('users:manager_users')
-        messages.error(request, "New client couldn't be created")
+        else:
+            first_error = next(iter(user_form.errors.values()))[0]
+            messages.error(request, first_error)
     else:
         user_form = ClientRegistrationForm(
             initial={
@@ -94,7 +96,7 @@ def users_add_manager_view(request):
     return render(
         request,
         'managers/pages/users_add.html',
-        {'user_form': user_form},
+        {'user_form': user_form, 'section': 'users'},
     )
 
 
@@ -110,24 +112,22 @@ def users_edit_manager_view(request, username):
             client.num_guest = cd['num_guest']
             user.save()
             client.save()
-            messages.success(request, 'A new client has been successfully edited.')
+            messages.success(request, 'Client has been successfully edited.')
             return redirect('users:manager_users')
-        messages.error(request, "New client couldn't be edited")
+        else:
+            first_error = next(iter(user_edit_form.errors.values()))[0]
+            messages.error(request, first_error)
     else:
         user_edit_form = ClientEditForm(instance=client.user)
     return render(
         request,
         'managers/pages/users_edit.html',
-        {
-            'user_edit_form': user_edit_form,
-            'client': client,
-        },
+        {'user_edit_form': user_edit_form, 'client': client, 'section': 'users'},
     )
 
 
 @login_required
 @manager_required
-@require_POST
 def users_delete_manager_view(request, username):
     client = get_object_or_404(Client, user__username=username)
     client.user.delete()
@@ -146,11 +146,7 @@ def users_manager_view(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    return render(
-        request,
-        'managers/pages/users.html',
-        {'page_obj': page_obj},
-    )
+    return render(request, 'managers/pages/users.html', {'page_obj': page_obj, 'section': 'users'})
 
 
 @login_required
@@ -172,18 +168,15 @@ def products_edit_manager_view(request, product_id):
         product_edit_form = ProductEditForm(instance=product, data=request.POST)
         if product_edit_form.is_valid():
             product.save()
-            messages.success(request, 'Product has been successfully edited.')
+            messages.success(request, 'Product successfully edited.')
             return redirect('users:manager_products')
-        messages.error(request, "New product couldn't be edited")
+        messages.error(request, "Product couldn't be edited")
     else:
         product_edit_form = ProductEditForm(instance=product)
     return render(
         request,
         'managers/pages/products_edit.html',
-        {
-            'product_edit_form': product_edit_form,
-            'product': product,
-        },
+        {'product_edit_form': product_edit_form, 'product': product, 'section': 'products'},
     )
 
 
@@ -206,9 +199,7 @@ def products_add_manager_view(request):
     return render(
         request,
         'managers/pages/products_add.html',
-        {
-            'product_add_form': product_add_form,
-        },
+        {'product_add_form': product_add_form, 'section': 'products'},
     )
 
 
@@ -222,7 +213,9 @@ def products_manager_view(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    return render(request, 'managers/pages/products.html', {'page_obj': page_obj})
+    return render(
+        request, 'managers/pages/products.html', {'page_obj': page_obj, 'section': 'products'}
+    )
 
 
 @login_required
@@ -245,7 +238,9 @@ def bookings_manager_view(request):
     paginator = Paginator(bookings, 14)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'managers/pages/bookings.html', {'page_obj': page_obj})
+    return render(
+        request, 'managers/pages/bookings.html', {'page_obj': page_obj, 'section': 'reservations'}
+    )
 
 
 @login_required

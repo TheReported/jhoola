@@ -10,10 +10,10 @@ from .utils import generate_password
 class CleanUserData:
     def clean_email(self):
         email = self.cleaned_data['email']
-        if User.objects.filter(email=email).exclude(id=self.instance.id).exists():
-            raise forms.ValidationError('Email already in use.')
-        elif email == '':
+        if email == '':
             raise forms.ValidationError('Email is required for registration.')
+        elif User.objects.filter(email=email).exclude(id=self.instance.id).exists():
+            raise forms.ValidationError('Email already in use.')
         return email
 
     def clean_first_name(self):
@@ -26,10 +26,19 @@ class CleanUserData:
             return last_name
         raise forms.ValidationError('Last name is required for registration.')
 
+    def clean_num_guest(self):
+        if num_guest := self.cleaned_data.get('num_guest'):
+            return num_guest
+        raise forms.ValidationError('Clients in room is required for registration.')
+
 
 class LoginForm(forms.Form):
-    username = forms.CharField(label='username',widget=forms.TextInput(attrs={'placeholder': 'Username'}))
-    password = forms.CharField(label='password', widget=forms.PasswordInput(attrs={'placeholder':'Password'}))
+    username = forms.CharField(
+        label='username', widget=forms.TextInput(attrs={'placeholder': 'Username'})
+    )
+    password = forms.CharField(
+        label='password', widget=forms.PasswordInput(attrs={'placeholder': 'Password'})
+    )
 
 
 class ClientRegistrationForm(forms.ModelForm, CleanUserData):
@@ -44,7 +53,7 @@ class ClientRegistrationForm(forms.ModelForm, CleanUserData):
             MinValueValidator(Client._meta.get_field('num_guest').validators[0].limit_value),
             MaxValueValidator(Client._meta.get_field('num_guest').validators[1].limit_value),
         ],
-        initial=3,
+        initial=1,
     )
 
     def __init__(self, *args, **kwargs):
@@ -59,11 +68,12 @@ class ClientRegistrationForm(forms.ModelForm, CleanUserData):
 class ClientEditForm(forms.ModelForm, CleanUserData):
     num_guest = forms.IntegerField(
         label='Clients in room',
+        required=False,
         validators=[
             MinValueValidator(Client._meta.get_field('num_guest').validators[0].limit_value),
             MaxValueValidator(Client._meta.get_field('num_guest').validators[1].limit_value),
         ],
-        initial=3,
+        initial=Client._meta.get_field('num_guest'),
     )
 
     class Meta:

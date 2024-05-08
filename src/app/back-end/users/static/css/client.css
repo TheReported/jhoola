@@ -76,6 +76,41 @@
   text-underline-offset: 12px;
 }
 
+/* Paginator */
+
+.container.pagination {
+  margin-top: 15px;
+  display: flex;
+  justify-content: start;
+}
+
+.pagination-3 {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  
+}
+
+.page-number {
+  margin: 0 5px; 
+  
+}
+
+.page-link {
+  text-decoration: none;
+  color: white;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: black;
+
+}
+
+.page-link:hover {
+  background-color: #f0f0f0;
+}
+
+
 /*****Book Form*****/
 
 #duration_id,

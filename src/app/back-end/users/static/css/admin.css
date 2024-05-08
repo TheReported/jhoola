@@ -23,13 +23,17 @@ header, nav, .searchbar, .logo {
 }
 
 .modal-content {
-background-color: #212529;
-color: white;
+  background-color: #212529;
+  color: white;
 }
 
 a {
   text-decoration: none;
   color: white;
+}
+
+.nav-link.is-active {
+  background-color: #55555546;
 }
 
 /* .user-card {
