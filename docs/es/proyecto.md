@@ -1,14 +1,19 @@
-<center>
+<div align="center">
+
 # Dpto. INFORMÁTICA - I.E.S. PUERTO DE LA CRUZ – TELESFORO BRAVO 
+
 ***
+
 ### MÓDULO PROYECTO (PRW)
+
 ### C.F.G.S. Desarrollo de Aplicaciones Web (DAW) 
 
-TÍTULO DEL PROYECTO 
+<img src="../../src/img/Jhoola-logo3.png" width="200" />
 
-</center>
+<br>
+</br>
 
-<right>
+
 
 
 ***Autor/es:*** Abián Gustavo Castañeda Méndez, Diego Peraza Cabo, Samuel Eloy González Díaz
@@ -19,8 +24,7 @@ TÍTULO DEL PROYECTO
 
 
 
-</right>
-
+</div>
 <center>
 
 # INDICE 
