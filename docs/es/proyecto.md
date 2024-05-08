@@ -135,12 +135,16 @@ En la siguiente tabla se va a intentar hacer una estimación (imposible hacerla 
 | Tarea 2 | Desarrollo del Login de Hoteles | Se desarrolló un buscador de hoteles con autocompletado para que los clientes y administradores busquen su hotel antes de pasar al login | X horas | Marzo | Abril | 1 | 0 | 0 € (Va a ser un servicio) | Samuel |
 | Tarea 3 | Desarrollo del Login | Se desarrolló un login para el hotel mediante el cual clientes y administradores se verificarían para después poder hacer uso de la aplicación | X horas | Marzo | Abril | 3 | 0 | 0 € (Va a ser un servicio) | Abián, Diego y Samuel |
 | Tarea 4 | Desarrollo de la Zona Admin | Se desarrolló una zona de administradores desde la cual los mismos pueden gestionar los usuarios, productos y reservas de los clientes | X horas | Marzo | Mayo | 3 | 0 | 0 € (Va a ser un servicio) | Abián, Diego y Samuel |
+| Tarea 4.1 | Desarrollo del Backend de la Zona Admin | Se desarrolló la lógica de programación que hay detras zona de administradores desde la cual los mismos pueden gestionar los usuarios, productos y reservas de los clientes | X horas | Marzo | Mayo | 3 | 0 | 0 € (Va a ser un servicio) | Abián, Diego y Samuel |
+| Tarea 4.2 | Desarrollo del Frontend de la Zona Admin | Se desarrolló el como debe visualizarse la zona de administradores desde la cual los mismos pueden gestionar los usuarios, productos y reservas de los clientes | X horas | Marzo | Mayo | 2 | 0 | 0 € (Va a ser un servicio) | Abián y Samuel |
 | Tarea 5 | Desarrollo de la Zona Cliente | Se desarrolló una zona de clientes desde la cual los mismos pueden hacer reservas, consultarlas y borrarlas | X horas | Abril | Mayo | 3 | 0 | 0 € (Va a ser un servicio) | Abián, Diego y Samuel |
+| Tarea 5.1 | Desarrollo del Sistema de Pagos y el backend de la zona | Se hizo uso de Stripe con el fin de desarrollar un sistema de pagos | X horas | Abril | Mayo | 1 | 0 | 0 € (Va a ser un servicio) | Abián |
+| Tarea 5.2 | Desarrollo del frontend de la zona | Se hizo uso de HTML, CSS, JS y Bootstrap para realizar el diseño de la zona de clientes | X horas | Abril | Mayo | 1 | 0 | 0 € (Va a ser un servicio) | Samuel |
+| Tarea 5.3 | Desarrollo del selector de hamacas y la lógica tras ello | Se hizo uso de JS, backend y SVGs con el fin de desarrollar la lógica tras el selector de Hamacas | X horas | Abril | Mayo | 1 | 0 | 0 € (Va a ser un servicio) | Diego |
 | Tarea 6 | Desarrollo de la API | Se desarrolló una API para tener conectadas las distintas areas de la aplicación de manera eficiente y segura | X horas | Marzo | Marzo | 1 | 0 | 0 € (Va a ser un servicio) | Diego |
 | Tarea 7 | Despliegue de la Aplicación | Se preparó la aplicación para su despliegue automatizada mediante un script en una máquina Azure | X horas | Mayo | Mayo | 1 | 0 | 0 € (Va a ser un servicio) | Diego |
 | Tarea 8 | Migración de la Base de Datos a PostgreSQL | Se pasó la aplicación a PostgreSQL con el fin de disponer de una mayor eficiencia y seguridad | X horas | Mayo | Mayo | 1 | 0 | 0 € (Va a ser un servicio) | Diego
 | Tarea 9 | Desarrollo del Testing de la Aplicación | Se realizaron una serie de tests con el fin de asegurar el buen funcionamiento de la aplicación | X Horas | Abril | Mayo | 1 | 0 | 0 € (Va a ser un servicio) | Abián
-
 
 </center>
 
