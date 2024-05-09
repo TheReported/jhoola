@@ -175,48 +175,35 @@
 
 {% block domready %}
   <script>
+    window.addEventListener('beforeunload', (event) => {location.reload()})
     let products = document.querySelectorAll("input[name=products]")
     let hammocks = document.querySelector("#hammocks")
     let totalPrice = document.querySelector("#totalPrice")
     const checked_hammocks = []
 
-    function changeProducts(products) {
-      products.forEach((product) => { 
-        product.addEventListener('click', () => {
-          let fill = document.querySelector(`svg[name=${product.id}]`).firstElementChild.style.fill
-          if (fill !== "red"){
-            document.querySelector(`svg[name=${product.id}]`).firstElementChild.style.fill = fill == "green" ? "grey": "green"
-            const productPrice = parseFloat("{{ form.products.field.queryset.first.price }}")
-            if (product.checked){
-              localStorage.setItem('totalPrice', parseFloat(totalPrice.innerHTML) + productPrice)
-              checked_hammocks.push(product.value)
-              totalPrice.innerHTML = localStorage.getItem("totalPrice")
-              
-            } else {
-              localStorage.setItem('totalPrice', parseFloat(totalPrice.innerHTML) - productPrice)
-              let indx = checked_hammocks.indexOf(product.value)
-              totalPrice.innerHTML = localStorage.getItem("totalPrice")
-              checked_hammocks.splice(indx, 1)
-            }
+    products.forEach((product) => { 
+      product.addEventListener('click', () => {
+        let fill = document.querySelector(`svg[name=${product.id}]`).firstElementChild.style.fill
+        if (fill !== "red"){
+          document.querySelector(`svg[name=${product.id}]`).firstElementChild.style.fill = fill == "green" ? "grey": "green"
+          const productPrice = parseFloat("{{ form.products.field.queryset.first.price }}")
+          if (product.checked){
+            localStorage.setItem('totalPrice', parseFloat(totalPrice.innerHTML) + productPrice)
+            checked_hammocks.push(product.value)
+            totalPrice.innerHTML = localStorage.getItem("totalPrice")
+            
+          } else {
+            localStorage.setItem('totalPrice', parseFloat(totalPrice.innerHTML) - productPrice)
+            let indx = checked_hammocks.indexOf(product.value)
+            totalPrice.innerHTML = localStorage.getItem("totalPrice")
+            checked_hammocks.splice(indx, 1)
           }
+        }
 
-          hammocks.innerHTML = checked_hammocks.join(", ")
-        })
-      }
-    )}
-
-    window.addEventListener('pagehide', (event) => {
-      if (event.persisted){
-        location.reload()
-        products.forEach((product) => {
-          console.log(product.checked)
-          product.checked = false
-        })
-        const checked_hammocks = []
-      }
-    })
-    
-    changeProducts(products)
+        hammocks.innerHTML = checked_hammocks.join(", ")
+      })
+    }
+  )
 
   </script>
 {% endblock %}
