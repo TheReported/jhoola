@@ -205,7 +205,7 @@
       }
     )}
 
-    window.addEventListener('pageshow', (event) => {
+    window.addEventListener('pagehide', (event) => {
       if (event.persisted){
         location.reload()
         products.forEach((product) => {
