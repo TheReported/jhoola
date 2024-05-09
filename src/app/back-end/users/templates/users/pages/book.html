@@ -175,15 +175,10 @@
 
 {% block domready %}
   <script>
-    window.addEventListener("beforeunload", () => {
-      location.reload()
-    })
     let products = document.querySelectorAll("input[name=products]")
     let hammocks = document.querySelector("#hammocks")
     let totalPrice = document.querySelector("#totalPrice")
     const checked_hammocks = []
-
-    {% comment %} Función que cambia los productos y añade el valor total y la id de la hamaca {% endcomment %}
 
     function changeProducts(products) {
       products.forEach((product) => { 
@@ -205,11 +200,17 @@
         })
       }
     )}
-    {% comment %} Evento para controlar cuando se va para atras sin terminar la reserva {% endcomment %}
+
+    window.addEventListener('pageshow', (event) => {
+      if (event.persisted){
+        location.reload()
+        products.forEach((product) => {
+          product.checked = false
+        })
+      }
+    })
     
     changeProducts(products)
-    
-
 
   </script>
 {% endblock %}
