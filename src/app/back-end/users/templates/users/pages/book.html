@@ -205,7 +205,7 @@
     {% comment %} Evento para controlar cuando se va para atras sin terminar la reserva {% endcomment %}
     window.addEventListener("beforeunload", () => {
       location.reload()
-      changeProducts(products)
+      const checked_hammocks = []
     })
     changeProducts(products)
     
