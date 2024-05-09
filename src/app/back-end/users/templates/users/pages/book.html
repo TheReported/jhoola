@@ -175,13 +175,15 @@
 
 {% block domready %}
   <script>
-    {% comment %} Evento para controlar cuando se va para atras sin terminar la reserva {% endcomment %}
-    window.addEventListener("beforeunload", () => {window.location.reload()})
     let products = document.querySelectorAll("input[name=products]")
     let hammocks = document.querySelector("#hammocks")
     let totalPrice = document.querySelector("#totalPrice")
     const checked_hammocks = []
-    products.forEach((product) => { 
+
+    {% comment %} Función que cambia los productos y añade el valor total y la id de la hamaca {% endcomment %}
+
+    function changeProducts(products) {
+      products.forEach((product) => { 
         product.addEventListener('click', () => {
           let fill = document.querySelector(`svg[name=${product.id}]`).firstElementChild.style.fill
           if (fill !== "red"){
@@ -199,7 +201,14 @@
           }
         })
       }
-    )
+    )}
+    {% comment %} Evento para controlar cuando se va para atras sin terminar la reserva {% endcomment %}
+    window.addEventListener("beforeunload", () => {
+      location.reload()
+      changeProducts(products)
+    })
+    changeProducts(products)
+    
 
 
   </script>
