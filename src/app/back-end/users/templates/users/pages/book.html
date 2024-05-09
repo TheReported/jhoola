@@ -205,8 +205,10 @@
       if (event.persisted){
         location.reload()
         products.forEach((product) => {
+          console.log(product.checked)
           product.checked = false
         })
+        const checked_hammocks = []
       }
     })
     
