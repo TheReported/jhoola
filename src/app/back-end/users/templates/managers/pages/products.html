@@ -1,8 +1,21 @@
 {% extends "managers/base.html" %}
+
+{% block title %}Products{% endblock title %}
+
 {% load static %}
 {% block content %}
+<div class="product p-4 d-flex justify-content-center">
+  <div class="card" style="width: 18rem;">
+    <img src="{% static "imgs/hammock.jpg" %}" class="card-img-top" alt="Hammocks">
+    <div class="card-body text-white">
+      <h5 class="card-title">Hammocks</h5>
+      <p class="card-text">Experience bliss in our hotel's classic lounge chairs. Sink into relaxation as you bask in the sun's warmth, surrounded by comfort and tranquility.</p>
+      <a href="#" class="btn btn-warning">Detail</a>
+    </div>
+  </div>
+</div>
 
-<div class="container-fluid py-4">
+{% comment %} <div class="container-fluid py-4">
   <div class="row">
     <div class="col-3 col-xs-8"></div>
 
@@ -44,7 +57,6 @@
       </div>
     </div>
   </div>
-</div>
-{% include "managers/paginator.html" %}
+</div> {% endcomment %}
 
 {% endblock %}

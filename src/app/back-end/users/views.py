@@ -248,6 +248,7 @@ def bookings_manager_view(request):
 def search_manager_view(request):
     form = SearchForm(request.GET)
     clients = []
+    bookings = []
     selected_hotel = request.session.get('hotel_session_name')
     hotel = Hotel.objects.get(name=selected_hotel)
 
@@ -264,12 +265,16 @@ def search_manager_view(request):
             .exclude(user__groups__name='HotelManagers')
         )
 
-    paginator = Paginator(clients, 8)
+        bookings = Booking.objects.filter(Q(id__icontains=query)).distinct()
+
+    client_paginator = Paginator(clients, 7)
+    booking_paginator = Paginator(bookings, 7)
     page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    clients = client_paginator.get_page(page_number)
+    bookings = booking_paginator.get_page(page_number)
 
     return render(
         request,
         'managers/pages/search_list.html',
-        {'form': form, 'page_obj': page_obj},
+        {'form': form, 'bookings': bookings, 'clients': clients},
     )

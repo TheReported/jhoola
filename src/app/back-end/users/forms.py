@@ -42,6 +42,10 @@ class LoginForm(forms.Form):
 
 
 class ClientRegistrationForm(forms.ModelForm, CleanUserData):
+    def __init__(self, *args, **kwargs):
+        super(ClientRegistrationForm, self).__init__(*args, **kwargs)
+        self.fields['password'].initial = generate_password()
+
     password = forms.CharField(
         label='Password',
         validators=[validate_password],
@@ -56,16 +60,18 @@ class ClientRegistrationForm(forms.ModelForm, CleanUserData):
         initial=1,
     )
 
-    def __init__(self, *args, **kwargs):
-        super(ClientRegistrationForm, self).__init__(*args, **kwargs)
-        self.fields['password'].initial = generate_password()
-
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'email']
 
 
 class ClientEditForm(forms.ModelForm, CleanUserData):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance:
+            initial_num_guest = self.instance.client.num_guest
+            self.fields['num_guest'].initial = initial_num_guest
+
     num_guest = forms.IntegerField(
         label='Clients in room',
         required=False,
@@ -73,7 +79,6 @@ class ClientEditForm(forms.ModelForm, CleanUserData):
             MinValueValidator(Client._meta.get_field('num_guest').validators[0].limit_value),
             MaxValueValidator(Client._meta.get_field('num_guest').validators[1].limit_value),
         ],
-        initial=Client._meta.get_field('num_guest'),
     )
 
     class Meta:
