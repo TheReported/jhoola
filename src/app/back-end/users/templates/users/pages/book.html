@@ -175,6 +175,9 @@
 
 {% block domready %}
   <script>
+    window.addEventListener("beforeunload", () => {
+      location.reload()
+    })
     let products = document.querySelectorAll("input[name=products]")
     let hammocks = document.querySelector("#hammocks")
     let totalPrice = document.querySelector("#totalPrice")
@@ -203,10 +206,7 @@
       }
     )}
     {% comment %} Evento para controlar cuando se va para atras sin terminar la reserva {% endcomment %}
-    window.addEventListener("beforeunload", () => {
-      location.reload()
-      const checked_hammocks = []
-    })
+    
     changeProducts(products)
     
 
