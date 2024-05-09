@@ -129,25 +129,26 @@ https://github.com/users/TheReported/projects/1/views/4
 
 ### 6. TAREAS, RESUMEN DE RECURSOS HUMANOS Y MATERIALES. <a name="id6"></a>
 
-En la siguiente tabla se va a intentar hacer una estimación (imposible hacerla exacta) de las fechas en las que se trabajó en las distintas areas del proyecto y a su vez el tiempo que se tardó.
+En la siguiente tabla se va a intentar hacer una estimación (imposible hacerla exacta) de las fechas en las que se trabajó en las distintas áreas del proyecto y a su vez el tiempo que se tardó.
 <center>
 
 | Tarea | Título | Descripción y Metodología  | Duración | Fecha Ini | Fecha Fin | Recursos Humanos | Recursos Materiales | Coste | Responsable |
 |-------|--------|----------------------------|----------|-----------|-----------|------------------|---------------------|-------|-------------|
 | Tarea 1 | Desarrollo de la Landing Page | Se desarrolló una página de inicio para la aplicación en la que los clientes pueden encontrar información de nuestro proyecto, como contactarnos, etc. | 4-5 horas | Marzo | Marzo | 1 | 0 | 0 € (Va a ser un servicio) | Abián |
-| Tarea 2 | Desarrollo del Login de Hoteles | Se desarrolló un buscador de hoteles con autocompletado para que los clientes y administradores busquen su hotel antes de pasar al login | X horas | Marzo | Abril | 1 | 0 | 0 € (Va a ser un servicio) | Samuel |
+| Tarea 2 | Desarrollo del Login de Hoteles | Se desarrolló un buscador de hoteles con autocompletado para que los clientes y administradores busquen su hotel antes de pasar al login | 4-5 horas | Marzo | Abril | 1 | 0 | 0 € (Va a ser un servicio) | Samuel |
 | Tarea 3 | Desarrollo del Login Principal | Se desarrolló un login para el hotel mediante el cual clientes y administradores se verificarían para después poder hacer uso de la aplicación | 4 horas | Marzo | Abril | 3 | 0 | 0 € (Va a ser un servicio) | Abián, Diego y Samuel |
-| Tarea 4 | Desarrollo de la Zona Admin | Se desarrolló una zona de administradores desde la cual los mismos pueden gestionar los usuarios, productos y reservas de los clientes | X horas | Marzo | Mayo | 3 | 0 | 0 € (Va a ser un servicio) | Abián, Diego y Samuel |
+| Tarea 4 | Desarrollo de la Zona Admin | Se desarrolló una zona de administradores desde la cual los mismos pueden gestionar los usuarios, productos y reservas de los clientes | 12-16 horas | Marzo | Mayo | 3 | 0 | 0 € (Va a ser un servicio) | Abián, Diego y Samuel |
 | Tarea 4.1 | Desarrollo del Backend de la Zona Admin | Se desarrolló la lógica de programación que hay detras zona de administradores desde la cual los mismos pueden gestionar los usuarios, productos y reservas de los clientes | 5-6 horas | Marzo | Mayo | 3 | 0 | 0 € (Va a ser un servicio) | Abián, Diego y Samuel |
-| Tarea 4.2 | Desarrollo del Frontend de la Zona Admin | Se desarrolló el como debe visualizarse la zona de administradores desde la cual los mismos pueden gestionar los usuarios, productos y reservas de los clientes | X horas | Marzo | Mayo | 2 | 0 | 0 € (Va a ser un servicio) | Abián y Samuel |
-| Tarea 5 | Desarrollo de la Zona Cliente | Se desarrolló una zona de clientes desde la cual los mismos pueden hacer reservas, consultarlas y borrarlas | X horas | Abril | Mayo | 3 | 0 | 0 € (Va a ser un servicio) | Abián, Diego y Samuel |
-| Tarea 5.1 | Desarrollo del Sistema de Pagos y el backend de la zona | Se hizo uso de Stripe con el fin de desarrollar un sistema de pagos | X horas | Abril | Mayo | 1 | 0 | 0 € (Va a ser un servicio) | Abián |
-| Tarea 5.2 | Desarrollo del frontend de la zona | Se hizo uso de HTML, CSS, JS y Bootstrap para realizar el diseño de la zona de clientes | X horas | Abril | Mayo | 1 | 0 | 0 € (Va a ser un servicio) | Samuel |
+| Tarea 4.2 | Desarrollo del Frontend de la Zona Admin | Se desarrolló el como debe visualizarse la zona de administradores desde la cual los mismos pueden gestionar los usuarios, productos y reservas de los clientes | 7 - 8 horas | Marzo | Mayo | 2 | 0 | 0 € (Va a ser un servicio) | Abián y Samuel |
+| Tarea 5 | Desarrollo de la Zona Cliente | Se desarrolló una zona de clientes desde la cual los mismos pueden hacer reservas, consultarlas y borrarlas | 8-11 horas | Abril | Mayo | 3 | 0 | 0 € (Va a ser un servicio) | Abián, Diego y Samuel |
+| Tarea 5.1 | Desarrollo del Sistema de Pagos y el backend de la zona | Se hizo uso de Stripe con el fin de desarrollar un sistema de pagos | 4-6 horas | Abril | Mayo | 1 | 0 | 0 € (Va a ser un servicio) | Abián, Samuel |
+| Tarea 5.2 | Desarrollo del frontend de la zona | Se hizo uso de HTML, CSS, JS y Bootstrap para realizar el diseño de la zona de clientes | 4 horas | Abril | Mayo | 1 | 0 | 0 € (Va a ser un servicio) | Samuel |
 | Tarea 5.3 | Desarrollo del selector de hamacas y la lógica tras ello | Se hizo uso de JS, backend y SVGs con el fin de desarrollar la lógica tras el selector de Hamacas | 4 horas | Abril | Mayo | 1 | 0 | 0 € (Va a ser un servicio) | Diego |
 | Tarea 6 | Desarrollo de la API | Se desarrolló una API para tener conectadas las distintas areas de la aplicación de manera eficiente y segura | 2 horas | Marzo | Marzo | 1 | 0 | 0 € (Va a ser un servicio) | Diego |
 | Tarea 7 | Despliegue de la Aplicación | Se preparó la aplicación para su despliegue automatizada mediante un script en una máquina Azure | 1 hora | Mayo | Mayo | 1 | 0 | 0 € (Va a ser un servicio) | Diego |
 | Tarea 8 | Migración de la Base de Datos a PostgreSQL | Se pasó la aplicación a PostgreSQL con el fin de disponer de una mayor eficiencia y seguridad | 1 hora | Mayo | Mayo | 1 | 0 | 0 € (Va a ser un servicio) | Diego
 | Tarea 9 | Desarrollo del Testing de la Aplicación | Se realizaron una serie de tests con el fin de asegurar el buen funcionamiento de la aplicación | 2 Horas | Abril | Mayo | 1 | 0 | 0 € (Va a ser un servicio) | Abián
+| Tarea 10 | Responsividad Final sobre la Aplicación | Se aplicó responsividad sobre toda la aplicación. | 10-12 Horas | Mayo | Mayo | 1 | 0 | 0 € (Va a ser un servicio) | Samuel
 
 </center>
 
@@ -210,7 +211,7 @@ Se enviarán encuestas a los clientes para evaluar su satisfacción con el proye
 Se fomentará un ambiente sano dentro del equipo, donde los miembros puedan compartir sus ideas, preocupaciones y sugerencias para mejorar el proceso y el producto final.
 Implementando estas acciones de seguimiento, evaluación y control de calidad, el equipo podrá estar en sintonía con el progreso del proyecto, identificar y abordar casos inesperados de manera oportuna y asegurar la entrega de un producto de alta calidad que cumpla con los requisitos y expectativas del cliente.
 
-### 9.  CLAUSULAS. <a name="id9"></a>
+### 9.  CLÁUSULAS. <a name="id9"></a>
 
 #### 9.1 Entrega y plazos
 
@@ -265,15 +266,28 @@ Implementando estas acciones de seguimiento, evaluación y control de calidad, e
 - [Docs Python](https://docs.python.org/3/)
 - Django 4 By Example
 - [Developer Mozilla](https://developer.mozilla.org)
+- [Material Icons](https://fonts.google.com/icons)
+- [Font Awesome](https://fontawesome.com/)
+- [Stripe](https://stripe.com/es)
+- [Django Cors-Headers](https://pypi.org/project/django-cors-headers/)
+- [Celery](https://docs.celeryq.dev/en/stable/)
+- [Redis](https://redis.io/es/)
+- [Django REST framework](https://www.django-rest-framework.org/)
     
 ### 11.  GLOSARIO. <a name="id11"></a>
 
 **- API (Interfaz de Programación de Aplicaciones):** Un conjunto de reglas y definiciones que permite a las aplicaciones de software comunicarse entre sí.
+
 **- Backend:** La parte de una aplicación web que se encarga de procesar las solicitudes del cliente, interactuar con la base de datos y realizar la lógica de negocio.
+
 **- Frontend:** La parte de una aplicación web que interactúa directamente con el usuario, proporcionando la interfaz gráfica con la que interactúa.
+
 **- Testing:** Proceso de evaluación de un sistema o aplicación para verificar que cumple con los requisitos especificados y para identificar defectos o errores.
+
 **- Beta-Testing:** Es una etapa en el desarrollo de un producto, ya sea software, hardware o cualquier otro tipo de producto, en la que se pone a disposición una versión preliminar del mismo a un grupo limitado de usuarios externos.
+
 **- Token:** Es un código único y temporal que se genera y se envía al usuario como parte de un proceso de autenticación.
+
 **- Landing Page:** Es una página web diseñada específicamente para recibir y convertir a los visitantes en leads o clientes potenciales.
 
 ### 12.  ANEXOS. <a name="id12"></a>
