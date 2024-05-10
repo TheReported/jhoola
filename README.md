@@ -10,5 +10,5 @@
 
 - [Preliminary project](https://github.com/TheReported/jhoola/blob/development/docs/en/preliminaryproject.md)
 - [Diagrams](https://github.com/TheReported/jhoola/blob/development/docs/en/diagrams/README.md)
-- [Project Documentation]()
-- [Final Report]()
+- [Project Documentation](https://github.com/TheReported/jhoola/blob/development/docs/en/project.md)
+- [Final Report](https://github.com/TheReported/jhoola/blob/development/docs/en/finalreport.md)
