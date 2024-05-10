@@ -212,12 +212,8 @@ and usability).
     
 ### 11.  LESSONS LEARNED TO CONSIDER IN FUTURE PROJECTS. <a name="id11"></a>
 
-**Abian:** I think the project has been very useful for me because it has put my colleagues and me in difficult decision-making situations and conflicts that 
-have helped us to improve the project and also to improve as people and in our work environments.
+As a result of this project, we gained a great deal of knowledge and a first contact with what a real work environment could be like, beyond the internship. We have realized that good organization and teamwork are fundamental aspects for the good development of any project, and that we must improve for the future. In addition, having good communication at all times is crucial, to be able to carry out in an optimal way the decisions that we had to make, as in our case, for example, with the elimination of the frontend technology due to the lack of knowledge and problems that it was giving us.
 
 ### 12.  CONCLUSIONS, COMMENTS, AND FINAL ASSESSMENT. <a name="id12"></a>
 
-**Abián:** I believe that for this type of projects, knowing how little time there is since we also have to go to work, it is not fair to have the enough that 
-has been provided for it and therefore it should be focused that the work on this project starts well before Christmas in order to achieve the objectives in a 
-more realistic and calm environment. However, as far as we have managed to move forward and we have taken away a very good experience that will stay with us 
-forever.
+We believe that the project together with the internship has given us a great experience and knowledge. We were left with a bad taste for not knowing how to get the most out of the application, not using a front-end framework. As we mentioned before, there was a moment when we were a bit in trouble and we decided to make the whole application in Django with Javascript, Html and Css. In this sense, we believe that perhaps, we could prioritize the teaching of a front-end framework in the second year to reinforce this point.
