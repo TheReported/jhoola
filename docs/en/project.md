@@ -18,7 +18,7 @@
 
 ***Author(s):*** Abián Gustavo Castañeda Méndez, Diego Peraza Cabo, Samuel Eloy González Díaz
 
-***Date:*** 10 de Mayo de 2024
+***Date:*** May 10, 2024
 
 ***Tutor:*** Alejandro Martín Zarza
 
