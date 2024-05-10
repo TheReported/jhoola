@@ -307,7 +307,7 @@ def check_booking_manager_view(request):
             hotel = Hotel.objects.get(name=selected_hotel)
             actual_datetime = timezone.now().date()
             try:
-                Booking.objects.get(
+                booking = Booking.objects.get(
                     id=booking_id,
                     user__user=client_id,
                     date=actual_datetime,
@@ -315,7 +315,25 @@ def check_booking_manager_view(request):
                     paid=True,
                 )
             except Booking.DoesNotExist:
-                return render(request, 'managers/pages/invalid_booking.html')
-            return render(request, 'managers/pages/valid_booking.html')
+                message = '''The scanned reservation does not exist. 
+Check if the information is correct, and if necessary consult the receptionist.'''
+                return render(
+                    request,
+                    'managers/pages/check_booking.html',
+                    {
+                        'section': "Invalid Booking",
+                        'valid_booking': False,
+                        'message': message,
+                    },
+                )
+            return render(
+                request,
+                'managers/pages/check_booking.html',
+                {
+                    'section': "Valid Booking",
+                    'valid_booking': True,
+                    'booking': booking,
+                },
+            )
         return redirect("booking:booking_list")
     return redirect("main")
