@@ -9,7 +9,7 @@
             {% include "users/messages/message.html" %}
         {% endblock messages %}
 
-        <div class="row mt-4 text-center">
+        <div class="row mt-4 text-white text-center">
             <h2>Choose your date and time slot:</h2>
         </div>
         <form method="post">
@@ -18,14 +18,14 @@
                 <div class="col-12 d-flex justify-content-center">
                     <div class="reservation-form-filter">
                         <p class="d-flex flex-column">
-                            <label>Date:</label>
+                            <label class="text-white">Date:</label>
                             {{ form.date }}
                         <p class="d-flex flex-column">
-                            <label>Time slot:</label>
+                            <label class="text-white">Time slot:</label>
                             {{form.duration}}
                         </p>
-                        <button type="submit" class="btn btn-primary">Next</button>
-                        <hr>
+                        <button type="submit" class="text-white btn btn-dark">Next</button>
+                        <hr class="text-white">
                     </div>
                 </div>
             </div>

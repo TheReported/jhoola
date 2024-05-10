@@ -188,4 +188,4 @@ def filter_view(request, username):
                     messages.error(request, error)
     else:
         form = BookingFilterForm(user=client)
-    return render(request, 'users/pages/filter.html', {'section': 'Book', 'form': form})
+    return render(request, 'users/pages/filter.html', {'section': 'Filter', 'form': form})

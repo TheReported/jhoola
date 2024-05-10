@@ -67,6 +67,11 @@ body {
   display: inline-block;
   position: relative;
 }
+
+.navbar-toggler-icon {
+  filter: invert(100%);
+}
+
 .nav-link:after {
   bottom: -8;
   content: "";
@@ -88,10 +93,6 @@ body {
   text-decoration-color: white;
   text-decoration-thickness: 2px;
   text-underline-offset: 12px;
-}
-
-.card-body {
-  background-color: rgb(255, 255, 255);
 }
 
 /* Paginator */

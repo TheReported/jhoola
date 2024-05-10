@@ -43,18 +43,8 @@
     </tbody>
   </table>
 </div>
-  {% include "managers/paginator.html" %}
+  {% include "managers/admin_paginator.html" %}
+
   {% block domready %}
-  <script>
-    document.addEventListener("DOMContentLoaded", (event) => {
-      document
-        .querySelector("#search-bookings-btn")
-        .addEventListener("click", (event) => {
-          event.preventDefault();
-          const data = document.querySelector("#search-bookings-field").value;
-          window.location.href = `/manager/bookings/search/${data}/`;
-      });
-    });
-  </script>
   {% endblock domready %}
 {% endblock %}

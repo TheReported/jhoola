@@ -13,7 +13,7 @@ header, nav, .searchbar, .logo {
   width: 100%;
 }
 
-#aside {
+#aside, .main-content {
   height: calc(100vh - 75px - 1px);
   overflow: auto;
 }
@@ -150,7 +150,7 @@ hr {
   display: flex;
 }
 
-a.page-link {
+a.page-link, a.page-link:hover  {
   color: white;
 }
 
@@ -164,12 +164,15 @@ a.page-link {
   padding: 5px 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  background-color: black;
+  background-color: #343A40;
+}
 
+.bg-black {
+  background-color: black;
 }
 
 .page-link:hover {
-  background-color: #f0f0f0;
+  background-color: black;
 }
 
 /* Form */
