@@ -48,15 +48,5 @@
 </div>
 
 {% include "managers/paginator.html" %}
-  <script>
-    document.addEventListener("DOMContentLoaded", (event) => {
-      document
-        .querySelector("#search-users-btn")
-        .addEventListener("click", (event) => {
-          event.preventDefault();
-          const data = document.querySelector("#search-users-field").value;
-          window.location.href = `/manager/users/search/${data}/`;
-        });
-    });
-  </script>
+
 {% endblock %}

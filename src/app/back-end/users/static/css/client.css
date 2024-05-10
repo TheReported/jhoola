@@ -2,6 +2,20 @@
 /* Naranja logo: #FE9854 */
 
 
+html {
+  background-color: #ffffff;
+}
+
+body { 
+  padding:0;
+  margin:0;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../imgs/beach.webp);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh; 
+}
+
 .site-map {
   max-height: 600px;
 }
@@ -48,7 +62,7 @@
 }
 
 .nav-link {
-  color: black;
+  color: white;
   text-decoration: none;
   display: inline-block;
   position: relative;
@@ -60,7 +74,7 @@
   height: 2px;
   left: 50%;
   position: absolute;
-  background: black;
+  background: white;
   transition: width 0.3s ease 0s, left 0.3s ease 0s;
   width: 0;
 }
@@ -71,7 +85,7 @@
 
 .nav-link.is-active {
   text-decoration: underline;
-  text-decoration-color: black;
+  text-decoration-color: white;
   text-decoration-thickness: 2px;
   text-underline-offset: 12px;
 }
@@ -88,12 +102,10 @@
   list-style: none;
   padding: 0;
   display: flex;
-  
 }
 
 .page-number {
   margin: 0 5px; 
-  
 }
 
 .page-link {
@@ -103,7 +115,10 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: black;
+}
 
+a.page-link {
+  color: black;
 }
 
 .page-link:hover {
@@ -133,8 +148,4 @@ select {
   border-left: 1px solid #ccc;
   height: 90%;
   margin: 0 20px; 
-}
-/*****Paginator*****/
-a.page-link {
-  color: black;
 }

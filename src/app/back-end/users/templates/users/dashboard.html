@@ -21,13 +21,13 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto align-items-center">
           <li class="nav-item m-2">
-            <a class="nav-link mx-2 text-dark p-0 {% if section == "My Bookings" %}is-active{% endif %}" href="{% url 'booking:booking_list' request.user.username %}">My reservations</a>
+            <a class="nav-link mx-2 text-dark p-0 text-white {% if section == "My Bookings" %}is-active{% endif %}" href="{% url 'booking:booking_list' request.user.username %}">My reservations</a>
           </li>
           <li class="nav-item m-2">
-            <a class="nav-link mx-2 text-dark p-0 {% if section == "Book" %}is-active{% endif %}" href="{% url 'booking:client_book_filter' request.user.username %}">New reserve</a>
+            <a class="nav-link mx-2 text-dark p-0 text-white{% if section == "Book" %}is-active{% endif %}" href="{% url 'booking:client_book_filter' request.user.username %}">New reserve</a>
         </li>
           <li class="nav-item m2">
-            <a class="btn btn-black btn-rounded" href="{% url 'logout' %}"><i class="fa fa-user me-1"></i>Log Out</a>
+            <a class="btn btn-black btn-rounded text-white" href="{% url 'logout' %}"><i class="fa fa-user me-1"></i>Log Out</a>
           </li>
         </ul>
       </div>
@@ -41,7 +41,7 @@
 
 <footer class="footer mt-auto py-3">
   <div class="container text-center">
-    <span class="text-black">© 2024 <strong>Jhoola</strong></span>
+    <span class="text-white">© 2024 <strong>Jhoola</strong></span>
   </div>
 </footer>
 

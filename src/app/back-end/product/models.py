@@ -18,7 +18,7 @@ class Product(models.Model):
         FREE = 'FR', 'Free'
         OCCUPIED = 'OC', 'Occupied'
 
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30, default='Hammock')
     price = models.DecimalField(max_digits=4, decimal_places=2, null=False, default=2.5)
     avatar = models.CharField(max_length=100, blank=True)
     status = models.CharField(max_length=2, choices=Status.choices, default='FR')
