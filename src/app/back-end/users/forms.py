@@ -58,6 +58,7 @@ class ClientRegistrationForm(forms.ModelForm, CleanUserData):
             MaxValueValidator(Client._meta.get_field('num_guest').validators[1].limit_value),
         ],
         initial=1,
+        min_value=1,
     )
 
     class Meta:
@@ -79,6 +80,7 @@ class ClientEditForm(forms.ModelForm, CleanUserData):
             MinValueValidator(Client._meta.get_field('num_guest').validators[0].limit_value),
             MaxValueValidator(Client._meta.get_field('num_guest').validators[1].limit_value),
         ],
+        min_value=1,
     )
 
     class Meta:

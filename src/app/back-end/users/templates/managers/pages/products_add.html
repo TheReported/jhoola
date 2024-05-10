@@ -6,7 +6,7 @@
           arrow_back
       </span>
   </a>
-  <h2 class="font-weight-bolder p-4 pb-0 m-0 text-start text-white">Create product</h2>
+  <h2 class="font-weight-bolder p-4 pb-0 m-0 text-start text-white">Create products</h2>
 </div>
 
 <div class="form-container d-flex justify-content-start col-12 p-4">
@@ -28,6 +28,14 @@
               {{ product_add_form.price }}
           </div>
       </div>
+      <div class="form-group d-flex flex-lg-row flex-column mb-4">
+        <div class="django-label col-1 pe-2">
+            Quantity:
+        </div>
+        <div class="django-input pe-4">
+            {{ product_add_form.quantity }}
+        </div>
+    </div>
       <button class="btn btn-block bg-warning justify-content-center" type="submit">Create</button>
   </form>
 </div>

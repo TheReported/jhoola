@@ -188,12 +188,13 @@ def products_add_manager_view(request):
     if request.method == 'POST':
         product_add_form = ProductCreationForm(request.POST)
         if product_add_form.is_valid():
-            product = product_add_form.save(commit=False)
-            product.hotel = hotel
-            product.save()
-            messages.success(request, 'A new product has been successfully created.')
+            cd = product_add_form.cleaned_data
+            name, price, quantity = cd['name'], cd['price'], cd['quantity']
+            for _ in range(quantity):
+                Product.objects.create(name=name, price=price, hotel=hotel)
+            messages.success(request, 'New products has been successfully created.')
             return redirect('users:manager_products')
-        messages.error(request, "New product couldn't be created")
+        messages.error(request, "New products couldn't be created")
     else:
         product_add_form = ProductCreationForm()
     return render(
