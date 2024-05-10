@@ -17,8 +17,8 @@
             <span>Booking ID: {{ booking.id }}</span>
             <span>Client: {{ booking.user.fullname }}</span>
             <span>Date: {{ booking.date }}</span>
-            <span>Duration: {{ booking.duration }} </span>
-            <span>Hammocks: {{ booking.products|join:", " }}</span>
+            <span>Duration: {{ booking.get_duration_display }} </span>
+            <span>Hammocks: {{ booking.products.all()|join:", " }}</span>
 
         {% else %}
             <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" fill="#DB2955" class="bi bi-cart-x-fill" viewBox="0 0 16 16">
