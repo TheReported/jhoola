@@ -16,7 +16,7 @@
             <img src="{% static "imgs/valid_booking.svg" %}" alt="">
             <span>Hotel: {{ booking.user.hotel}} </span>
             <span>Booking ID: {{ booking.id }}</span>
-            <span>Client: {{ booking.user.user.get_full_name() }}</span>
+            <span>Client: {{ booking.user.fullname }}</span>
             <span>Date: {{ booking.date }}</span>
             <span>Duration: {{ booking.duration }} </span>
             <span>Hammocks: {{ booking.products|join:", " }}</span>
