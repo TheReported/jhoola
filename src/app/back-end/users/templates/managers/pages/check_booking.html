@@ -18,7 +18,7 @@
             <span>Client: {{ booking.user.fullname }}</span>
             <span>Date: {{ booking.date }}</span>
             <span>Duration: {{ booking.get_duration_display }} </span>
-            <span>Hammocks: {% for product in booking.products.all %}{{ product.id }}{% if not forloop.last %},{% else %}){% endif %}
+            <span>Hammocks: ({% for product in booking.products.all %}{{ product.id }}{% if not forloop.last %},{% else %}){% endif %}
                 {% endfor %}</span>
 
         {% else %}
