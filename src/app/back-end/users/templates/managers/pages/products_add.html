@@ -1,29 +1,34 @@
 {% extends "managers/base.html" %}
 {% block content %}
-<div class="container pt-4">
-  <div class="row justify-content-center">
-      <div class="col-xs-8 col-sm-2"></div>
-      <div class="col-md-8 col-xs-4 col-sm-4">
-          <div class="card edit mt-4">
-              <div class="card-body edit">
-              <form action="{% url "users:manager_products_add" %}" method="post" id="createform">
-                {% csrf_token %}
-                <div class="form-group">
-                  <div class="custom-input">
-                    <i class="fas fa-box"></i> {{ product_add_form.name.label_tag }} {{ product_add_form.name }}
-                  </div>
-                </div>
-                <br>
-                <div class="form-group">
-                  <div class="custom-input">
-                    <i class="fas fa-money-bill"></i> {{ product_add_form.price.label_tag }} {{ product_add_form.price }}
-                  </div>
-                </div>
-                <br>
-                <button class="btn-lg btn-block bg-warning justify-content-center" type="submit">Create Product</button>
-              </form>
+<div class="admin-head d-flex flex-row ">
+  <a href="javascript:history.back()" class="d-flex align-items-center ps-4 pt-4 pb-0 text-end">
+      <span class="material-symbols-outlined m-0 text-end text-white">
+          arrow_back
+      </span>
+  </a>
+  <h2 class="font-weight-bolder p-4 pb-0 m-0 text-start text-white">Create product</h2>
+</div>
+
+<div class="form-container d-flex justify-content-start col-12 p-4">
+  <form action="{% url "users:manager_products_add" %}"  method="post" id="edit-user-form" class="col-10" novalidate>
+      {% csrf_token %}
+      <div class="form-group d-flex flex-lg-row flex-column mb-4">
+          <div class="django-label col-lg-1 col-12 pe-2 pt-2 pt-lg-0">
+              Name: 
           </div>
-        </div>
+          <div class="django-input pe-4">
+              {{ product_add_form.name }}
+          </div>
       </div>
+      <div class="form-group d-flex flex-lg-row flex-column mb-4">
+          <div class="django-label col-1 pe-2">
+              Price:
+          </div>
+          <div class="django-input pe-4">
+              {{ product_add_form.price }}
+          </div>
+      </div>
+      <button class="btn btn-block bg-warning justify-content-center" type="submit">Create</button>
+  </form>
 </div>
 {% endblock %}

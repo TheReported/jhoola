@@ -361,12 +361,14 @@ hr {
   list-style: none;
   padding: 0;
   display: flex;
-  
+}
+
+a.page-link {
+  color: white;
 }
 
 .page-number {
   margin: 0 5px; 
-  
 }
 
 .page-link {
