@@ -24,7 +24,7 @@
             <a class="nav-link mx-2 p-0 text-white {% if section == "My Bookings" %}is-active{% endif %}" href="{% url 'booking:booking_list' request.user.username %}">My reservations</a>
           </li>
           <li class="nav-item m-2">
-            <a class="nav-link mx-2 p-0 text-white {% if section == "Filter" %}is-active{% endif %}" href="{% url 'booking:client_book_filter' request.user.username %}">New reserve</a>
+            <a class="nav-link mx-2 p-0 text-white {% if section == "Reserve" %}is-active{% endif %}" href="{% url 'booking:client_book_filter' request.user.username %}">Reserve</a>
         </li>
           <li class="nav-item m2">
             <a class="btn btn-black btn-rounded text-white" href="{% url 'logout' %}"><i class="fa fa-user me-1"></i>Log Out</a>

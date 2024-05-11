@@ -155,3 +155,7 @@ select {
   height: 90%;
   margin: 0 20px; 
 }
+
+.site-map, .site-map-aside {
+  background-color: #0000001f;
+}

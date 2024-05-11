@@ -135,7 +135,7 @@ def booking_view(request, username):
         'users/pages/book.html',
         {
             'form': form,
-            'section': 'Book',
+            'section': 'Reserve',
             'occupied_products': occupied_products,
             'duration': formatted_duration,
             'date': formatted_date,
@@ -188,4 +188,4 @@ def filter_view(request, username):
                     messages.error(request, error)
     else:
         form = BookingFilterForm(user=client)
-    return render(request, 'users/pages/filter.html', {'section': 'Filter', 'form': form})
+    return render(request, 'users/pages/filter.html', {'section': 'Reserve', 'form': form})

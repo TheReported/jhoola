@@ -10,12 +10,12 @@
   {% include "users/messages/message.html" %}
 {% endblock messages %}
 
-  <div class="row mt-4 text-white">
+  <div class="row mt-4 text-white mb-4">
     <h2>Select your hammocks:</h2>
   </div>
-  <form method="post">
+  <form method="post" class="choose-hammock">
     {% csrf_token %}
-    <div class="row mt-4 p-2">
+    <div class="row p-2">
       <div class="site-map col-lg-10 col-12 border border-1 rounded d-flex flex-row">
         <div class="col-md-4 col-5 products d-flex flex-wrap justify-content-center">
           {% for product in form.products|slice:"::2" %}
@@ -134,17 +134,17 @@
           {% endfor %}
         </div>
       </div>
-      <div class="col-lg-2 col-12 d-flex flex-lg-column flex-row pt-lg-0 ps-lg-4 pt-4 p-0 justify-content-lg-start justify-content-center">
+      <div class="site-map-aside col-lg-2 col-12 d-flex flex-lg-column flex-row ps-lg-4 pt-4 p-0 justify-content-lg-start justify-content-center">
         <div class="hammock-form col-lg-12 col-4 d-lg-block d-flex flex-column align-items-start text-white">
           <p>Duration: {{ duration }}</p>
           <p>Date: {{ date }}</p>
           <p>Hammocks
             : <span id="hammocks"></span></p>
           <p>Price: <span id="totalPrice">0</span> €</p>
-          <button type="submit" class="btn btn-dark">Make reservation</button>
+          <button type="submit" class="btn btn-dark border rounded border-white">Make reservation</button>
         </div>
 
-        <hr class="d-lg-block d-none text-white">
+        <hr class="d-lg-block d-none text-white"  style="width: 90%; background-color: rgba(255, 255, 255, 1); opacity: 0.7;">
         <div class="vertical-line d-lg-none d-flex justify-content-center"></div>
 
         <div class="legend col-lg-12 col-4 text-white">
