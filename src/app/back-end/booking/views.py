@@ -59,37 +59,9 @@ def booking_pdf(request, username, booking_id):
 @login_required
 @client_required
 def booking_view(request, username):
-    date = request.session.get('date')
-    duration = request.session.get('duration')
+    date, duration, client, occupied_products, max_products = get_context_data(request, username)
     formatted_date = datetime.strptime(date, '%Y-%m-%d').strftime('%d/%m/%Y')
     formatted_duration = dict(Booking.TimeSlots.choices)[duration]
-    client = get_object_or_404(Client, user=request.user)
-    user_bookings = Booking.objects.filter(date=date, paid=True, user=client)
-    total_products = (
-        user_bookings.aggregate(total_products=Count('products'))['total_products'] or 0
-    )
-    max_products = client.num_guest - total_products
-    all_date_bookings = Booking.objects.filter(paid=True, date=date)
-
-    # Inicializar la lista de productos ocupados
-    occupied_products = []
-
-    # Filtrar las reservas según la duración seleccionada
-    match duration:
-        case Booking.TimeSlots.AFTERNOON | Booking.TimeSlots.MORNING:
-            # Obtener las reservas de mañana/tarde
-            bookings = all_date_bookings.filter(duration=duration)
-            # Obtener los productos ocupados de las reservas de mañana/tarde
-            occupied_products.extend(
-                [product.id for booking in bookings for product in booking.products.all()]
-            )
-            all_day_bookings = all_date_bookings.filter(duration=Booking.TimeSlots.ALL_DAY)
-            for booking in all_day_bookings:
-                occupied_products.extend([product.id for product in booking.products.all()])
-        case Booking.TimeSlots.ALL_DAY:
-            for booking in all_date_bookings:
-                occupied_products.extend([product.id for product in booking.products.all()])
-
     if request.method == 'POST':
         form = BookingForm(user=client, data=request.POST)
         if form.is_valid():
@@ -106,7 +78,7 @@ def booking_view(request, username):
                     if product.status == Product.Status.OCCUPIED
                 ]
             ):
-                messages.error(request, 'The selected hammocks is not available.')
+                messages.error(request, 'The selected hammocks are being reserved by another user')
                 return redirect('booking:client_book', client)
 
             total_price = sum(product.price for product in products)
@@ -153,7 +125,7 @@ def booking_view(request, username):
                     messages.error(request, error)
     else:
         form = BookingForm(user=client)
-        products = form.fields["products"].queryset
+        products = form.fields['products'].queryset
         for product in products.all():
             product.status = Product.Status.FREE
             product.save()
@@ -224,3 +196,30 @@ def filter_view(request, username):
     else:
         form = BookingFilterForm(user=client)
     return render(request, 'users/pages/filter.html', {'section': 'Reserve', 'form': form})
+
+
+def get_context_data(request, username):
+    date = request.session.get('date')
+    duration = request.session.get('duration')
+    client = get_object_or_404(Client, user=request.user)
+    user_bookings = Booking.objects.filter(date=date, paid=True, user=client)
+    total_products = (
+        user_bookings.aggregate(total_products=Count('products'))['total_products'] or 0
+    )
+    max_products = client.num_guest - total_products
+    all_date_bookings = Booking.objects.filter(paid=True, date=date)
+    occupied_products = []
+    match duration:
+        case Booking.TimeSlots.AFTERNOON | Booking.TimeSlots.MORNING:
+            bookings = all_date_bookings.filter(duration=duration)
+            occupied_products.extend(
+                [product.id for booking in bookings for product in booking.products.all()]
+            )
+            all_day_bookings = all_date_bookings.filter(duration=Booking.TimeSlots.ALL_DAY)
+            for booking in all_day_bookings:
+                occupied_products.extend([product.id for product in booking.products.all()])
+        case Booking.TimeSlots.ALL_DAY:
+            for booking in all_date_bookings:
+                occupied_products.extend([product.id for product in booking.products.all()])
+
+    return (date, duration, client, occupied_products, max_products)
