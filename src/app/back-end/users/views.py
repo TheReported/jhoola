@@ -4,7 +4,6 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
-
 from booking.models import Booking
 from product.forms import ProductCreationForm, ProductEditForm
 from product.models import Product
@@ -283,3 +282,48 @@ def search_manager_view(request, query=''):
         'managers/pages/search_list.html',
         {'form': form, 'bookings': bookings, 'clients': clients},
     )
+
+
+def check_booking_manager_view(request):
+    if request.user.is_authenticated:
+        try:
+            client = Client.objects.get(user=request.user)
+        except Client.DoesNotExist:
+            return redirect('main')
+        if client.user.groups.filter(name='HotelManagers').exists():
+            booking_id = request.GET.get('booking_id')
+            client_id = request.GET.get('client_id')
+            selected_hotel = request.GET.get('hotel')
+            hotel = Hotel.objects.get(name=selected_hotel)
+            actual_datetime = timezone.now().date()
+            try:
+                booking = Booking.objects.get(
+                    id=booking_id,
+                    user__user=client_id,
+                    date=actual_datetime,
+                    user__hotel=hotel,
+                    paid=True,
+                )
+            except Booking.DoesNotExist:
+                message = """The scanned reservation does not exist. 
+Check if the information is correct, and if necessary consult the receptionist."""
+                return render(
+                    request,
+                    'managers/pages/check_booking.html',
+                    {
+                        'section': 'Invalid Booking',
+                        'valid_booking': False,
+                        'message': message,
+                    },
+                )
+            return render(
+                request,
+                'managers/pages/check_booking.html',
+                {
+                    'section': 'Valid Booking',
+                    'valid_booking': True,
+                    'booking': booking,
+                },
+            )
+        return redirect('booking:booking_list')
+    return redirect('main')

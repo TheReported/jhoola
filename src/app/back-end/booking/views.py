@@ -1,5 +1,8 @@
-import weasyprint
+from base64 import b64encode
 from datetime import datetime
+from io import BytesIO
+
+import weasyprint
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
@@ -9,8 +12,10 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils import timezone
+from qrcode import make
 
 from booking.forms import BookingFilterForm, BookingForm
+from product.models import Product
 from users.decorators import client_required
 from users.models import Client
 
@@ -36,8 +41,15 @@ def booking_list(request, username):
 @client_required
 @login_required
 def booking_pdf(request, username, booking_id):
-    booking = get_object_or_404(Booking, id=booking_id)
-    html = render_to_string('users/pages/pdf.html', {'booking': booking})
+    booking = get_object_or_404(Booking, id=booking_id, user__user=request.user)
+    selected_hotel = request.session.get('hotel_session_name')
+    get_params = f'?booking_id={booking.id}&client_id={request.user.id}&hotel={selected_hotel}'
+    path_qr = request.build_absolute_uri(f"{reverse('users:manager_check_booking')}{get_params}")
+    qr_rend = BytesIO()
+    img = make(path_qr)
+    img.save(qr_rend, 'PNG')
+    qr_url = f'data:image/png/;base64,{b64encode(qr_rend.getvalue()).decode("ascii")}'
+    html = render_to_string('users/pages/pdf.html', {'booking': booking, 'qr': qr_url})
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = f'filename=transaction_{booking_id}.pdf'
     weasyprint.HTML(string=html, base_url=request.build_absolute_uri()).write_pdf(response)
@@ -88,6 +100,16 @@ def booking_view(request, username):
                 messages.error(request, 'You have already reserved all possible hammocks.')
                 return redirect('booking:client_book', client)
 
+            if any(
+                [
+                    product.status
+                    for product in products
+                    if product.status == Product.Status.OCCUPIED
+                ]
+            ):
+                messages.error(request, 'The selected hammocks is not available.')
+                return redirect('booking:client_book', client)
+
             total_price = sum(product.price for product in products)
             booking.user = client
             booking.price = total_price
@@ -95,6 +117,9 @@ def booking_view(request, username):
             booking.duration = duration
             booking.save()
             form.save_m2m()
+            for product in booking.products.all():
+                product.status = Product.Status.OCCUPIED
+                product.save()
             line_items = [
                 {
                     'price_data': {
@@ -148,7 +173,11 @@ def booking_view(request, username):
 def payment_success(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id)
     booking.paid = True
+    for product in booking.products.all():
+        product.status = Product.Status.FREE
+        product.save()
     booking.save()
+
     messages.success(request, 'Your hammocks have been properly booked')
     return redirect('booking:booking_list', booking.user)
 
@@ -157,7 +186,11 @@ def payment_success(request, booking_id):
 @login_required
 def payment_cancel(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id)
+    for product in booking.products.all():
+        product.status = Product.Status.FREE
+        product.save()
     booking.delete()
+
     messages.error(request, 'There has been an error with your booking')
     return redirect('booking:booking_list', booking.user)
 

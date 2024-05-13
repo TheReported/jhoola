@@ -22,5 +22,6 @@ ssh "$REMOTE_USER@$REMOTE_HOST" "
   cd src/app/back-end/
   pip install -r requirements.txt
   supervisorctl restart jhoola
+  celery -A jhoola worker -l info --detach
 "
 cd ~/$TARGET_DIR/src/app/back-end/ && scp .env "$REMOTE_USER@$REMOTE_HOST":/home/diego/$TARGET_DIR/

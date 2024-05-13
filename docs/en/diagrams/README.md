@@ -4,15 +4,17 @@ In this document we will analyze and design our application using the different 
 
 ## Specification of the DB E/R Diagram
 
-In this section an image of the DB E/R diagram and a short explanation of it will be presented.
+<img src="https://github.com/TheReported/jhoola/blob/development/docs/en/diagrams/img/jhoola-er.png">
 
 ## Specification of the MR diagram of the BBDD
 
-In this section we will show an image of the MR diagram of the DB and a short explanation of it.
+<img src="https://github.com/TheReported/jhoola/blob/development/docs/en/diagrams/img/jhoola-mr.png">
 
 ## UC specification
 
-In this section, an image of the diagram and the specification of the use cases will be shown.
+<img src="https://github.com/TheReported/jhoola/blob/development/docs/en/diagrams/img/usecase_diagram_jhoola.png">
+
+As you can see in the image the user will have to authenticate in order to make a reservation in which to complete it he/she will have to make a payment. By doing so, the user will be able to review the reservation, delete it or have at his disposal a PDF with the data. On the other hand, the administrator will be able to manage users, products and reservations. 
 
 ### Specification of Stakeholders
 
@@ -163,9 +165,54 @@ This document specifies the use cases that are part of the proposed solution.
 | Author | _Abián Castañeda Méndez_ |
 | Date | _06/03/2024_ |
 
+#### Delete
+
+| Use Case CU.8 | Delete |
+|---|---|
+| Sources | |
+| Stakeholder | User |
+| Description | The user deletes his reservation. |
+| Basic flow | |
+| Pre-conditions |  |  
+| Post-conditions | |  
+| Requirements | That a reservation has been made. |
+| Notes |  |
+| Author | _Abián Castañeda Méndez_ |
+| Date | _07/05/2024_ |
+
+#### Consult
+
+| Use Case CU.9 | Consult |
+|---|---|
+| Sources | |
+| Stakeholder | User |
+| Description | The user consults his reservation. |
+| Basic flow | |
+| Pre-conditions |  |  
+| Post-conditions | |  
+| Requirements | That a reservation has been made. |
+| Notes |  |
+| Author | _Abián Castañeda Méndez_ |
+| Date | _07/05/2024_ |
+
+#### Download PDF
+
+| Use Case CU.10 | Download PDF |
+|---|---|
+| Sources | |
+| Stakeholder | User |
+| Description | The user downloads a PDF with the reservation data. |
+| Basic flow | |
+| Pre-conditions |  |  
+| Post-conditions | |  
+| Requirements | That a reservation has been made. |
+| Notes |  |
+| Author | _Abián Castañeda Méndez_ |
+| Date | _07/05/2024_ |
+
 #### Authenticate
 
-| Use Case CU.8 | Authenticate |
+| Use Case CU.11 | Authenticate |
 |---|---|
 | Sources | |
 | Stakeholder | Administrator |
@@ -180,7 +227,7 @@ This document specifies the use cases that are part of the proposed solution.
 
 #### User Management
 
-| Use Case CU.9 | User Management |
+| Use Case CU.12 | User Management |
 |---|---|
 | Sources | |
 | Stakeholder | Administrator |
@@ -195,7 +242,7 @@ This document specifies the use cases that are part of the proposed solution.
 
 #### Create
 
-| Use Case CU.10 | Create |
+| Use Case CU.13 | Create |
 |---|---|
 | Sources | |
 | Stakeholder | Administrator |
@@ -210,7 +257,7 @@ This document specifies the use cases that are part of the proposed solution.
 
 #### Read
 
-| Use Case CU.11 | Read |
+| Use Case CU.14 | Read |
 |---|---|
 | Sources | |
 | Stakeholder | Administrator |
@@ -225,7 +272,7 @@ This document specifies the use cases that are part of the proposed solution.
 
 #### Update
 
-| Use Case CU.12 | Update |
+| Use Case CU.15 | Update |
 |---|---|
 | Sources | |
 | Stakeholder | Administrator |
@@ -240,7 +287,7 @@ This document specifies the use cases that are part of the proposed solution.
 
 #### Delete
 
-| Use Case CU.13 | Delete |
+| Use Case CU.16 | Delete |
 |---|---|
 | Sources | |
 | Stakeholder | Administrator |
@@ -255,7 +302,7 @@ This document specifies the use cases that are part of the proposed solution.
 
 #### Booking Management
 
-| Use Case CU.14 | Booking Management |
+| Use Case CU.17 | Booking Management |
 |---|---|
 | Sources | |
 | Stakeholder | Administrator |
@@ -268,24 +315,9 @@ This document specifies the use cases that are part of the proposed solution.
 | Author | _Abián Castañeda Méndez_ |
 | Date | _06/03/2024_ |
 
-#### Create
-
-| Use Case CU.15 | Create |
-|---|---|
-| Sources | |
-| Stakeholder | Administrator |
-| Description | The administrator can create bookings in the application. |
-| Basic flow |  |
-| Pre-conditions |  |  
-| Post-conditions | |  
-| Requirements |  |
-| Notes |  |
-| Author | _Abián Castañeda Méndez_ |
-| Date | _06/03/2024_ |
-
 #### Read
 
-| Use Case CU.16 | Read |
+| Use Case CU.18 | Read |
 |---|---|
 | Sources | |
 | Stakeholder | Administrator |
@@ -298,24 +330,9 @@ This document specifies the use cases that are part of the proposed solution.
 | Author | _Abián Castañeda Méndez_ |
 | Date | _06/03/2024_ |
 
-#### Update
-
-| Use Case CU.17 | Update |
-|---|---|
-| Sources | |
-| Stakeholder | Administrator |
-| Description | The administrator can modify the bookings of the application. |
-| Basic flow |  |
-| Pre-conditions |  |  
-| Post-conditions | |  
-| Requirements |  |
-| Notes |  |
-| Author | _Abián Castañeda Méndez_ |
-| Date | _06/03/2024_ |
-
 #### Delete
 
-| Use Case CU.18 | Delete |
+| Use Case CU.19 | Delete |
 |---|---|
 | Sources | |
 | Stakeholder | Administrator |
@@ -330,7 +347,7 @@ This document specifies the use cases that are part of the proposed solution.
 
 #### Product Management
 
-| Use Case CU.19 | Product Management |
+| Use Case CU.20 | Product Management |
 |---|---|
 | Sources | |
 | Stakeholder | Administrator |
@@ -345,7 +362,7 @@ This document specifies the use cases that are part of the proposed solution.
 
 #### Create
 
-| Use Case CU.20 | Create |
+| Use Case CU.21 | Create |
 |---|---|
 | Sources | |
 | Stakeholder | Administrator |
@@ -360,7 +377,7 @@ This document specifies the use cases that are part of the proposed solution.
 
 #### Read
 
-| Use Case CU.21 | Read |
+| Use Case CU.22 | Read |
 |---|---|
 | Sources | |
 | Stakeholder | Administrator |
@@ -375,7 +392,7 @@ This document specifies the use cases that are part of the proposed solution.
 
 #### Update
 
-| Use Case CU.22 | Update |
+| Use Case CU.23 | Update |
 |---|---|
 | Sources | |
 | Stakeholder | Administrator |
@@ -390,7 +407,7 @@ This document specifies the use cases that are part of the proposed solution.
 
 #### Delete
 
-| Use Case CU.23 | Delete |
+| Use Case CU.24 | Delete |
 |---|---|
 | Sources | |
 | Stakeholder | Administrator |
@@ -405,4 +422,6 @@ This document specifies the use cases that are part of the proposed solution.
 
 ## Specification of the class diagram
 
-In this section an image of the class diagram and a short explanation of it will be presented.
+<img src="https://github.com/TheReported/jhoola/blob/development/docs/en/diagrams/img/class_diagram_jhoola.png">
+
+In this diagram a hotel has a large number of products and users and at the same time they have the possibility to make from none to many reservations. On the other hand, the administrator, who has the same tools as the user, has superior powers that allow him to manage the different areas.

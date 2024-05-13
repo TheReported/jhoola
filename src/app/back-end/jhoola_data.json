@@ -3,7 +3,7 @@
   "model": "admin.logentry",
   "pk": 1,
   "fields": {
-    "action_time": "2024-04-15T17:02:52.555Z",
+    "action_time": "2024-04-27T12:08:47.169Z",
     "user": 1,
     "content_type": 7,
     "object_id": "1",
@@ -16,11 +16,11 @@
   "model": "admin.logentry",
   "pk": 2,
   "fields": {
-    "action_time": "2024-04-15T17:03:18.815Z",
+    "action_time": "2024-04-27T12:09:11.227Z",
     "user": 1,
-    "content_type": 9,
-    "object_id": "1",
-    "object_repr": "Hamaca",
+    "content_type": 4,
+    "object_id": "2",
+    "object_repr": "HLA-ADMIN",
     "action_flag": 1,
     "change_message": "[{\"added\": {}}]"
   }
@@ -29,7 +29,7 @@
   "model": "admin.logentry",
   "pk": 3,
   "fields": {
-    "action_time": "2024-04-15T17:05:20.574Z",
+    "action_time": "2024-04-27T12:09:51.803Z",
     "user": 1,
     "content_type": 3,
     "object_id": "1",
@@ -42,37 +42,37 @@
   "model": "admin.logentry",
   "pk": 4,
   "fields": {
-    "action_time": "2024-04-15T17:05:48.321Z",
+    "action_time": "2024-04-27T12:10:04.080Z",
     "user": 1,
     "content_type": 4,
     "object_id": "2",
     "object_repr": "HLA-ADMIN",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Groups\"]}}]"
   }
 },
 {
   "model": "admin.logentry",
   "pk": 5,
   "fields": {
-    "action_time": "2024-04-15T17:06:05.418Z",
+    "action_time": "2024-04-27T12:10:40.679Z",
     "user": 1,
     "content_type": 4,
-    "object_id": "2",
-    "object_repr": "HLA-ADMIN",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"Groups\"]}}]"
+    "object_id": "3",
+    "object_repr": "HLAPDLC-9999",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
   }
 },
 {
   "model": "admin.logentry",
   "pk": 6,
   "fields": {
-    "action_time": "2024-04-15T17:07:04.017Z",
+    "action_time": "2024-04-27T12:10:59.825Z",
     "user": 1,
     "content_type": 8,
     "object_id": "1",
-    "object_repr": "HLA-ADMIN",
+    "object_repr": "HLAPDLC-9999",
     "action_flag": 1,
     "change_message": "[{\"added\": {}}]"
   }
@@ -81,10 +81,10 @@
   "model": "admin.logentry",
   "pk": 7,
   "fields": {
-    "action_time": "2024-04-15T17:08:05.115Z",
+    "action_time": "2024-04-27T12:11:46.729Z",
     "user": 1,
     "content_type": 9,
-    "object_id": "2",
+    "object_id": "1",
     "object_repr": "Hamaca",
     "action_flag": 1,
     "change_message": "[{\"added\": {}}]"
@@ -94,11 +94,63 @@
   "model": "admin.logentry",
   "pk": 8,
   "fields": {
-    "action_time": "2024-04-15T17:23:36.974Z",
+    "action_time": "2024-04-27T12:25:10.019Z",
     "user": 1,
-    "content_type": 10,
+    "content_type": 4,
+    "object_id": "4",
+    "object_repr": "HLAPDLC-0001",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2024-04-27T12:25:34.712Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "2",
+    "object_repr": "HLAPDLC-0001",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2024-04-27T18:33:00.989Z",
+    "user": 1,
+    "content_type": 3,
     "object_id": "1",
-    "object_repr": "1",
+    "object_repr": "HotelManagers",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2024-04-27T18:33:39.644Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "2",
+    "object_repr": "HLA-ADMIN",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"User permissions\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2024-04-27T18:35:56.138Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "3",
+    "object_repr": "HLA-ADMIN",
     "action_flag": 1,
     "change_message": "[{\"added\": {}}]"
   }
@@ -488,16 +540,16 @@
   "model": "auth.user",
   "pk": 1,
   "fields": {
-    "password": "pbkdf2_sha256$600000$1xciC1fsG7mbCemmk57sSE$7ozO7XcZ8cCOdpKEFbRMpx6EZT+wpPjRhQ9vliBJk60=",
-    "last_login": "2024-04-15T17:22:51.854Z",
+    "password": "pbkdf2_sha256$600000$OCS6kaNP4tL3Hbh421FjyP$iv9NgW5aBTgzbJKlcwGcheHITrJuQj3+KEoYJcAkKnc=",
+    "last_login": "2024-04-28T17:01:34.463Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
     "last_name": "",
-    "email": "admin@example.com",
+    "email": "admin@admin.com",
     "is_staff": true,
     "is_active": true,
-    "date_joined": "2024-04-15T17:00:35.135Z",
+    "date_joined": "2024-04-27T12:08:02.050Z",
     "groups": [],
     "user_permissions": []
   }
@@ -506,36 +558,49 @@
   "model": "auth.user",
   "pk": 2,
   "fields": {
-    "password": "pbkdf2_sha256$600000$grAXni7B7Q9aPBnGCVmOIc$iH978UhRPwPZzfrC3wUHYhExyMimYPSVBPRQKwhVn2A=",
-    "last_login": "2024-04-16T15:11:50.086Z",
+    "password": "pbkdf2_sha256$600000$hmzCq8sKi6bnAI6VrdIGpJ$RHfCCCI5Da4QVluzKAUF+jCQTbEs3SWhj7jPZO4Z2/M=",
+    "last_login": "2024-05-05T16:53:37.062Z",
     "is_superuser": false,
     "username": "HLA-ADMIN",
-    "first_name": "Diego",
-    "last_name": "Peraza",
+    "first_name": "",
+    "last_name": "",
     "email": "",
     "is_staff": false,
     "is_active": true,
-    "date_joined": "2024-04-15T17:05:48Z",
+    "date_joined": "2024-04-27T12:09:10Z",
     "groups": [
       1
     ],
-    "user_permissions": []
+    "user_permissions": [
+      37,
+      38,
+      39,
+      40,
+      33,
+      34,
+      35,
+      36,
+      29,
+      30,
+      31,
+      32
+    ]
   }
 },
 {
   "model": "auth.user",
   "pk": 3,
   "fields": {
-    "password": "pbkdf2_sha256$600000$KFBfcx68XuyVMehuozRcHr$RKeGhmBkjSjXtH/JAjy4R5kWiVdxjzHvkiecGu8dAps=",
-    "last_login": "2024-04-16T14:54:14.732Z",
+    "password": "pbkdf2_sha256$600000$Uwc2OB5DsThRKpzT7eZEui$mEvE+GrppW0nnRV7JtF1c0Qg/w9b6wjsxt5ydPG9A0k=",
+    "last_login": "2024-04-28T16:00:28.762Z",
     "is_superuser": false,
-    "username": "HLAPDLC-0001",
-    "first_name": "Diego",
-    "last_name": "Peraza",
-    "email": "alupc23dpl@gmail.com",
+    "username": "HLAPDLC-9999",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
     "is_staff": false,
     "is_active": true,
-    "date_joined": "2024-04-15T17:13:16.890Z",
+    "date_joined": "2024-04-27T12:10:40.086Z",
     "groups": [],
     "user_permissions": []
   }
@@ -544,16 +609,16 @@
   "model": "auth.user",
   "pk": 4,
   "fields": {
-    "password": "pbkdf2_sha256$600000$McuEl2RHplz9mFn9Di6upo$kYzU291coC5n2hpefmYUbSozRFS4/NoAXOBCHtdbmUo=",
-    "last_login": null,
+    "password": "pbkdf2_sha256$600000$qvWikbC9lrvopG14qOSoVe$E42JPV4r/rUciDj7shsh5L4diby02+kwqu4agFjj9XE=",
+    "last_login": "2024-05-05T16:57:11.342Z",
     "is_superuser": false,
-    "username": "HLAPDLC-0002",
-    "first_name": "sAMU",
-    "last_name": "epawo",
-    "email": "samugd17@gmail.com",
+    "username": "HLAPDLC-0001",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
     "is_staff": false,
     "is_active": true,
-    "date_joined": "2024-04-16T15:31:15.074Z",
+    "date_joined": "2024-04-27T12:25:09.703Z",
     "groups": [],
     "user_permissions": []
   }
@@ -562,16 +627,52 @@
   "model": "auth.user",
   "pk": 6,
   "fields": {
-    "password": "pbkdf2_sha256$600000$as9bGZLWoAxOAdKqF4FPBq$oyUy0pQeT2ncEA3tF86cRR7IYXAEr0wN8xQ8ym7xtCA=",
+    "password": "pbkdf2_sha256$600000$QoaXzU7COPGbS8KgoPvHP2$FoBm5WS8rOQeWTXXOPsEY3LLkYnWgy6X99qUk4izVRE=",
     "last_login": null,
     "is_superuser": false,
-    "username": "HLAPDLC-0003",
+    "username": "HLAPDLC-0004",
     "first_name": "Abian",
-    "last_name": "Mmawebo",
+    "last_name": "yo te mato",
     "email": "abiancma12@gmail.com",
     "is_staff": false,
     "is_active": true,
-    "date_joined": "2024-04-16T15:35:39.501Z",
+    "date_joined": "2024-04-28T17:03:24.207Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 7,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$gshguo0Zu8Ymvwla8WgYQX$0XNvZ2xMrRNjysPkApUHiMY8kYFiQclWJGWnURuLuvk=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "HLAPDLC-0005",
+    "first_name": "Pepe",
+    "last_name": "Benavente",
+    "email": "diegopca12@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-05-05T09:03:40.928Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 14,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$csmQN8nPSpT6IihUgoXQ2w$VACPV1rn0bs85Zta/LLMkoKstNeZIaZtypEiCGvOlxE=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "HLAPDLC-0006",
+    "first_name": "Diego",
+    "last_name": "Benavente",
+    "email": "alupc23dpl@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-05-05T09:45:32.464Z",
     "groups": [],
     "user_permissions": []
   }
@@ -658,10 +759,10 @@
 },
 {
   "model": "sessions.session",
-  "pk": "lh460ul0bswyppqbd08mdoybidp51b5o",
+  "pk": "ttgt3eph2x0ajsstqxsnlb2kbflr3ns3",
   "fields": {
-    "session_data": ".eJxVjLEOgyAURX_FMDcELKB0a6cO7TeQB--hthYS0anpv1cTF9dzzr1f1ueZRleolCEnl-BD7MLuG6weUKprtwwjFHZiDpa5d0uhyQ24NvWReQhvSpvAF6Qu85DTPA2ebwnfbeHPjDTe9vZw0EPp17W1McYamkjemsZriV4CinMrhRFSGWhCK0BbUoKkwRqsCqgVolQQdVDs9wfwY0a6:1rwkTO:4_6vLPvBcNbHyMP0n6-kRWoRIbgsOUFQZ8gMUqOe07c",
-    "expire_date": "2024-04-30T15:11:50.117Z"
+    "session_data": ".eJxVj8sOgjAURH_FdK2k3D4Ad7hygd_QXOjlodgmtKyM_26buGF75swk82Gzj7SaQCEs3hmHb2JXds_w1GE4tdO-rBjYmRnc42z2QJtZbHLkkfU4vMjlwD7RTb4YvIvb0hdZKf5pKB7e0nr7u4eBGcOc2iAkqUZRDxxAWpI0Ii8b0NCLoRGaC6i0bYSSGjWoitNoxzpZFUEtxzqNWoz5RBqQF64uZZnZvmFMDxNvu459f3tGT1Q:1s3h7m:qLnmdLZPpdY1nktf3uX02w-WcPhWTi9hKoKNz81CXZQ",
+    "expire_date": "2024-05-19T19:02:14.757Z"
   }
 },
 {
@@ -671,9 +772,9 @@
     "name": "Hotel Las Aguilas",
     "slug": "hotel-las-aguilas",
     "city": "Puerto de la Cruz",
-    "country": "Tenerife",
+    "country": "Santa Cruz de Tenerife",
     "email": "hclasaguilas@example.com",
-    "phone": "82820099",
+    "phone": "888999000",
     "code": "PU-HOLAAG",
     "site_map": ""
   }
@@ -682,8 +783,8 @@
   "model": "users.client",
   "pk": 1,
   "fields": {
-    "user": 2,
-    "num_guest": 1,
+    "user": 3,
+    "num_guest": 2,
     "hotel": 1
   }
 },
@@ -691,7 +792,7 @@
   "model": "users.client",
   "pk": 2,
   "fields": {
-    "user": 3,
+    "user": 4,
     "num_guest": 2,
     "hotel": 1
   }
@@ -700,8 +801,8 @@
   "model": "users.client",
   "pk": 3,
   "fields": {
-    "user": 4,
-    "num_guest": 3,
+    "user": 2,
+    "num_guest": 1,
     "hotel": 1
   }
 },
@@ -715,11 +816,28 @@
   }
 },
 {
+  "model": "users.client",
+  "pk": 6,
+  "fields": {
+    "user": 7,
+    "num_guest": 4,
+    "hotel": 1
+  }
+},
+{
+  "model": "users.client",
+  "pk": 13,
+  "fields": {
+    "user": 14,
+    "num_guest": 3,
+    "hotel": 1
+  }
+},
+{
   "model": "product.product",
   "pk": 1,
   "fields": {
     "name": "Hamaca",
-    "slug": "hamaca",
     "price": "2.50",
     "avatar": "",
     "status": "FR",
@@ -731,7 +849,6 @@
   "pk": 2,
   "fields": {
     "name": "Hamaca",
-    "slug": "hamaca",
     "price": "2.50",
     "avatar": "",
     "status": "FR",
@@ -743,7 +860,6 @@
   "pk": 3,
   "fields": {
     "name": "Hamaca",
-    "slug": "",
     "price": "2.50",
     "avatar": "",
     "status": "FR",
@@ -755,7 +871,6 @@
   "pk": 4,
   "fields": {
     "name": "Hamaca",
-    "slug": "",
     "price": "2.50",
     "avatar": "",
     "status": "FR",
@@ -767,7 +882,6 @@
   "pk": 5,
   "fields": {
     "name": "Hamaca",
-    "slug": "",
     "price": "2.50",
     "avatar": "",
     "status": "FR",
@@ -779,7 +893,6 @@
   "pk": 6,
   "fields": {
     "name": "Hamaca",
-    "slug": "",
     "price": "2.50",
     "avatar": "",
     "status": "FR",
@@ -791,7 +904,6 @@
   "pk": 7,
   "fields": {
     "name": "Hamaca",
-    "slug": "",
     "price": "2.50",
     "avatar": "",
     "status": "FR",
@@ -803,43 +915,6 @@
   "pk": 8,
   "fields": {
     "name": "Hamaca",
-    "slug": "",
-    "price": "2.50",
-    "avatar": "",
-    "status": "FR",
-    "hotel": 1
-  }
-},
-{
-  "model": "product.product",
-  "pk": 9,
-  "fields": {
-    "name": "Hamaca",
-    "slug": "",
-    "price": "2.50",
-    "avatar": "",
-    "status": "FR",
-    "hotel": 1
-  }
-},
-{
-  "model": "product.product",
-  "pk": 10,
-  "fields": {
-    "name": "Hamaca",
-    "slug": "",
-    "price": "2.50",
-    "avatar": "",
-    "status": "FR",
-    "hotel": 1
-  }
-},
-{
-  "model": "product.product",
-  "pk": 11,
-  "fields": {
-    "name": "Hamaca",
-    "slug": "",
     "price": "2.50",
     "avatar": "",
     "status": "FR",
@@ -848,13 +923,28 @@
 },
 {
   "model": "booking.booking",
-  "pk": 1,
+  "pk": 2,
   "fields": {
-    "user": 2,
-    "timestamp": "2024-04-15T17:23:36.971Z",
+    "user": 1,
+    "timestamp": "2024-04-27T12:14:26.045Z",
     "price": "2.50",
-    "duration": "AFT",
-    "date": "2024-04-15",
+    "duration": "ALL",
+    "date": "2024-04-28",
+    "paid": false,
+    "products": [
+      1
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 4,
+  "fields": {
+    "user": 1,
+    "timestamp": "2024-04-27T12:28:17.199Z",
+    "price": "2.50",
+    "duration": "ALL",
+    "date": "2024-04-28",
     "paid": true,
     "products": [
       1
@@ -863,16 +953,807 @@
 },
 {
   "model": "booking.booking",
-  "pk": 2,
+  "pk": 5,
   "fields": {
     "user": 2,
-    "timestamp": "2024-04-15T17:34:17.064Z",
+    "timestamp": "2024-04-27T18:45:59.577Z",
+    "price": "2.50",
+    "duration": "ALL",
+    "date": "2024-04-28",
+    "paid": true,
+    "products": [
+      7
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 6,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-04-28T08:35:28.102Z",
+    "price": "5.00",
+    "duration": "AFT",
+    "date": "2024-04-29",
+    "paid": true,
+    "products": [
+      3,
+      6
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 7,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-04-28T15:59:45.444Z",
+    "price": "5.00",
+    "duration": "ALL",
+    "date": "2024-04-30",
+    "paid": true,
+    "products": [
+      3,
+      7
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 8,
+  "fields": {
+    "user": 1,
+    "timestamp": "2024-04-28T17:00:01.550Z",
+    "price": "5.00",
+    "duration": "ALL",
+    "date": "2024-04-30",
+    "paid": true,
+    "products": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 9,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T10:29:03.055Z",
+    "price": "5.00",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3,
+      5
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 10,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T10:33:51.420Z",
+    "price": "5.00",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3,
+      5
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 11,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T10:34:35.875Z",
+    "price": "5.00",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3,
+      5
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 12,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T10:37:15.494Z",
+    "price": "5.00",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3,
+      5
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 13,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T10:39:11.377Z",
+    "price": "5.00",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3,
+      5
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 14,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T10:40:24.747Z",
+    "price": "5.00",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3,
+      5
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 15,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T10:41:39.768Z",
+    "price": "5.00",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3,
+      5
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 16,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T10:43:34.134Z",
+    "price": "5.00",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3,
+      5
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 17,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T10:55:32.210Z",
+    "price": "5.00",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3,
+      5
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 18,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T10:59:06.744Z",
+    "price": "5.00",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3,
+      5
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 19,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T11:01:49.015Z",
+    "price": "5.00",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3,
+      5
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 20,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T11:04:55.246Z",
+    "price": "5.00",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3,
+      5
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 21,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T11:05:25.052Z",
+    "price": "5.00",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3,
+      5
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 22,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T11:09:03.928Z",
     "price": "2.50",
     "duration": "AFT",
-    "date": "2024-04-18",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 23,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T11:10:09.598Z",
+    "price": "2.50",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 24,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T11:12:17.570Z",
+    "price": "2.50",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 25,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T11:14:56.038Z",
+    "price": "2.50",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 26,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T11:15:15.032Z",
+    "price": "2.50",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 27,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T11:16:08.026Z",
+    "price": "2.50",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 28,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T11:16:50.947Z",
+    "price": "2.50",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 29,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T11:18:52.532Z",
+    "price": "2.50",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 30,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T11:23:50.361Z",
+    "price": "2.50",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 31,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T11:25:36.696Z",
+    "price": "2.50",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 32,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T11:26:32.211Z",
+    "price": "2.50",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 33,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T11:27:30.607Z",
+    "price": "2.50",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 34,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T11:28:54.534Z",
+    "price": "2.50",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 35,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T11:30:35.797Z",
+    "price": "2.50",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 36,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T11:34:12.305Z",
+    "price": "2.50",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      5
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 37,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T11:34:32.073Z",
+    "price": "2.50",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 38,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T11:38:17.153Z",
+    "price": "2.50",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 39,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T11:42:23.844Z",
+    "price": "2.50",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 40,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T11:43:37.929Z",
+    "price": "2.50",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": true,
+    "products": [
+      3
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 41,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T12:41:42.183Z",
+    "price": "5.00",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      1,
+      5
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 42,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T12:43:14.816Z",
+    "price": "5.00",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      1,
+      5
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 43,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T12:51:44.032Z",
+    "price": "2.50",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      5
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 44,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T12:53:06.464Z",
+    "price": "2.50",
+    "duration": "AFT",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      5
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 45,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T12:53:23.764Z",
+    "price": "2.50",
+    "duration": "AFT",
+    "date": "2024-05-06",
     "paid": true,
     "products": [
       2
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 46,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T12:54:20.966Z",
+    "price": "2.50",
+    "duration": "ALL",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      5
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 47,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T12:55:31.594Z",
+    "price": "2.50",
+    "duration": "ALL",
+    "date": "2024-05-06",
+    "paid": false,
+    "products": [
+      3
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 48,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T12:57:27.933Z",
+    "price": "2.50",
+    "duration": "ALL",
+    "date": "2024-05-07",
+    "paid": false,
+    "products": [
+      3
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 49,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T17:14:20.487Z",
+    "price": "5.00",
+    "duration": "ALL",
+    "date": "2024-05-07",
+    "paid": true,
+    "products": [
+      3,
+      5
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 50,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T18:23:46.100Z",
+    "price": "5.00",
+    "duration": "MOR",
+    "date": "2024-05-08",
+    "paid": true,
+    "products": [
+      2,
+      8
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 51,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T18:49:25.254Z",
+    "price": "5.00",
+    "duration": "ALL",
+    "date": "2024-05-09",
+    "paid": false,
+    "products": [
+      2,
+      4
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 52,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T18:55:55.864Z",
+    "price": "5.00",
+    "duration": "ALL",
+    "date": "2024-05-10",
+    "paid": false,
+    "products": [
+      5,
+      7
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 53,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T18:56:22.265Z",
+    "price": "5.00",
+    "duration": "ALL",
+    "date": "2024-05-10",
+    "paid": false,
+    "products": [
+      2,
+      4
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 54,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T18:57:31.449Z",
+    "price": "5.00",
+    "duration": "ALL",
+    "date": "2024-05-10",
+    "paid": false,
+    "products": [
+      2,
+      4
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 55,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T18:58:52.883Z",
+    "price": "5.00",
+    "duration": "ALL",
+    "date": "2024-05-10",
+    "paid": true,
+    "products": [
+      2,
+      4
+    ]
+  }
+},
+{
+  "model": "booking.booking",
+  "pk": 56,
+  "fields": {
+    "user": 2,
+    "timestamp": "2024-05-05T19:02:19.217Z",
+    "price": "5.00",
+    "duration": "ALL",
+    "date": "2024-05-11",
+    "paid": true,
+    "products": [
+      2,
+      4
     ]
   }
 }

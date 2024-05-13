@@ -4,15 +4,23 @@ En este documento analizaremos y diseñaremos nuestra aplicación utilizando los
 
 ## Especificación del diagrama E/R de la BBDD
 
-En esta sección se presentará una imagen del diagrama E/R de la BD y una breve explicación del mismo.
+En esta sección se presentará una imagen del diagrama E/R de la BD.
+
+<img src="https://github.com/TheReported/jhoola/blob/development/docs/en/diagrams/img/jhoola-er.png">
 
 ## Especificación del diagrama MR de la BBDD
 
-En este apartado se mostrará una imagen del diagrama MR de la BBDD y una breve explicación del mismo.
+En este apartado se mostrará una imagen del diagrama MR de la BBDD.
+
+<img src="https://github.com/TheReported/jhoola/blob/development/docs/en/diagrams/img/jhoola-mr.png">
 
 ## Especificación de los CU
 
 En este apartado se mostrará una imagen del diagrama y la especificación de los casos de uso.
+
+<img src="https://github.com/TheReported/jhoola/blob/development/docs/en/diagrams/img/usecase_diagram_jhoola.png">
+
+Se puede ver como el usuario debe autenticarse para poder acceder a la posibilidad de hacer reservas en las cuales tendrá que pasar por una pasarela de pago para en un final acceder a la posibilidad de borrar reservas, descargarse un PDF con los datos de la misma y consultarla. Por otro lado el administrador tendrá que pasar por un proceso de autenticación muy similiar para lograr gestionar usuarios, productos y reservas.
 
 ### Especificación de los actores
 
@@ -163,9 +171,54 @@ Este documento especifica los casos de uso que forman parte de la solución prop
 | Autor |  _Abián Castañeda Méndez_ |
 | Fecha | _08/03/2024_ |
 
+#### Borrar
+
+| Caso de uso CU.8 | Borrar |
+|---|---|
+| Fuentes | |
+| Actor | Usuario |
+| Descripción | La reserva se borra. |
+| Flujo básico | |
+| Pre-condiciones | |   
+| Post-condiciones | | 
+| Requisitos | Que se haya realizado una reserva. |
+| Notas | |
+| Autor |  _Abián Castañeda Méndez_ |
+| Fecha | _07/05/2024_ |
+
+#### Consultar
+
+| Caso de uso CU.9 | Consultar |
+|---|---|
+| Fuentes | |
+| Actor | Usuario |
+| Descripción | Se consulta la reserva. |
+| Flujo básico | |
+| Pre-condiciones | |   
+| Post-condiciones | | 
+| Requisitos | Que se haya realizado una reserva. |
+| Notas | |
+| Autor |  _Abián Castañeda Méndez_ |
+| Fecha | _07/05/2024_ |
+
+#### Descargar PDF
+
+| Caso de uso CU.10 | Descargar PDF |
+|---|---|
+| Fuentes | |
+| Actor | Usuario |
+| Descripción | Se descarga un PDF con los datos de la reserva. |
+| Flujo básico | |
+| Pre-condiciones | |   
+| Post-condiciones | | 
+| Requisitos | Que se haya realizado una reserva. |
+| Notas | |
+| Autor |  _Abián Castañeda Méndez_ |
+| Fecha | _07/05/2024_ |
+
 #### Autenticarse
 
-| Caso de uso CU.8 | Autenticarse |
+| Caso de uso CU.11 | Autenticarse |
 |---|---|
 | Fuentes | |
 | Actor | Administrador |
@@ -180,7 +233,7 @@ Este documento especifica los casos de uso que forman parte de la solución prop
 
 #### Gestionar Usuario
 
-| Caso de uso CU.9 | Gestionar Usuario |
+| Caso de uso CU.12 | Gestionar Usuario |
 |---|---|
 | Fuentes | |
 | Actor | Administrador |
@@ -195,7 +248,7 @@ Este documento especifica los casos de uso que forman parte de la solución prop
 
 #### Crear
 
-| Caso de uso CU.10 | Crear |
+| Caso de uso CU.13 | Crear |
 |---|---|
 | Fuentes | |
 | Actor | Administrador |
@@ -210,7 +263,7 @@ Este documento especifica los casos de uso que forman parte de la solución prop
 
 #### Consultar
 
-| Caso de uso CU.11 | Consultar |
+| Caso de uso CU.14 | Consultar |
 |---|---|
 | Fuentes | |
 | Actor | Administrador |
@@ -225,7 +278,7 @@ Este documento especifica los casos de uso que forman parte de la solución prop
 
 #### Modificar
 
-| Caso de uso CU.12 | Modificar |
+| Caso de uso CU.15 | Modificar |
 |---|---|
 | Fuentes | |
 | Actor | Administrador |
@@ -240,7 +293,7 @@ Este documento especifica los casos de uso que forman parte de la solución prop
 
 #### Borrar
 
-| Caso de uso CU.13 | Borrar |
+| Caso de uso CU.16 | Borrar |
 |---|---|
 | Fuentes | |
 | Actor | Administrador |
@@ -255,7 +308,7 @@ Este documento especifica los casos de uso que forman parte de la solución prop
 
 #### Gestionar Reserva
 
-| Use Case CU.14 | Gestionar Reserva |
+| Use Case CU.17 | Gestionar Reserva |
 |---|---|
 | Fuentes | |
 | Actor | Administrador |
@@ -268,24 +321,9 @@ Este documento especifica los casos de uso que forman parte de la solución prop
 | Autor |  _Abián Castañeda Méndez_ |
 | Fecha | _08/03/2024_ |
 
-#### Crear
-
-| Caso de uso CU.15 | Crear |
-|---|---|
-| Fuentes | |
-| Actor | Administrador |
-| Descripción | El administrador puede crear reservas en la aplicación. |
-| Flujo básico | |
-| Pre-condiciones | | 
-| Post-condiciones | |
-| Requisitos | |
-| Notas | |
-| Autor |  _Abián Castañeda Méndez_ |
-| Fecha | _08/03/2024_ |
-
 #### Consultar
 
-| Caso de uso CU.16 | Consultar |
+| Caso de uso CU.18 | Consultar |
 |---|---|
 | Fuentes | |
 | Actor | Administrador |
@@ -298,24 +336,9 @@ Este documento especifica los casos de uso que forman parte de la solución prop
 | Autor |  _Abián Castañeda Méndez_ |
 | Fecha | _08/03/2024_ |
 
-#### Modificar
-
-| Caso de uso CU.17 | Modificar |
-|---|---|
-| Fuentes | |
-| Actor | Administrador |
-| Descripción | El administrador puede modificar las reservas de la aplicación. |
-| Flujo básico | |
-| Pre-condiciones | | 
-| Post-condiciones | |
-| Requisitos | |
-| Notas | |
-| Autor |  _Abián Castañeda Méndez_ |
-| Fecha | _08/03/2024_ |
-
 #### Borrar
 
-| Caso de uso CU.18 | Borrar |
+| Caso de uso CU.19 | Borrar |
 |---|---|
 | Fuentes | |
 | Actor | Administrador |
@@ -330,7 +353,7 @@ Este documento especifica los casos de uso que forman parte de la solución prop
 
 #### Gestionar Producto
 
-| Use Case CU.19 | Gestionar Producto |
+| Use Case CU.20 | Gestionar Producto |
 |---|---|
 | Fuentes | |
 | Actor | Administrador |
@@ -345,7 +368,7 @@ Este documento especifica los casos de uso que forman parte de la solución prop
 
 #### Crear
 
-| Caso de uso CU.20 | Crear |
+| Caso de uso CU.21 | Crear |
 |---|---|
 | Fuentes | |
 | Actor | Administrador |
@@ -360,7 +383,7 @@ Este documento especifica los casos de uso que forman parte de la solución prop
 
 #### Consultar
 
-| Caso de uso CU.21 | Consultar |
+| Caso de uso CU.22 | Consultar |
 |---|---|
 | Fuentes | |
 | Actor | Administrador |
@@ -375,7 +398,7 @@ Este documento especifica los casos de uso que forman parte de la solución prop
 
 #### Modificar
 
-| Caso de uso CU.22 | Modificar |
+| Caso de uso CU.23 | Modificar |
 |---|---|
 | Fuentes | |
 | Actor | Administrador |
@@ -390,7 +413,7 @@ Este documento especifica los casos de uso que forman parte de la solución prop
 
 #### Borrar
 
-| Caso de uso CU.23 | Borrar |
+| Caso de uso CU.24 | Borrar |
 |---|---|
 | Fuentes | |
 | Actor | Administrador |
@@ -407,3 +430,6 @@ Este documento especifica los casos de uso que forman parte de la solución prop
 
 En esta sección se presentará una imagen del diagrama de clases y una breve explicación del mismo.
 
+<img src="https://github.com/TheReported/jhoola/blob/development/docs/en/diagrams/img/class_diagram_jhoola.png">
+
+En este esquema un hotel tiene un gran número de productos y usuarios y al mismo tiempo tienen la posibilidad de hacer desde ninguna hasta muchas reservas. Por otro lado, el administrador, que dispone de las mismas herramientas que el usuario, tiene poderes superiores que le permiten gestionar las diferentes áreas.
