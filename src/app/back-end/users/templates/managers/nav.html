@@ -2,12 +2,12 @@
 {% block nav %}
 <nav class="navbar p-0 m-0" id="navbarBlur">
         <div class="searchbar d-flex justify-content-between align-items-center col-12 pt-2 pb-2">
-            <div class="logo col-2 d-flex justify-content-center p-3">
-                <img src="{% static 'imgs/logo.svg' %}" id="logo">
-            </div>
+                <a href="{% url "users:manager_dashboard" %}" class="logo col-2 d-flex justify-content-center p-3">
+                    <img src="{% static 'imgs/logo.svg' %}" id="logo">
+                </a>
             <hr class="m-0">
             <div class="btn-signout col-lg-10 col-10 d-flex justify-content-end">
-                <form class="search-form" action="{% url 'users:manager_search' %}"> 
+                <form class="search-form" action="{% url 'users:manager_search' '?' %}"> 
                     <input class="form-control me-2 bg-white search-input" type="search" placeholder="Search..." aria-label="Search" id="search" name="query">
                     <button id="search-btn" class="btn btn-light rounded-circle search-btn" type="submit">
                         <i class="fas fa-search search-icon"></i>

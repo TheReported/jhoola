@@ -10,6 +10,10 @@
           <th scope="col">Username</th>
           <th scope="col">Name</th>
           <th scope="col">Email</th>
+          <th scope="col">Nº Guest</th>
+          <th scope="col">Reservations ID</th>
+          <th scope="col">Joined</th>
+          <th scope="col">Last Login</th>
           <th scope="col">Actions</th>
           <th scope="col">
             <a href="{% url 'users:manager_users_add' %}" class="btn btn-success btn-sm flex-row d-flex justify-content-center">
@@ -27,6 +31,18 @@
           <td>{{ client.user }}</td>
           <td>{{ client.fullname }}</td>
           <td>{{ client.user.email }}</td>
+          <td>{{ client.num_guest }}</td>
+            <td>{% for booking in client.bookings.all %}
+              <a href="{% url 'users:manager_search' booking.id %}">{{ booking.id }}{% if not forloop.last %},{% endif %}</a>
+              {% endfor %}
+            </td>
+            <td>{{ client.user.date_joined|date:"d/m/Y, H:m" }}</td>
+            <td>{% if client.user.last_login is None %}
+                Not yet logged in
+                {% else %}
+                {{ client.user.last_login|date:"d/m/Y, H:m" }}
+                {% endif %}
+            </td>
           <td>
             <a href="{% url 'users:manager_users_edit' client %}" class="btn btn-warning btn-sm mb-1 mb-lg-0">
               <span class="material-icons">

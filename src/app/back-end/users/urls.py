@@ -34,7 +34,7 @@ urlpatterns = [
         name='manager_bookings_delete',
     ),
     path(
-        'manager/search/',
+        'manager/search/<path:query>',
         views.search_manager_view,
         name='manager_search',
     ),

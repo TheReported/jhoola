@@ -13,6 +13,7 @@
         <th scope="col">Price</th>
         <th scope="col">Duration</th>
         <th scope="col">Date</th>
+        <th scope="col">Timestamp</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -30,6 +31,7 @@
         <td>{{ booking.price }} €</td>
         <td>{{ booking.get_duration_display }}</td>
         <td>{{ booking.date|date:"d/m/Y" }}</td>
+        <td>{{ booking.timestamp|date:"d/m/Y, H:m" }}</td>
         <td>
           <a href="{% url 'users:manager_bookings_delete' booking.id %}" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal{{ booking.id }}">
             <span class="material-icons">

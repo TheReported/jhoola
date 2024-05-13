@@ -14,6 +14,8 @@ from .forms import ClientEditForm, ClientRegistrationForm, LoginForm, SearchForm
 from .models import Client, Hotel
 from .tasks import user_created
 from django.contrib.auth.models import Group
+from users.utils import get_monthly_bookings
+from django.utils import timezone
 
 
 def user_login(request):
@@ -47,7 +49,7 @@ def manager_dashboard(request):
     hotel_manager_group = Group.objects.get(name='HotelManagers')
     clients = hotel.clients.exclude(user__groups=hotel_manager_group).count()
     products = hotel.products.count()
-    bookings = Booking.objects.filter(user__hotel=hotel, paid=True)
+    bookings = get_monthly_bookings(hotel)
     total_money = 0
     for booking in bookings:
         total_money += booking.price
@@ -235,7 +237,7 @@ def bookings_delete_manager_view(request, booking_id):
 def bookings_manager_view(request):
     selected_hotel = request.session.get('hotel_session_name')
     hotel = Hotel.objects.get(name=selected_hotel)
-    bookings = Booking.objects.filter(user__hotel=hotel, paid=True)
+    bookings = Booking.objects.filter(user__hotel=hotel, paid=True, date__gte=timezone.now().date())
     paginator = Paginator(bookings, 14)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -246,7 +248,7 @@ def bookings_manager_view(request):
 
 @login_required
 @manager_required
-def search_manager_view(request):
+def search_manager_view(request, query=''):
     form = SearchForm(request.GET)
     clients = []
     bookings = []
@@ -255,19 +257,21 @@ def search_manager_view(request):
 
     if form.is_valid():
         query = form.cleaned_data['query']
-        clients = (
-            hotel.clients.filter(
-                Q(user__first_name__icontains=query)
-                | Q(user__last_name__icontains=query)
-                | Q(user__username__icontains=query)
-                | Q(user__email__icontains=query)
-            )
-            .distinct()
-            .exclude(user__groups__name='HotelManagers')
+    else:
+        query = query
+
+    clients = (
+        hotel.clients.filter(
+            Q(user__first_name__icontains=query)
+            | Q(user__last_name__icontains=query)
+            | Q(user__username__icontains=query)
+            | Q(user__email__icontains=query)
         )
+        .distinct()
+        .exclude(user__groups__name='HotelManagers')
+    )
 
-        bookings = Booking.objects.filter(Q(id__icontains=query)).distinct()
-
+    bookings = Booking.objects.filter(Q(id__icontains=query)).distinct()
     client_paginator = Paginator(clients, 7)
     booking_paginator = Paginator(bookings, 7)
     page_number = request.GET.get('page')
