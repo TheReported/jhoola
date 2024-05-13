@@ -10,12 +10,12 @@
   {% include "users/messages/message.html" %}
 {% endblock messages %}
 
-  <div class="row mt-4">
+  <div class="row mt-4 text-white mb-4">
     <h2>Select your hammocks:</h2>
   </div>
-  <form method="post">
+  <form method="post" class="choose-hammock">
     {% csrf_token %}
-    <div class="row mt-4 p-2">
+    <div class="row p-2">
       <div class="site-map col-lg-10 col-12 border border-1 rounded d-flex flex-row">
         <div class="col-md-4 col-5 products d-flex flex-wrap justify-content-center">
           {% for product in form.products|slice:"::2" %}
@@ -27,7 +27,7 @@
                   preserveAspectRatio="xMidYMid meet" name="{{ product.id_for_label }}">
 
                   <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
-                  style="fill:{% if product_id in occupied_products %}red{% else %}grey{% endif %}" stroke="none">
+                  style="fill:{% if product_id in occupied_products %}red{% else %}white{% endif %}" stroke="none">
                   <path d="M1150 5015 c-60 -19 -109 -62 -145 -126 l-30 -54 -3 -2255 c-2 -2500
                   -7 -2315 65 -2399 20 -24 59 -54 87 -67 l51 -24 1385 0 1385 0 51 24 c28 13
                   67 43 87 67 72 84 67 -101 65 2399 l-3 2255 -30 54 c-36 66 -85 107 -149 126
@@ -70,13 +70,13 @@
           <div>
             <svg width="300" height="600" xmlns="http://www.w3.org/2000/svg">
               <!-- Swimming pool -->
-              <rect x="60" y="50" width="200" height="500" fill="lightblue" stroke="grey" stroke-width="5"/>
+              <rect x="60" y="50" width="200" height="500" fill="lightblue" stroke="black" stroke-width="5"/>
               <!-- Stairs -->
-              <rect x="140" y="525" width="40" height="50" fill="grey"/>
+              <rect x="140" y="525" width="40" height="50" fill="black"/>
             </svg>
           </div>
         </div>
-        <div class="no-svg-pool col-2 d-md-none d-flex justify-content-center align-items-center flex-column">
+        <div class="no-svg-pool col-2 d-md-none text-white d-flex justify-content-center align-items-center flex-column">
           <p>P</p>
           <p>O</p>
           <p>O</p>
@@ -94,7 +94,7 @@
                   preserveAspectRatio="xMidYMid meet" name="{{ product.id_for_label }}">
 
                   <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
-                  style="fill:{% if product_id in occupied_products %}red{% else %}grey{% endif %}" stroke="none">
+                  style="fill:{% if product_id in occupied_products %}red{% else %}white{% endif %}" stroke="none">
                   <path d="M1150 5015 c-60 -19 -109 -62 -145 -126 l-30 -54 -3 -2255 c-2 -2500
                   -7 -2315 65 -2399 20 -24 59 -54 87 -67 l51 -24 1385 0 1385 0 51 24 c28 13
                   67 43 87 67 72 84 67 -101 65 2399 l-3 2255 -30 54 c-36 66 -85 107 -149 126
@@ -134,22 +134,22 @@
           {% endfor %}
         </div>
       </div>
-      <div class="col-lg-2 col-12 d-flex flex-lg-column flex-row pt-lg-0 ps-lg-4 pt-4 p-0 justify-content-lg-start justify-content-center">
-        <div class="hammock-form col-lg-12 col-4 d-lg-block d-flex flex-column align-items-start">
+      <div class="site-map-aside col-lg-2 col-12 d-flex flex-lg-column flex-row ps-lg-4 pt-4 p-0 justify-content-lg-start justify-content-center">
+        <div class="hammock-form col-lg-12 col-4 d-lg-block d-flex flex-column align-items-start text-white">
           <p>Duration: {{ duration }}</p>
           <p>Date: {{ date }}</p>
           <p>Hammocks
             : <span id="hammocks"></span></p>
           <p>Price: <span id="totalPrice">0</span> €</p>
-          <button type="submit" class="btn btn-primary">Make reservation</button>
+          <button type="submit" class="btn btn-dark border rounded border-white">Make reservation</button>
         </div>
 
-        <hr class="d-lg-block d-none">
+        <hr class="d-lg-block d-none text-white"  style="width: 90%; background-color: rgba(255, 255, 255, 1); opacity: 0.7;">
         <div class="vertical-line d-lg-none d-flex justify-content-center"></div>
 
-        <div class="legend col-lg-12 col-4">
+        <div class="legend col-lg-12 col-4 text-white">
           <div class="legend-square">
-            <svg width="20" height="20" viewBox="0 0 120 120" fill="grey">
+            <svg width="20" height="20" viewBox="0 0 120 120" fill="white">
               <rect x="10" y="10" width="100" height="100" />
             </svg>
             Free
@@ -161,7 +161,7 @@
             Occupied
           </div>
           <div class="legend-square">
-            <svg width="20" height="20" viewBox="0 0 120 120" fill="green">
+            <svg width="20" height="20" viewBox="0 0 120 120" fill="lightgreen">
               <rect x="10" y="10" width="100" height="100" />
             </svg>
             Your selection
@@ -175,28 +175,35 @@
 
 {% block domready %}
   <script>
+    window.addEventListener('beforeunload', (event) => {location.reload()})
     let products = document.querySelectorAll("input[name=products]")
     let hammocks = document.querySelector("#hammocks")
     let totalPrice = document.querySelector("#totalPrice")
     const checked_hammocks = []
+
     products.forEach((product) => { 
-        product.addEventListener('click', () => {
-          let fill = document.querySelector(`svg[name=${product.id}]`).firstElementChild.style.fill
-          if (fill !== "red"){
-            document.querySelector(`svg[name=${product.id}]`).firstElementChild.style.fill = fill == "green" ? "grey": "green"
-            const productPrice = parseFloat("{{ form.products.field.queryset.first.price }}")
-            if (product.checked){
-              checked_hammocks.push(product.value)
-              totalPrice.innerHTML = parseFloat(totalPrice.innerHTML) + productPrice
-            } else {
-              let indx = checked_hammocks.indexOf(product.value)
-              totalPrice.innerHTML = parseFloat(totalPrice.innerHTML) - productPrice
-              checked_hammocks.splice(indx, 1)
-            }
-            hammocks.innerHTML = checked_hammocks.join(", ")
+      product.addEventListener('click', () => {
+        let fill = document.querySelector(`svg[name=${product.id}]`).firstElementChild.style.fill
+        if (fill !== "red"){
+          document.querySelector(`svg[name=${product.id}]`).firstElementChild.style.fill = fill == "lightgreen" ? "white": "lightgreen"
+          const productPrice = parseFloat("{{ form.products.field.queryset.first.price }}")
+          if (product.checked){
+            localStorage.setItem('totalPrice', parseFloat(totalPrice.innerHTML) + productPrice)
+            checked_hammocks.push(product.value)
+            totalPrice.innerHTML = localStorage.getItem("totalPrice")
+            
+          } else {
+            localStorage.setItem('totalPrice', parseFloat(totalPrice.innerHTML) - productPrice)
+            let indx = checked_hammocks.indexOf(product.value)
+            totalPrice.innerHTML = localStorage.getItem("totalPrice")
+            checked_hammocks.splice(indx, 1)
           }
-        })
-      }
-    )
+        }
+
+        hammocks.innerHTML = checked_hammocks.join(", ")
+      })
+    }
+  )
+
   </script>
 {% endblock %}

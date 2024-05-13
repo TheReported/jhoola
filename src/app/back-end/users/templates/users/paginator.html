@@ -1,15 +1,15 @@
 <div class="container pagination">
     <ul class="pagination-3">
         <li class="page-number">
-            {% if products.has_previous %}
-            <a href="?page={{ products.previous_page_number }}" class="page-link">Previous</a>
+            {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}" class="page-link ">Previous</a>
             {% endif %}
         </li>
         
-        {% for num_page in products.paginator.page_range %}
-            {% if products.number == num_page %}
+        {% for num_page in page_obj.paginator.page_range %}
+            {% if page_obj.number == num_page %}
                 <li class="page-number active">
-                    <a class="page-link" href="?page={{ num_page }}">{{ num_page }}</a>
+                    <a class="page-link bg-dark border-dark" href="?page={{ num_page }}">{{ num_page }}</a>
                 </li>
             {% else %}
                 <li class="page-number">
@@ -18,9 +18,9 @@
             {% endif %}
         {% endfor%}
         <li class="page-number">
-            {% if products.has_next %}
-                <a href="?page={{ products.next_page_number }}" class="page-link">Next</a>
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="page-link">Next</a>
             {% endif %}
         </li>
     </ul>
-  </div>
+</div>

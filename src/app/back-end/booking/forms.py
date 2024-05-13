@@ -16,7 +16,7 @@ class BookingFilterForm(forms.Form):
         self.fields['duration'].initial = Booking.TimeSlots.ALL_DAY
 
     def clean_date(self):
-        date = self.cleaned_data.get("date")
+        date = self.cleaned_data.get('date')
         actual_date = timezone.now().date()
         max_date = actual_date + timezone.timedelta(days=7)
 

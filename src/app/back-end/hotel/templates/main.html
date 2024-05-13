@@ -61,7 +61,7 @@
                         <div class="card-body">
                             <small class="text-primary font-weight-bold">01</small>
                             <h5 class="card-title mt-3">Hammock Reservation<h5>
-                            <p class="mb-0">Secure your place in the sun! With us you can book your sun lounger today for a relaxing day by the pool. Escape from the hustle and bustle of everyday life and relax, surrounded by the soothing sound of the water and the warmth of the sun.</p>
+                            <p class="mb-0">Secure your place in the sun! With us you can book your sun lounger today for a relaxing day by the pool. Escape from the hustle of everyday life and relax, surrounded by the soothing sound of the water and the warmth of the sun.</p>
                         </div>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
                         <div class="card-body">
                             <small class="text-primary font-weight-bold">03</small>
                             <h5 class="card-title mt-3">Customer Support<h5>
-                            <p class="mb-0">We offer you the best support you can find by helping you with your problems related to application errors and how to improve the flow of your application. Feel free to contact us today to find out more about our service and how it can be implemented.</p>
+                            <p class="mb-0">We offer you the best support you can find with your problems related to application errors and how to improve the flow of your application. Feel free to contact us today to find out more about our service and how it can be implemented.</p>
                         </div>
                     </div>
                 </div>              
@@ -112,7 +112,46 @@
         </div>
     </section>
 
-    <section id="contact" class="section has-img-bg py-4 pt-4 pb-4 border-secondary text-center">
+    <section id="contact" class="section has-img-bg pb-0">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-5 my-3">
+                    <h6 class="mb-0">Teléfono</h6>
+                    <p class="mb-4">+34 922 35 21 21</p>
+
+                    <h6 class="mb-0">Dirección</h6>
+                    <p class="mb-4">Calle Juan Marcial, 8</p>
+
+                    <h6 class="mb-0">Email</h6>
+                    <p class="mb-0">jhoolasl@gmail.com</p>
+                    <p></p>
+                </div>
+                <div class="col-md-7">
+                    <form method="post">
+                        {% csrf_token %}
+                        <h4 class="mb-4">Drop Us A Line</h4>
+                        <div class="form-row">
+                            <div class="form-group col-sm-4">
+                                <input type="text" class="form-control text-white rounded-0 bg-transparent" name="name" placeholder="Name">
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <input type="email" class="form-control text-white rounded-0 bg-transparent" name="email" placeholder="Email">
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <input type="text" class="form-control text-white rounded-0 bg-transparent" name="subject" placeholder="Subject">
+                            </div>
+                            <div class="form-group col-12">
+                                <input type="text" name="message" class="form-control text-white rounded-0 bg-transparent" placeholder="Message"></input>
+
+                            </div>
+                            <div class="form-group col-12 mb-0">
+                                <input type="submit" class="btn btn-warning rounded w-md mt-3" value="Send"></input>
+                            </div>                          
+                        </div>                          
+                    </form>
+                </div>
+            </div>
+            <footer class="mt-5 py-4 border-top border-secondary">
                 <p class="mb-0 small">&copy; 2024, Jhoola Created By Jhoola Team.</a> All rights reserved </p>     
     </section>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

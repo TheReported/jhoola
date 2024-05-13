@@ -1,68 +1,62 @@
 {% extends "managers/base.html" %}
 {% block content %}
-  
-<div class="main-container m-0">
-  <h2 class="font-weight-bolder mt-4 m-0 text-start text-white ">{{ hotel }} Statistics:</h2>
+<h2 class="font-weight-bolder p-4 pb-0 m-0 text-start text-white">{{ hotel }} Statistics:</h2>
 {% comment %} ROW 1 {% endcomment %}
-  <div class="row mt-4">
-    <div class="col-6 p-2">
-      <div class="card">
-        <div class="card-header p-3 pt-2">
-            <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark shadow text-center mt-n4 position-absolute">
-                <i class="material-icons opacity-10">weekend</i> 
-            </div>
-            <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">Bookings</p>
-                <h4 class="m-0">{{ num_bookings }}</h4> 
-            </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-6 p-2"> 
-      <div class="card mb-2">
-        <div class="card-header p-3 pt-2">
-          <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary shadow text-center mt-n4 position-absolute">
-            <i class="material-icons opacity-10">leaderboard</i>
+<div class="card-container d-flex flex-sm-row flex-column">
+  <div class="col-sm-6 col-12 ps-sm-4 pe-sm-2 pb-2 p-4">
+    <div class="card">
+      <div class="card-header p-3">
+          <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark shadow text-center mt-n4 position-absolute">
+              <i class="material-icons opacity-10">weekend</i> 
           </div>
           <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">Clients</p>
-            <h4 class="mb-0">{{ num_clients }}</h4>
+              <p class="text-sm mb-0 text-capitalize">Month Reservations</p>
+              <h4 class="m-0">{{ num_bookings }}</h4> 
           </div>
-        </div>
       </div>
     </div>
   </div>
-{% comment %} ROW 2 {% endcomment %}
-  <div class="row">
-    <div class="col-6 p-2">
-      <div class="card">
-        <div class="card-header p-3 pt-2">
-          <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center mt-n4 position-absolute">
-            <i class="material-icons opacity-10">store</i>
-          </div>
-            <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">Revenue</p>
-                <h4 class="m-0">{{ total_money }} €</h4> 
-            </div>
+  <div class="col-sm-6 col-12 ps-sm-2 pe-sm-4 pt-sm-4 pt-2 pb-2 p-4"> 
+    <div class="card mb-2">
+      <div class="card-header p-3">
+        <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary shadow text-center mt-n4 position-absolute">
+          <i class="material-icons opacity-10">leaderboard</i>
         </div>
-      </div>
-    </div>
-
-    <div class="col-6 p-2"> 
-      <div class="card mb-2">
-        <div class="card-header p-3 pt-2">
-          <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center mt-n4 position-absolute">
-            <i class="material-icons opacity-10">diamond</i>
-          </div>
-          <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">Products</p>
-            <h4 class="mb-0">{{ num_products }}</h4>
-          </div>
+        <div class="text-end pt-1">
+          <p class="text-sm mb-0 text-capitalize">Clients</p>
+          <h4 class="mb-0">{{ num_clients }}</h4>
         </div>
       </div>
     </div>
   </div>
 </div>
-  
+{% comment %} ROW 2 {% endcomment %}
+<div class="card-container d-flex flex-sm-row flex-column">
+  <div class="col-sm-6 col-12 ps-sm-4 pe-sm-2 pt-2 p-4">
+    <div class="card">
+      <div class="card-header p-3">
+        <div class="icon icon-lg icon-shape bg-gradient-success text-center position-absolute">
+          <i class="material-icons opacity-10">store</i>
+        </div>
+          <div class="text-end pt-1">
+              <p class="text-sm mb-0 text-capitalize">Revenue</p>
+              <h4 class="m-0">{{ total_money }} €</h4> 
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-12 ps-sm-2 pe-sm-4 pt-2 p-4"> 
+    <div class="card mb-2">
+      <div class="card-header p-3">
+        <div class="icon icon-lg icon-shape bg-gradient-info text-center position-absolute">
+          <i class="material-icons opacity-10">diamond</i>
+        </div>
+        <div class="text-end pt-1">
+          <p class="text-sm mb-0 text-capitalize">Products</p>
+          <h4 class="mb-0">{{ num_products }}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

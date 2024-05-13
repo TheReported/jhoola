@@ -2,63 +2,67 @@
 {% load static %}
 
 {% block content %}
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-3"></div> 
-    <div class="col-6">
-      <div class="card user-card add-user-card mt-4">
-        <div class="card-body">
-          <div class="user-name-card">
-            <a href="{% url 'users:manager_users_add' %}">
-              <div class="add-account">+</div>
+<div class="users-container">
+    <table class="table table-striped table-dark">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Username</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Nº Guest</th>
+          <th scope="col">Reservations ID</th>
+          <th scope="col">Joined</th>
+          <th scope="col">Last Login</th>
+          <th scope="col">Actions</th>
+          <th scope="col">
+            <a href="{% url 'users:manager_users_add' %}" class="btn btn-success btn-sm flex-row d-flex justify-content-center">
+            <span class="material-icons ">
+              add_circle_outline
+              </span>
+          </a>
+        </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for client in page_obj %}
+        <tr>
+          <th scope="row">{{ client.id }}</th>
+          <td>{{ client.user }}</td>
+          <td>{{ client.fullname }}</td>
+          <td>{{ client.user.email }}</td>
+          <td>{{ client.num_guest }}</td>
+            <td>{% for booking in client.bookings.all %}
+              <a href="{% url 'users:manager_search' booking.id %}">{{ booking.id }}{% if not forloop.last %},{% endif %}</a>
+              {% endfor %}
+            </td>
+            <td>{{ client.user.date_joined|date:"d/m/Y, H:m" }}</td>
+            <td>{% if client.user.last_login is None %}
+                Not yet logged in
+                {% else %}
+                {{ client.user.last_login|date:"d/m/Y, H:m" }}
+                {% endif %}
+            </td>
+          <td>
+            <a href="{% url 'users:manager_users_edit' client %}" class="btn btn-warning btn-sm mb-1 mb-lg-0">
+              <span class="material-icons">
+                edit
+                </span>
             </a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-1"></div>
-
-    {% for client in clients %}
-    {% if forloop.counter|divisibleby:2 == False %}
-        <div class="col-3"></div>
-    {% endif %}
-    <div class="col-3">
-      <div class="card colorful-card mt-2 mb-4" style="background: linear-gradient(to right, rgba(255, 255, 255, 0.1) , rgba(0, 0, 0, 1));;">
-        <div class="card-body">
-            <h5 class="card-title text-center"> <b>{{ client.user.username.upper }}</b> </h2>
-            <p class="card-text "><b>Full Name:</b> {{ client.user.get_full_name }}</p>
-            <p class="card-text"><b>Email:</b> {{ client.user.email }}</p>
-            <p class="card-text"><b>Number of Guests:</b> {{ client.num_guest }}</p>
-            {% if client.user.last_login is None %}
-                <p class="card-text"><b>Joined:</b> {{ client.user.date_joined }}</p>
-            {% else %}
-                <p class="card-text"><b>Last Login:</b> {{ client.user.last_login }}</p>
-            {% endif %}
-            <a href="{% url 'users:manager_users_edit' client %}" class="btn btn-warning ml-auto">Edit</a>
-
-        </div>
-    </div>
-</div>
-    {% if forloop.counter|divisibleby:2%}
-        <div class="col-2"></div>
-    {% endif %}
-    
-{% endfor %}
-    
-  </div>
+            <a href="{% url "users:manager_users_delete" client %}" class="btn btn-danger btn-sm mb-1 mb-lg-0" data-bs-toggle="modal" data-bs-target="#deleteModal{{ client }}">
+              <span class="material-icons">
+                delete
+              </span>
+            </a>
+          </td>
+          <td></td>
+        </tr>
+        {% include "users/messages/delete_user_modal.html" %}
+        {% endfor %}
+      </tbody>    
+    </table>
 </div>
 
-  {% include "managers/pagination-clients.html" with clients=clients %}
-  <script>
-    document.addEventListener("DOMContentLoaded", (event) => {
-      document
-        .querySelector("#search-users-btn")
-        .addEventListener("click", (event) => {
-          event.preventDefault();
-          const data = document.querySelector("#search-users-field").value;
-          window.location.href = `/manager/users/search/${data}/`;
-        });
-    });
-  </script>
+{% include "managers/admin_paginator.html" %}
+
 {% endblock %}

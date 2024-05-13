@@ -6,9 +6,9 @@ from users.api.serializers import ClientSerializer
 
 
 class BookingSerializer(serializers.ModelSerializer):
-    client = ClientSerializer(many=False)
-    product = ProductSerializer(many=False)
+    user = ClientSerializer(many=False)
+    products = ProductSerializer(many=True)
 
     class Meta:
         model = Booking
-        fields = ['id', 'client', 'product', 'timestamp', 'price', 'duration']
+        fields = ['id', 'user', 'products', 'date', 'price', 'duration']

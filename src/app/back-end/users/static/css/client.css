@@ -2,6 +2,20 @@
 /* Naranja logo: #FE9854 */
 
 
+html {
+  background-color: #ffffff;
+}
+
+body { 
+  padding:0;
+  margin:0;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3)), url(../imgs/4k-beach-with-boat.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh; 
+}
+
 .site-map {
   max-height: 600px;
 }
@@ -21,7 +35,7 @@
   top: 94px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1;
+  z-index: 2;
   max-width: fit-content;
 }
 
@@ -44,15 +58,20 @@
 /*****NAV*****/
 
 .navbar {
-  box-shadow: 0 4px 6px 0 lightgray, 0 6px 20px 0 lightgray;
+  box-shadow: 0 1px 6px 0 rgba(24, 23, 23, 0.5), 0 10px 20px 0 rgba(0, 0, 0, 0.3);
 }
 
 .nav-link {
-  color: black;
+  color: white;
   text-decoration: none;
   display: inline-block;
   position: relative;
 }
+
+.navbar-toggler-icon {
+  filter: invert(100%);
+}
+
 .nav-link:after {
   bottom: -8;
   content: "";
@@ -60,7 +79,7 @@
   height: 2px;
   left: 50%;
   position: absolute;
-  background: black;
+  background: white;
   transition: width 0.3s ease 0s, left 0.3s ease 0s;
   width: 0;
 }
@@ -71,10 +90,47 @@
 
 .nav-link.is-active {
   text-decoration: underline;
-  text-decoration-color: black;
+  text-decoration-color: white;
   text-decoration-thickness: 2px;
   text-underline-offset: 12px;
 }
+
+/* Paginator */
+
+.container.pagination {
+  margin-top: 15px;
+  display: flex;
+  justify-content: start;
+}
+
+.pagination-3 {
+  list-style: none;
+  padding: 0;
+  display: flex;
+}
+
+.page-number {
+  margin: 0 5px; 
+}
+
+.page-link {
+  text-decoration: none;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: black;
+}
+
+a.page-link {
+  color: black;
+}
+
+a.page-link:hover {
+  background-color: #2B3035;
+  color: white;
+  border-color: #2B3035;
+}
+
 
 /*****Book Form*****/
 
@@ -99,7 +155,7 @@ select {
   height: 90%;
   margin: 0 20px; 
 }
-/*****Paginator*****/
-a.page-link {
-  color: black;
+
+.site-map, .site-map-aside {
+  background-color: #0000001f;
 }

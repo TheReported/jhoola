@@ -1,50 +1,53 @@
 {% extends "managers/base.html" %}
+
+{% block title %}Products{% endblock title %}
+
 {% load static %}
 {% block content %}
-
-<div class="container-fluid py-4">
-  <div class="row">
-    <div class="col-3 col-xs-8"></div>
-
-    <div class="col-md-6">
-      <div class="card user-card add-user-card mt-4">
-        <div class="card-body">
-          <div class="user-name-card">
-            <a href="{% url 'users:manager_products_add' %}">
-              <div class="add-account">+</div>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-1"></div>
-
-          {% for product in products %}
-            {% if forloop.counter|divisibleby:2 == False %}
-              <div class="col-3"></div>
-            {% endif %}
-          <div class="col-3">
-            <div class="card colorful-card mt-2 mb-4" style="background: linear-gradient(to right, rgba(255, 255, 255, 0.1) , rgba(0, 0, 0, 1));;">
-              
-              <div class="card-body">
-                <h5 class="card-title text-center"> <b>{{ product.name }}</b></h2>
-                <p class="card-text"><b>ID:</b> {{ product.id }}</p>
-                <p class="card-text"><b>Price:</b> {{ product.price }}</p>
-                <p class="card-text"><b>Status:</b> {{ product.status }}</p>
-                <a href="{% url 'users:manager_products_edit' product.id %}" class="btn btn-warning ml-auto">Edit</a>
-
-              </div>
-            </div>
-          </div>
-          {% if forloop.counter|divisibleby:2%}
-        <div class="col-2"></div>
-        {% endif %}
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="users-container">
+  <table class="table table-striped table-dark">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Status</th>
+        <th scope="col">Actions</th>
+        <th scope="col">
+          <a href="{% url 'users:manager_products_add' %}" class="btn btn-success btn-sm flex-row d-flex justify-content-center">
+          <span class="material-icons ">
+            add_circle_outline
+            </span>
+        </a>
+      </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in page_obj %}
+      <tr>
+        <th scope="row">{{ product.id }}</th>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price }} €</td>
+        <td>{{ product.get_status_display }}</td>
+        <td>
+          <a href="{% url 'users:manager_products_edit' product.id %}" class="btn btn-warning btn-sm mb-1 mb-lg-0">
+            <span class="material-icons">
+              edit
+              </span>
+          </a>
+          <a href="{% url 'users:manager_products_delete' product.id %}" class="btn btn-danger btn-sm mb-1 mb-lg-0" data-bs-toggle="modal" data-bs-target="#deleteModal{{ product.id }}">
+            <span class="material-icons">
+              delete
+            </span>
+          </a>
+        </td>
+        <td></td>
+      </tr>
+      {% include "users/messages/delete_product_modal.html" %}
+      {% endfor %}
+    </tbody>    
+  </table>
 </div>
-{% include "managers/pagination-products.html" with products=products %}
+{% include "managers/admin_paginator.html" %}
 
 {% endblock %}

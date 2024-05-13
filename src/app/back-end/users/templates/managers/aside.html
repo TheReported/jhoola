@@ -1,89 +1,50 @@
-
 {% block aside %}
-<nav class="navbar-vertical navbar-expand-xs navbar-light bg-gradient-dark">
-    <div class="separator d-lg-flex d-none justify-content-center">
-        <hr class="m-0">
-    </div>
-    <div class="navbar d-flex justify-content-center">
-        <ul class="navbar-nav flex-column mt-4">
-            <li class="nav-item mb-2">
-                <a class="nav-link text-white d-flex flex-row" href="{% url "users:manager_dashboard" %}">
+<nav class="navbar-vertical navbar-expand-xs navbar-light bg-gradient-dark p-0 m-0">
+    <div class="navbar d-flex flex-column justify-content-start align-items-center" id='aside'>
+        <ul class="navbar-nav flex-column mt-3">
+            <li class="nav-item d-flex justify-content-center mb-2">
+                <a class="nav-link text-white d-flex flex-row p-3 rounded {% if section == "dashboard" %}is-active{% endif %}" href="{% url "users:manager_dashboard" %}">
                     <i class="material-icons opacity-10 me-lg-2">dashboard</i>
                     <div class="text d-lg-flex d-none">
                         Dashboard
                     </div>
                 </a>
             </li>
-            <li class="nav-item mb-2">
-                <a class="nav-link text-white d-flex flex-row" href="{% url "users:manager_bookings" %}">
+            <li class="nav-item d-flex justify-content-center mb-2 mt-2">
+                <a class="nav-link text-white d-flex flex-row p-3 rounded {% if section == "reservations" %}is-active{% endif %}" href="{% url "users:manager_bookings" %}">
                     <i class="material-icons opacity-10 me-lg-2">beach_access</i>
                     <div class="text d-lg-flex d-none">
-                        Bookings
+                        Reservations
                     </div>
                 </a>
             </li>
-            <li class="nav-item mb-2">
-                <a class="nav-link text-white d-flex flex-row" href="{% url "users:manager_products" %}">
+            <li class="nav-item d-flex justify-content-center mb-2 mt-2">
+                <a class="nav-link text-white d-flex flex-row p-3 rounded {% if section == "products" %}is-active{% endif %}" href="{% url "users:manager_products" %}">
                     <i class="material-icons opacity-10 me-lg-2">inventory_2</i>
                     <div class="text d-lg-flex d-none">
                         Products
                     </div>
                 </a>
             </li>
-            <li class="nav-item d-flex mb-2">
-                <a class="nav-link text-white d-flex flex-row" href="{% url "users:manager_users" %}">
+            <li class="nav-item d-flex justify-content-center mb-2 mt-2">
+                <a class="nav-link text-white d-flex flex-row p-3 rounded {% if section == "users" %}is-active{% endif %}" href="{% url "users:manager_users" %}">
                     <i class="material-icons opacity-10 me-lg-2">person_add</i>
                     <div class="text d-lg-flex d-none">
                         Users
                     </div>
                 </a>
             </li>
+            <li class="navbar-footer d-flex justify-content-center align-items-center mt-4 mb-4">
+                <div class="support d-flex justify-content-center align-items-center">
+                    <a class="btn bg-warning d-flex flex-row justify-content-center p-2" href="#" type="button">
+                        <i class="material-icons opacity-10 d-lg-none d-flex">phone</i>
+                        <div class="text d-lg-flex d-none">
+                            Support
+                        </div>
+                    </a>
+                </div>
+            </li>
         </ul>
     </div>
-    <br>
-    <div class="navbar-footer d-flex justify-content-center align-items-center">
-        <div class="support d-flex justify-content-center align-items-center">
-            <a class="btn bg-warning d-flex flex-row justify-content-center" href="#" type="button">
-                <i class="material-icons opacity-10 d-lg-none d-flex">phone</i>
-                <div class="text d-lg-flex d-none">
-                    Support
-                </div>
-            </a>
-        </div>
-    </div>
 </nav>
-{% comment %} <nav class="navbar-vertical navbar-expand-xs navbar-light bg-gradient-dark" >
-        <div class="navbar-nav-scroll">
-            <ul class="navbar-nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="{% url "users:manager_dashboard" %}">
-                        <i class="material-icons opacity-10 me-2">dashboard</i>
-                        Dashboard
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="{% url "users:manager_bookings" %}">
-                        <i class="material-icons opacity-10 me-2">beach_access</i>
-                        Bookings
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="{% url "users:manager_products" %}">
-                        <i class="material-icons opacity-10 me-2">inventory_2</i>
-                        Products
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="{% url "users:manager_users" %}">
-                        <i class="material-icons opacity-10 me-2">person_add</i>
-                        Users
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <br>
-        <div class="navbar-footer">
-            <a class="btn bg-warning w-100" href="#" type="button">Support</a>
-        </div>
-</nav> {% endcomment %}
 {% endblock aside %}
