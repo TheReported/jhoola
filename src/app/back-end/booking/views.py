@@ -92,7 +92,6 @@ def booking_view(request, username):
 
     if request.method == 'POST':
         form = BookingForm(user=client, data=request.POST)
-
         if form.is_valid():
             booking = form.save(commit=False)
             products = form.cleaned_data['products']
@@ -152,9 +151,12 @@ def booking_view(request, username):
             for errors in form.errors.values():
                 for error in errors:
                     messages.error(request, error)
-
     else:
         form = BookingForm(user=client)
+        products = form.fields["products"].queryset
+        for product in products.all():
+            product.status = Product.Status.FREE
+            product.save()
     return render(
         request,
         'users/pages/book.html',

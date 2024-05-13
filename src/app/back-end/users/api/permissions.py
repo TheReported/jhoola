@@ -7,5 +7,5 @@ class AdminSiteAccess(permissions.BasePermission):
     def has_permission(self, request, view):
         return (
             request.user.is_authenticated
-            and request.user.groups.filter(name='admin-hotel').exists()
+            and request.user.groups.filter(name='HotelManagers').exists()
         )

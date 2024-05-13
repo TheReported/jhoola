@@ -4,6 +4,8 @@ from .forms import HotelForm
 
 
 def main(request):
+    if request.user.is_staff:
+        return redirect("admin:index")
     if request.user.is_authenticated:
         if request.user.groups.filter(name='HotelManagers').exists():
             return redirect('users:manager_dashboard')
