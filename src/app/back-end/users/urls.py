@@ -39,7 +39,7 @@ urlpatterns = [
         name='manager_search',
     ),
     path(
-        'manager/check_booking/',
+        'manager/check_reservation/',
         views.check_booking_manager_view,
         name='manager_check_booking',
     ),
