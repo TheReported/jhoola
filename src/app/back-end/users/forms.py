@@ -96,3 +96,20 @@ class ClientEditForm(forms.ModelForm, CleanUserData):
 
 class SearchForm(forms.Form):
     query = forms.CharField()
+
+
+class SupportForm(forms.Form):
+    subject = forms.CharField(
+        max_length=100, label='subject', widget=forms.TextInput(attrs={'placeholder': 'Subject'})
+    )
+    email = forms.EmailField(
+        max_length=200, label='email', widget=forms.EmailInput(attrs={'placeholder': 'Email'})
+    )
+    name = forms.CharField(
+        max_length=100, label='name', widget=forms.TextInput(attrs={'placeholder': 'Name'})
+    )
+    message = forms.CharField(
+        max_length=300,
+        label='message',
+        widget=forms.Textarea(attrs={'placeholder': 'Message', 'rows': "4", 'cols': "30"}),
+    )

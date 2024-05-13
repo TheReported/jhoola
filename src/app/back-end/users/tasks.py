@@ -21,3 +21,13 @@ Please remember to keep your password secure at all times to ensure the safety o
     to_email = [data['email']]
     mail_sent = send_mail(subject, message, from_email, to_email, fail_silently=False)
     return mail_sent
+
+
+@shared_task
+def contact_support(cd):
+    subject = f'{cd["name"]} - {cd["subject"]}'
+    message = cd['message']
+    from_email = cd['email']
+    to_email = [settings.EMAIL_HOST_USER]
+    mail_sent = send_mail(subject, message, from_email, to_email, fail_silently=False)
+    return mail_sent

@@ -1,4 +1,8 @@
+from django.contrib import messages
 from django.shortcuts import redirect, render
+
+from users.forms import SupportForm
+from users.tasks import contact_support
 
 from .forms import HotelForm
 
@@ -11,13 +15,19 @@ def main(request):
             return redirect('users:manager_dashboard')
         return redirect('booking:booking_list', username=request.user.username)
     if request.method == 'POST':
-        form = HotelForm(request.POST)
-        if form.is_valid():
-            hotel_selector = form.cleaned_data['hotel_selector']
+        hotel_form = HotelForm(request.POST)
+        support_form = SupportForm(request.POST)
+        if hotel_form.is_valid():
+            hotel_selector = hotel_form.cleaned_data['hotel_selector']
             hotel_name = hotel_selector.split(',')[0].strip()
             request.session['hotel_session_name'] = hotel_name
             request.session.save()
             return redirect('user_login')
+        if support_form.is_valid():
+            cd = support_form.cleaned_data
+            contact_support.delay(cd)
+            messages.success(request, 'A new client has been successfully created.')
     else:
-        form = HotelForm()
-    return render(request, 'main.html', {'form': form})
+        hotel_form = HotelForm()
+        support_form = SupportForm()
+    return render(request, 'main.html', {'form': hotel_form, 'support_form': support_form})
