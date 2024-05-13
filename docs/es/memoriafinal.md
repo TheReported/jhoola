@@ -3,17 +3,15 @@
 # MEMORIA FINAL
 ***
 
-
 </center>
 
 <right>
 
-
 ***Autor/es:*** Abián Gustavo Castañeda Méndez, Diego Peraza Cabo, Samuel Eloy González Díaz
+<br>
 ***Fecha:*** 10 de Mayo de 2024
+<br>
 ***Tutor:*** Alejandro Martín Zarza
-
-
 
 </right>
 
@@ -69,6 +67,8 @@ Las tecnologías usadas en el proyecto han sido las siguientes:
 
 **redis==5.0.4:** Redis es una base de datos en memoria de código abierto que se utiliza comúnmente como almacén de datos en caché o como cola de mensajes en aplicaciones web. La biblioteca Redis proporciona herramientas para interactuar con un servidor Redis desde una aplicación Python.
 
+**qrcode==7.4.2:** Es una biblioteca de Python que permite generar códigos QR de forma programática. Los códigos QR son códigos de barras bidimensionales que pueden contener una variedad de datos, como enlaces URL, texto simple, información de contacto, etc.
+
 ### 3. GUIA DE ESTILO DE LA WEB. <a name="id3"></a>
 
 El logro que nos hemos propuesto es establecer pautas visuales y de diseño para una aplicación que permite reservar hamacas y gestionarlas, tanto para usuarios como para administradores. La aplicación debe ser intuitiva, fácil de usar y brindar una experiencia agradable tanto en términos de funcionalidad como de estética:
@@ -118,6 +118,7 @@ Entre las funcionalidades acordadas que han sido implementadas destacan:
 - Login
 - Zona de Clientes para Reservas
 - Sistema de Pagos
+- PDF para comprobar los pagos vinculado a QR
 - Zona de Admin para Gestiones
 - API
 
@@ -169,7 +170,7 @@ En esta zona tanto usuario como administrador tendrán que introducir sus datos 
 
 #### 10.3 Zona Cliente
 
-En esta zona el cliente tendrá la posibilidad de hacer una reserva mediante la cual encontrará una serie de apartados en los que seleccionar la fecha y posteriormente la parte de la piscina en la que se quiere quedar. Acto seguido pasará al pago en el cual introducirá sus datos para poder completar la reserva. Por último tendrá la posibilidad de consultar su reserva descargándose un PDF o borrarla en el caso de que se haya equivocado o quiera dar marcha atrás.
+En esta zona el cliente tendrá la posibilidad de hacer una reserva mediante la cual encontrará una serie de apartados en los que seleccionar la fecha y posteriormente la parte de la piscina en la que se quiere quedar. Acto seguido pasará al pago en el cual introducirá sus datos para poder completar la reserva. Por último tendrá la posibilidad de consultar su reserva descargándose un PDF y allí escanear el QR o borrarla en el caso de que se haya equivocado o quiera dar marcha atrás.
 
 #### 10.4 Zona Administrador
 
