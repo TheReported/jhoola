@@ -26,6 +26,7 @@ def main(request):
         if support_form.is_valid():
             cd = support_form.cleaned_data
             contact_support.delay(cd)
+            return redirect("main")
     else:
         hotel_form = HotelForm()
         support_form = SupportForm()
