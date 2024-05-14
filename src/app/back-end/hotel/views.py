@@ -26,7 +26,6 @@ def main(request):
         if support_form.is_valid():
             cd = support_form.cleaned_data
             contact_support.delay(cd)
-            messages.success(request, 'A new client has been successfully created.')
     else:
         hotel_form = HotelForm()
         support_form = SupportForm()
