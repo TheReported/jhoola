@@ -2,6 +2,8 @@
 {% load static %}
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600" rel='stylesheet' type='text/css'>
     <link href="https://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
@@ -15,14 +17,14 @@
         </a>
         <div class="login d-flex justify-content-center align-items-center mx-auto">
             <div class="loginbox col-12 d-flex flex-column justify-content-center align-items-center">
-                <h1>Login</h1>
+                <h1 class="m-0">Login</h1>
                 <form method="post" class="col-12 d-flex flex-column">
                     <hr>
                     {% block content %}
                         {% if messages %}
                             <ul class="messages">
                                 {% for message in messages %}
-                                    <li class="{{ message.tags }}">
+                                    <li class="{{ message.tags }} text-white">
                                         {{ message|safe }}
                                     </li>
                                 {% endfor %}
@@ -53,6 +55,10 @@
                 </form>
             </div>
         </div>
-
     </div>
+    <footer class="footer mt-auto py-3 fixed-bottom">
+        <div class="container text-center">
+            <span class="text-white">© 2024 <strong>Jhoola</strong></span>
+        </div>
+    </footer>
 </html>

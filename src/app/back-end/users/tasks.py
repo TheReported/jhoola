@@ -1,6 +1,7 @@
 from celery import shared_task
 from django.conf import settings
 from django.core.mail import send_mail
+from django.core.mail.message import EmailMessage
 
 
 @shared_task
@@ -29,5 +30,12 @@ def contact_support(cd):
     message = cd['message']
     from_email = cd['email']
     to_email = [settings.EMAIL_HOST_USER]
-    mail_sent = send_mail(subject, message, from_email, to_email, fail_silently=False)
-    return mail_sent
+    email = EmailMessage(
+        subject,
+        message,
+        from_email,
+        to_email,
+        reply_to=[from_email],
+    )
+
+    email.send()

@@ -34,7 +34,7 @@ def user_login(request):
                     return redirect('booking:booking_list', username=user.username)
                 messages.error(request, "You are accessing a hotel where you aren't authenticated.")
             else:
-                messages.error(request, 'The credentials entered are incorrect. Please try again.')
+                messages.error(request, "Your username and password didn't match. Please try again.")
     else:
         form = LoginForm()
     return render(request, 'registration/login.html', {'form': form})

@@ -4,15 +4,17 @@ from django.utils import timezone
 from product.models import Product
 
 from .models import Booking
+from hotel.models import Hotel  
 
 
 class BookingFilterForm(forms.Form):
     date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
-    duration = forms.ChoiceField(choices=Booking.TimeSlots.choices)
+    duration = forms.ChoiceField()
 
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.user = user
+        self.fields['duration'].choices = self.get_duration_choices(self.user.hotel)
         self.fields['duration'].initial = Booking.TimeSlots.ALL_DAY
 
     def clean_date(self):
@@ -25,6 +27,17 @@ class BookingFilterForm(forms.Form):
         if date < actual_date:
             raise forms.ValidationError('You cannot book for past dates.')
         return date
+
+    def get_duration_choices(self,hotel):
+        hotel = Hotel.objects.get(id=hotel.id)
+        morning_hours = hotel.opening_morning_hours
+        afternoon_hours = hotel.opening_afternoon_hours
+
+        duration_choices = [
+            (choice[0], Booking.TimeSlots.get_display_with_hours(choice[0], morning_hours, afternoon_hours)) 
+            for choice in Booking.TimeSlots.choices
+        ]
+        return duration_choices
 
 
 class BookingForm(forms.ModelForm):
