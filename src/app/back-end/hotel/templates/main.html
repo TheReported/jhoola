@@ -17,7 +17,7 @@
                 <img src="{% static "imgs/logo.svg" %}" alt="Jhoola" id="logo">
             </a>
             <div class="navbar col-9">
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ml-auto text-center">
                     <li class="nav-item">
                         <a class="link" href="#service">Our Service</a>
                     </li>
@@ -32,10 +32,10 @@
         </div>
     </nav>
     <header class="header">
-        <div class="d-flex justify-content-center align-items-center text-white">
+        <div class="d-flex justify-content-center align-items-center text-white text-lg-start text-center">
             <form action="{% url "main" %}" id="hotel-form" method="post">
                 {% csrf_token %}
-                {{ form.hotel_selector.label_tag }}
+                <label class="text-center">{{ form.hotel_selector.label_tag }}</label>
                 <hr class="dropdown-divider mb-3">
                 <i class="fa-solid fa-hotel" id="icon"></i>
                 {{ form.hotel_selector }}

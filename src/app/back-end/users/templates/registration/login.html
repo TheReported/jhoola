@@ -17,14 +17,14 @@
         </a>
         <div class="login d-flex justify-content-center align-items-center mx-auto">
             <div class="loginbox col-12 d-flex flex-column justify-content-center align-items-center">
-                <h1>Login</h1>
+                <h1 class="m-0">Login</h1>
                 <form method="post" class="col-12 d-flex flex-column">
                     <hr>
                     {% block content %}
                         {% if messages %}
                             <ul class="messages">
                                 {% for message in messages %}
-                                    <li class="{{ message.tags }}">
+                                    <li class="{{ message.tags }} text-white">
                                         {{ message|safe }}
                                     </li>
                                 {% endfor %}

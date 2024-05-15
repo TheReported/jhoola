@@ -75,8 +75,8 @@
   </div>
   {% else %}
   <div class="row">
-    <div class="col-12 d-flex justify-content-center align-items-end p-5">
-      <h3>Looks like you haven't made any reservations yet, start your break <a href="{% url 'booking:client_book_filter' user.username %}">here</a></h3>
+    <div class="col-12 d-flex justify-content-center align-items-end p-5 text-white">
+      <h3>Looks like you haven't made any reservations yet, start your break <a href="{% url 'booking:client_book_filter' user.username %}" class="link-light link-offset-2 link-underline-opacity-100 link-opacity-75-hover link-underline-opacity-75-hover" id="no-bookings-yet">here</a></h3>
     </div>
   </div>
   {% endif %}
