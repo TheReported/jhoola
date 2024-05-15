@@ -14,7 +14,7 @@ class BookingFilterForm(forms.Form):
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.user = user
-        self.fields['duration'].choices = self.get_duration_choices()
+        self.fields['duration'].choices = self.get_duration_choices(self.user.hotel)
         self.fields['duration'].initial = Booking.TimeSlots.ALL_DAY
 
     def clean_date(self):
@@ -28,8 +28,8 @@ class BookingFilterForm(forms.Form):
             raise forms.ValidationError('You cannot book for past dates.')
         return date
 
-    def get_duration_choices(self):
-        hotel = Hotel.objects.first()
+    def get_duration_choices(self,hotel):
+        hotel = Hotel.objects.get(id=hotel.id)
         morning_hours = hotel.opening_morning_hours
         afternoon_hours = hotel.opening_afternoon_hours
 

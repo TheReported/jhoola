@@ -2,7 +2,6 @@ from django.db import models
 
 from product.models import Product
 from users.models import Client
-from hotel.models import Hotel
 
 
 class PaidManager(models.Manager):
@@ -21,7 +20,7 @@ class Booking(models.Model):
             slot_display = dict(cls.choices)[slot]
             if slot == cls.MORNING:
                 return f'{slot_display} ({morning_hours})'
-            elif slot == cls.AFTERNOON:
+            if slot == cls.AFTERNOON:
                 return f'{slot_display} ({afternoon_hours})'
             else:
                 return slot_display
@@ -43,8 +42,8 @@ class Booking(models.Model):
     @property
     def get_duration_display(self):
         if self.duration == self.TimeSlots.MORNING:
-            return f'Morning ({Hotel.opening_morning_hours})'
-        if self.duration == self.TimeSlots.AFTERNOON:
-            return f'Afternoon ({Hotel.opening_afternoon_hours})'
+            return f'Morning ({self.user.hotel.opening_morning_hours})'
+        elif self.duration == self.TimeSlots.AFTERNOON:
+            return f'Afternoon ({self.user.hotel.opening_afternoon_hours})'
         else:
             return 'All Day'
