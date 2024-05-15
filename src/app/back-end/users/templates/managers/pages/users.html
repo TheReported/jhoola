@@ -44,12 +44,12 @@
                 {% endif %}
             </td>
           <td>
-            <a href="{% url 'users:manager_users_edit' client %}" class="btn btn-warning btn-sm mb-1 mb-lg-0">
+            <a href="{% url 'users:manager_users_edit' client %}" class="btn btn-warning btn-sm mb-1">
               <span class="material-icons">
                 edit
                 </span>
             </a>
-            <a href="{% url "users:manager_users_delete" client %}" class="btn btn-danger btn-sm mb-1 mb-lg-0" data-bs-toggle="modal" data-bs-target="#deleteModal{{ client }}">
+            <a href="{% url "users:manager_users_delete" client %}" class="btn btn-danger btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#deleteModal{{ client }}">
               <span class="material-icons">
                 delete
               </span>
