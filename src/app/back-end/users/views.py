@@ -1,22 +1,24 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils import timezone
+
 from booking.models import Booking
 from product.forms import ProductCreationForm, ProductEditForm
 from product.models import Product
+from users.utils import get_monthly_bookings
 
-from .decorators import manager_required
+from .decorators import hotel_required, manager_required
 from .forms import ClientEditForm, ClientRegistrationForm, LoginForm, SearchForm
 from .models import Client, Hotel
 from .tasks import user_created
-from django.contrib.auth.models import Group
-from users.utils import get_monthly_bookings
-from django.utils import timezone
 
 
+@hotel_required
 def user_login(request):
     selected_hotel = request.session.get('hotel_session_name')
     if request.method == 'POST':
@@ -34,7 +36,9 @@ def user_login(request):
                     return redirect('booking:booking_list', username=user.username)
                 messages.error(request, "You are accessing a hotel where you aren't authenticated.")
             else:
-                messages.error(request, "Your username and password didn't match. Please try again.")
+                messages.error(
+                    request, "Your username and password didn't match. Please try again."
+                )
     else:
         form = LoginForm()
     return render(request, 'registration/login.html', {'form': form})
@@ -42,6 +46,7 @@ def user_login(request):
 
 @login_required
 @manager_required
+@hotel_required
 def manager_dashboard(request):
     selected_hotel = request.session.get('hotel_session_name')
     hotel = Hotel.objects.get(name=selected_hotel)

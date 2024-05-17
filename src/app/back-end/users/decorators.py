@@ -26,3 +26,12 @@ def manager_required(func):
         return redirect(reverse("booking:booking_list", kwargs={'username': client.user.username}))
 
     return wrapper
+
+
+def hotel_required(func):
+    def wrapper(request, *args, **kwargs):
+        if request.session.get('hotel_session_name'):
+            return func(request, *args, **kwargs)
+        return redirect('main')
+
+    return wrapper
