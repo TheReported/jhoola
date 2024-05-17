@@ -25,7 +25,7 @@
     <tbody>
       {% for product in page_obj %}
       <tr>
-        <th scope="row">{{ product.id }}</th>
+        <th scope="row">{{ product.hotel_product_id }}</th>
         <td>{{ product.name }}</td>
         <td>{{ product.price }} €</td>
         <td>{{ product.get_status_display }}</td>

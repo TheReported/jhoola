@@ -70,6 +70,7 @@ def manager_dashboard(request):
 @login_required
 @manager_required
 def users_add_manager_view(request):
+    # import ipdb; ipdb.set_trace()
     selected_hotel = request.session.get('hotel_session_name')
     hotel = Hotel.objects.get(name=selected_hotel)
     hotel_abbreviation = ''.join(letter[0] for letter in hotel.name.split()).upper()
@@ -91,7 +92,7 @@ def users_add_manager_view(request):
     else:
         user_form = ClientRegistrationForm(
             initial={
-                'username': f'{hotel_abbreviation}{city_abbreviation}-{hotel.clients.last().id:04d}'
+                'username': f'{hotel_abbreviation}{city_abbreviation}-{hotel.clients.last().hotel_client_id:04d}'
             }
         )
     return render(
