@@ -83,8 +83,11 @@ WSGI_APPLICATION = 'jhoola.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DB_NAME', default='jhoola'),
+        'USER': config('DB_USERNAME', default='jhoola'),
+        'PASSWORD': config('DB_PASSWORD', default='jhoola'),
+        'HOST': config('DB_HOST', default='localhost'),
     }
 }
 
