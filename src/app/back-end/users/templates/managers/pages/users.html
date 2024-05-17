@@ -34,11 +34,11 @@
               <a href="{% url 'users:manager_search' booking.id %}">{{ booking.id }}{% if not forloop.last %},{% endif %}</a>
               {% endfor %}
             </td>
-            <td>{{ client.user.date_joined|date:"d/m/Y, H:m" }}</td>
+            <td>{{ client.user.date_joined|date:"d/m/Y, H:i" }}</td>
             <td>{% if client.user.last_login is None %}
                 Not yet logged in
                 {% else %}
-                {{ client.user.last_login|date:"d/m/Y, H:m" }}
+                {{ client.user.last_login|date:"d/m/Y, H:i" }}
                 {% endif %}
             </td>
           <td>
