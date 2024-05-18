@@ -26,7 +26,7 @@ function displayHotels() {
         let listHotel = document.createElement('li');
         let displayFormat = `${hotel.name}, ${hotel.city}`;
         listHotel.textContent = displayFormat;
-        listHotel.classList.add('pt-2', 'mt-1');
+        listHotel.classList.add('pt-2', 'mt-1', 'text-start');
         listHotel.addEventListener('click', function() {
             document.getElementById('hotel-input').value = displayFormat;
             hotelDropdown.innerHTML = '';
