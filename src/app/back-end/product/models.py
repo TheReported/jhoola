@@ -29,6 +29,9 @@ class Product(models.Model):
     free = FreeManager()
     occupied = OccupiedManager()
 
+    def __str__(self):
+        return self.name
+
     def save(self, *args, **kwargs):
         if not self.pk:
             last_product = (
@@ -39,4 +42,3 @@ class Product(models.Model):
             else:
                 self.hotel_product_id = 1
         super().save(*args, **kwargs)
-
