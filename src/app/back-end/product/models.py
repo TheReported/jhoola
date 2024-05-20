@@ -29,6 +29,9 @@ class Product(models.Model):
     free = FreeManager()
     occupied = OccupiedManager()
 
+    class Meta:
+        ordering = ['hotel_product_id']
+
     def __str__(self):
         return self.name
 
