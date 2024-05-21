@@ -287,7 +287,7 @@ def search_manager_view(request, query=''):
         .exclude(user__groups__name='HotelManagers')
     )
 
-    bookings = Booking.objects.filter(Q(id__icontains=query)).distinct()
+    bookings = Booking.objects.filter(id__icontains=query, hotel=hotel).distinct()
     client_paginator = Paginator(clients, 7)
     booking_paginator = Paginator(bookings, 7)
     page_number = request.GET.get('page')
