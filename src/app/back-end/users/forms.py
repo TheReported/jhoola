@@ -3,24 +3,17 @@ from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 from django.core.validators import MaxValueValidator, MinValueValidator
 
-from users.models import Client
-
 from .models import Client
 from .utils import generate_password
 
 
 class CleanUserData:
     def clean_email(self):
-        username = self.cleaned_data['username']
         email = self.cleaned_data['email']
-        user = Client.objects.get(user__username=username)
-        if username == '':
+        hotel = self.cleaned_data['hotel']
+        if email == '':
             raise forms.ValidationError('Email is required for registration.')
-        elif (
-            Client.objects.filter(user__email=email, hotel=user.hotel)
-            .exclude(id=self.instance.id)
-            .exists()
-        ):
+        elif Client.objects.filter(email=email, hotel=hotel).exclude(id=self.instance.id).exists():
             raise forms.ValidationError('Email already in use.')
         return email
 
@@ -49,11 +42,12 @@ class LoginForm(forms.Form):
     )
 
 
-class ClientRegistrationForm(forms.ModelForm, CleanUserData):
-    def __init__(self, *args, **kwargs):
-        super(ClientRegistrationForm, self).__init__(*args, **kwargs)
-        self.fields['password'].initial = generate_password()
+class ClientRegistrationForm(forms.Form):
 
+    username = forms.CharField(label='Username')
+    first_name = forms.CharField(label='First name')
+    last_name = forms.CharField(label='Last name')
+    email = forms.EmailField(label='Email')
     password = forms.CharField(
         label='Password',
         validators=[validate_password],
@@ -68,18 +62,45 @@ class ClientRegistrationForm(forms.ModelForm, CleanUserData):
         initial=1,
         min_value=1,
     )
+    hotel = forms.CharField(widget=forms.HiddenInput(), required=False)
 
-    class Meta:
-        model = User
-        fields = ['username', 'first_name', 'last_name', 'email']
+    def __init__(self, *args, **kwargs):
+        super(ClientRegistrationForm, self).__init__(*args, **kwargs)
+        self.fields['password'].initial = generate_password()
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        hotel = self.data['hotel']
+        if email == '':
+            raise forms.ValidationError('Email is required for registration.')
+        try:
+            client = Client.objects.get(user__email=email, hotel__name=hotel)
+            if client:
+                raise forms.ValidationError('Email already in use.')
+        except Client.DoesNotExist:
+            return email
+        return email
+
+    def clean_first_name(self):
+        if first_name := self.cleaned_data.get('first_name'):
+            return first_name
+        raise forms.ValidationError('First name is required for registration.')
+
+    def clean_last_name(self):
+        if last_name := self.cleaned_data.get('last_name'):
+            return last_name
+        raise forms.ValidationError('Last name is required for registration.')
+
+    def clean_password(self):
+        if password := self.data.get('password'):
+            return password
 
 
 class ClientEditForm(forms.ModelForm, CleanUserData):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        if self.instance:
-            initial_num_guest = self.instance.client.num_guest
-            self.fields['num_guest'].initial = initial_num_guest
+        initial_num_guest = self.instance.client.num_guest
+        self.fields['num_guest'].initial = initial_num_guest
 
     num_guest = forms.IntegerField(
         label='Clients in room',
@@ -90,6 +111,26 @@ class ClientEditForm(forms.ModelForm, CleanUserData):
         ],
         min_value=1,
     )
+
+    hotel = forms.CharField(widget=forms.HiddenInput(), required=False)
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        username = self.cleaned_data['username']
+        hotel = self.data['hotel']
+        try:
+            user = Client.objects.get(user__username=username)
+        except Client.DoesNotExist:
+            raise forms.ValidationError("The client username doesn't exist.")
+        if email == '':
+            raise forms.ValidationError('Email is required for registration.')
+        try:
+            client = Client.objects.get(user__email=email, hotel__name=hotel)
+            if client and user.user.email != email:
+                raise forms.ValidationError('Email already in use.')
+            return email
+        except Client.DoesNotExist:
+            return email
 
     class Meta:
         model = User

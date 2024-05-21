@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
@@ -83,7 +83,12 @@ def users_add_manager_view(request):
         user_form = ClientRegistrationForm(request.POST)
         if user_form.is_valid():
             cd = user_form.cleaned_data
-            new_user = user_form.save(commit=False)
+            new_user = User(
+                username=cd['username'],
+                first_name=cd['first_name'],
+                last_name=cd['last_name'],
+                email=cd['email'],
+            )
             new_user.set_password(cd['password'])
             new_user.save()
             Client.objects.create(user=new_user, hotel=hotel, num_guest=cd['num_guest'])
@@ -96,7 +101,8 @@ def users_add_manager_view(request):
     else:
         user_form = ClientRegistrationForm(
             initial={
-                'username': f'{hotel_abbreviation}{city_abbreviation}-{hotel.clients.last().hotel_client_id:04d}'
+                'username': f'{hotel_abbreviation}{city_abbreviation}-{hotel.clients.last().hotel_client_id:04d}',
+                'hotel': selected_hotel,
             }
         )
     return render(
@@ -109,6 +115,7 @@ def users_add_manager_view(request):
 @login_required
 @manager_required
 def users_edit_manager_view(request, username):
+    selected_hotel = request.session.get('hotel_session_name')
     client = get_object_or_404(Client, user__username=username)
     if request.method == 'POST':
         user_edit_form = ClientEditForm(instance=client.user, data=request.POST)
@@ -124,7 +131,12 @@ def users_edit_manager_view(request, username):
             first_error = next(iter(user_edit_form.errors.values()))[0]
             messages.error(request, first_error)
     else:
-        user_edit_form = ClientEditForm(instance=client.user)
+        user_edit_form = ClientEditForm(
+            instance=client.user,
+            initial={
+                'hotel': selected_hotel,
+            },
+        )
     return render(
         request,
         'managers/pages/users_edit.html',
