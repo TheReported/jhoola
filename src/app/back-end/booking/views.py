@@ -68,7 +68,7 @@ def booking_view(request, username):
             booking = form.save(commit=False)
             products = form.cleaned_data['products']
             if len(products) > max_products:
-                messages.error(request, 'You have already reserved all possible hammocks.')
+                messages.error(request, 'You have already reserved all possible hammocks for your account.')
                 return redirect('booking:client_book', client)
 
             if any(
@@ -152,7 +152,7 @@ def payment_success(request, booking_id):
         product.save()
     booking.save()
 
-    messages.success(request, 'Your hammocks have been properly booked')
+    messages.success(request, 'Your hammocks have been properly reserved')
     return redirect('booking:booking_list', booking.user)
 
 
@@ -165,7 +165,7 @@ def payment_cancel(request, booking_id):
         product.save()
     booking.delete()
 
-    messages.error(request, 'There has been an error with your booking')
+    messages.error(request, 'There has been an error with your reservation')
     return redirect('booking:booking_list', booking.user)
 
 
@@ -175,7 +175,7 @@ def delete_booking(request, username, booking_id):
     client = get_object_or_404(Client, user=request.user)
     booking = get_object_or_404(Booking, id=booking_id, user=client)
     booking.delete()
-    messages.success(request, f'Booking {booking_id} has been succesfully deleted')
+    messages.success(request, f'Reservation {booking_id} has been succesfully deleted')
     return redirect('booking:booking_list', username=username)
 
 

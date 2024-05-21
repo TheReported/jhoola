@@ -75,7 +75,6 @@ def manager_dashboard(request):
 @login_required
 @manager_required
 def users_add_manager_view(request):
-    # import ipdb; ipdb.set_trace()
     selected_hotel = request.session.get('hotel_session_name')
     hotel = Hotel.objects.get(name=selected_hotel)
     hotel_abbreviation = ''.join(letter[0] for letter in hotel.name.split()).upper()

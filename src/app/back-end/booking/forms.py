@@ -23,9 +23,9 @@ class BookingFilterForm(forms.Form):
         max_date = actual_date + timezone.timedelta(days=7)
 
         if actual_date <= date > max_date:
-            raise forms.ValidationError('You can only book up to one week from today.')
+            raise forms.ValidationError('You can only reserve up to one week from today.')
         if date < actual_date:
-            raise forms.ValidationError('You cannot book for past dates.')
+            raise forms.ValidationError('You cannot reserve for past dates.')
         return date
 
     def get_duration_choices(self,hotel):
