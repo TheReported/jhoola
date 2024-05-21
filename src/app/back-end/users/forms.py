@@ -3,16 +3,24 @@ from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 from django.core.validators import MaxValueValidator, MinValueValidator
 
+from users.models import Client
+
 from .models import Client
 from .utils import generate_password
 
 
 class CleanUserData:
     def clean_email(self):
+        username = self.cleaned_data['username']
         email = self.cleaned_data['email']
-        if email == '':
+        user = Client.objects.get(user__username=username)
+        if username == '':
             raise forms.ValidationError('Email is required for registration.')
-        elif User.objects.filter(email=email).exclude(id=self.instance.id).exists():
+        elif (
+            Client.objects.filter(user__email=email, hotel=user.hotel)
+            .exclude(id=self.instance.id)
+            .exists()
+        ):
             raise forms.ValidationError('Email already in use.')
         return email
 
